@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BettingSystem.Domain", "BettingSystem.Domain\BettingSystem.Domain.csproj", "{84D479AB-D6CC-4DB5-82D4-ABD677F634D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BettingSystem.Startup", "BettingSystem.Startup\BettingSystem.Startup.csproj", "{F127286B-9704-48BB-BD4A-C33A262D0007}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BettingSystem.Startup", "BettingSystem.Startup\BettingSystem.Startup.csproj", "{F127286B-9704-48BB-BD4A-C33A262D0007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BettingSystem.Web", "BettingSystem.Web\BettingSystem.Web.csproj", "{9439F847-FD10-4B09-93A6-5183D68B2869}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BettingSystem.Web", "BettingSystem.Web\BettingSystem.Web.csproj", "{9439F847-FD10-4B09-93A6-5183D68B2869}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BettingSystem.Infrastructure", "BettingSystem.Infrastructure\BettingSystem.Infrastructure.csproj", "{BCEA6EE6-9003-454E-8A98-F52CC86FA1C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{9439F847-FD10-4B09-93A6-5183D68B2869}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9439F847-FD10-4B09-93A6-5183D68B2869}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9439F847-FD10-4B09-93A6-5183D68B2869}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCEA6EE6-9003-454E-8A98-F52CC86FA1C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCEA6EE6-9003-454E-8A98-F52CC86FA1C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCEA6EE6-9003-454E-8A98-F52CC86FA1C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCEA6EE6-9003-454E-8A98-F52CC86FA1C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

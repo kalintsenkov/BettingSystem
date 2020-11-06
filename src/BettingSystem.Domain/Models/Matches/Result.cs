@@ -9,12 +9,12 @@
         public static readonly Result Away = new Result(2, nameof(Away));
         public static readonly Result NotFinished = new Result(3, nameof(NotFinished));
 
-        public Result(int value)
+        private Result(int value)
             : this(value, FromValue<Result>(value).Name)
         {
         }
 
-        public Result(int value, string name)
+        private Result(int value, string name)
             : base(value, name)
         {
         }

@@ -8,12 +8,12 @@
         public static readonly Prediction Home = new Prediction(1, nameof(Home));
         public static readonly Prediction Away = new Prediction(2, nameof(Away));
 
-        public Prediction(int value)
+        private Prediction(int value)
             : this(value, FromValue<Prediction>(value).Name)
         {
         }
 
-        public Prediction(int value, string name)
+        private Prediction(int value, string name)
             : base(value, name)
         {
         }

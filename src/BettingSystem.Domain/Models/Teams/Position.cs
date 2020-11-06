@@ -1,6 +1,7 @@
 ﻿namespace BettingSystem.Domain.Models.Teams
 {
     using Common;
+    using Matches;
 
     public class Position : Enumeration
     {
@@ -9,7 +10,12 @@
         public static readonly Position Midfielder = new Position(3, nameof(Midfielder));
         public static readonly Position Forward = new Position(4, nameof(Forward));
 
-        public Position(int value, string name)
+        private Position(int value)
+            : this(value, FromValue<Result>(value).Name)
+        {
+        }
+
+        private Position(int value, string name)
             : base(value, name)
         {
         }

@@ -43,24 +43,14 @@
 
         public Statistics Statistics { get; private set; }
 
-        public Result Result
-            => (this.Statistics.HomeScore, this.Statistics.AwayScore) switch
-            {
-                var (homeScore, awayScore)
-                    when !homeScore.HasValue && !awayScore.HasValue
-                    => Result.NotFinished,
-                var (homeScore, awayScore)
-                    when homeScore > awayScore
-                    => Result.Home,
-                var (homeScore, awayScore)
-                    when homeScore < awayScore
-                    => Result.Away,
-                var (homeScore, awayScore)
-                    when homeScore == awayScore
-                    => Result.Draw,
-                (_, _)
-                    => Result.NotFinished
-            };
+        public Result Result => (this.Statistics.HomeScore, this.Statistics.AwayScore) switch
+        {
+            var (homeScore, awayScore) when !homeScore.HasValue && !awayScore.HasValue => Result.NotFinished,
+            var (homeScore, awayScore) when homeScore > awayScore => Result.Home,
+            var (homeScore, awayScore) when homeScore < awayScore => Result.Away,
+            var (homeScore, awayScore) when homeScore == awayScore => Result.Draw,
+            (_, _) => Result.NotFinished
+        };
 
         public Match UpdateStartDate(DateTime startDate)
         {
