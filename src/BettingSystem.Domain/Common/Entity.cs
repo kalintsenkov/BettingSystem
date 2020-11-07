@@ -30,7 +30,7 @@
             return this.Id.Equals(other.Id);
         }
 
-        public static bool operator ==(Entity<TId> first, Entity<TId> second)
+        public static bool operator ==(Entity<TId>? first, Entity<TId>? second)
         {
             if (first is null && second is null)
             {
@@ -45,7 +45,7 @@
             return first.Equals(second);
         }
 
-        public static bool operator !=(Entity<TId> first, Entity<TId> second) => !(first == second);
+        public static bool operator !=(Entity<TId>? first, Entity<TId>? second) => !(first == second);
 
         public override int GetHashCode() => (this.GetType().ToString() + this.Id).GetHashCode();
     }

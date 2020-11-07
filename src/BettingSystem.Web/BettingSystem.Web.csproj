@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BettingSystem.Application\BettingSystem.Application.csproj" />
   </ItemGroup>
 

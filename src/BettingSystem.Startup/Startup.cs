@@ -1,11 +1,13 @@
 namespace BettingSystem.Startup
 {
+    using Application;
     using Infrastructure;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Web;
 
     public class Startup
     {
@@ -16,8 +18,9 @@ namespace BettingSystem.Startup
 
         public void ConfigureServices(IServiceCollection services)
             => services
+                .AddApplication(this.Configuration)
                 .AddInfrastructure(this.Configuration)
-                .AddControllers();
+                .AddWebComponents();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -29,11 +32,11 @@ namespace BettingSystem.Startup
             app
                 .UseHttpsRedirection()
                 .UseRouting()
+                .UseAuthentication()
                 .UseAuthorization()
-                .UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                });
+                .UseEndpoints(endpoints => endpoints
+                    .MapControllers())
+                .Initialize();
         }
     }
 }

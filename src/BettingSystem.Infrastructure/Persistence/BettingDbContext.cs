@@ -4,9 +4,11 @@
     using Domain.Models.Bets;
     using Domain.Models.Matches;
     using Domain.Models.Teams;
+    using Identity;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    internal class BettingDbContext : DbContext
+    internal class BettingDbContext : IdentityDbContext<User>
     {
         public BettingDbContext(DbContextOptions<BettingDbContext> options)
             : base(options)
