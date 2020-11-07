@@ -1,0 +1,31 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: Install NuGet
+
+- task: NuGetCommand@2
+  displayName: Restore NuGet
+  inputs:
+    restoreSolution: 'src/BettingSystem.sln'
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    projects: 'src/BettingSystem.sln'
+    arguments: '--configuration $(buildConfiguration)'
+  
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: 'src/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
