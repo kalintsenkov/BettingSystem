@@ -1,9 +1,11 @@
 ﻿namespace BettingSystem.Infrastructure
 {
+    using Application.Contracts;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Persistence;
+    using Persistence.Repositories;
 
     public static class InfrastructureConfiguration
     {
@@ -14,7 +16,8 @@
                 .AddDbContext<BettingDbContext>(options => options
                     .UseSqlServer(
                         configuration.GetConnectionString("DefaultConnection"),
-                        b => b.MigrationsAssembly(
-                            typeof(BettingDbContext).Assembly.FullName)));
+                        b => b.MigrationsAssembly(typeof(BettingDbContext)
+                            .Assembly.FullName)))
+                .AddTransient(typeof(IRepository<>), typeof(DataRepository<>));
     }
 }
