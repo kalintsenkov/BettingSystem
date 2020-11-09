@@ -11,7 +11,7 @@
     {
         private readonly HashSet<Player> players;
 
-        public Team(string name)
+        internal Team(string name)
         {
             this.Validate(name);
 

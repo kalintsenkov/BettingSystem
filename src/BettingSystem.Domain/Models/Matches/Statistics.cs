@@ -7,7 +7,7 @@
 
     public class Statistics : ValueObject
     {
-        public Statistics(int? homeScore, int? awayScore)
+        internal Statistics(int? homeScore, int? awayScore)
         {
             this.Validate(homeScore, awayScore);
 

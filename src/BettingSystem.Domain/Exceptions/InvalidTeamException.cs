@@ -1,6 +1,5 @@
 ﻿namespace BettingSystem.Domain.Exceptions
 {
-    using System;
     using Common;
 
     public class InvalidTeamException : BaseDomainException

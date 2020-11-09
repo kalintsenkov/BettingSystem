@@ -7,7 +7,7 @@
 
     public class Stadium : Entity<int>
     {
-        public Stadium(string name, string imageUrl)
+        internal Stadium(string name, string imageUrl)
         {
             this.Validate(name, imageUrl);
 

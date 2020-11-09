@@ -7,7 +7,7 @@
 
     public class Match : Entity<int>, IAggregateRoot
     {
-        public Match(
+        internal Match(
             DateTime startDate,
             Team homeTeam,
             Team awayTeam,
@@ -19,8 +19,8 @@
             this.StartDate = startDate;
             this.HomeTeam = homeTeam;
             this.AwayTeam = awayTeam;
-            this.Statistics = statistics;
             this.Stadium = stadium;
+            this.Statistics = statistics;
         }
 
         private Match(DateTime startDate)
@@ -29,8 +29,8 @@
 
             this.HomeTeam = default!;
             this.AwayTeam = default!;
-            this.Statistics = default!;
             this.Stadium = default!;
+            this.Statistics = default!;
         }
 
         public DateTime StartDate { get; private set; }
