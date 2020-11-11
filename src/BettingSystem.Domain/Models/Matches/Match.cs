@@ -43,7 +43,7 @@
 
         public Statistics Statistics { get; private set; }
 
-        public Result Result => (this.Statistics.HomeScore, this.Statistics.AwayScore) switch
+        public Result GetResult() => (this.Statistics.HomeScore, this.Statistics.AwayScore) switch
         {
             var (homeScore, awayScore) when !homeScore.HasValue && !awayScore.HasValue => Result.NotFinished,
             var (homeScore, awayScore) when homeScore > awayScore => Result.Home,

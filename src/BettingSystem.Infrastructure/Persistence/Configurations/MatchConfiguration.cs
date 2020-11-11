@@ -16,9 +16,6 @@
                 .IsRequired();
 
             builder
-                .Ignore(m => m.Result);
-
-            builder
                 .HasOne(m => m.HomeTeam)
                 .WithMany()
                 .HasForeignKey("HomeTeamId")

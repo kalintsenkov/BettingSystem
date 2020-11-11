@@ -42,6 +42,6 @@
 
         [HttpGet]
         [Authorize]
-        public ActionResult Get() => Ok(this.User.Identity.Name);
+        public ActionResult Get() => Ok(this.User.Identity!.Name);
     }
 }

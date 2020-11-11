@@ -23,7 +23,7 @@
                 {
                     p.WithOwner();
 
-                    p.Property(po => po.Value);
+                    p.Property(po => po.Value).IsRequired();
                 });
         }
     }

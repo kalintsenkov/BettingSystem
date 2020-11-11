@@ -50,12 +50,11 @@
             return this;
         }
 
-        public Bet UpdatePrediction(Prediction prediction)
-        {
-            this.Prediction = prediction;
+        public void BetForHomeTeam() => this.Prediction = Prediction.Home;
 
-            return this;
-        }
+        public void BetForAwayTeam() => this.Prediction = Prediction.Away;
+
+        public void BetForDraw() => this.Prediction = Prediction.Draw;
 
         private void Validate(decimal amount)
             => Guard.AgainstOutOfRange<InvalidBetException>(

@@ -13,7 +13,7 @@
 
             builder
                 .Property(b => b.Amount)
-                .HasColumnType("decimal(19, 4)")
+                .HasPrecision(19, 4)
                 .IsRequired();
 
             builder
@@ -28,7 +28,7 @@
                 {
                     p.WithOwner();
 
-                    p.Property(pr => pr.Value);
+                    p.Property(pr => pr.Value).IsRequired();
                 });
         }
     }
