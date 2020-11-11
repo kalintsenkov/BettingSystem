@@ -1,5 +1,7 @@
 ﻿namespace BettingSystem.Application
 {
+    using System.Reflection;
+    using MediatR;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +13,7 @@
             => services
                 .Configure<ApplicationSettings>(
                     configuration.GetSection(nameof(ApplicationSettings)),
-                    options => options.BindNonPublicProperties = true);
+                    options => options.BindNonPublicProperties = true)
+                .AddMediatR(Assembly.GetExecutingAssembly());
     }
 }

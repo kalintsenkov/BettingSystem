@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using Common;
     using Features.Identity;
+    using Features.Identity.Commands.LoginUser;
 
     public interface IIdentity
     {

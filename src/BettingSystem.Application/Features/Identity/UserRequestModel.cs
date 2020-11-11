@@ -1,8 +1,8 @@
 ﻿namespace BettingSystem.Application.Features.Identity
 {
-    public class UserRequestModel
+    public abstract class UserRequestModel
     {
-        public UserRequestModel(string email, string password)
+        protected UserRequestModel(string email, string password)
         {
             this.Email = email;
             this.Password = password;
