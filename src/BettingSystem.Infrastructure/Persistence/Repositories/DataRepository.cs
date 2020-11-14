@@ -6,16 +6,22 @@
     using Application.Contracts;
     using Domain.Common;
 
-    internal class DataRepository<TEntity> : IRepository<TEntity>
+    internal abstract class DataRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IAggregateRoot
     {
-        private readonly BettingDbContext db;
+        protected DataRepository(BettingDbContext db) => this.Data = db;
 
-        public DataRepository(BettingDbContext db) => this.db = db;
+        protected BettingDbContext Data { get; }
 
-        public IQueryable<TEntity> All() => this.db.Set<TEntity>();
+        protected IQueryable<TEntity> All() => this.Data.Set<TEntity>();
 
-        public async Task<int> SaveChanges(CancellationToken cancellationToken = default)
-            => await this.db.SaveChangesAsync(cancellationToken);
+        public async Task Save(
+            TEntity entity,
+            CancellationToken cancellationToken = default)
+        {
+            this.Data.Update(entity);
+
+            await this.Data.SaveChangesAsync(cancellationToken);
+        }
     }
 }

@@ -11,7 +11,6 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using Persistence;
-    using Persistence.Repositories;
 
     using static Domain.Models.ModelConstants.Identity;
 
@@ -22,6 +21,7 @@
             IConfiguration configuration)
             => services
                 .AddDatabase(configuration)
+                .AddRepositories()
                 .AddIdentity(configuration);
 
         private static IServiceCollection AddDatabase(
@@ -31,10 +31,20 @@
                 .AddDbContext<BettingDbContext>(options => options
                     .UseSqlServer(
                         configuration.GetConnectionString("DefaultConnection"),
-                        b => b.MigrationsAssembly(typeof(BettingDbContext)
-                            .Assembly.FullName)))
-                .AddTransient<IInitializer, BettingDbInitializer>()
-                .AddTransient(typeof(IRepository<>), typeof(DataRepository<>));
+                        sqlServer => sqlServer
+                            .MigrationsAssembly(typeof(BettingDbContext)
+                                .Assembly.FullName)))
+                .AddTransient<IInitializer, BettingDbInitializer>();
+
+        private static IServiceCollection AddRepositories(
+            this IServiceCollection services)
+            => services
+                .Scan(scan => scan
+                    .FromCallingAssembly()
+                    .AddClasses(classes => classes
+                        .AssignableTo(typeof(IRepository<>)))
+                    .AsMatchingInterface()
+                    .WithTransientLifetime());
 
         private static IServiceCollection AddIdentity(
             this IServiceCollection services,
