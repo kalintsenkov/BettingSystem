@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using Application.Contracts;
     using Domain.Common;
+    using Microsoft.EntityFrameworkCore;
 
     internal abstract class DataRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IAggregateRoot
@@ -14,6 +15,8 @@
         protected BettingDbContext Data { get; }
 
         protected IQueryable<TEntity> All() => this.Data.Set<TEntity>();
+
+        protected IQueryable<TEntity> AllAsNoTracking() => this.All().AsNoTracking();
 
         public async Task Save(
             TEntity entity,

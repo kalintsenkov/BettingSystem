@@ -31,8 +31,8 @@
 
             builder
                 .HasOne(m => m.Stadium)
-                .WithOne()
-                .HasForeignKey<Match>("StadiumId")
+                .WithMany()
+                .HasForeignKey("StadiumId")
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 

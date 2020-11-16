@@ -21,7 +21,5 @@
         IMatchFactory WithStadium(Stadium stadium);
 
         IMatchFactory WithStatistics(int? homeScore, int? awayScore);
-
-        IMatchFactory WithStatistics(Statistics statistics);
     }
 }

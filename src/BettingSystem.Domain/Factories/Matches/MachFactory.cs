@@ -54,11 +54,8 @@
         }
 
         public IMatchFactory WithStatistics(int? homeScore, int? awayScore)
-            => this.WithStatistics(new Statistics(homeScore, awayScore));
-
-        public IMatchFactory WithStatistics(Statistics statistics)
         {
-            this.matchStatistics = statistics;
+            this.matchStatistics = new Statistics(homeScore, awayScore);
             return this;
         }
 
