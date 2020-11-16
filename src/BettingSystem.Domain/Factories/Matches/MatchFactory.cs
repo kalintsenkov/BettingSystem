@@ -5,7 +5,7 @@
     using Models.Matches;
     using Models.Teams;
 
-    internal class MachFactory : IMatchFactory
+    internal class MatchFactory : IMatchFactory
     {
         private DateTime matchStartDate = default!;
         private Team matchHomeTeam = default!;

@@ -1,7 +1,6 @@
 ﻿namespace BettingSystem.Domain
 {
     using Factories;
-    using Factories.Matches;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class DomainConfiguration
@@ -14,7 +13,6 @@
                     .AddClasses(classes => classes
                         .AssignableTo(typeof(IFactory<>)))
                     .AsMatchingInterface()
-                    .WithTransientLifetime())
-                .AddTransient<IMatchFactory, MachFactory>();
+                    .WithTransientLifetime());
     }
 }
