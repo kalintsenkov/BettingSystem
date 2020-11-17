@@ -61,22 +61,23 @@
             return this;
         }
 
-        public Match UpdateHomeTeam(string homeTeam)
+        public Match UpdateHomeTeam(Team homeTeam)
         {
-            if (this.HomeTeam.Name != homeTeam)
-            {
-                this.HomeTeam = new Team(homeTeam);
-            }
+            this.HomeTeam = homeTeam;
 
             return this;
         }
 
-        public Match UpdateAwayTeam(string awayTeam)
+        public Match UpdateAwayTeam(Team awayTeam)
         {
-            if (this.AwayTeam.Name != awayTeam)
-            {
-                this.AwayTeam = new Team(awayTeam);
-            }
+            this.AwayTeam = awayTeam;
+
+            return this;
+        }
+
+        public Match UpdateStadium(Stadium stadium)
+        {
+            this.Stadium = stadium;
 
             return this;
         }
@@ -84,13 +85,6 @@
         public Match UpdateStatistics(int? homeScore, int? awayScore)
         {
             this.Statistics = new Statistics(homeScore, awayScore);
-
-            return this;
-        }
-
-        public Match UpdateStadium(string name, string imageUrl)
-        {
-            this.Stadium = new Stadium(name, imageUrl);
 
             return this;
         }

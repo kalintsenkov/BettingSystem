@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using Application.Features.Matches.Commands.Create;
+    using Application.Features.Matches.Commands.Edit;
     using Application.Features.Matches.Queries.Details;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -19,5 +20,12 @@
         public async Task<ActionResult<CreateMatchResponseModel>> Create(
             CreateMatchCommand command)
             => await this.Send(command);
+
+        [HttpPut]
+        [Route(Id)]
+        [Authorize]
+        public async Task<ActionResult> Edit(
+            int id, EditMatchCommand command)
+            => await this.Send(command.SetId(id));
     }
 }

@@ -49,7 +49,7 @@
             => await this.mapper
                 .ProjectTo<MatchDetailsResponseModel>(this
                     .AllAsNoTracking()
-                    .Where(c => c.Id == id))
+                    .Where(m => m.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
         public async Task<Team> GetHomeTeam(
@@ -57,21 +57,21 @@
             CancellationToken cancellationToken = default)
             => await this
                 .AllTeams()
-                .FirstOrDefaultAsync(c => c.Name == homeTeam, cancellationToken);
+                .FirstOrDefaultAsync(t => t.Name == homeTeam, cancellationToken);
 
         public async Task<Team> GetAwayTeam(
             string awayTeam,
             CancellationToken cancellationToken = default)
             => await this
                 .AllTeams()
-                .FirstOrDefaultAsync(m => m.Name == awayTeam, cancellationToken);
+                .FirstOrDefaultAsync(t => t.Name == awayTeam, cancellationToken);
 
         public async Task<Stadium> GetStadium(
             string stadium,
             CancellationToken cancellationToken = default)
             => await this
                 .AllStadiums()
-                .FirstOrDefaultAsync(m => m.Name == stadium, cancellationToken);
+                .FirstOrDefaultAsync(s => s.Name == stadium, cancellationToken);
 
         public async Task<IEnumerable<GetMatchStadiumResponseModel>> GetStadiums(
             CancellationToken cancellationToken = default)
@@ -85,6 +85,9 @@
             CancellationToken cancellationToken = default)
             => await this
                 .All()
+                .Include(m => m.HomeTeam)
+                .Include(m => m.AwayTeam)
+                .Include(m => m.Stadium)
                 .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 
         private IQueryable<Team> AllTeams()
