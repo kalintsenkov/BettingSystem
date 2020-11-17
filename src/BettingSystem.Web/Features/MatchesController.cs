@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Application.Features.Matches.Commands.Create;
+    using Application.Features.Matches.Commands.Delete;
     using Application.Features.Matches.Commands.Edit;
     using Application.Features.Matches.Queries.Details;
     using Application.Features.Matches.Queries.Stadiums;
@@ -35,5 +36,12 @@
         public async Task<ActionResult> Edit(
             int id, EditMatchCommand command)
             => await this.Send(command.SetId(id));
+
+        [HttpDelete]
+        [Route(Id)]
+        [Authorize]
+        public async Task<ActionResult> Delete(
+            [FromRoute] DeleteMatchCommand command)
+            => await this.Send(command);
     }
 }
