@@ -1,5 +1,5 @@
 trigger:
-- master
+- main
 
 pool:
   vmImage: 'windows-latest'
@@ -14,13 +14,15 @@ steps:
 - task: UseDotNet@2
   displayName: 'Install .NET 5'
   inputs:
-    version: '5.0.x'
     packageType: sdk
+    version: '5.x'
 
-- task: NuGetCommand@2
-  displayName: Restore NuGet
+- task: DotNetCoreCLI@2
+  displayName: 'Restore'
   inputs:
-    restoreSolution: 'src/BettingSystem.sln'
+    command: restore
+    projects: 'src/BettingSystem.sln'
+    arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: Build
