@@ -35,7 +35,7 @@
             string stadium,
             CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<GetMatchStadiumResponseModel>> GetStadiums(
+        Task<IEnumerable<GetMatchStadiumsResponseModel>> GetStadiums(
             CancellationToken cancellationToken = default);
     }
 }

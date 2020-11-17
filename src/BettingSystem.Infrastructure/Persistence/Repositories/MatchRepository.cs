@@ -73,10 +73,10 @@
                 .AllStadiums()
                 .FirstOrDefaultAsync(s => s.Name == stadium, cancellationToken);
 
-        public async Task<IEnumerable<GetMatchStadiumResponseModel>> GetStadiums(
+        public async Task<IEnumerable<GetMatchStadiumsResponseModel>> GetStadiums(
             CancellationToken cancellationToken = default)
             => await this.mapper
-                .ProjectTo<GetMatchStadiumResponseModel>(this
+                .ProjectTo<GetMatchStadiumsResponseModel>(this
                     .AllStadiums())
                 .ToListAsync(cancellationToken);
 

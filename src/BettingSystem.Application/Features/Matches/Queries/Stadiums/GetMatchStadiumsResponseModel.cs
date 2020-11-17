@@ -3,7 +3,7 @@
     using Domain.Models.Matches;
     using Mapping;
 
-    public class GetMatchStadiumResponseModel : IMapFrom<Stadium>
+    public class GetMatchStadiumsResponseModel : IMapFrom<Stadium>
     {
         public int Id { get; private set; }
 
