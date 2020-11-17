@@ -15,7 +15,7 @@ steps:
   displayName: 'Install .NET 5'
   inputs:
     version: '5.0.x'
-    packageType: runtime
+    packageType: sdk
 
 - task: NuGetCommand@2
   displayName: Restore NuGet
