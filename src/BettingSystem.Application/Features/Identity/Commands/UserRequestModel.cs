@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Application.Features.Identity
+﻿namespace BettingSystem.Application.Features.Identity.Commands
 {
     public abstract class UserRequestModel
     {

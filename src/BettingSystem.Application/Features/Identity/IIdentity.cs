@@ -1,9 +1,9 @@
-﻿namespace BettingSystem.Application.Contracts
+﻿namespace BettingSystem.Application.Features.Identity
 {
     using System.Threading.Tasks;
+    using Commands;
+    using Commands.LoginUser;
     using Common;
-    using Features.Identity;
-    using Features.Identity.Commands.LoginUser;
 
     public interface IIdentity
     {

@@ -2,6 +2,7 @@
 {
     using System.Reflection;
     using AutoMapper;
+    using Behaviours;
     using MediatR;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@
                     configuration.GetSection(nameof(ApplicationSettings)),
                     options => options.BindNonPublicProperties = true)
                 .AddAutoMapper(Assembly.GetExecutingAssembly())
-                .AddMediatR(Assembly.GetExecutingAssembly());
+                .AddMediatR(Assembly.GetExecutingAssembly())
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
     }
 }

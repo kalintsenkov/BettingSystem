@@ -8,14 +8,14 @@
     using System.Threading.Tasks;
     using Application;
     using Application.Common;
-    using Application.Contracts;
     using Application.Features.Identity;
+    using Application.Features.Identity.Commands;
     using Application.Features.Identity.Commands.LoginUser;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
 
-    public class IdentityService : IIdentity
+    internal class IdentityService : IIdentity
     {
         private const string InvalidLoginErrorMessage = "Invalid credentials.";
 

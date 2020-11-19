@@ -3,7 +3,6 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Common;
-    using Contracts;
     using MediatR;
 
     public class RegisterUserCommand : UserRequestModel, IRequest<Result>

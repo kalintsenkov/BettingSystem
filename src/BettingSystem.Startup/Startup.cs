@@ -9,6 +9,7 @@ namespace BettingSystem.Startup
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Web;
+    using Web.Middleware;
 
     public class Startup
     {
@@ -32,6 +33,7 @@ namespace BettingSystem.Startup
             }
 
             app
+                .UseValidationExceptionHandler()
                 .UseHttpsRedirection()
                 .UseRouting()
                 .UseAuthentication()

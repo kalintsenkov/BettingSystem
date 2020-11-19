@@ -3,6 +3,7 @@
     using System.Text;
     using Application;
     using Application.Contracts;
+    using Application.Features.Identity;
     using Identity;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
