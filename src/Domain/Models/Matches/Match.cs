@@ -2,7 +2,6 @@
 {
     using System;
     using Common;
-    using Exceptions;
     using Teams;
 
     public class Match : Entity<int>, IAggregateRoot
@@ -14,8 +13,6 @@
             Stadium stadium,
             Statistics statistics)
         {
-            this.Validate(startDate);
-
             this.StartDate = startDate;
             this.HomeTeam = homeTeam;
             this.AwayTeam = awayTeam;
@@ -54,8 +51,6 @@
 
         public Match UpdateStartDate(DateTime startDate)
         {
-            this.Validate(startDate);
-
             this.StartDate = startDate;
 
             return this;
@@ -88,12 +83,5 @@
 
             return this;
         }
-
-        private void Validate(DateTime startDate)
-            => Guard.AgainstOutOfRange<InvalidMatchException>(
-                startDate,
-                DateTime.Today,
-                DateTime.MaxValue,
-                nameof(this.StartDate));
     }
 }

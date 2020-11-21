@@ -67,17 +67,6 @@
             ThrowException<TException>($"{name} must be between {min} and {max}.");
         }
 
-        public static void AgainstOutOfRange<TException>(DateTime date, DateTime min, DateTime max, string name = "Value")
-            where TException : BaseDomainException, new()
-        {
-            if (min <= date && date <= max)
-            {
-                return;
-            }
-
-            ThrowException<TException>($"{name} must be between {min.ToShortDateString()} and {max.ToShortDateString()}.");
-        }
-
         public static void ForValidUrl<TException>(string url, string name = "Value")
             where TException : BaseDomainException, new()
         {

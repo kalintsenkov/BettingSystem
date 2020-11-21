@@ -2,7 +2,7 @@
 {
     public class CreateMatchResponseModel
     {
-        public CreateMatchResponseModel(int id) => this.Id = id;
+        internal CreateMatchResponseModel(int id) => this.Id = id;
 
         public int Id { get; }
     }
