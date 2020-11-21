@@ -8,11 +8,9 @@
     {
         public void Configure(EntityTypeBuilder<User> builder)
             => builder
-                .HasMany(t => t.Bets)
+                .HasOne(t => t.Gambler)
                 .WithOne()
-                .IsRequired()
-                .Metadata
-                .PrincipalToDependent
-                .SetField("bets");
+                .HasForeignKey<User>("GamblerId")
+                .OnDelete(DeleteBehavior.Restrict);
     }
 }

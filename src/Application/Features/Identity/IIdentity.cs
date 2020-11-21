@@ -7,7 +7,7 @@
 
     public interface IIdentity
     {
-        Task<Result> Register(UserRequestModel userRequest);
+        Task<Result<IUser>> Register(UserRequestModel userRequest);
 
         Task<Result<LoginResponseModel>> Login(UserRequestModel userRequest);
     }

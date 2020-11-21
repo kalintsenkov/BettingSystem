@@ -9,7 +9,7 @@
         public void Configure(EntityTypeBuilder<Bet> builder)
         {
             builder
-                .Property(b => b.Id);
+                .HasKey(b => b.Id);
 
             builder
                 .Property(b => b.Amount)

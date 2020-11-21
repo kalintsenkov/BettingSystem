@@ -2,6 +2,7 @@
 {
     using System.Reflection;
     using Domain.Models.Bets;
+    using Domain.Models.Gamblers;
     using Domain.Models.Matches;
     using Domain.Models.Teams;
     using Identity;
@@ -16,6 +17,8 @@
         }
 
         public DbSet<Bet> Bets { get; set; } = default!;
+
+        public DbSet<Gambler> Gamblers { get; set; } = default!;
 
         public DbSet<Match> Matches { get; set; } = default!;
 

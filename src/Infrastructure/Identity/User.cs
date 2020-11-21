@@ -1,24 +1,26 @@
 ﻿namespace BettingSystem.Infrastructure.Identity
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using Domain.Models.Bets;
+    using Application.Features.Identity;
+    using Domain.Exceptions;
+    using Domain.Models.Gamblers;
     using Microsoft.AspNetCore.Identity;
 
-    public class User : IdentityUser
+    public class User : IdentityUser, IUser
     {
-        private readonly HashSet<Bet> bets;
-
         internal User(string email)
             : base(email)
+            => this.Email = email;
+
+        public Gambler? Gambler { get; private set; }
+
+        public void BecomeGambler(Gambler gambler)
         {
-            this.Email = email;
+            if (this.Gambler != null)
+            {
+                throw new InvalidGamblerException($"User '{this.UserName}' is already existing.");
+            }
 
-            this.bets = new HashSet<Bet>();
+            this.Gambler = gambler;
         }
-
-        public IReadOnlyCollection<Bet> Bets => this.bets.ToList().AsReadOnly();
-
-        public void AddBet(Bet bet) => this.bets.Add(bet);
     }
 }
