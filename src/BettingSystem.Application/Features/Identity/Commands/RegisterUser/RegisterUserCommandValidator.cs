@@ -16,10 +16,12 @@
 
             this.RuleFor(u => u.Password)
                 .MinimumLength(MinPasswordLength)
+                .MaximumLength(MaxPasswordLength)
                 .NotEmpty();
 
             this.RuleFor(u => u.ConfirmPassword)
                 .Equal(u => u.Password)
+                .WithMessage("The password and confirmation password do not match.")
                 .NotEmpty();
 
         }
