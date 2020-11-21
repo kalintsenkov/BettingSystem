@@ -48,7 +48,7 @@
 
             if (gambler == null)
             {
-                throw new InvalidGamblerException("This user is not a dealer.");
+                throw new InvalidGamblerException("Invalid user.");
             }
 
             return gambler;
