@@ -27,7 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\BettingSystem.Application\BettingSystem.Application.csproj" />
+		<ProjectReference Include="..\Application\BettingSystem.Application.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -15,8 +15,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\BettingSystem.Infrastructure\BettingSystem.Infrastructure.csproj" />
-		<ProjectReference Include="..\BettingSystem.Web\BettingSystem.Web.csproj" />
+		<ProjectReference Include="..\Infrastructure\BettingSystem.Infrastructure.csproj" />
+		<ProjectReference Include="..\Web\BettingSystem.Web.csproj" />
 	</ItemGroup>
 
 

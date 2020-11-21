@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BettingSystem.Domain", "BettingSystem.Domain\BettingSystem.Domain.csproj", "{84D479AB-D6CC-4DB5-82D4-ABD677F634D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BettingSystem.Startup", "Startup\BettingSystem.Startup.csproj", "{F127286B-9704-48BB-BD4A-C33A262D0007}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BettingSystem.Startup", "BettingSystem.Startup\BettingSystem.Startup.csproj", "{F127286B-9704-48BB-BD4A-C33A262D0007}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BettingSystem.Domain", "Domain\BettingSystem.Domain.csproj", "{84D479AB-D6CC-4DB5-82D4-ABD677F634D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BettingSystem.Web", "BettingSystem.Web\BettingSystem.Web.csproj", "{9439F847-FD10-4B09-93A6-5183D68B2869}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BettingSystem.Web", "Web\BettingSystem.Web.csproj", "{9439F847-FD10-4B09-93A6-5183D68B2869}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BettingSystem.Infrastructure", "BettingSystem.Infrastructure\BettingSystem.Infrastructure.csproj", "{BCEA6EE6-9003-454E-8A98-F52CC86FA1C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BettingSystem.Infrastructure", "Infrastructure\BettingSystem.Infrastructure.csproj", "{BCEA6EE6-9003-454E-8A98-F52CC86FA1C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BettingSystem.Application", "BettingSystem.Application\BettingSystem.Application.csproj", "{9C3A7D00-9CF6-4401-8492-4B03C0881241}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BettingSystem.Application", "Application\BettingSystem.Application.csproj", "{9C3A7D00-9CF6-4401-8492-4B03C0881241}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
