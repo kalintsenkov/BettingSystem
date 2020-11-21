@@ -55,7 +55,7 @@
                 return InvalidLoginErrorMessage;
             }
 
-            var token = this.jwtGenerator.GenerateToken(user);
+            var token = await this.jwtGenerator.GenerateToken(user);
 
             return new LoginResponseModel(token);
         }
