@@ -8,22 +8,26 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="Persistence\Migrations\20201106210148_InitialDomainTables.cs" />
-		<Compile Remove="Persistence\Migrations\20201106210148_InitialDomainTables.Designer.cs" />
-		<Compile Remove="Persistence\Migrations\20201106211217_InitialDomainTables.cs" />
-		<Compile Remove="Persistence\Migrations\20201106211217_InitialDomainTables.Designer.cs" />
-		<Compile Remove="Persistence\Migrations\20201106211611_InitialDomainTables.cs" />
-		<Compile Remove="Persistence\Migrations\20201106211611_InitialDomainTables.Designer.cs" />
+		<ProjectCapability Include="DynamicFileNesting" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+		<Compile Remove="**\*.Specs.cs" />
+		<Compile Remove="**\*.Fakes.cs" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' != 'Release'">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
+		<PackageReference Include="xunit" Version="2.4.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

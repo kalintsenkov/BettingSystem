@@ -37,7 +37,7 @@
                                 .Assembly.FullName)))
                 .AddTransient<IInitializer, BettingDbInitializer>();
 
-        private static IServiceCollection AddRepositories(
+        internal static IServiceCollection AddRepositories(
             this IServiceCollection services)
             => services
                 .Scan(scan => scan
