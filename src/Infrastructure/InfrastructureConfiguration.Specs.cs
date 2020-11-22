@@ -2,6 +2,7 @@
 {
     using System;
     using System.Reflection;
+    using Application.Features.Bets;
     using Application.Features.Gamblers;
     using Application.Features.Matches;
     using AutoMapper;
@@ -35,6 +36,11 @@
 
             services
                 .GetService<IMatchRepository>()
+                .Should()
+                .NotBeNull();
+
+            services
+                .GetService<IBetRepository>()
                 .Should()
                 .NotBeNull();
         }
