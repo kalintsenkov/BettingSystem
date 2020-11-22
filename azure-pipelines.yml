@@ -6,6 +6,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  solution: 'src/BettingSystem.sln'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -21,19 +22,19 @@ steps:
   displayName: 'Restore'
   inputs:
     command: restore
-    projects: 'src/BettingSystem.sln'
+    projects: '$(solution)'
     arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
     command: build
-    projects: 'src/BettingSystem.sln'
+    projects: '$(solution)'
     arguments: '--configuration $(buildConfiguration)'
   
 - task: DotNetCoreCLI@2
   displayName: Test
   inputs:
     command: test
-    projects: 'src/*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+    projects: 'src/*/*.csproj'
+    arguments: '--configuration Debug'
