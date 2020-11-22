@@ -2,6 +2,7 @@
 {
     using System;
     using Bogus;
+    using Common;
     using FakeItEasy;
 
     using static ModelConstants.Common;
@@ -18,7 +19,8 @@
                         f.Random.String2(
                             MinNameLength,
                             MaxNameLength)))
-                    .Generate();
+                    .Generate()
+                    .SetId(1);
 
             public Priority Priority => Priority.Default;
         }
