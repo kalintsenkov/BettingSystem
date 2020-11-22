@@ -70,8 +70,10 @@
         public static void ForValidUrl<TException>(string url, string name = "Value")
             where TException : BaseDomainException, new()
         {
+            AgainstEmptyString<TException>(url, name);
+
             if (url.Length <= ModelConstants.Common.MaxUrlLength &&
-                Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
+                Uri.IsWellFormedUriString(url, UriKind.Absolute))
             {
                 return;
             }
