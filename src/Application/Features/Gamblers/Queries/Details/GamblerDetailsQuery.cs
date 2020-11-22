@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Application.Features.Gambler.Queries.Details
+﻿namespace BettingSystem.Application.Features.Gamblers.Queries.Details
 {
     using System.Threading;
     using System.Threading.Tasks;

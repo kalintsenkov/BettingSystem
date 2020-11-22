@@ -5,8 +5,8 @@
     using System.Linq.Expressions;
     using System.Threading;
     using System.Threading.Tasks;
-    using Application.Features.Gambler;
-    using Application.Features.Gambler.Queries.Details;
+    using Application.Features.Gamblers;
+    using Application.Features.Gamblers.Queries.Details;
     using AutoMapper;
     using Domain.Exceptions;
     using Domain.Models.Gamblers;

@@ -16,7 +16,7 @@
             CancellationToken cancellationToken = default);
 
         Task<Match> Find(
-            int id, 
+            int id,
             CancellationToken cancellationToken = default);
 
         Task<MatchDetailsResponseModel> GetDetails(

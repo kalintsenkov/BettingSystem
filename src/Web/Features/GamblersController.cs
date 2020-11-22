@@ -1,8 +1,8 @@
 ﻿namespace BettingSystem.Web.Features
 {
     using System.Threading.Tasks;
-    using Application.Features.Gambler.Commands.Edit;
-    using Application.Features.Gambler.Queries.Details;
+    using Application.Features.Gamblers.Commands.Edit;
+    using Application.Features.Gamblers.Queries.Details;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

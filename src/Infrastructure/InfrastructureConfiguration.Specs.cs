@@ -2,7 +2,7 @@
 {
     using System;
     using System.Reflection;
-    using Application.Features.Gambler;
+    using Application.Features.Gamblers;
     using Application.Features.Matches;
     using AutoMapper;
     using FluentAssertions;

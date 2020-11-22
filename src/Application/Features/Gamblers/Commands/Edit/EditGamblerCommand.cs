@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Application.Features.Gambler.Commands.Edit
+﻿namespace BettingSystem.Application.Features.Gamblers.Commands.Edit
 {
     using System.Threading;
     using System.Threading.Tasks;

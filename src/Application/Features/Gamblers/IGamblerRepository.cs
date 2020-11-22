@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Application.Features.Gambler
+﻿namespace BettingSystem.Application.Features.Gamblers
 {
     using System.Threading;
     using System.Threading.Tasks;

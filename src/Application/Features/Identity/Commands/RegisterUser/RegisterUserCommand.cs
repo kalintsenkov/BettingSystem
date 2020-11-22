@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using Common;
     using Domain.Factories.Gamblers;
-    using Gambler;
+    using Gamblers;
     using MediatR;
 
     public class RegisterUserCommand : UserRequestModel, IRequest<Result>

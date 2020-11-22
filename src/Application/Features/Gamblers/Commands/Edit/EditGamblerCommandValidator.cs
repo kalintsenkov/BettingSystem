@@ -1,7 +1,6 @@
-﻿namespace BettingSystem.Application.Features.Gambler.Commands.Edit
+﻿namespace BettingSystem.Application.Features.Gamblers.Commands.Edit
 {
     using FluentValidation;
-
     using static Domain.Models.ModelConstants.Common;
 
     public class EditGamblerCommandValidator : AbstractValidator<EditGamblerCommand>
