@@ -6,12 +6,18 @@
     using Application.Features.Matches.Commands.Delete;
     using Application.Features.Matches.Commands.Edit;
     using Application.Features.Matches.Queries.Details;
+    using Application.Features.Matches.Queries.Search;
     using Application.Features.Matches.Queries.Stadiums;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class MatchesController : ApiController
     {
+        [HttpGet]
+        public async Task<ActionResult<SearchMatchesResponseModel>> Search(
+            [FromQuery] SearchMatchesQuery query)
+            => await this.Send(query);
+
         [HttpGet]
         [Route(Id)]
         public async Task<ActionResult<MatchDetailsResponseModel>> Details(

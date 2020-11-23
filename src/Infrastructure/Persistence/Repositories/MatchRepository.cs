@@ -5,11 +5,13 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Application.Features.Matches;
+    using Application.Features.Matches.Queries.Common;
     using Application.Features.Matches.Queries.Details;
     using Application.Features.Matches.Queries.Stadiums;
     using AutoMapper;
     using Domain.Models.Matches;
     using Domain.Models.Teams;
+    using Domain.Specifications;
     using Microsoft.EntityFrameworkCore;
 
     internal class MatchRepository : DataRepository<Match>, IMatchRepository
@@ -42,6 +44,15 @@
             int id,
             CancellationToken cancellationToken = default)
             => await this.FindById(id, cancellationToken);
+
+        public async Task<IEnumerable<MatchResponseModel>> GetMatchListings(
+            Specification<Match> matchSpecification,
+            CancellationToken cancellationToken = default)
+            => await this.mapper
+                .ProjectTo<MatchResponseModel>(this
+                    .AllAsNoTracking()
+                    .Where(matchSpecification))
+                .ToListAsync(cancellationToken);
 
         public async Task<MatchDetailsResponseModel> GetDetails(
             int id,

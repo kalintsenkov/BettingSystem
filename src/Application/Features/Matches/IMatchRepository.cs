@@ -6,6 +6,8 @@
     using Contracts;
     using Domain.Models.Matches;
     using Domain.Models.Teams;
+    using Domain.Specifications;
+    using Queries.Common;
     using Queries.Details;
     using Queries.Stadiums;
 
@@ -19,10 +21,13 @@
             int id,
             CancellationToken cancellationToken = default);
 
+        Task<IEnumerable<MatchResponseModel>> GetMatchListings(
+            Specification<Match> matchSpecification,
+            CancellationToken cancellationToken = default);
+
         Task<MatchDetailsResponseModel> GetDetails(
             int id,
             CancellationToken cancellationToken = default);
-
         Task<Team> GetHomeTeam(
             string homeTeam,
             CancellationToken cancellationToken = default);

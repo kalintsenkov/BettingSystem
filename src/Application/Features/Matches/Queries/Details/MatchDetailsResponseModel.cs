@@ -1,22 +1,18 @@
 ﻿namespace BettingSystem.Application.Features.Matches.Queries.Details
 {
+    using AutoMapper;
+    using Common;
     using Domain.Models.Matches;
-    using Mapping;
 
-    public class MatchDetailsResponseModel : IMapFrom<Match>
+    public class MatchDetailsResponseModel : MatchResponseModel
     {
-        public string StartDate { get; private set; } = default!;
-
-        public string HomeTeamName { get; private set; } = default!;
-
-        public string AwayTeamName { get; private set; } = default!;
-
         public string StadiumName { get; private set; } = default!;
 
         public string StadiumImageUrl { get; private set; } = default!;
 
-        public int? StatisticsHomeScore { get; private set; }
-
-        public int? StatisticsAwayScore { get; private set; }
+        public override void Mapping(Profile mapper)
+            => mapper
+                .CreateMap<Match, MatchDetailsResponseModel>()
+                .IncludeBase<Match, MatchResponseModel>();
     }
 }

@@ -2,6 +2,7 @@
 {
     using System;
     using Exceptions;
+    using FakeItEasy;
     using FluentAssertions;
     using Xunit;
 
@@ -13,7 +14,7 @@
         public void ValidStadiumShouldNotThrowException()
         {
             // Act
-            Action act = () => GetStadium();
+            Action act = () => A.Dummy<Stadium>();
 
             // Assert
             act.Should().NotThrow<InvalidMatchException>();
