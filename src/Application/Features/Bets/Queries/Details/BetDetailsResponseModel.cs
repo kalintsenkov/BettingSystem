@@ -17,7 +17,7 @@
 
         public string Prediction { get; private set; } = default!;
 
-        public void Mapping(Profile mapper)
+        public virtual void Mapping(Profile mapper)
             => mapper
                 .CreateMap<Bet, BetDetailsResponseModel>()
                 .ForMember(b => b.HomeTeam, cfg => cfg

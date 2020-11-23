@@ -33,7 +33,7 @@
 
                 if (request.Id != gambler.Id)
                 {
-                    return "You cannot this profile.";
+                    return "You cannot edit this profile.";
                 }
 
                 gambler.UpdateName(request.Name);
