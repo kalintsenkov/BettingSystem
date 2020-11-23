@@ -40,15 +40,6 @@
 
         public Statistics Statistics { get; private set; }
 
-        public Result GetResult() => (this.Statistics.HomeScore, this.Statistics.AwayScore) switch
-        {
-            var (homeScore, awayScore) when !homeScore.HasValue && !awayScore.HasValue => Result.NotFinished,
-            var (homeScore, awayScore) when homeScore > awayScore => Result.Home,
-            var (homeScore, awayScore) when homeScore < awayScore => Result.Away,
-            var (homeScore, awayScore) when homeScore == awayScore => Result.Draw,
-            (_, _) => Result.NotFinished
-        };
-
         public Match UpdateStartDate(DateTime startDate)
         {
             this.StartDate = startDate;
@@ -77,9 +68,9 @@
             return this;
         }
 
-        public Match UpdateStatistics(int? homeScore, int? awayScore)
+        public Match UpdateStatistics(int? homeScore, int? awayScore, Status status)
         {
-            this.Statistics = new Statistics(homeScore, awayScore);
+            this.Statistics = new Statistics(homeScore, awayScore, status);
 
             return this;
         }

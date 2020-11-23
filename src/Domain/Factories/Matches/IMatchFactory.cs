@@ -20,6 +20,6 @@
 
         IMatchFactory WithStadium(Stadium stadium);
 
-        IMatchFactory WithStatistics(int? homeScore, int? awayScore);
+        IMatchFactory WithStatistics(int? homeScore, int? awayScore, Status status);
     }
 }

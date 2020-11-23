@@ -34,11 +34,7 @@
                 => new Faker<Player>()
                     .CustomInstantiator(f => new Player(
                         f.Name.FullName(Name.Gender.Male),
-                        f.PickRandom(
-                            Position.Goalkeeper,
-                            Position.Defender,
-                            Position.Midfielder,
-                            Position.Forward)))
+                        f.PickRandom(Enumeration.GetAll<Position>())))
                     .Generate()
                     .SetId(id);
         }

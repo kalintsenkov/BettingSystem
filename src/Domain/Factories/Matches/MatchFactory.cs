@@ -53,9 +53,9 @@
             return this;
         }
 
-        public IMatchFactory WithStatistics(int? homeScore, int? awayScore)
+        public IMatchFactory WithStatistics(int? homeScore, int? awayScore, Status status)
         {
-            this.matchStatistics = new Statistics(homeScore, awayScore);
+            this.matchStatistics = new Statistics(homeScore, awayScore, status);
             return this;
         }
 

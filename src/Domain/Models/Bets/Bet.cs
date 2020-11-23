@@ -13,7 +13,7 @@
             decimal amount,
             Prediction prediction)
         {
-            this.Validate(amount);
+            this.Validate(match, amount);
 
             this.Match = match;
             this.Amount = amount;
@@ -43,24 +43,39 @@
 
         public Bet UpdateAmount(decimal amount)
         {
-            this.Validate(amount);
+            this.ValidateAmount(amount);
 
             this.Amount = amount;
 
             return this;
         }
 
-        public void BetForHomeTeam() => this.Prediction = Prediction.Home;
+        private void Validate(Match match, decimal amount)
+        {
+            this.ValidateMatch(match);
+            this.ValidateAmount(amount);
+        }
 
-        public void BetForAwayTeam() => this.Prediction = Prediction.Away;
-
-        public void BetForDraw() => this.Prediction = Prediction.Draw;
-
-        private void Validate(decimal amount)
+        private void ValidateAmount(decimal amount)
             => Guard.AgainstOutOfRange<InvalidBetException>(
                 amount,
                 Zero,
                 decimal.MaxValue,
                 nameof(this.Amount));
+
+        private void ValidateMatch(Match match)
+        {
+            var matchStatus = match.Statistics.Status;
+
+            if (matchStatus == Status.Finished)
+            {
+                throw new InvalidBetException("You cannot make bets on finished match.");
+            }
+
+            if (matchStatus == Status.Cancelled)
+            {
+                throw new InvalidBetException("You cannot make bets on cancelled match.");
+            }
+        }
     }
 }
