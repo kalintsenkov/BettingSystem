@@ -60,6 +60,10 @@
                 .Aggregate(startValue, (current, value) => current * multiplier + value!.GetHashCode());
         }
 
+        public static bool operator ==(ValueObject first, ValueObject second) => first.Equals(second);
+
+        public static bool operator !=(ValueObject first, ValueObject second) => !(first == second);
+
         private IEnumerable<FieldInfo> GetFields()
         {
             var type = this.GetType();
@@ -75,9 +79,5 @@
 
             return fields;
         }
-
-        public static bool operator ==(ValueObject first, ValueObject second) => first.Equals(second);
-
-        public static bool operator !=(ValueObject first, ValueObject second) => !(first == second);
     }
 }

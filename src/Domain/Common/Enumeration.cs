@@ -11,17 +11,15 @@
         private static readonly ConcurrentDictionary<Type, IEnumerable<object>> EnumCache
             = new ConcurrentDictionary<Type, IEnumerable<object>>();
 
-        public int Value { get; }
-
-        public string Name { get; }
-
         protected Enumeration(int value, string name)
         {
             this.Value = value;
             this.Name = name;
         }
 
-        public override string ToString() => this.Name;
+        public int Value { get; }
+
+        public string Name { get; }
 
         public static IEnumerable<T> GetAll<T>() where T : Enumeration
         {
@@ -56,6 +54,8 @@
             }
         }
 
+        public int CompareTo(object? other) => this.Value.CompareTo(((Enumeration)other!).Value);
+
         public override bool Equals(object? obj)
         {
             if (!(obj is Enumeration otherValue))
@@ -68,6 +68,10 @@
 
             return typeMatches && valueMatches;
         }
+
+        public override string ToString() => this.Name;
+
+        public override int GetHashCode() => (this.GetType().ToString() + this.Value).GetHashCode();
 
         public static bool operator ==(Enumeration? first, Enumeration? second)
         {
@@ -85,10 +89,6 @@
         }
 
         public static bool operator !=(Enumeration? first, Enumeration? second) => !(first == second);
-
-        public override int GetHashCode() => (this.GetType().ToString() + this.Value).GetHashCode();
-
-        public int CompareTo(object? other) => this.Value.CompareTo(((Enumeration)other!).Value);
 
         private static T Parse<T, TValue>(TValue value, string description, Func<T, bool> predicate) where T : Enumeration
         {
