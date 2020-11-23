@@ -67,12 +67,12 @@
         {
             var matchStatus = match.Statistics.Status;
 
-            if (Equals(matchStatus, Status.Finished))
+            if (matchStatus == Status.Finished)
             {
                 throw new InvalidBetException("You cannot make bets on finished match.");
             }
 
-            if (Equals(matchStatus, Status.Cancelled))
+            if (matchStatus == Status.Cancelled)
             {
                 throw new InvalidBetException("You cannot make bets on cancelled match.");
             }

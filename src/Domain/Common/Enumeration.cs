@@ -56,18 +56,6 @@
             }
         }
 
-        private static T Parse<T, TValue>(TValue value, string description, Func<T, bool> predicate) where T : Enumeration
-        {
-            var matchingItem = GetAll<T>().FirstOrDefault(predicate);
-
-            if (matchingItem == null)
-            {
-                throw new InvalidOperationException($"'{value}' is not a valid {description} in {typeof(T)}");
-            }
-
-            return matchingItem;
-        }
-
         public override bool Equals(object? obj)
         {
             if (!(obj is Enumeration otherValue))
@@ -81,8 +69,37 @@
             return typeMatches && valueMatches;
         }
 
+        public static bool operator ==(Enumeration? first, Enumeration? second)
+        {
+            if (first is null && second is null)
+            {
+                return true;
+            }
+
+            if (first is null || second is null)
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        public static bool operator !=(Enumeration? first, Enumeration? second) => !(first == second);
+
         public override int GetHashCode() => (this.GetType().ToString() + this.Value).GetHashCode();
 
         public int CompareTo(object? other) => this.Value.CompareTo(((Enumeration)other!).Value);
+
+        private static T Parse<T, TValue>(TValue value, string description, Func<T, bool> predicate) where T : Enumeration
+        {
+            var matchingItem = GetAll<T>().FirstOrDefault(predicate);
+
+            if (matchingItem == null)
+            {
+                throw new InvalidOperationException($"'{value}' is not a valid {description} in {typeof(T)}");
+            }
+
+            return matchingItem;
+        }
     }
 }
