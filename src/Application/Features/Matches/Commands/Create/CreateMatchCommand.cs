@@ -63,9 +63,7 @@
                     .WithStartDate(request.StartDate)
                     .Build();
 
-                await this.matchRepository.Save(
-                    match,
-                    cancellationToken);
+                await this.matchRepository.Save(match, cancellationToken);
 
                 return new CreateMatchResponseModel(match.Id);
             }
