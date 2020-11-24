@@ -4,8 +4,6 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Common;
-    using Domain.Common;
-    using Domain.Models.Matches;
     using MediatR;
 
     public class EditMatchCommand : EntityCommand<int, EditMatchCommand>, IRequest<Result>
@@ -68,10 +66,7 @@
 
                 match
                     .UpdateStartDate(request.StartDate ?? match.StartDate)
-                    .UpdateStatistics(
-                        request.HomeTeamScore,
-                        request.AwayTeamScore,
-                        Enumeration.FromValue<Status>(request.Status));
+                    .UpdateStatistics(request.HomeTeamScore, request.AwayTeamScore);
 
                 await this.matchRepository.Save(match, cancellationToken);
 

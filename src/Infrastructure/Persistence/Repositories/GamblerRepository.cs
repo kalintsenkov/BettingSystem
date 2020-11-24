@@ -37,6 +37,16 @@
                 user => user.Gambler!.Id,
                 cancellationToken);
 
+        public async Task<bool> HasBet(
+            int gamblerId,
+            int betId,
+            CancellationToken cancellationToken = default)
+            => await this
+                .AllAsNoTracking()
+                .Where(g => g.Id == gamblerId)
+                .AnyAsync(g => g.Bets
+                    .Any(b => b.Id == betId), cancellationToken);
+
         public async Task<GamblerDetailsResponseModel> GetDetails(
             int id,
             CancellationToken cancellationToken = default)

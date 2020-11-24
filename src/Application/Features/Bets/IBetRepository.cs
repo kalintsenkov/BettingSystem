@@ -10,6 +10,14 @@
 
     public interface IBetRepository : IRepository<Bet>
     {
+        Task<bool> Delete(
+            int id,
+            CancellationToken cancellationToken = default);
+
+        Task<Bet> Find(
+            int id,
+            CancellationToken cancellationToken = default);
+
         Task<BetDetailsResponseModel> GetDetails(
             int id,
             CancellationToken cancellationToken = default);

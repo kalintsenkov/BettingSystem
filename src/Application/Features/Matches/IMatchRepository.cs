@@ -28,6 +28,7 @@
         Task<MatchDetailsResponseModel> GetDetails(
             int id,
             CancellationToken cancellationToken = default);
+
         Task<Team> GetHomeTeam(
             string homeTeam,
             CancellationToken cancellationToken = default);

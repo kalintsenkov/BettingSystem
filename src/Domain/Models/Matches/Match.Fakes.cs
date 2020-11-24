@@ -19,7 +19,8 @@
                         A.Dummy<Team>(),
                         A.Dummy<Team>(),
                         A.Dummy<Stadium>(),
-                        A.Dummy<Statistics>()))
+                        A.Dummy<Statistics>(),
+                        Status.InPlay))
                     .Generate()
                     .SetId(1);
 

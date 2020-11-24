@@ -53,9 +53,9 @@
             return this;
         }
 
-        public IMatchFactory WithStatistics(int? homeScore, int? awayScore, Status status)
+        public IMatchFactory WithStatistics(int? homeScore, int? awayScore)
         {
-            this.matchStatistics = new Statistics(homeScore, awayScore, status);
+            this.matchStatistics = new Statistics(homeScore, awayScore);
             return this;
         }
 
@@ -72,7 +72,8 @@
                 this.matchHomeTeam,
                 this.matchAwayTeam,
                 this.matchStadium,
-                this.matchStatistics);
+                this.matchStatistics,
+                Status.NotStarted);
         }
     }
 }

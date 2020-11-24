@@ -11,7 +11,6 @@
         private Prediction betPrediction = default!;
 
         private bool isMatchSet = false;
-        private bool isPredictionSet = false;
 
         public IBetFactory WithMatch(Match match)
         {
@@ -29,22 +28,21 @@
         public IBetFactory WithPrediction(Prediction prediction)
         {
             this.betPrediction = prediction;
-            this.isPredictionSet = true;
             return this;
         }
 
         public Bet Build()
         {
-            if (!this.isMatchSet || !this.isPredictionSet)
+            if (!this.isMatchSet)
             {
-                throw new InvalidBetException(
-                    "Match and prediction must have a value.");
+                throw new InvalidBetException("Match must have a value.");
             }
 
             return new Bet(
                 this.betMatch,
                 this.betAmount,
-                this.betPrediction);
+                this.betPrediction,
+                false);
         }
     }
 }

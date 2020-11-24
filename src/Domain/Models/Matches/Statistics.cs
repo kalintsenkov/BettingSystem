@@ -7,28 +7,17 @@
 
     public class Statistics : ValueObject
     {
-        internal Statistics(int? homeScore, int? awayScore, Status status)
+        internal Statistics(int? homeScore, int? awayScore)
         {
             this.Validate(homeScore, awayScore);
 
             this.HomeScore = homeScore;
             this.AwayScore = awayScore;
-            this.Status = status;
-        }
-
-        private Statistics(int? homeScore, int? awayScore)
-        {
-            this.HomeScore = homeScore;
-            this.AwayScore = awayScore;
-
-            this.Status = default!;
         }
 
         public int? HomeScore { get; private set; }
 
         public int? AwayScore { get; private set; }
-
-        public Status Status { get; private set; }
 
         private void Validate(int? homeScore, int? awayScore)
         {

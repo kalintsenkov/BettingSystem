@@ -43,13 +43,14 @@
 
                     s.Property(st => st.HomeScore);
                     s.Property(st => st.AwayScore);
+                });
 
-                    s.OwnsOne(st => st.Status, st =>
-                    {
-                        st.WithOwner();
+            builder
+                .OwnsOne(st => st.Status, st =>
+                {
+                    st.WithOwner();
 
-                        st.Property(sts => sts.Value).IsRequired();
-                    });
+                    st.Property(sts => sts.Value).IsRequired();
                 });
         }
     }

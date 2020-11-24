@@ -9,7 +9,7 @@
         {
             public bool CanCreate(Type type) => type == typeof(Statistics);
 
-            public object? Create(Type type) => new Statistics(3, 0, Status.InPlay);
+            public object? Create(Type type) => new Statistics(3, 0);
 
             public Priority Priority => Priority.Default;
         }

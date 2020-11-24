@@ -16,6 +16,11 @@
             string userId,
             CancellationToken cancellationToken = default);
 
+        Task<bool> HasBet(
+            int gamblerId,
+            int betId,
+            CancellationToken cancellationToken = default);
+
         Task<GamblerDetailsResponseModel> GetDetails(
             int id,
             CancellationToken cancellationToken = default);

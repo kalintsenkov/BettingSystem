@@ -52,12 +52,12 @@
                     : this.matchFactory.WithHomeTeam(homeTeam);
 
                 factory = awayTeam == null
-                    ? this.matchFactory.WithAwayTeam(request.AwayTeam)
-                    : this.matchFactory.WithAwayTeam(awayTeam);
+                    ? factory.WithAwayTeam(request.AwayTeam)
+                    : factory.WithAwayTeam(awayTeam);
 
                 factory = stadium == null
-                    ? this.matchFactory.WithStadium(request.StadiumName, request.StadiumImageUrl)
-                    : this.matchFactory.WithStadium(stadium);
+                    ? factory.WithStadium(request.StadiumName, request.StadiumImageUrl)
+                    : factory.WithStadium(stadium);
 
                 var match = factory
                     .WithStartDate(request.StartDate)

@@ -1,7 +1,6 @@
 ﻿namespace BettingSystem.Domain.Models.Matches
 {
     using System;
-    using Common;
     using Exceptions;
     using FluentAssertions;
     using Xunit;
@@ -9,32 +8,26 @@
     public class StatisticsSpecs
     {
         [Theory]
-        [InlineData(3, 0, "InPlay")]
-        [InlineData(0, 3, "InPlay")]
-        [InlineData(null, null, "NotStarted")]
-        public void ValidStatisticShouldNotThrowException(int? homeScore, int? awayScore, string status)
+        [InlineData(3, 0)]
+        [InlineData(0, 3)]
+        [InlineData(null, null)]
+        public void ValidStatisticShouldNotThrowException(int? homeScore, int? awayScore)
         {
             // Act
-            Action act = () => new Statistics(
-                homeScore,
-                awayScore,
-                Enumeration.FromName<Status>(status));
+            Action act = () => new Statistics(homeScore, awayScore);
 
             // Assert
             act.Should().NotThrow<InvalidMatchException>();
         }
 
         [Theory]
-        [InlineData(-1, 0, "Cancelled")]
-        [InlineData(0, -1, "Cancelled")]
-        [InlineData(-1, -1, "Cancelled")]
-        public void InvalidStatisticShouldThrowException(int homeScore, int awayScore, string status)
+        [InlineData(-1, 0)]
+        [InlineData(0, -1)]
+        [InlineData(-1, -1)]
+        public void InvalidStatisticShouldThrowException(int homeScore, int awayScore)
         {
             // Act
-            Action act = () => new Statistics(
-                homeScore,
-                awayScore,
-                Enumeration.FromName<Status>(status));
+            Action act = () => new Statistics(homeScore, awayScore);
 
             // Assert
             act.Should().Throw<InvalidMatchException>();

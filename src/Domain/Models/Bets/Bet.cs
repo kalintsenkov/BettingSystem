@@ -11,18 +11,21 @@
         internal Bet(
             Match match,
             decimal amount,
-            Prediction prediction)
+            Prediction prediction,
+            bool isProfitable)
         {
             this.Validate(match, amount);
 
             this.Match = match;
             this.Amount = amount;
             this.Prediction = prediction;
+            this.IsProfitable = isProfitable;
         }
 
-        private Bet(decimal amount)
+        private Bet(decimal amount, bool isProfitable)
         {
             this.Amount = amount;
+            this.IsProfitable = isProfitable;
 
             this.Match = default!;
             this.Prediction = default!;
@@ -33,6 +36,8 @@
         public decimal Amount { get; private set; }
 
         public Prediction Prediction { get; private set; }
+
+        public bool IsProfitable { get; private set; }
 
         public Bet UpdateMatch(Match match)
         {
@@ -46,6 +51,13 @@
             this.ValidateAmount(amount);
 
             this.Amount = amount;
+
+            return this;
+        }
+
+        public Bet MakeProfitable()
+        {
+            this.IsProfitable = true;
 
             return this;
         }
@@ -65,7 +77,7 @@
 
         private void ValidateMatch(Match match)
         {
-            var matchStatus = match.Statistics.Status;
+            var matchStatus = match.Status;
 
             if (matchStatus == Status.Finished)
             {

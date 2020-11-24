@@ -19,6 +19,32 @@
             : base(db)
             => this.mapper = mapper;
 
+        public async Task<bool> Delete(
+            int id,
+            CancellationToken cancellationToken = default)
+        {
+            var bet = await this.Find(id, cancellationToken);
+
+            if (bet == null)
+            {
+                return false;
+            }
+
+            this.Data.Remove(bet);
+
+            await this.Data.SaveChangesAsync(cancellationToken);
+
+            return true;
+        }
+
+        public async Task<Bet> Find(
+            int id,
+            CancellationToken cancellationToken = default)
+            => await this
+                .All()
+                .Include(b => b.Match)
+                .FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
+
         public async Task<BetDetailsResponseModel> GetDetails(
             int id,
             CancellationToken cancellationToken)

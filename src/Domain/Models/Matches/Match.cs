@@ -11,13 +11,15 @@
             Team homeTeam,
             Team awayTeam,
             Stadium stadium,
-            Statistics statistics)
+            Statistics statistics,
+            Status status)
         {
             this.StartDate = startDate;
             this.HomeTeam = homeTeam;
             this.AwayTeam = awayTeam;
             this.Stadium = stadium;
             this.Statistics = statistics;
+            this.Status = status;
         }
 
         private Match(DateTime startDate)
@@ -28,6 +30,7 @@
             this.AwayTeam = default!;
             this.Stadium = default!;
             this.Statistics = default!;
+            this.Status = default!;
         }
 
         public DateTime StartDate { get; private set; }
@@ -39,6 +42,8 @@
         public Stadium Stadium { get; private set; }
 
         public Statistics Statistics { get; private set; }
+
+        public Status Status { get; private set; }
 
         public Match UpdateStartDate(DateTime startDate)
         {
@@ -68,9 +73,9 @@
             return this;
         }
 
-        public Match UpdateStatistics(int? homeScore, int? awayScore, Status status)
+        public Match UpdateStatistics(int? homeScore, int? awayScore)
         {
-            this.Statistics = new Statistics(homeScore, awayScore, status);
+            this.Statistics = new Statistics(homeScore, awayScore);
 
             return this;
         }
