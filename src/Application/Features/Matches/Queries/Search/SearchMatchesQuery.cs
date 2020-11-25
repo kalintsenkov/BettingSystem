@@ -13,6 +13,8 @@
 
         public string? AwayTeam { get; set; }
 
+        public string? Stadium { get; set; }
+
         public class SearchMatchesQueryHandler : IRequestHandler<SearchMatchesQuery, SearchMatchesResponseModel>
         {
             private readonly IMatchRepository matchRepository;
@@ -36,7 +38,8 @@
             private Specification<Match> GetMatchSpecification(
                 SearchMatchesQuery request)
                 => new MatchByHomeTeamSpecification(request.HomeTeam)
-                    .And(new MatchByAwayTeamSpecification(request.AwayTeam));
+                    .And(new MatchByAwayTeamSpecification(request.AwayTeam))
+                    .And(new MatchByStadiumSpecification(request.Stadium));
         }
     }
 }
