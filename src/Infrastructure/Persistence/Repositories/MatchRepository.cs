@@ -25,7 +25,7 @@
             int id,
             CancellationToken cancellationToken = default)
         {
-            var match = await this.FindById(id, cancellationToken);
+            var match = await this.Data.Matches.FindAsync(id, cancellationToken);
 
             if (match == null)
             {
@@ -42,7 +42,12 @@
         public async Task<Match> Find(
             int id,
             CancellationToken cancellationToken = default)
-            => await this.FindById(id, cancellationToken);
+            => await this
+                .All()
+                .Include(m => m.HomeTeam)
+                .Include(m => m.AwayTeam)
+                .Include(m => m.Stadium)
+                .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 
         public async Task<IEnumerable<MatchResponseModel>> GetMatchListings(
             Specification<Match> matchSpecification,
@@ -89,16 +94,6 @@
                 .ProjectTo<GetMatchStadiumsResponseModel>(this
                     .AllStadiums())
                 .ToListAsync(cancellationToken);
-
-        private async Task<Match> FindById(
-            int id,
-            CancellationToken cancellationToken = default)
-            => await this
-                .All()
-                .Include(m => m.HomeTeam)
-                .Include(m => m.AwayTeam)
-                .Include(m => m.Stadium)
-                .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 
         private IQueryable<Team> AllTeams()
             => this.Data.Teams;

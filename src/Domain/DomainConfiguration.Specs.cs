@@ -1,5 +1,7 @@
 ﻿namespace BettingSystem.Domain
 {
+    using System.Linq;
+    using Common;
     using Factories.Bets;
     using Factories.Gamblers;
     using Factories.Matches;
@@ -35,6 +37,26 @@
                 .GetService<IMatchFactory>()
                 .Should()
                 .NotBeNull();
+        }
+
+        [Fact]
+        public void AddDomainShouldRegisterInitialData()
+        {
+            // Arrange
+            var serviceCollection = new ServiceCollection();
+
+            // Act
+            var services = serviceCollection
+                .AddDomain()
+                .BuildServiceProvider();
+
+            // Assert
+            services
+                .GetServices<IInitialData>()
+                .ToList()
+                .ForEach(initialData => initialData
+                    .Should()
+                    .NotBeNull());
         }
     }
 }
