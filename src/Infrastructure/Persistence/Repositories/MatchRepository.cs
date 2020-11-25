@@ -10,7 +10,6 @@
     using Application.Features.Matches.Queries.Stadiums;
     using AutoMapper;
     using Domain.Models.Matches;
-    using Domain.Models.Teams;
     using Domain.Specifications;
     using Microsoft.EntityFrameworkCore;
 

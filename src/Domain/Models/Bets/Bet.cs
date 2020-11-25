@@ -4,7 +4,7 @@
     using Exceptions;
     using Matches;
 
-    using static ModelConstants.Common;
+    using static ModelConstants.Bet;
 
     public class Bet : Entity<int>, IAggregateRoot
     {
@@ -57,7 +57,27 @@
 
         public Bet MakeProfitable()
         {
-            this.IsProfitable = true;
+            this.ValidateIfMatchIsFinished(this.Match);
+
+            var homeScore = this.Match.Statistics.HomeScore;
+            var awayScore = this.Match.Statistics.AwayScore;
+
+            if (homeScore > awayScore && this.Prediction == Prediction.Home)
+            {
+                this.IsProfitable = true;
+            }
+            else if (homeScore < awayScore && this.Prediction == Prediction.Away)
+            {
+                this.IsProfitable = true;
+            }
+            else if (homeScore == awayScore && this.Prediction == Prediction.Draw)
+            {
+                this.IsProfitable = true;
+            }
+            else
+            {
+                throw new InvalidBetException("Wrong bet prediction.");
+            }
 
             return this;
         }
@@ -67,13 +87,6 @@
             this.ValidateMatch(match);
             this.ValidateAmount(amount);
         }
-
-        private void ValidateAmount(decimal amount)
-            => Guard.AgainstOutOfRange<InvalidBetException>(
-                amount,
-                Zero,
-                decimal.MaxValue,
-                nameof(this.Amount));
 
         private void ValidateMatch(Match match)
         {
@@ -89,5 +102,24 @@
                 throw new InvalidBetException("You cannot make bets on cancelled match.");
             }
         }
+
+        private void ValidateIfMatchIsFinished(Match match)
+        {
+            var matchStatus = match.Status;
+
+            if (matchStatus == Status.InPlay ||
+                matchStatus == Status.Cancelled ||
+                matchStatus == Status.NotStarted)
+            {
+                throw new InvalidBetException("This match is not finished yet.");
+            }
+        }
+
+        private void ValidateAmount(decimal amount)
+            => Guard.AgainstOutOfRange<InvalidBetException>(
+                amount,
+                MinAmountValue,
+                MaxAmountValue,
+                nameof(this.Amount));
     }
 }

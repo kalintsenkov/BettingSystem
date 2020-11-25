@@ -20,8 +20,6 @@
 
         public int? AwayTeamScore { get; set; }
 
-        public int Status { get; set; }
-
         public class EditMatchCommandHandler : IRequestHandler<EditMatchCommand, Result>
         {
             private readonly IMatchRepository matchRepository;

@@ -4,7 +4,6 @@
     using Domain.Models.Bets;
     using Domain.Models.Gamblers;
     using Domain.Models.Matches;
-    using Domain.Models.Teams;
     using Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -25,8 +24,6 @@
         public DbSet<Stadium> Stadiums { get; set; } = default!;
 
         public DbSet<Team> Teams { get; set; } = default!;
-
-        public DbSet<Player> Players { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

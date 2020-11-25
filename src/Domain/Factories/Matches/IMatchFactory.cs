@@ -2,7 +2,6 @@
 {
     using System;
     using Models.Matches;
-    using Models.Teams;
 
     public interface IMatchFactory : IFactory<Match>
     {
@@ -19,7 +18,5 @@
         IMatchFactory WithStadium(string name, string imageUrl);
 
         IMatchFactory WithStadium(Stadium stadium);
-
-        IMatchFactory WithStatistics(int? homeScore, int? awayScore);
     }
 }

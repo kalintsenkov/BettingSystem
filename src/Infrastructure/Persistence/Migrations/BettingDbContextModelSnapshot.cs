@@ -30,7 +30,7 @@ namespace BettingSystem.Infrastructure.Persistence.Migrations
                         .HasPrecision(19, 4)
                         .HasColumnType("decimal(19,4)");
 
-                    b.Property<int?>("GamblerId")
+                    b.Property<int>("GamblerId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsProfitable")
@@ -117,29 +117,7 @@ namespace BettingSystem.Infrastructure.Persistence.Migrations
                     b.ToTable("Stadiums");
                 });
 
-            modelBuilder.Entity("BettingSystem.Domain.Models.Teams.Player", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("Players");
-                });
-
-            modelBuilder.Entity("BettingSystem.Domain.Models.Teams.Team", b =>
+            modelBuilder.Entity("BettingSystem.Domain.Models.Matches.Team", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -363,7 +341,9 @@ namespace BettingSystem.Infrastructure.Persistence.Migrations
                 {
                     b.HasOne("BettingSystem.Domain.Models.Gamblers.Gambler", null)
                         .WithMany("Bets")
-                        .HasForeignKey("GamblerId");
+                        .HasForeignKey("GamblerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("BettingSystem.Domain.Models.Matches.Match", "Match")
                         .WithMany()
@@ -397,13 +377,13 @@ namespace BettingSystem.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("BettingSystem.Domain.Models.Matches.Match", b =>
                 {
-                    b.HasOne("BettingSystem.Domain.Models.Teams.Team", "AwayTeam")
+                    b.HasOne("BettingSystem.Domain.Models.Matches.Team", "AwayTeam")
                         .WithMany()
                         .HasForeignKey("AwayTeamId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BettingSystem.Domain.Models.Teams.Team", "HomeTeam")
+                    b.HasOne("BettingSystem.Domain.Models.Matches.Team", "HomeTeam")
                         .WithMany()
                         .HasForeignKey("HomeTeamId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -464,36 +444,6 @@ namespace BettingSystem.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Status")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BettingSystem.Domain.Models.Teams.Player", b =>
-                {
-                    b.HasOne("BettingSystem.Domain.Models.Teams.Team", null)
-                        .WithMany("Players")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.OwnsOne("BettingSystem.Domain.Models.Teams.Position", "Position", b1 =>
-                        {
-                            b1.Property<int>("PlayerId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .UseIdentityColumn();
-
-                            b1.Property<int>("Value")
-                                .HasColumnType("int");
-
-                            b1.HasKey("PlayerId");
-
-                            b1.ToTable("Players");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PlayerId");
-                        });
-
-                    b.Navigation("Position")
                         .IsRequired();
                 });
 
@@ -561,11 +511,6 @@ namespace BettingSystem.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("BettingSystem.Domain.Models.Gamblers.Gambler", b =>
                 {
                     b.Navigation("Bets");
-                });
-
-            modelBuilder.Entity("BettingSystem.Domain.Models.Teams.Team", b =>
-                {
-                    b.Navigation("Players");
                 });
 #pragma warning restore 612, 618
         }

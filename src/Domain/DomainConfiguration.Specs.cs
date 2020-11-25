@@ -3,7 +3,6 @@
     using Factories.Bets;
     using Factories.Gamblers;
     using Factories.Matches;
-    using Factories.Teams;
     using FluentAssertions;
     using Microsoft.Extensions.DependencyInjection;
     using Xunit;
@@ -34,11 +33,6 @@
 
             services
                 .GetService<IMatchFactory>()
-                .Should()
-                .NotBeNull();
-
-            services
-                .GetService<ITeamFactory>()
                 .Should()
                 .NotBeNull();
         }

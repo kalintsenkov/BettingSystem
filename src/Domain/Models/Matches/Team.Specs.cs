@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Domain.Models.Teams
+﻿namespace BettingSystem.Domain.Models.Matches
 {
     using System;
     using Exceptions;
@@ -6,13 +6,13 @@
     using FluentAssertions;
     using Xunit;
 
-    public class PlayerSpecs
+    public class TeamSpecs
     {
         [Fact]
-        public void ValidPlayerShouldNotThrowException()
+        public void ValidTeamShouldNotThrowException()
         {
             // Act
-            Action act = () => A.Dummy<Player>();
+            Action act = () => A.Dummy<Team>();
 
             // Assert
             act.Should().NotThrow<InvalidTeamException>();
@@ -22,10 +22,10 @@
         [InlineData("")]
         [InlineData("cs")]
         [InlineData(null)]
-        public void InvalidPlayerShouldThrowException(string name)
+        public void InvalidTeamShouldThrowException(string name)
         {
             // Act
-            Action act = () => new Player(name, Position.Forward);
+            Action act = () => new Team(name);
 
             // Assert
             act.Should().Throw<InvalidTeamException>();

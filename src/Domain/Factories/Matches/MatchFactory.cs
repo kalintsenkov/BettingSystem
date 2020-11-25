@@ -3,15 +3,18 @@
     using System;
     using Exceptions;
     using Models.Matches;
-    using Models.Teams;
 
     internal class MatchFactory : IMatchFactory
     {
+        private readonly Status defaultMatchStatus = Status.NotStarted;
+        private readonly Statistics defaultMatchStatistics = new Statistics(
+            homeScore: null,
+            awayScore: null);
+
         private DateTime matchStartDate = default!;
         private Team matchHomeTeam = default!;
         private Team matchAwayTeam = default!;
         private Stadium matchStadium = default!;
-        private Statistics matchStatistics = default!;
 
         private bool isHomeTeamSet = false;
         private bool isAwayTeamSet = false;
@@ -53,12 +56,6 @@
             return this;
         }
 
-        public IMatchFactory WithStatistics(int? homeScore, int? awayScore)
-        {
-            this.matchStatistics = new Statistics(homeScore, awayScore);
-            return this;
-        }
-
         public Match Build()
         {
             if (!this.isHomeTeamSet || !this.isAwayTeamSet || !this.isStadiumSet)
@@ -72,8 +69,8 @@
                 this.matchHomeTeam,
                 this.matchAwayTeam,
                 this.matchStadium,
-                this.matchStatistics,
-                Status.NotStarted);
+                this.defaultMatchStatistics,
+                this.defaultMatchStatus);
         }
     }
 }

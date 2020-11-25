@@ -21,6 +21,8 @@
             builder
                 .HasMany(g => g.Bets)
                 .WithOne()
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict)
                 .Metadata
                 .PrincipalToDependent
                 .SetField("bets");

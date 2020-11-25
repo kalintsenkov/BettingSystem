@@ -2,7 +2,8 @@
 {
     using System;
     using Common;
-    using Teams;
+
+    using static ModelConstants.Common;
 
     public class Match : Entity<int>, IAggregateRoot
     {
@@ -76,6 +77,29 @@
         public Match UpdateStatistics(int? homeScore, int? awayScore)
         {
             this.Statistics = new Statistics(homeScore, awayScore);
+
+            return this;
+        }
+
+        public Match Start()
+        {
+            this.UpdateStatistics(Zero, Zero);
+
+            this.Status = Status.InPlay;
+
+            return this;
+        }
+
+        public Match Finish()
+        {
+            this.Status = Status.Finished;
+
+            return this;
+        }
+
+        public Match Cancel()
+        {
+            this.Status = Status.Cancelled;
 
             return this;
         }

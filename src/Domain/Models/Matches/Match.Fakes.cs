@@ -4,7 +4,6 @@
     using Bogus;
     using Common;
     using FakeItEasy;
-    using Teams;
 
     public class MatchFakes
     {

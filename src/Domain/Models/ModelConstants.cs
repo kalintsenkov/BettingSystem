@@ -17,5 +17,11 @@
             public const int MinPasswordLength = 6;
             public const int MaxPasswordLength = 32;
         }
+
+        public class Bet
+        {
+            public const decimal MinAmountValue = decimal.One;
+            public const decimal MaxAmountValue = decimal.MaxValue;
+        }
     }
 }

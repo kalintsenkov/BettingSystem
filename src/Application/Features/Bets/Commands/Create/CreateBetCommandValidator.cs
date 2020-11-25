@@ -4,14 +4,14 @@
     using Domain.Models.Bets;
     using FluentValidation;
 
-    using static Domain.Models.ModelConstants.Common;
+    using static Domain.Models.ModelConstants.Bet;
 
     public class CreateBetCommandValidator : AbstractValidator<CreateBetCommand>
     {
         public CreateBetCommandValidator()
         {
             this.RuleFor(b => b.Amount)
-                .InclusiveBetween(Zero, decimal.MaxValue);
+                .InclusiveBetween(MinAmountValue, MaxAmountValue);
 
             this.RuleFor(b => b.Prediction)
                 .Must(Enumeration.HasValue<Prediction>)

@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
     using Contracts;
     using Domain.Models.Matches;
-    using Domain.Models.Teams;
     using Domain.Specifications;
     using Queries.Common;
     using Queries.Details;

@@ -3,6 +3,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Common;
+    using Exceptions;
     using MediatR;
 
     public class MakeBetProfitableCommand : EntityCommand<int, MakeBetProfitableCommand>, IRequest<Result>
@@ -11,7 +12,7 @@
         {
             private readonly IBetRepository betRepository;
 
-            public MakeBetProfitableCommandHandler(IBetRepository betRepository) 
+            public MakeBetProfitableCommandHandler(IBetRepository betRepository)
                 => this.betRepository = betRepository;
 
             public async Task<Result> Handle(
@@ -22,7 +23,10 @@
                     request.Id,
                     cancellationToken);
 
-                // TODO: Match validation (result and prediction)
+                if (bet == null)
+                {
+                    throw new NotFoundException(nameof(bet), request.Id);
+                }
 
                 bet.MakeProfitable();
 

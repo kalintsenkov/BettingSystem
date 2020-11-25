@@ -32,8 +32,8 @@
         [HttpPut]
         [Route(Id)]
         public async Task<ActionResult> MakeProfitable(
-            int id, MakeBetProfitableCommand command)
-            => await this.Send(command.SetId(id));
+            [FromRoute] MakeBetProfitableCommand command)
+            => await this.Send(command);
 
         [HttpDelete]
         [Route(Id)]
