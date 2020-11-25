@@ -6,7 +6,7 @@
     using Exceptions;
     using MediatR;
 
-    public class MakeBetProfitableCommand : EntityCommand<int, MakeBetProfitableCommand>, IRequest<Result>
+    public class MakeBetProfitableCommand : EntityCommand<int>, IRequest<Result>
     {
         public class MakeBetProfitableCommandHandler : IRequestHandler<MakeBetProfitableCommand, Result>
         {

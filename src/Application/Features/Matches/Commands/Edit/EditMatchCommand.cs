@@ -1,21 +1,13 @@
 ﻿namespace BettingSystem.Application.Features.Matches.Commands.Edit
 {
-    using System;
     using System.Threading;
     using System.Threading.Tasks;
+    using Application.Common;
     using Common;
     using MediatR;
 
-    public class EditMatchCommand : EntityCommand<int, EditMatchCommand>, IRequest<Result>
+    public class EditMatchCommand : MatchCommand<EditMatchCommand>, IRequest<Result>
     {
-        public DateTime? StartDate { get; set; }
-
-        public string? HomeTeam { get; set; }
-
-        public string? AwayTeam { get; set; }
-
-        public string? Stadium { get; set; }
-
         public int? HomeTeamScore { get; set; }
 
         public int? AwayTeamScore { get; set; }
@@ -35,35 +27,32 @@
                     request.Id,
                     cancellationToken);
 
-                if (request.HomeTeam != null)
-                {
-                    var homeTeam = await this.matchRepository.GetHomeTeam(
-                        request.HomeTeam,
-                        cancellationToken);
+                var homeTeam = await this.matchRepository.GetHomeTeam(
+                    request.HomeTeam,
+                    cancellationToken);
 
-                    match.UpdateHomeTeam(homeTeam);
-                }
+                var awayTeam = await this.matchRepository.GetAwayTeam(
+                    request.AwayTeam,
+                    cancellationToken);
 
-                if (request.AwayTeam != null)
-                {
-                    var awayTeam = await this.matchRepository.GetAwayTeam(
-                        request.AwayTeam,
-                        cancellationToken);
+                var stadium = await this.matchRepository.GetStadium(
+                    request.StadiumName,
+                    cancellationToken);
 
-                    match.UpdateAwayTeam(awayTeam);
-                }
+                match = homeTeam == null
+                    ? match.UpdateHomeTeam(request.HomeTeam)
+                    : match.UpdateHomeTeam(homeTeam);
 
-                if (request.Stadium != null)
-                {
-                    var stadium = await this.matchRepository.GetStadium(
-                        request.Stadium,
-                        cancellationToken);
+                match = awayTeam == null
+                    ? match.UpdateAwayTeam(request.AwayTeam)
+                    : match.UpdateAwayTeam(awayTeam);
 
-                    match.UpdateStadium(stadium);
-                }
+                match = stadium == null
+                    ? match.UpdateStadium(request.StadiumName, request.StadiumImageUrl)
+                    : match.UpdateStadium(stadium);
 
                 match
-                    .UpdateStartDate(request.StartDate ?? match.StartDate)
+                    .UpdateStartDate(request.StartDate)
                     .UpdateStatistics(request.HomeTeamScore, request.AwayTeamScore);
 
                 await this.matchRepository.Save(match, cancellationToken);

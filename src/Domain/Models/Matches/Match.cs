@@ -2,6 +2,7 @@
 {
     using System;
     using Common;
+    using Exceptions;
 
     using static ModelConstants.Common;
 
@@ -15,6 +16,8 @@
             Statistics statistics,
             Status status)
         {
+            this.Validate(startDate);
+
             this.StartDate = startDate;
             this.HomeTeam = homeTeam;
             this.AwayTeam = awayTeam;
@@ -48,7 +51,19 @@
 
         public Match UpdateStartDate(DateTime startDate)
         {
+            this.Validate(startDate);
+
             this.StartDate = startDate;
+
+            return this;
+        }
+
+        public Match UpdateHomeTeam(string homeTeam)
+        {
+            if (this.HomeTeam.Name != homeTeam)
+            {
+                this.HomeTeam = new Team(homeTeam);
+            }
 
             return this;
         }
@@ -60,9 +75,29 @@
             return this;
         }
 
+        public Match UpdateAwayTeam(string awayTeam)
+        {
+            if (this.AwayTeam.Name != awayTeam)
+            {
+                this.AwayTeam = new Team(awayTeam);
+            }
+
+            return this;
+        }
+
         public Match UpdateAwayTeam(Team awayTeam)
         {
             this.AwayTeam = awayTeam;
+
+            return this;
+        }
+
+        public Match UpdateStadium(string name, string imageUrl)
+        {
+            if (this.Stadium.Name != name)
+            {
+                this.Stadium = new Stadium(name, imageUrl);
+            }
 
             return this;
         }
@@ -102,6 +137,14 @@
             this.Status = Status.Cancelled;
 
             return this;
+        }
+
+        private void Validate(DateTime startDate)
+        {
+            if (startDate < DateTime.Today)
+            {
+                throw new InvalidMatchException();
+            }
         }
     }
 }

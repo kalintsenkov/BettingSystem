@@ -2,11 +2,11 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using Common;
+    using Application.Common;
     using Exceptions;
     using MediatR;
 
-    public class StartMatchCommand : EntityCommand<int, StartMatchCommand>, IRequest<Result>
+    public class StartMatchCommand : EntityCommand<int>, IRequest<Result>
     {
         public class StartMatchCommandHandler : IRequestHandler<StartMatchCommand, Result>
         {

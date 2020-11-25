@@ -6,7 +6,7 @@
     using Contracts;
     using MediatR;
 
-    public class EditGamblerCommand : EntityCommand<int, EditGamblerCommand>, IRequest<Result>
+    public class EditGamblerCommand : EntityCommand<int>, IRequest<Result>
     {
         public string Name { get; set; } = default!;
 

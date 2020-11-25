@@ -8,7 +8,7 @@
     using Gamblers;
     using MediatR;
 
-    public class CloseBetCommand : EntityCommand<int, CloseBetCommand>, IRequest<Result>
+    public class CloseBetCommand : EntityCommand<int>, IRequest<Result>
     {
         public class CloseBetCommandHandler : IRequestHandler<CloseBetCommand, Result>
         {

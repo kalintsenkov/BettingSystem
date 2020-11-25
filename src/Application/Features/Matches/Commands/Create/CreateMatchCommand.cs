@@ -1,23 +1,13 @@
 ﻿namespace BettingSystem.Application.Features.Matches.Commands.Create
 {
-    using System;
     using System.Threading;
     using System.Threading.Tasks;
+    using Common;
     using Domain.Factories.Matches;
     using MediatR;
 
-    public class CreateMatchCommand : IRequest<CreateMatchResponseModel>
+    public class CreateMatchCommand : MatchCommand<CreateMatchCommand>, IRequest<CreateMatchResponseModel>
     {
-        public DateTime StartDate { get; set; }
-
-        public string HomeTeam { get; set; } = default!;
-
-        public string AwayTeam { get; set; } = default!;
-
-        public string StadiumName { get; set; } = default!;
-
-        public string StadiumImageUrl { get; set; } = default!;
-
         public class CreateMatchCommandHandler : IRequestHandler<CreateMatchCommand, CreateMatchResponseModel>
         {
             private readonly IMatchFactory matchFactory;

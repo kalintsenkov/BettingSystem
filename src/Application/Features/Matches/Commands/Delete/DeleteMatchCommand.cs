@@ -2,10 +2,10 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using Common;
+    using Application.Common;
     using MediatR;
 
-    public class DeleteMatchCommand : EntityCommand<int, DeleteMatchCommand>, IRequest<Result>
+    public class DeleteMatchCommand : EntityCommand<int>, IRequest<Result>
     {
         public class DeleteMatchCommandHandler : IRequestHandler<DeleteMatchCommand, Result>
         {

@@ -1,14 +1,17 @@
 ﻿namespace BettingSystem.Application.Features
 {
-    public class EntityCommand<TId, TCommand>
-        where TCommand : EntityCommand<TId, TCommand>
+    public class EntityCommand<TId>
     {
         public TId Id { get; set; } = default!;
+    }
 
-        public TCommand SetId(TId id)
+    public static class EntityCommandExtensions
+    {
+        public static TCommand SetId<TCommand, TId>(this TCommand command, TId id)
+            where TCommand : EntityCommand<TId>
         {
-            this.Id = id;
-            return (TCommand)this;
+            command.Id = id;
+            return command;
         }
     }
 }

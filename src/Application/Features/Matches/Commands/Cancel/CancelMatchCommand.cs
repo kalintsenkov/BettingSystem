@@ -2,11 +2,11 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using Common;
+    using Application.Common;
     using Exceptions;
     using MediatR;
 
-    public class CancelMatchCommand : EntityCommand<int, CancelMatchCommand>, IRequest<Result>
+    public class CancelMatchCommand : EntityCommand<int>, IRequest<Result>
     {
         public class CancelMatchCommandHandler : IRequestHandler<CancelMatchCommand, Result>
         {
