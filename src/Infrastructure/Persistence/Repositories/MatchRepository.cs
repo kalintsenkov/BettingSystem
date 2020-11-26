@@ -8,6 +8,7 @@
     using Application.Features.Matches.Queries.Common;
     using Application.Features.Matches.Queries.Details;
     using Application.Features.Matches.Queries.Stadiums;
+    using Application.Features.Matches.Queries.Teams;
     using AutoMapper;
     using Domain.Models.Matches;
     using Domain.Specifications;
@@ -95,10 +96,23 @@
                     .AllStadiums())
                 .ToListAsync(cancellationToken);
 
+        public async Task<IEnumerable<GetMatchTeamsResponseModel>> GetTeams(
+            CancellationToken cancellationToken = default)
+            => await this.mapper
+                .ProjectTo<GetMatchTeamsResponseModel>(this
+                    .AllTeams())
+                .ToListAsync(cancellationToken);
+
         private IQueryable<Team> AllTeams()
-            => this.Data.Teams;
+            => this
+                .Data
+                .Teams
+                .AsNoTracking();
 
         private IQueryable<Stadium> AllStadiums()
-            => this.Data.Stadiums;
+            => this
+                .Data
+                .Stadiums
+                .AsNoTracking();
     }
 }

@@ -9,6 +9,7 @@
     using Queries.Common;
     using Queries.Details;
     using Queries.Stadiums;
+    using Queries.Teams;
 
     public interface IMatchRepository : IRepository<Match>
     {
@@ -41,6 +42,9 @@
             CancellationToken cancellationToken = default);
 
         Task<IEnumerable<GetMatchStadiumsResponseModel>> GetStadiums(
+            CancellationToken cancellationToken = default);
+
+        Task<IEnumerable<GetMatchTeamsResponseModel>> GetTeams(
             CancellationToken cancellationToken = default);
     }
 }

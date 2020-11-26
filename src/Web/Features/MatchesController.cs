@@ -12,6 +12,7 @@
     using Application.Features.Matches.Queries.Details;
     using Application.Features.Matches.Queries.Search;
     using Application.Features.Matches.Queries.Stadiums;
+    using Application.Features.Matches.Queries.Teams;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -32,6 +33,12 @@
         [Route(nameof(Stadiums))]
         public async Task<ActionResult<IEnumerable<GetMatchStadiumsResponseModel>>> Stadiums(
             [FromQuery] GetMatchStadiumsQuery query)
+            => await this.Send(query);
+
+        [HttpGet]
+        [Route(nameof(Teams))]
+        public async Task<ActionResult<IEnumerable<GetMatchTeamsResponseModel>>> Teams(
+            [FromQuery] GetMatchTeamsQuery query)
             => await this.Send(query);
 
         [HttpPost]
