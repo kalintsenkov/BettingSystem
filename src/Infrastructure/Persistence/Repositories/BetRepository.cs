@@ -6,9 +6,10 @@
     using System.Threading.Tasks;
     using Application.Features.Bets;
     using Application.Features.Bets.Queries.Details;
-    using Application.Features.Bets.Queries.Mine;
     using AutoMapper;
     using Domain.Models.Bets;
+    using Domain.Models.Gamblers;
+    using Domain.Specifications;
     using Microsoft.EntityFrameworkCore;
 
     internal class BetRepository : DataRepository<Bet>, IBetRepository
@@ -54,20 +55,23 @@
                     .Where(b => b.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<IEnumerable<MineBetsResponseModel>> GetMine(
-            int gamblerId,
+        public async Task<IEnumerable<TResponseModel>> GetBetListings<TResponseModel>(
+            Specification<Bet> betSpecification,
+            Specification<Gambler> gamblerSpecification,
             CancellationToken cancellationToken = default)
             => await this.mapper
-                .ProjectTo<MineBetsResponseModel>(this
-                    .GetGamblerBetsQuery(gamblerId))
+                .ProjectTo<TResponseModel>(this
+                    .GetGamblerBetsQuery(betSpecification, gamblerSpecification))
                 .ToListAsync(cancellationToken);
 
         private IQueryable<Bet> GetGamblerBetsQuery(
-            int gamblerId)
+            Specification<Bet> betSpecification,
+            Specification<Gambler> gamblerSpecification)
             => this
                 .Data
                 .Gamblers
-                .Where(g => g.Id == gamblerId)
-                .SelectMany(g => g.Bets);
+                .Where(gamblerSpecification)
+                .SelectMany(g => g.Bets)
+                .Where(betSpecification);
     }
 }

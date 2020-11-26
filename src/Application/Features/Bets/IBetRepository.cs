@@ -5,8 +5,9 @@
     using System.Threading.Tasks;
     using Contracts;
     using Domain.Models.Bets;
+    using Domain.Models.Gamblers;
+    using Domain.Specifications;
     using Queries.Details;
-    using Queries.Mine;
 
     public interface IBetRepository : IRepository<Bet>
     {
@@ -22,8 +23,9 @@
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<MineBetsResponseModel>> GetMine(
-            int gamblerId,
+        Task<IEnumerable<TResponseModel>> GetBetListings<TResponseModel>(
+            Specification<Bet> betSpecification,
+            Specification<Gambler> gamblerSpecification,
             CancellationToken cancellationToken = default);
     }
 }

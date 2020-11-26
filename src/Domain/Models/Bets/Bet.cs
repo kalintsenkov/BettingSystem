@@ -90,14 +90,12 @@
 
         private void ValidateMatch(Match match)
         {
-            var matchStatus = match.Status;
-
-            if (matchStatus == Status.Finished)
+            if (match.Status == Status.Finished)
             {
                 throw new InvalidBetException("You cannot make bets on finished match.");
             }
 
-            if (matchStatus == Status.Cancelled)
+            if (match.Status == Status.Cancelled)
             {
                 throw new InvalidBetException("You cannot make bets on cancelled match.");
             }
@@ -105,11 +103,7 @@
 
         private void ValidateIfMatchIsFinished(Match match)
         {
-            var matchStatus = match.Status;
-
-            if (matchStatus == Status.InPlay ||
-                matchStatus == Status.Cancelled ||
-                matchStatus == Status.NotStarted)
+            if (match.Status != Status.Finished)
             {
                 throw new InvalidBetException("This match is not finished yet.");
             }

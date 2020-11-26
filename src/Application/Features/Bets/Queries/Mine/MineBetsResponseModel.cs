@@ -1,14 +1,13 @@
 ﻿namespace BettingSystem.Application.Features.Bets.Queries.Mine
 {
-    using AutoMapper;
-    using Details;
-    using Domain.Models.Bets;
+    using System.Collections.Generic;
+    using Common;
 
-    public class MineBetsResponseModel : BetDetailsResponseModel
+    public class MineBetsResponseModel : BetListingsResponseModel<MineBetResponseModel>
     {
-        public override void Mapping(Profile mapper)
-            => mapper
-                .CreateMap<Bet, MineBetsResponseModel>()
-                .IncludeBase<Bet, BetDetailsResponseModel>();
+        internal MineBetsResponseModel(IEnumerable<MineBetResponseModel> bets)
+            : base(bets)
+        {
+        }
     }
 }

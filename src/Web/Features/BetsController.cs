@@ -1,12 +1,12 @@
 ﻿namespace BettingSystem.Web.Features
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Application.Features.Bets.Commands.Close;
     using Application.Features.Bets.Commands.Create;
     using Application.Features.Bets.Commands.MakeProfitable;
     using Application.Features.Bets.Queries.Details;
     using Application.Features.Bets.Queries.Mine;
+    using Application.Features.Bets.Queries.Search;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +14,13 @@
     public class BetsController : ApiController
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MineBetsResponseModel>>> Mine(
+        public async Task<ActionResult<SearchBetsResponseModel>> Search(
+            [FromQuery] SearchBetsQuery query)
+            => await this.Send(query);
+
+        [HttpGet]
+        [Route(nameof(Mine))]
+        public async Task<ActionResult<MineBetsResponseModel>> Mine(
             [FromQuery] MineBetsQuery query)
             => await this.Send(query);
 

@@ -1,21 +1,22 @@
 ﻿namespace BettingSystem.Application.Features.Gamblers.Queries.Details
 {
+    using System.Linq;
     using AutoMapper;
     using Domain.Models.Gamblers;
-    using Mapping;
 
-    public class GamblerDetailsResponseModel : IMapFrom<Gambler>
+    public class GamblerDetailsResponseModel
     {
         public int Id { get; private set; }
 
         public string Name { get; private set; } = default!;
 
-        public int TotalBets { get; private set; }
+        public int TotalWins { get; private set; }
 
         public void Mapping(Profile mapper)
             => mapper
                 .CreateMap<Gambler, GamblerDetailsResponseModel>()
-                .ForMember(m => m.TotalBets, cfg => cfg
-                    .MapFrom(g => g.Bets.Count));
+                .ForMember(m => m.TotalWins, cfg => cfg
+                    .MapFrom(g => g.Bets
+                        .Count(b => b.IsProfitable)));
     }
 }
