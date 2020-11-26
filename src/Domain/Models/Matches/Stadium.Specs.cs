@@ -13,20 +13,16 @@
         [Fact]
         public void ValidStadiumShouldNotThrowException()
         {
-            // Act
             Action act = () => A.Dummy<Stadium>();
 
-            // Assert
             act.Should().NotThrow<InvalidMatchException>();
         }
 
         [Fact]
         public void InvalidNameAndImageUrlShouldThrowException()
         {
-            // Act
             Action act = () => GetStadium(string.Empty, string.Empty);
 
-            // Assert
             act.Should().Throw<InvalidMatchException>();
         }
 
@@ -36,10 +32,8 @@
         [InlineData("cs", "https://validimageurl.com")]
         public void InvalidNameShouldThrowException(string name, string imageUrl)
         {
-            // Act
             Action act = () => GetStadium(name, imageUrl);
 
-            // Assert
             act.Should().Throw<InvalidMatchException>();
         }
 
@@ -48,10 +42,8 @@
         [InlineData("ValidStadium", "invalidimageurl.com")]
         public void InvalidImageUrlShouldThrowException(string name, string imageUrl)
         {
-            // Act
             Action act = () => GetStadium(name, imageUrl);
 
-            // Assert
             act.Should().Throw<InvalidMatchException>();
         }
     }

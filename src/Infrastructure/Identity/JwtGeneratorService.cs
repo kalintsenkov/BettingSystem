@@ -10,7 +10,7 @@
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
 
-    using static InfrastructureConstants;
+    using static Domain.Models.ModelConstants.Identity;
 
     internal class JwtGeneratorService : IJwtGenerator
     {
@@ -18,7 +18,7 @@
         private readonly ApplicationSettings applicationSettings;
 
         public JwtGeneratorService(
-            UserManager<User> userManager, 
+            UserManager<User> userManager,
             IOptions<ApplicationSettings> applicationSettings)
         {
             this.userManager = userManager;
@@ -44,8 +44,9 @@
             };
 
 
-            var isAdministrator = await this.userManager.IsInRoleAsync(user, AdministratorRoleName);
-            
+            var isAdministrator = await this.userManager
+                .IsInRoleAsync(user, AdministratorRoleName);
+
             if (isAdministrator)
             {
                 tokenDescriptor.Subject.AddClaim(new Claim(

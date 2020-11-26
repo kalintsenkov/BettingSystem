@@ -7,6 +7,7 @@
     using Application.Features.Bets.Queries.Details;
     using Application.Features.Bets.Queries.Mine;
     using Application.Features.Bets.Queries.Search;
+    using Common;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -37,12 +38,14 @@
 
         [HttpPut]
         [Route(Id)]
+        [AuthorizeAdministrator]
         public async Task<ActionResult> MakeProfitable(
             [FromRoute] MakeBetProfitableCommand command)
             => await this.Send(command);
 
         [HttpDelete]
         [Route(Id)]
+        [AuthorizeAdministrator]
         public async Task<ActionResult> Close(
             [FromRoute] CloseBetCommand command)
             => await this.Send(command);

@@ -13,7 +13,7 @@
     using Application.Features.Matches.Queries.Search;
     using Application.Features.Matches.Queries.Stadiums;
     using Application.Features.Matches.Queries.Teams;
-    using Microsoft.AspNetCore.Authorization;
+    using Common;
     using Microsoft.AspNetCore.Mvc;
 
     public class MatchesController : ApiController
@@ -42,42 +42,42 @@
             => await this.Send(query);
 
         [HttpPost]
-        [Authorize]
+        [AuthorizeAdministrator]
         public async Task<ActionResult<CreateMatchResponseModel>> Create(
             CreateMatchCommand command)
             => await this.Send(command);
 
         [HttpPut]
-        [Authorize]
         [Route(Id)]
+        [AuthorizeAdministrator]
         public async Task<ActionResult> Edit(
             int id, EditMatchCommand command)
             => await this.Send(command.SetId(id));
 
         [HttpPut]
-        [Authorize]
+        [AuthorizeAdministrator]
         [Route(Id + PathSeparator + nameof(Start))]
         public async Task<ActionResult> Start(
             [FromRoute] StartMatchCommand command)
             => await this.Send(command);
 
         [HttpPut]
-        [Authorize]
+        [AuthorizeAdministrator]
         [Route(Id + PathSeparator + nameof(Finish))]
         public async Task<ActionResult> Finish(
             [FromRoute] FinishMatchCommand command)
             => await this.Send(command);
 
         [HttpPut]
-        [Authorize]
+        [AuthorizeAdministrator]
         [Route(Id + PathSeparator + nameof(Cancel))]
         public async Task<ActionResult> Cancel(
             [FromRoute] CancelMatchCommand command)
             => await this.Send(command);
 
         [HttpDelete]
-        [Authorize]
         [Route(Id)]
+        [AuthorizeAdministrator]
         public async Task<ActionResult> Delete(
             [FromRoute] DeleteMatchCommand command)
             => await this.Send(command);

@@ -13,10 +13,8 @@
         [InlineData(null, null)]
         public void ValidStatisticShouldNotThrowException(int? homeScore, int? awayScore)
         {
-            // Act
             Action act = () => new Statistics(homeScore, awayScore);
 
-            // Assert
             act.Should().NotThrow<InvalidMatchException>();
         }
 
@@ -26,10 +24,8 @@
         [InlineData(-1, -1)]
         public void InvalidStatisticShouldThrowException(int homeScore, int awayScore)
         {
-            // Act
             Action act = () => new Statistics(homeScore, awayScore);
 
-            // Assert
             act.Should().Throw<InvalidMatchException>();
         }
     }

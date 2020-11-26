@@ -10,7 +10,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
-    using static InfrastructureConstants;
+    using static Domain.Models.ModelConstants.Identity;
 
     internal class BettingDbInitializer : IInitializer
     {
@@ -68,9 +68,9 @@
 
                     await this.roleManager.CreateAsync(adminRole);
 
-                    var adminUser = new User(AdministratorEmail);
+                    var adminUser = new User("admin@bettingsystem.com");
 
-                    await this.userManager.CreateAsync(adminUser, AdministratorPassword);
+                    await this.userManager.CreateAsync(adminUser, "admin123456");
                     await this.userManager.AddToRoleAsync(adminUser, AdministratorRoleName);
                 })
                 .GetAwaiter()

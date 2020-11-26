@@ -1,22 +1,34 @@
 ﻿namespace BettingSystem.Domain.Models.Matches
 {
+    using System;
+    using Bets;
+    using Exceptions;
     using FakeItEasy;
     using FluentAssertions;
     using Xunit;
 
     public class MatchSpecs
     {
-        //[Fact]
-        //public void GetResultShouldReturnWinningTeam()
-        //{
-        //    // Arrange
-        //    var match = A.Dummy<Match>();
+        [Fact]
+        public void ValidMatchShouldNotThrowException()
+        {
+            Action act = () => A.Dummy<Match>();
 
-        //    // Act
-        //    var result = match.GetResult();
+            act.Should().NotThrow<InvalidMatchException>();
+        }
 
-        //    // Assert
-        //    result.Should().Be(Result.Home);
-        //}
+        [Fact]
+        public void InvalidMatchDateShouldThrowException()
+        {
+            Action act = () => new Match(
+                DateTime.Today.AddDays(-1),
+                A.Dummy<Team>(),
+                A.Dummy<Team>(),
+                A.Dummy<Stadium>(),
+                A.Dummy<Statistics>(),
+                Status.NotStarted);
+
+            act.Should().Throw<InvalidMatchException>();
+        }
     }
 }

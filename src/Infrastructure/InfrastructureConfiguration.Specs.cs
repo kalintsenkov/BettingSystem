@@ -17,18 +17,15 @@
         [Fact]
         public void AddRepositoriesShouldRegisterRepositories()
         {
-            // Arrange
             var serviceCollection = new ServiceCollection()
                 .AddDbContext<BettingDbContext>(options => options
                     .UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
-            // Act
             var services = serviceCollection
                 .AddAutoMapper(Assembly.GetExecutingAssembly())
                 .AddRepositories()
                 .BuildServiceProvider();
 
-            // Assert
             services
                 .GetService<IGamblerRepository>()
                 .Should()

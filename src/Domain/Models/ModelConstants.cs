@@ -16,6 +16,7 @@
             public const int MaxEmailLength = 50;
             public const int MinPasswordLength = 6;
             public const int MaxPasswordLength = 32;
+            public const string AdministratorRoleName = "Administrator";
         }
 
         public class Bet

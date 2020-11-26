@@ -14,15 +14,12 @@
         [Fact]
         public void AddDomainShouldRegisterFactories()
         {
-            // Arrange
             var serviceCollection = new ServiceCollection();
 
-            // Act
             var services = serviceCollection
                 .AddDomain()
                 .BuildServiceProvider();
 
-            // Assert
             services
                 .GetService<IBetFactory>()
                 .Should()
@@ -42,15 +39,12 @@
         [Fact]
         public void AddDomainShouldRegisterInitialData()
         {
-            // Arrange
             var serviceCollection = new ServiceCollection();
 
-            // Act
             var services = serviceCollection
                 .AddDomain()
                 .BuildServiceProvider();
 
-            // Assert
             services
                 .GetServices<IInitialData>()
                 .ToList()
