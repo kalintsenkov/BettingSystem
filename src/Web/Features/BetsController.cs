@@ -45,7 +45,6 @@
 
         [HttpDelete]
         [Route(Id)]
-        [AuthorizeAdministrator]
         public async Task<ActionResult> Close(
             [FromRoute] CloseBetCommand command)
             => await this.Send(command);
