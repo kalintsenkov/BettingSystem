@@ -14,16 +14,7 @@
             this.Name = name;
         }
 
-        public string Name { get; private set; }
-
-        public Team UpdateName(string name)
-        {
-            this.Validate(name);
-
-            this.Name = name;
-
-            return this;
-        }
+        public string Name { get; }
 
         private void Validate(string name)
             => Guard.ForStringLength<InvalidTeamException>(
