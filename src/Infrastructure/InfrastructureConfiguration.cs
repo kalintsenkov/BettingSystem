@@ -1,9 +1,13 @@
 ﻿namespace BettingSystem.Infrastructure
 {
     using System.Text;
-    using Application;
-    using Application.Contracts;
-    using Application.Features.Identity;
+    using Application.Common;
+    using Application.Common.Contracts;
+    using Application.Identity;
+    using Betting;
+    using Common;
+    using Common.Persistence;
+    using Domain.Common;
     using Identity;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
@@ -11,9 +15,8 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
-    using Persistence;
 
-    using static Domain.Models.ModelConstants.Identity;
+    using static Domain.Common.Models.ModelConstants.Identity;
 
     public static class InfrastructureConfiguration
     {
@@ -33,8 +36,8 @@
                     .UseSqlServer(
                         configuration.GetConnectionString("DefaultConnection"),
                         sqlServer => sqlServer
-                            .MigrationsAssembly(typeof(BettingDbContext)
-                                .Assembly.FullName)))
+                            .MigrationsAssembly(typeof(BettingDbContext).Assembly.FullName)))
+                .AddScoped<IBettingDbContext>(provider => provider.GetService<BettingDbContext>()!)
                 .AddTransient<IInitializer, BettingDbInitializer>();
 
         internal static IServiceCollection AddRepositories(
@@ -43,8 +46,9 @@
                 .Scan(scan => scan
                     .FromCallingAssembly()
                     .AddClasses(classes => classes
-                        .AssignableTo(typeof(IRepository<>)))
-                    .AsMatchingInterface()
+                        .AssignableTo(typeof(IDomainRepository<>))
+                        .AssignableTo(typeof(IQueryRepository<>)))
+                    .AsImplementedInterfaces()
                     .WithTransientLifetime());
 
         private static IServiceCollection AddIdentity(

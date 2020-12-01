@@ -1,12 +1,12 @@
 ﻿namespace BettingSystem.Web.Features
 {
     using System.Threading.Tasks;
-    using Application.Features.Bets.Commands.Close;
-    using Application.Features.Bets.Commands.Create;
-    using Application.Features.Bets.Commands.MakeProfitable;
-    using Application.Features.Bets.Queries.Details;
-    using Application.Features.Bets.Queries.Mine;
-    using Application.Features.Bets.Queries.Search;
+    using Application.Betting.Bets.Commands.Close;
+    using Application.Betting.Bets.Commands.Create;
+    using Application.Betting.Bets.Commands.MakeProfitable;
+    using Application.Betting.Bets.Queries.Details;
+    using Application.Betting.Bets.Queries.Mine;
+    using Application.Betting.Bets.Queries.Search;
     using Common;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

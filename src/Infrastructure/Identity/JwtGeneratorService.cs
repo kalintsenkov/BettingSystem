@@ -5,12 +5,12 @@
     using System.Security.Claims;
     using System.Text;
     using System.Threading.Tasks;
-    using Application;
+    using Application.Common;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
 
-    using static Domain.Models.ModelConstants.Identity;
+    using static Domain.Common.Models.ModelConstants.Identity;
 
     internal class JwtGeneratorService : IJwtGenerator
     {

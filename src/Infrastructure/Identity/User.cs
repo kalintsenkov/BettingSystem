@@ -1,8 +1,8 @@
 ﻿namespace BettingSystem.Infrastructure.Identity
 {
-    using Application.Features.Identity;
-    using Domain.Exceptions;
-    using Domain.Models.Gamblers;
+    using Application.Identity;
+    using Domain.Betting.Exceptions;
+    using Domain.Betting.Models.Gamblers;
     using Microsoft.AspNetCore.Identity;
 
     public class User : IdentityUser, IUser

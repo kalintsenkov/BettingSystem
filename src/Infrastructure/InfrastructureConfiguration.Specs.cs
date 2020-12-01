@@ -2,14 +2,15 @@
 {
     using System;
     using System.Reflection;
-    using Application.Features.Bets;
-    using Application.Features.Gamblers;
-    using Application.Features.Matches;
+    using Application.Betting.Bets;
+    using Application.Betting.Gamblers;
+    using Application.Betting.Matches;
     using AutoMapper;
+    using Betting;
+    using Common.Persistence;
     using FluentAssertions;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
-    using Persistence;
     using Xunit;
 
     public class InfrastructureConfigurationSpecs
@@ -19,7 +20,9 @@
         {
             var serviceCollection = new ServiceCollection()
                 .AddDbContext<BettingDbContext>(options => options
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString()));
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()))
+                .AddScoped<IBettingDbContext>(provider => provider
+                    .GetService<BettingDbContext>()!);
 
             var services = serviceCollection
                 .AddAutoMapper(Assembly.GetExecutingAssembly())
@@ -27,17 +30,17 @@
                 .BuildServiceProvider();
 
             services
-                .GetService<IGamblerRepository>()
+                .GetService<IGamblerQueryRepository>()
                 .Should()
                 .NotBeNull();
 
             services
-                .GetService<IMatchRepository>()
+                .GetService<IMatchQueryRepository>()
                 .Should()
                 .NotBeNull();
 
             services
-                .GetService<IBetRepository>()
+                .GetService<IBetQueryRepository>()
                 .Should()
                 .NotBeNull();
         }

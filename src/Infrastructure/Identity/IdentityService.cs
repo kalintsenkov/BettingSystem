@@ -3,9 +3,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Application.Common;
-    using Application.Features.Identity;
-    using Application.Features.Identity.Commands;
-    using Application.Features.Identity.Commands.LoginUser;
+    using Application.Identity;
+    using Application.Identity.Commands;
+    using Application.Identity.Commands.LoginUser;
     using Microsoft.AspNetCore.Identity;
 
     internal class IdentityService : IIdentity

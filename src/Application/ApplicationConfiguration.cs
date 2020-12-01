@@ -2,7 +2,8 @@
 {
     using System.Reflection;
     using AutoMapper;
-    using Behaviours;
+    using Common;
+    using Common.Behaviours;
     using MediatR;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

@@ -1,7 +1,6 @@
 ﻿namespace BettingSystem.Domain
 {
     using Common;
-    using Factories;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class DomainConfiguration

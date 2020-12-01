@@ -1,10 +1,10 @@
 ﻿namespace BettingSystem.Domain
 {
     using System.Linq;
+    using Betting.Factories.Bets;
+    using Betting.Factories.Gamblers;
+    using Betting.Factories.Matches;
     using Common;
-    using Factories.Bets;
-    using Factories.Gamblers;
-    using Factories.Matches;
     using FluentAssertions;
     using Microsoft.Extensions.DependencyInjection;
     using Xunit;

@@ -1,8 +1,8 @@
 ﻿namespace BettingSystem.Web.Features
 {
     using System.Threading.Tasks;
-    using Application.Features.Identity.Commands.LoginUser;
-    using Application.Features.Identity.Commands.RegisterUser;
+    using Application.Identity.Commands.LoginUser;
+    using Application.Identity.Commands.RegisterUser;
     using Microsoft.AspNetCore.Mvc;
 
     public class IdentityController : ApiController

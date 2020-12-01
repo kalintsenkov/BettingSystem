@@ -2,17 +2,17 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Application.Features;
-    using Application.Features.Matches.Commands.Cancel;
-    using Application.Features.Matches.Commands.Create;
-    using Application.Features.Matches.Commands.Delete;
-    using Application.Features.Matches.Commands.Edit;
-    using Application.Features.Matches.Commands.Finish;
-    using Application.Features.Matches.Commands.Start;
-    using Application.Features.Matches.Queries.Details;
-    using Application.Features.Matches.Queries.Search;
-    using Application.Features.Matches.Queries.Stadiums;
-    using Application.Features.Matches.Queries.Teams;
+    using Application.Betting.Matches.Commands.Cancel;
+    using Application.Betting.Matches.Commands.Create;
+    using Application.Betting.Matches.Commands.Delete;
+    using Application.Betting.Matches.Commands.Edit;
+    using Application.Betting.Matches.Commands.Finish;
+    using Application.Betting.Matches.Commands.Start;
+    using Application.Betting.Matches.Queries.Details;
+    using Application.Betting.Matches.Queries.Search;
+    using Application.Betting.Matches.Queries.Stadiums;
+    using Application.Betting.Matches.Queries.Teams;
+    using Application.Common;
     using Common;
     using Microsoft.AspNetCore.Mvc;
 
