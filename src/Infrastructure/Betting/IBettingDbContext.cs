@@ -16,6 +16,6 @@
 
         DbSet<Gambler> Gamblers { get; }
 
-        DbSet<Team> Teams { get; set; }
+        DbSet<Team> Teams { get; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace BettingSystem.Web.Features
 {
     using System.Threading.Tasks;
+    using Application.Betting.Gamblers.Commands.Create;
     using Application.Betting.Gamblers.Commands.Edit;
     using Application.Betting.Gamblers.Queries.Details;
     using Application.Common;
@@ -14,6 +15,12 @@
         public Task<ActionResult<GamblerDetailsResponseModel>> Details(
             [FromRoute] GamblerDetailsQuery query)
             => this.Send(query);
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<CreateGamblerResponseModel>> Create(
+            CreateGamblerCommand command)
+            => await this.Send(command);
 
         [HttpPut]
         [Route(Id)]

@@ -1,6 +1,7 @@
 ﻿namespace BettingSystem.Infrastructure.Betting.Configurations
 {
     using Domain.Betting.Models.Gamblers;
+    using Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,6 +18,12 @@
                 .Property(g => g.Name)
                 .HasMaxLength(MaxNameLength)
                 .IsRequired();
+
+            builder
+                .HasOne<User>()
+                .WithOne()
+                .HasForeignKey<Gambler>("UserId")
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasMany(g => g.Bets)

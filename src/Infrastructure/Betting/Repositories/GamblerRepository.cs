@@ -8,12 +8,10 @@
     using Application.Betting.Gamblers;
     using Application.Betting.Gamblers.Queries.Details;
     using AutoMapper;
-    using Common.Persistence;
     using Common.Persistence.Repositories;
     using Domain.Betting.Exceptions;
     using Domain.Betting.Models.Gamblers;
     using Domain.Betting.Repositories;
-    using Identity;
     using Microsoft.EntityFrameworkCore;
 
     internal class GamblerRepository : DataRepository<IBettingDbContext, Gambler>,
@@ -22,25 +20,19 @@
     {
         private readonly IMapper mapper;
 
-        public GamblerRepository(BettingDbContext db, IMapper mapper)
+        public GamblerRepository(IBettingDbContext db, IMapper mapper)
             : base(db)
             => this.mapper = mapper;
 
         public async Task<Gambler> FindByUser(
             string userId,
             CancellationToken cancellationToken = default)
-            => await this.FindByUser(
-                userId,
-                user => user.Gambler!,
-                cancellationToken);
+            => await this.FindByUser(userId, user => user, cancellationToken);
 
         public async Task<int> GetGamblerId(
             string userId,
             CancellationToken cancellationToken = default)
-            => await this.FindByUser(
-                userId,
-                user => user.Gambler!.Id,
-                cancellationToken);
+            => await this.FindByUser(userId, user => user.Id, cancellationToken);
 
         public async Task<bool> HasBet(
             int gamblerId,
@@ -63,13 +55,12 @@
 
         private async Task<T> FindByUser<T>(
             string userId,
-            Expression<Func<User, T>> selector,
+            Expression<Func<Gambler, T>> selector,
             CancellationToken cancellationToken = default)
         {
             var gambler = await this
-                .Data
-                .Users
-                .Where(u => u.Id == userId)
+                .All()
+                .Where(u => u.UserId == userId)
                 .Select(selector)
                 .FirstOrDefaultAsync(cancellationToken);
 

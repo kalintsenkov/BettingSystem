@@ -10,7 +10,6 @@
     using Application.Betting.Matches.Queries.Stadiums;
     using Application.Betting.Matches.Queries.Teams;
     using AutoMapper;
-    using Common.Persistence;
     using Common.Persistence.Repositories;
     using Domain.Betting.Models.Matches;
     using Domain.Betting.Repositories;
@@ -23,7 +22,7 @@
     {
         private readonly IMapper mapper;
 
-        public MatchRepository(BettingDbContext db, IMapper mapper)
+        public MatchRepository(IBettingDbContext db, IMapper mapper)
             : base(db)
             => this.mapper = mapper;
 
@@ -38,7 +37,7 @@
                 return false;
             }
 
-            this.Data.Remove(match);
+            this.Data.Matches.Remove(match);
 
             await this.Data.SaveChangesAsync(cancellationToken);
 

@@ -7,7 +7,6 @@
     using Application.Betting.Bets;
     using Application.Betting.Bets.Queries.Details;
     using AutoMapper;
-    using Common.Persistence;
     using Common.Persistence.Repositories;
     using Domain.Betting.Models.Bets;
     using Domain.Betting.Models.Gamblers;
@@ -21,7 +20,7 @@
     {
         private readonly IMapper mapper;
 
-        public BetRepository(BettingDbContext db, IMapper mapper)
+        public BetRepository(IBettingDbContext db, IMapper mapper)
             : base(db)
             => this.mapper = mapper;
 
@@ -36,7 +35,7 @@
                 return false;
             }
 
-            this.Data.Remove(bet);
+            this.Data.Bets.Remove(bet);
 
             await this.Data.SaveChangesAsync(cancellationToken);
 

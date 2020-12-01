@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Infrastructure.Common.Persistence.Configurations
+﻿namespace BettingSystem.Infrastructure.Betting.Configurations
 {
     using Domain.Betting.Models.Matches;
     using Microsoft.EntityFrameworkCore;

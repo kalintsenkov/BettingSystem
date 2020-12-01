@@ -10,9 +10,9 @@
         where TDbContext : IDbContext
         where TEntity : class, IAggregateRoot
     {
-        protected DataRepository(BettingDbContext db) => this.Data = db;
+        protected DataRepository(TDbContext db) => this.Data = db;
 
-        protected BettingDbContext Data { get; }
+        protected TDbContext Data { get; }
 
         protected IQueryable<TEntity> All() => this.Data.Set<TEntity>();
 

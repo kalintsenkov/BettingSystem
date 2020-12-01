@@ -5,6 +5,7 @@
     internal class GamblerFactory : IGamblerFactory
     {
         private string gamblerName = default!;
+        private string gamblerUserId = default!;
 
         public IGamblerFactory WithName(string name)
         {
@@ -12,11 +13,12 @@
             return this;
         }
 
-        public Gambler Build() => new Gambler(this.gamblerName);
+        public IGamblerFactory FromUser(string userId)
+        {
+            this.gamblerUserId = userId;
+            return this;
+        }
 
-        public Gambler Build(string name)
-            => this
-                .WithName(name)
-                .Build();
+        public Gambler Build() => new Gambler(this.gamblerName, this.gamblerUserId);
     }
 }

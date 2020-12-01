@@ -7,6 +7,6 @@
     {
         IGamblerFactory WithName(string name);
 
-        Gambler Build(string name);
+        IGamblerFactory FromUser(string userId);
     }
 }

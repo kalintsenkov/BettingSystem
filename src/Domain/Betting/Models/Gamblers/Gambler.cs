@@ -13,16 +13,19 @@
     {
         private readonly HashSet<Bet> bets;
 
-        internal Gambler(string name)
+        internal Gambler(string name, string userId)
         {
             this.Validate(name);
 
             this.Name = name;
+            this.UserId = userId;
 
             this.bets = new HashSet<Bet>();
         }
 
         public string Name { get; private set; }
+
+        public string UserId { get; private set; }
 
         public IReadOnlyCollection<Bet> Bets => this.bets.ToList().AsReadOnly();
 
