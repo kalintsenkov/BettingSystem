@@ -2,15 +2,14 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Application.Common;
+    using Application.Common.Contracts;
     using Common;
-    using Common.Contracts;
     using Domain.Betting.Repositories;
     using MediatR;
 
-    public class EditGamblerCommand : EntityCommand<int>, IRequest<Result>
+    public class EditGamblerCommand : GamblerCommand<EditGamblerCommand>, IRequest<Result>
     {
-        public string Name { get; set; } = default!;
-
         public class EditGamblerCommandHandler : IRequestHandler<EditGamblerCommand, Result>
         {
             private readonly ICurrentUser currentUser;

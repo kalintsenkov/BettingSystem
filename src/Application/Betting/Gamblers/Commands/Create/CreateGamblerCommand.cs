@@ -2,15 +2,14 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using Common.Contracts;
+    using Application.Common.Contracts;
+    using Common;
     using Domain.Betting.Factories.Gamblers;
     using Domain.Betting.Repositories;
     using MediatR;
 
-    public class CreateGamblerCommand : IRequest<CreateGamblerResponseModel>
+    public class CreateGamblerCommand : GamblerCommand<CreateGamblerCommand>, IRequest<CreateGamblerResponseModel>
     {
-        public string Name { get; set; } = default!;
-
         public class CreateGamblerCommandHandler : IRequestHandler<CreateGamblerCommand, CreateGamblerResponseModel>
         {
             private readonly ICurrentUser currentUser;
