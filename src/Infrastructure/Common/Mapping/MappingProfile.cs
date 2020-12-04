@@ -1,14 +1,16 @@
-﻿namespace BettingSystem.Application.Common.Mapping
+﻿namespace BettingSystem.Infrastructure.Common.Mapping
 {
     using System;
     using System.Linq;
     using System.Reflection;
+    using Application.Common;
+    using Application.Common.Mapping;
     using AutoMapper;
 
     public class MappingProfile : Profile
     {
         public MappingProfile()
-            => this.ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+            => this.ApplyMappingsFromAssembly(typeof(ApplicationSettings).Assembly);
 
         private void ApplyMappingsFromAssembly(Assembly assembly)
         {

@@ -1,7 +1,6 @@
 ﻿namespace BettingSystem.Application
 {
     using System.Reflection;
-    using AutoMapper;
     using Common;
     using Common.Behaviours;
     using MediatR;
@@ -17,7 +16,6 @@
                 .Configure<ApplicationSettings>(
                     configuration.GetSection(nameof(ApplicationSettings)),
                     options => options.BindNonPublicProperties = true)
-                .AddAutoMapper(Assembly.GetExecutingAssembly())
                 .AddMediatR(Assembly.GetExecutingAssembly())
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
     }

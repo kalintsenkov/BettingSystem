@@ -1,9 +1,11 @@
 ﻿namespace BettingSystem.Infrastructure
 {
+    using System.Reflection;
     using System.Text;
     using Application.Common;
     using Application.Common.Contracts;
     using Application.Identity;
+    using AutoMapper;
     using Betting;
     using Common;
     using Common.Persistence;
@@ -26,7 +28,8 @@
             => services
                 .AddDatabase(configuration)
                 .AddRepositories()
-                .AddIdentity(configuration);
+                .AddIdentity(configuration)
+                .AddAutoMapper(Assembly.GetExecutingAssembly());
 
         private static IServiceCollection AddDatabase(
             this IServiceCollection services,
