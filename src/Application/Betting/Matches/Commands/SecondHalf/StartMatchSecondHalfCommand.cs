@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Application.Betting.Matches.Commands.Start
+﻿namespace BettingSystem.Application.Betting.Matches.Commands.SecondHalf
 {
     using System.Threading;
     using System.Threading.Tasks;
@@ -7,17 +7,17 @@
     using Domain.Betting.Repositories;
     using MediatR;
 
-    public class StartMatchCommand : EntityCommand<int>, IRequest<Result>
+    public class StartMatchSecondHalfCommand : EntityCommand<int>, IRequest<Result>
     {
-        public class StartMatchCommandHandler : IRequestHandler<StartMatchCommand, Result>
+        public class StartMatchSecondHalfCommandHandler : IRequestHandler<StartMatchSecondHalfCommand, Result>
         {
             private readonly IMatchDomainRepository matchRepository;
 
-            public StartMatchCommandHandler(IMatchDomainRepository matchRepository)
+            public StartMatchSecondHalfCommandHandler(IMatchDomainRepository matchRepository)
                 => this.matchRepository = matchRepository;
 
             public async Task<Result> Handle(
-                StartMatchCommand request,
+                StartMatchSecondHalfCommand request,
                 CancellationToken cancellationToken)
             {
                 var match = await this.matchRepository.Find(
@@ -29,7 +29,7 @@
                     throw new NotFoundException(nameof(match), request.Id);
                 }
 
-                match.Start();
+                match.StartSecondHalf();
 
                 await this.matchRepository.Save(match, cancellationToken);
 

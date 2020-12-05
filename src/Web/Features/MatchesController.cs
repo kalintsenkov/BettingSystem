@@ -7,9 +7,9 @@
     using Application.Betting.Matches.Commands.Delete;
     using Application.Betting.Matches.Commands.Edit;
     using Application.Betting.Matches.Commands.Finish;
+    using Application.Betting.Matches.Commands.FirstHalf;
     using Application.Betting.Matches.Commands.HalfTime;
     using Application.Betting.Matches.Commands.SecondHalf;
-    using Application.Betting.Matches.Commands.Start;
     using Application.Betting.Matches.Queries.Details;
     using Application.Betting.Matches.Queries.Search;
     using Application.Betting.Matches.Queries.Stadiums;
@@ -61,9 +61,9 @@
             => await this.Send(command.SetId(id));
 
         [HttpPut]
-        [Route(Id + PathSeparator + nameof(Start))]
-        public async Task<ActionResult> Start(
-            [FromRoute] StartMatchCommand command)
+        [Route(Id + PathSeparator + nameof(StartFirstHalf))]
+        public async Task<ActionResult> StartFirstHalf(
+            [FromRoute] StartMatchFirstHalfCommand command)
             => await this.Send(command);
 
         [HttpPut]
@@ -73,9 +73,9 @@
             => await this.Send(command);
 
         [HttpPut]
-        [Route(Id + PathSeparator + nameof(SecondHalf))]
-        public async Task<ActionResult> SecondHalf(
-            [FromRoute] MatchSecondHalfCommand command)
+        [Route(Id + PathSeparator + nameof(StartSecondHalf))]
+        public async Task<ActionResult> StartSecondHalf(
+            [FromRoute] StartMatchSecondHalfCommand command)
             => await this.Send(command);
 
         [HttpPut]

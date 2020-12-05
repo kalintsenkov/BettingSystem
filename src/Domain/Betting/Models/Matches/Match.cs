@@ -119,7 +119,7 @@
             return this;
         }
 
-        public Match Start()
+        public Match StartFirstHalf()
         {
             this.UpdateStatistics(Zero, Zero);
 
@@ -139,7 +139,7 @@
             return this;
         }
 
-        public Match SecondHalf()
+        public Match StartSecondHalf()
         {
             this.ValidateIfMatchIsStarted();
 
