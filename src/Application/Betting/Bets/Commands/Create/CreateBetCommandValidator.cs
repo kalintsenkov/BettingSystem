@@ -3,6 +3,7 @@
     using Domain.Betting.Models.Bets;
     using Domain.Common.Models;
     using FluentValidation;
+
     using static Domain.Betting.Models.ModelConstants.Bet;
 
     public class CreateBetCommandValidator : AbstractValidator<CreateBetCommand>
