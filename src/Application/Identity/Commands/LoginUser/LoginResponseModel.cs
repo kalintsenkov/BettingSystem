@@ -2,8 +2,14 @@
 {
     public class LoginResponseModel
     {
-        public LoginResponseModel(string token) => this.Token = token;
+        internal LoginResponseModel(string token, int gamblerId)
+        {
+            this.Token = token;
+            this.GamblerId = gamblerId;
+        }
 
         public string Token { get; }
+
+        public int GamblerId { get; }
     }
 }

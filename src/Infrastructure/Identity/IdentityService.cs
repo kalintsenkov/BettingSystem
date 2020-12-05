@@ -38,7 +38,7 @@
                 : Result<IUser>.Failure(errors);
         }
 
-        public async Task<Result<LoginResponseModel>> Login(UserRequestModel userRequest)
+        public async Task<Result<LoginSuccessModel>> Login(UserRequestModel userRequest)
         {
             var user = await this.userManager.FindByEmailAsync(userRequest.Email);
             if (user == null)
@@ -57,7 +57,7 @@
 
             var token = await this.jwtGenerator.GenerateToken(user);
 
-            return new LoginResponseModel(token);
+            return new LoginSuccessModel(token, user.Id);
         }
     }
 }
