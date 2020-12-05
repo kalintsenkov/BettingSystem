@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BettingSystem.Infrastructure.Common.Persistence.Migrations
 {
     [DbContext(typeof(BettingDbContext))]
-    [Migration("20201201201433_GamblerUserId")]
-    partial class GamblerUserId
+    [Migration("20201204171538_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -414,6 +414,12 @@ namespace BettingSystem.Infrastructure.Common.Persistence.Migrations
                                 .UseIdentityColumn();
 
                             b1.Property<int?>("AwayScore")
+                                .HasColumnType("int");
+
+                            b1.Property<int?>("HalfTimeAwayScore")
+                                .HasColumnType("int");
+
+                            b1.Property<int?>("HalfTimeHomeScore")
                                 .HasColumnType("int");
 
                             b1.Property<int?>("HomeScore")

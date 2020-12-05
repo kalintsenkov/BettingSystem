@@ -25,7 +25,7 @@
                     new Team("Real Madrid"),
                     new Stadium("Camp Nou", "https://fifa.fans/2UZdIWH"),
                     new Statistics(0, 3),
-                    Status.InPlay),
+                    Status.FirstHalf),
 
                 new Match(
                     DateTime.Today.AddDays(3),

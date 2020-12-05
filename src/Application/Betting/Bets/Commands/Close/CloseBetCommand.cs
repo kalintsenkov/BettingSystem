@@ -52,8 +52,8 @@
 
                 var matchStatus = bet.Match.Status;
 
-                if (matchStatus == Status.InPlay ||
-                    matchStatus == Status.Finished)
+                if (matchStatus != Status.NotStarted ||
+                    matchStatus != Status.Cancelled)
                 {
                     return InvalidErrorMessage;
                 }

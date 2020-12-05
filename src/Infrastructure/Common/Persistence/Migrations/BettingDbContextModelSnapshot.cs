@@ -414,6 +414,12 @@ namespace BettingSystem.Infrastructure.Common.Persistence.Migrations
                             b1.Property<int?>("AwayScore")
                                 .HasColumnType("int");
 
+                            b1.Property<int?>("HalfTimeAwayScore")
+                                .HasColumnType("int");
+
+                            b1.Property<int?>("HalfTimeHomeScore")
+                                .HasColumnType("int");
+
                             b1.Property<int?>("HomeScore")
                                 .HasColumnType("int");
 

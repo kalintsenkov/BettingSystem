@@ -110,9 +110,11 @@
             return this;
         }
 
-        public Match UpdateStatistics(int? homeScore, int? awayScore)
+        public Match UpdateStatistics(int homeScore, int awayScore)
         {
-            this.Statistics = new Statistics(homeScore, awayScore);
+            this.Statistics
+                .UpdateHomeScore(homeScore)
+                .UpdateAwayScore(awayScore);
 
             return this;
         }
@@ -121,13 +123,35 @@
         {
             this.UpdateStatistics(Zero, Zero);
 
-            this.Status = Status.InPlay;
+            this.Status = Status.FirstHalf;
+
+            return this;
+        }
+
+        public Match HalfTime()
+        {
+            this.ValidateIfMatchIsStarted();
+
+            this.Statistics.UpdateHalfTimeScore();
+
+            this.Status = Status.HalfTime;
+
+            return this;
+        }
+
+        public Match SecondHalf()
+        {
+            this.ValidateIfMatchIsStarted();
+
+            this.Status = Status.SecondHalf;
 
             return this;
         }
 
         public Match Finish()
         {
+            this.ValidateIfMatchIsStarted();
+
             this.Status = Status.Finished;
 
             return this;
@@ -145,6 +169,14 @@
             if (startDate < DateTime.Today)
             {
                 throw new InvalidMatchException();
+            }
+        }
+
+        private void ValidateIfMatchIsStarted()
+        {
+            if (this.Status == Status.NotStarted)
+            {
+                throw new InvalidMatchException("This match is not started yet.");
             }
         }
     }

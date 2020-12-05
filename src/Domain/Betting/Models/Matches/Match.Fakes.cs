@@ -19,7 +19,7 @@
                         A.Dummy<Team>(),
                         A.Dummy<Stadium>(),
                         A.Dummy<Statistics>(),
-                        Status.InPlay))
+                        Status.FirstHalf))
                     .Generate()
                     .SetId(1);
 

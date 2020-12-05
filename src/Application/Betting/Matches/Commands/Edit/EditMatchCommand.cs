@@ -9,9 +9,9 @@
 
     public class EditMatchCommand : MatchCommand<EditMatchCommand>, IRequest<Result>
     {
-        public int? HomeTeamScore { get; set; }
+        public int HomeTeamScore { get; set; }
 
-        public int? AwayTeamScore { get; set; }
+        public int AwayTeamScore { get; set; }
 
         public class EditMatchCommandHandler : IRequestHandler<EditMatchCommand, Result>
         {

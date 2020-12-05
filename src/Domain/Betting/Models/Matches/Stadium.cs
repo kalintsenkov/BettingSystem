@@ -15,9 +15,9 @@
             this.ImageUrl = imageUrl;
         }
 
-        public string Name { get; }
+        public string Name { get; private set; }
 
-        public string ImageUrl { get; }
+        public string ImageUrl { get; private set; }
 
         private void Validate(string name, string image)
         {

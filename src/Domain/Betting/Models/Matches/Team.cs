@@ -14,7 +14,7 @@
             this.Name = name;
         }
 
-        public string Name { get; }
+        public string Name { get; private set; }
 
         private void Validate(string name)
             => Guard.ForStringLength<InvalidTeamException>(
