@@ -5,7 +5,7 @@
     using AutoMapper;
     using Domain.Betting.Models.Gamblers;
 
-    internal class GamblerData : IMapTo<Gambler>, IMapFrom<Gambler>
+    internal class GamblerData : IMapFrom<Gambler>
     {
         public int Id { get; set; }
 

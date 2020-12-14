@@ -35,7 +35,7 @@
     internal abstract class DataRepository<TDbContext, TEntity, TEntityData> : IDomainRepository<TEntity>
         where TDbContext : IDbContext
         where TEntity : class, IAggregateRoot
-        where TEntityData : class, IMapTo<TEntity>, IMapFrom<TEntity>
+        where TEntityData : class, IMapFrom<TEntity>
     {
         protected DataRepository(TDbContext db, IMapper mapper)
         {

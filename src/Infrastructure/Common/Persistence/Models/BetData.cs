@@ -4,7 +4,7 @@
     using AutoMapper;
     using Domain.Betting.Models.Bets;
 
-    internal class BetData : IMapTo<Bet>, IMapFrom<Bet>
+    internal class BetData : IMapFrom<Bet>
     {
         public int Id { get; set; }
 
