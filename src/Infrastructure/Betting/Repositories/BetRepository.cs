@@ -7,6 +7,7 @@
     using Application.Betting.Bets;
     using Application.Betting.Bets.Queries.Details;
     using AutoMapper;
+    using Common.Persistence.Models;
     using Common.Persistence.Repositories;
     using Domain.Betting.Models.Bets;
     using Domain.Betting.Models.Gamblers;
@@ -14,15 +15,14 @@
     using Domain.Common;
     using Microsoft.EntityFrameworkCore;
 
-    internal class BetRepository : DataRepository<IBettingDbContext, Bet>,
+    internal class BetRepository : DataRepository<IBettingDbContext, Bet, BetData>,
         IBetDomainRepository,
         IBetQueryRepository
     {
-        private readonly IMapper mapper;
-
         public BetRepository(IBettingDbContext db, IMapper mapper)
-            : base(db)
-            => this.mapper = mapper;
+            : base(db, mapper)
+        {
+        }
 
         public async Task<bool> Delete(
             int id,
@@ -45,15 +45,18 @@
         public async Task<Bet> Find(
             int id,
             CancellationToken cancellationToken = default)
-            => await this
-                .All()
-                .Include(b => b.Match)
+            => await this.Mapper
+                .ProjectTo<Bet>(this
+                    .Data
+                    .Bets
+                    .Include(b => b.Match)
+                    .AsNoTracking())
                 .FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
 
         public async Task<BetDetailsResponseModel> GetDetails(
             int id,
             CancellationToken cancellationToken)
-            => await this.mapper
+            => await this.Mapper
                 .ProjectTo<BetDetailsResponseModel>(this
                     .AllAsNoTracking()
                     .Where(b => b.Id == id))
@@ -63,7 +66,7 @@
             Specification<Bet> betSpecification,
             Specification<Gambler> gamblerSpecification,
             CancellationToken cancellationToken = default)
-            => await this.mapper
+            => await this.Mapper
                 .ProjectTo<TResponseModel>(this
                     .GetGamblerBetsQuery(betSpecification, gamblerSpecification))
                 .ToListAsync(cancellationToken);
@@ -72,10 +75,14 @@
             Specification<Bet> betSpecification,
             Specification<Gambler> gamblerSpecification)
             => this
-                .Data
-                .Gamblers
+                .AllGamblers()
                 .Where(gamblerSpecification)
                 .SelectMany(g => g.Bets)
                 .Where(betSpecification);
+
+        private IQueryable<Gambler> AllGamblers()
+            => this.Mapper
+                .ProjectTo<Gambler>(this
+                    .Data.Gamblers);
     }
 }

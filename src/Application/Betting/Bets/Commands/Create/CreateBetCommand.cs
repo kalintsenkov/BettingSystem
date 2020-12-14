@@ -22,20 +22,17 @@
         {
             private readonly ICurrentUser currentUser;
             private readonly IBetFactory betFactory;
-            private readonly IBetDomainRepository betRepository;
             private readonly IMatchDomainRepository matchRepository;
             private readonly IGamblerDomainRepository gamblerRepository;
 
             public CreateBetCommandHandler(
                 ICurrentUser currentUser,
                 IBetFactory betFactory,
-                IBetDomainRepository betRepository,
                 IMatchDomainRepository matchRepository,
                 IGamblerDomainRepository gamblerRepository)
             {
                 this.currentUser = currentUser;
                 this.betFactory = betFactory;
-                this.betRepository = betRepository;
                 this.matchRepository = matchRepository;
                 this.gamblerRepository = gamblerRepository;
             }
@@ -66,7 +63,7 @@
 
                 gambler.AddBet(bet);
 
-                await this.betRepository.Save(bet, cancellationToken);
+                await this.gamblerRepository.Save(gambler, cancellationToken);
 
                 return new CreateBetResponseModel(bet.Id);
             }

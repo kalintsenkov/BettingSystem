@@ -1,12 +1,12 @@
 ﻿namespace BettingSystem.Infrastructure.Betting.Configurations
 {
-    using Domain.Betting.Models.Bets;
+    using Common.Persistence.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal class BetConfiguration : IEntityTypeConfiguration<Bet>
+    internal class BetConfiguration : IEntityTypeConfiguration<BetData>
     {
-        public void Configure(EntityTypeBuilder<Bet> builder)
+        public void Configure(EntityTypeBuilder<BetData> builder)
         {
             builder
                 .HasKey(b => b.Id);
@@ -18,8 +18,8 @@
 
             builder
                 .HasOne(b => b.Match)
-                .WithMany()
-                .HasForeignKey("MatchId")
+                .WithMany(m => m.Bets)
+                .HasForeignKey(b => b.MatchId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 

@@ -27,7 +27,7 @@
 
         public string UserId { get; private set; }
 
-        public IReadOnlyCollection<Bet> Bets => this.bets.ToList().AsReadOnly();
+        public IReadOnlyCollection<Bet> Bets => this.bets.ToList();
 
         public Gambler UpdateName(string name)
         {

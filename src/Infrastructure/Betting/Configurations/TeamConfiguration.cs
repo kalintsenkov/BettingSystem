@@ -1,14 +1,14 @@
 ﻿namespace BettingSystem.Infrastructure.Betting.Configurations
 {
-    using Domain.Betting.Models.Matches;
+    using Common.Persistence.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     using static Domain.Common.Models.ModelConstants.Common;
 
-    internal class TeamConfiguration : IEntityTypeConfiguration<Team>
+    internal class TeamConfiguration : IEntityTypeConfiguration<TeamData>
     {
-        public void Configure(EntityTypeBuilder<Team> builder)
+        public void Configure(EntityTypeBuilder<TeamData> builder)
         {
             builder
                 .HasKey(t => t.Id);

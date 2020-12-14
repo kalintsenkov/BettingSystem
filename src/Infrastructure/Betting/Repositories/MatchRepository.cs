@@ -10,21 +10,21 @@
     using Application.Betting.Matches.Queries.Stadiums;
     using Application.Betting.Matches.Queries.Teams;
     using AutoMapper;
+    using Common.Persistence.Models;
     using Common.Persistence.Repositories;
     using Domain.Betting.Models.Matches;
     using Domain.Betting.Repositories;
     using Domain.Common;
     using Microsoft.EntityFrameworkCore;
 
-    internal class MatchRepository : DataRepository<IBettingDbContext, Match>,
+    internal class MatchRepository : DataRepository<IBettingDbContext, Match, MatchData>,
         IMatchDomainRepository,
         IMatchQueryRepository
     {
-        private readonly IMapper mapper;
-
         public MatchRepository(IBettingDbContext db, IMapper mapper)
-            : base(db)
-            => this.mapper = mapper;
+            : base(db, mapper)
+        {
+        }
 
         public async Task<bool> Delete(
             int id,
@@ -47,17 +47,20 @@
         public async Task<Match> Find(
             int id,
             CancellationToken cancellationToken = default)
-            => await this
-                .All()
-                .Include(m => m.HomeTeam)
-                .Include(m => m.AwayTeam)
-                .Include(m => m.Stadium)
+            => await this.Mapper
+                .ProjectTo<Match>(this
+                    .Data
+                    .Matches
+                    .Include(m => m.HomeTeam)
+                    .Include(m => m.AwayTeam)
+                    .Include(m => m.Stadium)
+                    .AsNoTracking())
                 .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 
         public async Task<IEnumerable<MatchResponseModel>> GetMatchListings(
             Specification<Match> matchSpecification,
             CancellationToken cancellationToken = default)
-            => await this.mapper
+            => await this.Mapper
                 .ProjectTo<MatchResponseModel>(this
                     .AllAsNoTracking()
                     .Where(matchSpecification))
@@ -66,7 +69,7 @@
         public async Task<MatchDetailsResponseModel> GetDetails(
             int id,
             CancellationToken cancellationToken = default)
-            => await this.mapper
+            => await this.Mapper
                 .ProjectTo<MatchDetailsResponseModel>(this
                     .AllAsNoTracking()
                     .Where(m => m.Id == id))
@@ -95,23 +98,24 @@
 
         public async Task<IEnumerable<GetMatchStadiumsResponseModel>> GetStadiums(
             CancellationToken cancellationToken = default)
-            => await this.mapper
+            => await this.Mapper
                 .ProjectTo<GetMatchStadiumsResponseModel>(this
                     .AllStadiums())
                 .ToListAsync(cancellationToken);
 
         public async Task<IEnumerable<GetMatchTeamsResponseModel>> GetTeams(
             CancellationToken cancellationToken = default)
-            => await this.mapper
+            => await this.Mapper
                 .ProjectTo<GetMatchTeamsResponseModel>(this
                     .AllTeams())
                 .ToListAsync(cancellationToken);
 
         private IQueryable<Team> AllTeams()
-            => this
-                .Data
-                .Teams
-                .AsNoTracking();
+            => this.Mapper
+                .ProjectTo<Team>(this
+                    .Data
+                    .Teams
+                    .AsNoTracking());
 
         private IQueryable<Stadium> AllStadiums()
             => this

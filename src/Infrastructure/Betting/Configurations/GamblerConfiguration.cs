@@ -1,15 +1,15 @@
 ﻿namespace BettingSystem.Infrastructure.Betting.Configurations
 {
-    using Domain.Betting.Models.Gamblers;
+    using Common.Persistence.Models;
     using Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     using static Domain.Common.Models.ModelConstants.Common;
 
-    internal class GamblerConfiguration : IEntityTypeConfiguration<Gambler>
+    internal class GamblerConfiguration : IEntityTypeConfiguration<GamblerData>
     {
-        public void Configure(EntityTypeBuilder<Gambler> builder)
+        public void Configure(EntityTypeBuilder<GamblerData> builder)
         {
             builder
                 .HasKey(g => g.Id);
@@ -22,17 +22,15 @@
             builder
                 .HasOne<User>()
                 .WithOne()
-                .HasForeignKey<Gambler>("UserId")
+                .HasForeignKey<GamblerData>(g => g.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasMany(g => g.Bets)
-                .WithOne()
+                .WithOne(b => b.Gambler)
+                .HasForeignKey(b => b.GamblerId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict)
-                .Metadata
-                .PrincipalToDependent
-                .SetField("bets");
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

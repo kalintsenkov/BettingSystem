@@ -8,38 +8,48 @@
     using Application.Betting.Gamblers;
     using Application.Betting.Gamblers.Queries.Details;
     using AutoMapper;
+    using Common.Persistence.Models;
     using Common.Persistence.Repositories;
     using Domain.Betting.Exceptions;
     using Domain.Betting.Models.Gamblers;
     using Domain.Betting.Repositories;
     using Microsoft.EntityFrameworkCore;
 
-    internal class GamblerRepository : DataRepository<IBettingDbContext, Gambler>,
+    internal class GamblerRepository : DataRepository<IBettingDbContext, Gambler, GamblerData>,
         IGamblerDomainRepository,
         IGamblerQueryRepository
     {
-        private readonly IMapper mapper;
-
         public GamblerRepository(IBettingDbContext db, IMapper mapper)
-            : base(db)
-            => this.mapper = mapper;
+            : base(db, mapper)
+        {
+        }
 
         public async Task<Gambler> FindByUser(
             string userId,
-            CancellationToken cancellationToken = default)
-            => await this.FindByUser(userId, user => user, cancellationToken);
+            CancellationToken cancellationToken = default) 
+            => this.Mapper
+                .Map<GamblerData, Gambler>(await this
+                    .FindByUser(
+                        userId, 
+                        user => user, 
+                        cancellationToken));
 
         public async Task<int> GetGamblerId(
             string userId,
             CancellationToken cancellationToken = default)
-            => await this.FindByUser(userId, user => user.Id, cancellationToken);
+            => await this.FindByUser(
+                userId,
+                user => user.Id,
+                cancellationToken);
 
         public async Task<bool> HasBet(
             int gamblerId,
             int betId,
             CancellationToken cancellationToken = default)
             => await this
-                .AllAsNoTracking()
+                .Data
+                .Gamblers
+                .AsNoTracking()
                 .Where(g => g.Id == gamblerId)
                 .AnyAsync(g => g.Bets
                     .Any(b => b.Id == betId), cancellationToken);
@@ -47,20 +57,23 @@
         public async Task<GamblerDetailsResponseModel> GetDetails(
             int id,
             CancellationToken cancellationToken = default)
-            => await this.mapper
+            => await this.Mapper
                 .ProjectTo<GamblerDetailsResponseModel>(this
-                    .AllAsNoTracking()
+                    .Data
+                    .Gamblers
                     .Where(g => g.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
         private async Task<T> FindByUser<T>(
             string userId,
-            Expression<Func<Gambler, T>> selector,
+            Expression<Func<GamblerData, T>> selector,
             CancellationToken cancellationToken = default)
         {
             var gambler = await this
-                .All()
+                .Data
+                .Gamblers
                 .Where(u => u.UserId == userId)
+                .AsNoTracking()
                 .Select(selector)
                 .FirstOrDefaultAsync(cancellationToken);
 
