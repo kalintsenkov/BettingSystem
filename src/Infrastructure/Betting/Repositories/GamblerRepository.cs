@@ -47,9 +47,7 @@
             int betId,
             CancellationToken cancellationToken = default)
             => await this
-                .Data
-                .Gamblers
-                .AsNoTracking()
+                .AllAsDataModels()
                 .Where(g => g.Id == gamblerId)
                 .AnyAsync(g => g.Bets
                     .Any(b => b.Id == betId), cancellationToken);
@@ -59,8 +57,7 @@
             CancellationToken cancellationToken = default)
             => await this.Mapper
                 .ProjectTo<GamblerDetailsResponseModel>(this
-                    .Data
-                    .Gamblers
+                    .AllAsDataModels()
                     .Where(g => g.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -70,10 +67,8 @@
             CancellationToken cancellationToken = default)
         {
             var gambler = await this
-                .Data
-                .Gamblers
+                .AllAsDataModels()
                 .Where(u => u.UserId == userId)
-                .AsNoTracking()
                 .Select(selector)
                 .FirstOrDefaultAsync(cancellationToken);
 

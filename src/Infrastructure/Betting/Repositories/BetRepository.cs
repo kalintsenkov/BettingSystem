@@ -47,10 +47,8 @@
             CancellationToken cancellationToken = default)
             => await this.Mapper
                 .ProjectTo<Bet>(this
-                    .Data
-                    .Bets
-                    .Include(b => b.Match)
-                    .AsNoTracking())
+                    .AllAsDataModels()
+                    .Include(b => b.Match))
                 .FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
 
         public async Task<BetDetailsResponseModel> GetDetails(
@@ -58,7 +56,7 @@
             CancellationToken cancellationToken)
             => await this.Mapper
                 .ProjectTo<BetDetailsResponseModel>(this
-                    .AllAsNoTracking()
+                    .AllAsDomainModels()
                     .Where(b => b.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -83,6 +81,8 @@
         private IQueryable<Gambler> AllGamblers()
             => this.Mapper
                 .ProjectTo<Gambler>(this
-                    .Data.Gamblers);
+                    .Data
+                    .Gamblers
+                    .AsNoTracking());
     }
 }

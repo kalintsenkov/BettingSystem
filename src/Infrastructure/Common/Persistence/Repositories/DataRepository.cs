@@ -45,14 +45,15 @@
 
         protected TDbContext Data { get; }
 
-        public IMapper Mapper { get; }
+        protected IMapper Mapper { get; }
 
-        protected IQueryable<TEntity> AllAsNoTracking()
+        protected IQueryable<TEntityData> AllAsDataModels()
+            => this.Data.Set<TEntityData>().AsNoTracking();
+
+        protected IQueryable<TEntity> AllAsDomainModels()
             => this.Mapper
                 .ProjectTo<TEntity>(this
-                    .Data
-                    .Set<TEntityData>()
-                    .AsNoTracking());
+                    .AllAsDataModels());
 
         public async Task Save(
             TEntity entity,

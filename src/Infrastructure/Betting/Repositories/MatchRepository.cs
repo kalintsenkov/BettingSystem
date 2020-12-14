@@ -49,12 +49,10 @@
             CancellationToken cancellationToken = default)
             => await this.Mapper
                 .ProjectTo<Match>(this
-                    .Data
-                    .Matches
+                    .AllAsDataModels()
                     .Include(m => m.HomeTeam)
                     .Include(m => m.AwayTeam)
-                    .Include(m => m.Stadium)
-                    .AsNoTracking())
+                    .Include(m => m.Stadium))
                 .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 
         public async Task<IEnumerable<MatchResponseModel>> GetMatchListings(
@@ -62,7 +60,7 @@
             CancellationToken cancellationToken = default)
             => await this.Mapper
                 .ProjectTo<MatchResponseModel>(this
-                    .AllAsNoTracking()
+                    .AllAsDomainModels()
                     .Where(matchSpecification))
                 .ToListAsync(cancellationToken);
 
@@ -71,7 +69,7 @@
             CancellationToken cancellationToken = default)
             => await this.Mapper
                 .ProjectTo<MatchDetailsResponseModel>(this
-                    .AllAsNoTracking()
+                    .AllAsDomainModels()
                     .Where(m => m.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
