@@ -16,21 +16,41 @@
 
         private void ApplyMappingsFromAssembly(params Assembly[] assemblies)
         {
-            var types = assemblies
+            const string mappingMethodName = "Mapping";
+
+            var mapFromTypes = assemblies
                 .SelectMany(a => a.GetTypes())
                 .Where(t => t
                     .GetInterfaces()
-                    .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
+                    .Any(i => i.IsGenericType &&
+                              i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
                 .ToList();
 
-            foreach (var type in types)
+            foreach (var type in mapFromTypes)
             {
                 var instance = Activator.CreateInstance(type);
 
-                const string mappingMethodName = "Mapping";
-
                 var methodInfo = type.GetMethod(mappingMethodName)
                                  ?? type.GetInterface("IMapFrom`1")?.GetMethod(mappingMethodName);
+
+                methodInfo?.Invoke(instance, new object[] { this });
+            }
+
+            var mapToTypes = assemblies
+                .SelectMany(a => a.GetTypes())
+                .Where(t => t
+                    .GetInterfaces()
+                    .Any(i => i.IsGenericType &&
+                              (i.IsPublic || i.IsNotPublic) &&
+                              i.GetGenericTypeDefinition() == typeof(IMapTo<>)))
+                .ToList();
+
+            foreach (var type in mapToTypes)
+            {
+                var instance = Activator.CreateInstance(type);
+
+                var methodInfo = type.GetMethod(mappingMethodName)
+                                 ?? type.GetInterface("IMapTo`1")?.GetMethod(mappingMethodName);
 
                 methodInfo?.Invoke(instance, new object[] { this });
             }

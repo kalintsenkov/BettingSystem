@@ -4,6 +4,7 @@
     using Common.Models;
     using Exceptions;
     using Matches;
+
     using static ModelConstants.Bet;
 
     public class Bet : Entity<int>, IAggregateRoot
