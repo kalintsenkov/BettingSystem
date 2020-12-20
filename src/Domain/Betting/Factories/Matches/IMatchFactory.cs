@@ -8,11 +8,7 @@
     {
         IMatchFactory WithStartDate(DateTime startDate);
 
-        IMatchFactory WithHomeTeam(string teamName);
-
         IMatchFactory WithHomeTeam(Team team);
-
-        IMatchFactory WithAwayTeam(string teamName);
 
         IMatchFactory WithAwayTeam(Team team);
 

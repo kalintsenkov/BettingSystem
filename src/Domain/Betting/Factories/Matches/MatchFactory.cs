@@ -7,9 +7,7 @@
     internal class MatchFactory : IMatchFactory
     {
         private readonly Status defaultMatchStatus = Status.NotStarted;
-        private readonly Statistics defaultMatchStatistics = new Statistics(
-            homeScore: null,
-            awayScore: null);
+        private readonly Statistics defaultMatchStatistics = new(homeScore: null, awayScore: null);
 
         private DateTime matchStartDate = default!;
         private Team matchHomeTeam = default!;
@@ -26,18 +24,12 @@
             return this;
         }
 
-        public IMatchFactory WithHomeTeam(string teamName)
-            => this.WithHomeTeam(new Team(teamName));
-
         public IMatchFactory WithHomeTeam(Team team)
         {
             this.matchHomeTeam = team;
             this.isHomeTeamSet = true;
             return this;
         }
-
-        public IMatchFactory WithAwayTeam(string teamName)
-            => this.WithAwayTeam(new Team(teamName));
 
         public IMatchFactory WithAwayTeam(Team team)
         {

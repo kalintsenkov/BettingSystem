@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Domain.Betting.Exceptions
+﻿namespace BettingSystem.Domain.Teams.Exceptions
 {
     using Common;
 

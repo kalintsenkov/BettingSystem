@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Domain.Betting.Models.Matches
+﻿namespace BettingSystem.Domain.Teams.Models
 {
     using System;
     using Exceptions;

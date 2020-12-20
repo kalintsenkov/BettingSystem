@@ -8,7 +8,6 @@
     using Application.Betting.Matches.Queries.Common;
     using Application.Betting.Matches.Queries.Details;
     using Application.Betting.Matches.Queries.Stadiums;
-    using Application.Betting.Matches.Queries.Teams;
     using AutoMapper;
     using Common.Persistence.Models;
     using Common.Persistence.Repositories;
@@ -99,13 +98,6 @@
             => await this.Mapper
                 .ProjectTo<GetMatchStadiumsResponseModel>(this
                     .AllStadiums())
-                .ToListAsync(cancellationToken);
-
-        public async Task<IEnumerable<GetMatchTeamsResponseModel>> GetTeams(
-            CancellationToken cancellationToken = default)
-            => await this.Mapper
-                .ProjectTo<GetMatchTeamsResponseModel>(this
-                    .AllTeams())
                 .ToListAsync(cancellationToken);
 
         private IQueryable<Team> AllTeams()

@@ -2,6 +2,7 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Application.Common.Exceptions;
     using Common;
     using Domain.Betting.Factories.Matches;
     using Domain.Betting.Repositories;
@@ -30,28 +31,32 @@
                     request.HomeTeam,
                     cancellationToken);
 
+                if (homeTeam == null)
+                {
+                    throw new NotFoundException(nameof(homeTeam), request.HomeTeam);
+                }
+
                 var awayTeam = await this.matchRepository.GetAwayTeam(
                     request.AwayTeam,
                     cancellationToken);
+
+                if (awayTeam == null)
+                {
+                    throw new NotFoundException(nameof(awayTeam), request.AwayTeam);
+                }
 
                 var stadium = await this.matchRepository.GetStadium(
                     request.StadiumName,
                     cancellationToken);
 
-                var factory = homeTeam == null
-                    ? this.matchFactory.WithHomeTeam(request.HomeTeam)
-                    : this.matchFactory.WithHomeTeam(homeTeam);
-
-                factory = awayTeam == null
-                    ? factory.WithAwayTeam(request.AwayTeam)
-                    : factory.WithAwayTeam(awayTeam);
-
-                factory = stadium == null
-                    ? factory.WithStadium(request.StadiumName, request.StadiumImageUrl)
-                    : factory.WithStadium(stadium);
+                var factory = stadium == null
+                    ? this.matchFactory.WithStadium(request.StadiumName, request.StadiumImageUrl)
+                    : this.matchFactory.WithStadium(stadium);
 
                 var match = factory
                     .WithStartDate(request.StartDate)
+                    .WithHomeTeam(homeTeam)
+                    .WithAwayTeam(awayTeam)
                     .Build();
 
                 await this.matchRepository.Save(match, cancellationToken);

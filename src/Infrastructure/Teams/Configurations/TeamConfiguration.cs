@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Infrastructure.Betting.Configurations
+﻿namespace BettingSystem.Infrastructure.Teams.Configurations
 {
     using Common.Persistence.Models;
     using Microsoft.EntityFrameworkCore;
@@ -17,6 +17,13 @@
                 .Property(t => t.Name)
                 .HasMaxLength(MaxNameLength)
                 .IsRequired();
+
+            builder
+                .HasMany(t => t.Players)
+                .WithOne()
+                .HasForeignKey("TeamId")
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

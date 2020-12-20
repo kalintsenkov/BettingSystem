@@ -59,29 +59,9 @@
             return this;
         }
 
-        public Match UpdateHomeTeam(string homeTeam)
-        {
-            if (this.HomeTeam.Name != homeTeam)
-            {
-                this.HomeTeam = new Team(homeTeam);
-            }
-
-            return this;
-        }
-
         public Match UpdateHomeTeam(Team homeTeam)
         {
             this.HomeTeam = homeTeam;
-
-            return this;
-        }
-
-        public Match UpdateAwayTeam(string awayTeam)
-        {
-            if (this.AwayTeam.Name != awayTeam)
-            {
-                this.AwayTeam = new Team(awayTeam);
-            }
 
             return this;
         }

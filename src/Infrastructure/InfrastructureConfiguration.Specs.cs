@@ -5,12 +5,14 @@
     using Application.Betting.Bets;
     using Application.Betting.Gamblers;
     using Application.Betting.Matches;
+    using Application.Teams;
     using AutoMapper;
     using Betting;
     using Common.Persistence;
     using FluentAssertions;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
+    using Teams;
     using Xunit;
 
     public class InfrastructureConfigurationSpecs
@@ -22,6 +24,8 @@
                 .AddDbContext<BettingDbContext>(options => options
                     .UseInMemoryDatabase(Guid.NewGuid().ToString()))
                 .AddScoped<IBettingDbContext>(provider => provider
+                    .GetService<BettingDbContext>()!)
+                .AddScoped<ITeamsDbContext>(provider => provider
                     .GetService<BettingDbContext>()!);
 
             var services = serviceCollection
@@ -41,6 +45,11 @@
 
             services
                 .GetService<IBetQueryRepository>()
+                .Should()
+                .NotBeNull();
+
+            services
+                .GetService<ITeamQueryRepository>()
                 .Should()
                 .NotBeNull();
         }

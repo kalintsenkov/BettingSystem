@@ -3,6 +3,7 @@
     using System;
     using Application.Common;
     using FluentValidation;
+    
     using static Domain.Common.Models.ModelConstants.Common;
 
     public class MatchCommandValidator<TCommand> : AbstractValidator<MatchCommand<TCommand>>

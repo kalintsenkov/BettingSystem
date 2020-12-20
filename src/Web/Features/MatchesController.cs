@@ -13,7 +13,6 @@
     using Application.Betting.Matches.Queries.Details;
     using Application.Betting.Matches.Queries.Search;
     using Application.Betting.Matches.Queries.Stadiums;
-    using Application.Betting.Matches.Queries.Teams;
     using Application.Common;
     using Common;
     using Microsoft.AspNetCore.Authorization;
@@ -40,13 +39,6 @@
         [Route(nameof(Stadiums))]
         public async Task<ActionResult<IEnumerable<GetMatchStadiumsResponseModel>>> Stadiums(
             [FromQuery] GetMatchStadiumsQuery query)
-            => await this.Send(query);
-
-        [HttpGet]
-        [AllowAnonymous]
-        [Route(nameof(Teams))]
-        public async Task<ActionResult<IEnumerable<GetMatchTeamsResponseModel>>> Teams(
-            [FromQuery] GetMatchTeamsQuery query)
             => await this.Send(query);
 
         [HttpPost]

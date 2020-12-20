@@ -3,10 +3,9 @@
     using System;
     using System.Collections.Generic;
     using Application.Common.Mapping;
-    using AutoMapper;
     using Domain.Betting.Models.Matches;
 
-    internal class MatchData : IMapFrom<Match>
+    internal class MatchData : IMapFrom<Match>, IMapTo<Match>
     {
         public int Id { get; set; }
 
@@ -29,10 +28,5 @@
         public Status Status { get; set; } = default!;
 
         public ICollection<BetData> Bets { get; } = new HashSet<BetData>();
-
-        public void Mapping(Profile mapper)
-            => mapper
-                .CreateMap<MatchData, Match>()
-                .ReverseMap();
     }
 }

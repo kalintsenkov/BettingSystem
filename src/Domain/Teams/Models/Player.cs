@@ -1,13 +1,13 @@
-﻿namespace BettingSystem.Domain.Betting.Models.Matches
+﻿namespace BettingSystem.Domain.Teams.Models
 {
     using Common.Models;
     using Exceptions;
-    
+
     using static Common.Models.ModelConstants.Common;
 
-    public class Team : Entity<int>
+    public class Player : Entity<int>
     {
-        internal Team(string name)
+        internal Player(string name)
         {
             this.Validate(name);
 
@@ -17,7 +17,7 @@
         public string Name { get; private set; }
 
         private void Validate(string name)
-            => Guard.ForStringLength<InvalidMatchException>(
+            => Guard.ForStringLength<InvalidTeamException>(
                 name,
                 MinNameLength,
                 MaxNameLength,
