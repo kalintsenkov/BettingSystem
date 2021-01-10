@@ -5,6 +5,7 @@
     using Application.Common;
     using Application.Teams.Commands.AddPlayer;
     using Application.Teams.Commands.Create;
+    using Application.Teams.Commands.Delete;
     using Application.Teams.Commands.Edit;
     using Application.Teams.Queries.All;
     using Common;
@@ -36,5 +37,11 @@
         public async Task<ActionResult> AddPlayer(
             int id, AddPlayerCommand command)
             => await this.Send(command.SetId(id));
+
+        [HttpDelete]
+        [Route(Id)]
+        public async Task<ActionResult> Delete(
+            [FromRoute] DeleteTeamCommand command)
+            => await this.Send(command);
     }
 }

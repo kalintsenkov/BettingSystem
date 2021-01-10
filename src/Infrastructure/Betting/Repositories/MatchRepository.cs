@@ -29,7 +29,7 @@
             int id,
             CancellationToken cancellationToken = default)
         {
-            var match = await this.Data.Matches.FindAsync(id, cancellationToken);
+            var match = await this.Data.Matches.FindAsync(id);
 
             if (match == null)
             {

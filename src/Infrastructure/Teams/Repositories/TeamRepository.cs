@@ -26,7 +26,7 @@
             int id,
             CancellationToken cancellationToken = default)
         {
-            var team = await this.Data.Teams.FindAsync(id, cancellationToken);
+            var team = await this.Data.Teams.FindAsync(id);
 
             if (team == null)
             {

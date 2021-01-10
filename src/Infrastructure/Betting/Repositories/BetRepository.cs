@@ -28,7 +28,7 @@
             int id,
             CancellationToken cancellationToken = default)
         {
-            var bet = await this.Data.Bets.FindAsync(id, cancellationToken);
+            var bet = await this.Data.Bets.FindAsync(id);
 
             if (bet == null)
             {
