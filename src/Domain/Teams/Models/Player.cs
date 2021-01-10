@@ -7,14 +7,24 @@
 
     public class Player : Entity<int>
     {
-        internal Player(string name)
+        internal Player(string name, Position position)
         {
             this.Validate(name);
 
             this.Name = name;
+            this.Position = position;
+        }
+
+        private Player(string name)
+        {
+            this.Name = name;
+
+            this.Position = default!;
         }
 
         public string Name { get; private set; }
+
+        public Position Position { get; private set; }
 
         private void Validate(string name)
             => Guard.ForStringLength<InvalidTeamException>(

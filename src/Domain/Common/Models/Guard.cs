@@ -1,7 +1,6 @@
 ﻿namespace BettingSystem.Domain.Common.Models
 {
     using System;
-    using Betting.Models;
 
     public static class Guard
     {

@@ -8,8 +8,7 @@
 
     public abstract class Enumeration : IComparable
     {
-        private static readonly ConcurrentDictionary<Type, IEnumerable<object>> EnumCache
-            = new ConcurrentDictionary<Type, IEnumerable<object>>();
+        private static readonly ConcurrentDictionary<Type, IEnumerable<object>> EnumCache = new();
 
         protected Enumeration(int value, string name)
         {
@@ -20,6 +19,8 @@
         public int Value { get; }
 
         public string Name { get; }
+
+        public int CompareTo(object? other) => this.Value.CompareTo(((Enumeration)other!).Value);
 
         public static IEnumerable<T> GetAll<T>() where T : Enumeration
         {
@@ -53,8 +54,6 @@
                 return false;
             }
         }
-
-        public int CompareTo(object? other) => this.Value.CompareTo(((Enumeration)other!).Value);
 
         public override bool Equals(object? obj)
         {
@@ -90,7 +89,8 @@
 
         public static bool operator !=(Enumeration? first, Enumeration? second) => !(first == second);
 
-        private static T Parse<T, TValue>(TValue value, string description, Func<T, bool> predicate) where T : Enumeration
+        private static T Parse<T, TValue>(TValue value, string description, Func<T, bool> predicate)
+            where T : Enumeration
         {
             var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 

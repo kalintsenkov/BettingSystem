@@ -17,6 +17,14 @@
                 .Property(p => p.Name)
                 .HasMaxLength(MaxNameLength)
                 .IsRequired();
+
+            builder
+                .OwnsOne(p => p.Position, p =>
+                {
+                    p.WithOwner();
+
+                    p.Property(sts => sts.Value).IsRequired();
+                });
         }
     }
 }
