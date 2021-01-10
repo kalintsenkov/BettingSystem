@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Application.Common;
+    using Application.Teams.Commands.AddPlayer;
     using Application.Teams.Commands.Create;
     using Application.Teams.Commands.Edit;
     using Application.Teams.Queries.All;
@@ -28,6 +29,12 @@
         [Route(Id)]
         public async Task<ActionResult> Edit(
             int id, EditTeamCommand command)
+            => await this.Send(command.SetId(id));
+
+        [HttpPut]
+        [Route(Id + PathSeparator + nameof(AddPlayer))]
+        public async Task<ActionResult> AddPlayer(
+            int id, AddPlayerCommand command)
             => await this.Send(command.SetId(id));
     }
 }

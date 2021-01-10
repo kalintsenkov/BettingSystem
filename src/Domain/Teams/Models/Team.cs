@@ -34,7 +34,8 @@
             return this;
         }
 
-        public void AddPlayer(Player player) => this.players.Add(player);
+        public void AddPlayer(string name, Position position)
+            => this.players.Add(new Player(name, position));
 
         private void Validate(string name)
             => Guard.ForStringLength<InvalidTeamException>(
