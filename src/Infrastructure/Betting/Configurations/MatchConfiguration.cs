@@ -31,7 +31,7 @@
 
             builder
                 .HasOne(m => m.Stadium)
-                .WithMany()
+                .WithMany(s => s.Matches)
                 .HasForeignKey(m => m.StadiumId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
@@ -43,6 +43,8 @@
 
                     s.Property(st => st.HomeScore);
                     s.Property(st => st.AwayScore);
+                    s.Property(st => st.HalfTimeHomeScore);
+                    s.Property(st => st.HalfTimeAwayScore);
                 });
 
             builder

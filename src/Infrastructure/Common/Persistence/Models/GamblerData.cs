@@ -19,10 +19,8 @@
         public void Mapping(Profile mapper)
         {
             mapper
-                .CreateMap<Gambler, GamblerData>();
-
-            mapper
-                .CreateMap<GamblerData, Gambler>();
+                .CreateMap<Gambler, GamblerData>()
+                .ReverseMap();
 
             mapper
                 .CreateMap<GamblerData, GamblerDetailsResponseModel>();

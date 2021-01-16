@@ -2,7 +2,6 @@
 {
     using Common.Persistence;
     using Common.Persistence.Models;
-    using Domain.Betting.Models.Matches;
     using Microsoft.EntityFrameworkCore;
 
     internal interface IBettingDbContext : IDbContext
@@ -11,7 +10,7 @@
 
         DbSet<MatchData> Matches { get; }
 
-        DbSet<Stadium> Stadiums { get; }
+        DbSet<StadiumData> Stadiums { get; }
 
         DbSet<GamblerData> Gamblers { get; }
 

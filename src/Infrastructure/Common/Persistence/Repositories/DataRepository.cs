@@ -48,7 +48,9 @@
         protected IMapper Mapper { get; }
 
         protected IQueryable<TEntityData> AllAsDataModels()
-            => this.Data.Set<TEntityData>().AsNoTracking();
+            => this.Data
+                .Set<TEntityData>()
+                .AsNoTracking();
 
         protected IQueryable<TEntity> AllAsDomainModels()
             => this.Mapper

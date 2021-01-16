@@ -108,9 +108,10 @@
                     .AsNoTracking());
 
         private IQueryable<Stadium> AllStadiums()
-            => this
-                .Data
-                .Stadiums
-                .AsNoTracking();
+            => this.Mapper
+                .ProjectTo<Stadium>(this
+                    .Data
+                    .Stadiums
+                    .AsNoTracking());
     }
 }

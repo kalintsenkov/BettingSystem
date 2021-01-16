@@ -13,6 +13,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using Teams;
+    using Tournaments;
     using Xunit;
 
     public class InfrastructureConfigurationSpecs
@@ -26,6 +27,8 @@
                 .AddScoped<IBettingDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
                 .AddScoped<ITeamsDbContext>(provider => provider
+                    .GetService<BettingDbContext>()!)
+                .AddScoped<ITournamentsDbContext>(provider => provider
                     .GetService<BettingDbContext>()!);
 
             var services = serviceCollection

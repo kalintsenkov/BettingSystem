@@ -18,7 +18,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using Teams;
-    
+    using Tournaments;
+
     using static Domain.Common.Models.ModelConstants.Identity;
 
     public static class InfrastructureConfiguration
@@ -44,6 +45,8 @@
                 .AddScoped<IBettingDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
                 .AddScoped<ITeamsDbContext>(provider => provider
+                    .GetService<BettingDbContext>()!)
+                .AddScoped<ITournamentsDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
                 .AddTransient<IInitializer, BettingDbInitializer>();
 

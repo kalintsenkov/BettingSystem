@@ -6,7 +6,7 @@
 
     using static Domain.Common.Models.ModelConstants.Common;
 
-    public class PlayerConfiguration : IEntityTypeConfiguration<Player>
+    internal class PlayerConfiguration : IEntityTypeConfiguration<Player>
     {
         public void Configure(EntityTypeBuilder<Player> builder)
         {

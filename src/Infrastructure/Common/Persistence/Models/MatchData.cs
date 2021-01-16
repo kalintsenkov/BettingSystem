@@ -3,9 +3,13 @@
     using System;
     using System.Collections.Generic;
     using Application.Common.Mapping;
-    using Domain.Betting.Models.Matches;
+    using AutoMapper;
 
-    internal class MatchData : IMapFrom<Match>, IMapTo<Match>
+    internal class MatchData :
+        IMapFrom<Domain.Betting.Models.Matches.Match>,
+        IMapTo<Domain.Betting.Models.Matches.Match>,
+        IMapFrom<Domain.Tournaments.Models.Matches.Match>,
+        IMapTo<Domain.Tournaments.Models.Matches.Match>
     {
         public int Id { get; set; }
 
@@ -21,12 +25,31 @@
 
         public int StadiumId { get; set; }
 
-        public Stadium Stadium { get; set; } = default!;
+        public StadiumData Stadium { get; set; } = default!;
 
-        public Statistics Statistics { get; set; } = default!;
+        public int? TournamentId { get; set; }
 
-        public Status Status { get; set; } = default!;
+        public TournamentData Tournament { get; set; } = default!;
+
+        public StatisticsData Statistics { get; set; } = default!;
+
+        public StatusData Status { get; set; } = default!;
 
         public ICollection<BetData> Bets { get; } = new HashSet<BetData>();
+
+        public void Mapping(Profile mapper)
+        {
+            mapper
+                .CreateMap<
+                    MatchData,
+                    Domain.Betting.Models.Matches.Match>()
+                .ReverseMap();
+
+            mapper
+                .CreateMap<
+                    MatchData,
+                    Domain.Tournaments.Models.Matches.Match>()
+                .ReverseMap();
+        }
     }
 }

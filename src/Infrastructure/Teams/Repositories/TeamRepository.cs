@@ -53,7 +53,7 @@
             CancellationToken cancellationToken = default)
             => await this.Mapper
                 .ProjectTo<GetAllTeamsResponseModel>(this
-                    .AllAsDataModels())
+                    .AllAsDomainModels())
                 .ToListAsync(cancellationToken);
     }
 }

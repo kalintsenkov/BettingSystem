@@ -4,20 +4,44 @@ using BettingSystem.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BettingSystem.Infrastructure.Common.Persistence.Migrations
 {
     [DbContext(typeof(BettingDbContext))]
-    partial class BettingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210116171133_Tournaments")]
+    partial class Tournaments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
+
+            modelBuilder.Entity("BettingSystem.Domain.Betting.Models.Matches.Stadium", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Stadiums");
+                });
 
             modelBuilder.Entity("BettingSystem.Domain.Teams.Models.Player", b =>
                 {
@@ -127,28 +151,6 @@ namespace BettingSystem.Infrastructure.Common.Persistence.Migrations
                     b.HasIndex("TournamentId");
 
                     b.ToTable("Matches");
-                });
-
-            modelBuilder.Entity("BettingSystem.Infrastructure.Common.Persistence.Models.StadiumData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("nvarchar(2048)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Stadiums");
                 });
 
             modelBuilder.Entity("BettingSystem.Infrastructure.Common.Persistence.Models.TeamData", b =>
@@ -474,8 +476,8 @@ namespace BettingSystem.Infrastructure.Common.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BettingSystem.Infrastructure.Common.Persistence.Models.StadiumData", "Stadium")
-                        .WithMany("Matches")
+                    b.HasOne("BettingSystem.Domain.Betting.Models.Matches.Stadium", "Stadium")
+                        .WithMany()
                         .HasForeignKey("StadiumId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -485,7 +487,7 @@ namespace BettingSystem.Infrastructure.Common.Persistence.Migrations
                         .HasForeignKey("TournamentId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.OwnsOne("BettingSystem.Infrastructure.Common.Persistence.Models.StatisticsData", "Statistics", b1 =>
+                    b.OwnsOne("BettingSystem.Domain.Betting.Models.Matches.Statistics", "Statistics", b1 =>
                         {
                             b1.Property<int>("MatchDataId")
                                 .ValueGeneratedOnAdd()
@@ -512,7 +514,7 @@ namespace BettingSystem.Infrastructure.Common.Persistence.Migrations
                                 .HasForeignKey("MatchDataId");
                         });
 
-                    b.OwnsOne("BettingSystem.Infrastructure.Common.Persistence.Models.StatusData", "Status", b1 =>
+                    b.OwnsOne("BettingSystem.Domain.Betting.Models.Matches.Status", "Status", b1 =>
                         {
                             b1.Property<int>("MatchDataId")
                                 .ValueGeneratedOnAdd()
@@ -604,11 +606,6 @@ namespace BettingSystem.Infrastructure.Common.Persistence.Migrations
             modelBuilder.Entity("BettingSystem.Infrastructure.Common.Persistence.Models.MatchData", b =>
                 {
                     b.Navigation("Bets");
-                });
-
-            modelBuilder.Entity("BettingSystem.Infrastructure.Common.Persistence.Models.StadiumData", b =>
-                {
-                    b.Navigation("Matches");
                 });
 
             modelBuilder.Entity("BettingSystem.Infrastructure.Common.Persistence.Models.TeamData", b =>
