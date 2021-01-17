@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using Application.Common.Mapping;
-    using Domain.Championships.Models.Groups;
+    using Domain.Competitions.Models.Groups;
 
     internal class GroupData : IMapFrom<Group>, IMapTo<Group>
     {

@@ -2,7 +2,7 @@
 {
     using System.Reflection;
     using Betting;
-    using Championships;
+    using Competitions;
     using Domain.Teams.Models;
     using Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

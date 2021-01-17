@@ -10,8 +10,8 @@
         IMapTo<Domain.Betting.Models.Matches.Team>,
         IMapFrom<Domain.Teams.Models.Team>,
         IMapTo<Domain.Teams.Models.Team>,
-        IMapFrom<Domain.Championships.Models.Matches.Team>,
-        IMapTo<Domain.Championships.Models.Matches.Team>
+        IMapFrom<Domain.Competitions.Models.Matches.Team>,
+        IMapTo<Domain.Competitions.Models.Matches.Team>
     {
         public int Id { get; set; }
 
@@ -36,7 +36,7 @@
             mapper
                 .CreateMap<
                     TeamData,
-                    Domain.Championships.Models.Matches.Team>()
+                    Domain.Competitions.Models.Matches.Team>()
                 .ReverseMap();
         }
     }

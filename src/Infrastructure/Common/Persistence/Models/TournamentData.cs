@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using Application.Common.Mapping;
-    using Domain.Championships.Models.Tournaments;
+    using Domain.Competitions.Models.Tournaments;
 
     internal class TournamentData : IMapFrom<Tournament>, IMapTo<Tournament>
     {

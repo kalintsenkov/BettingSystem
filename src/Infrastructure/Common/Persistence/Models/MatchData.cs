@@ -8,8 +8,8 @@
     internal class MatchData :
         IMapFrom<Domain.Betting.Models.Matches.Match>,
         IMapTo<Domain.Betting.Models.Matches.Match>,
-        IMapFrom<Domain.Championships.Models.Matches.Match>,
-        IMapTo<Domain.Championships.Models.Matches.Match>
+        IMapFrom<Domain.Competitions.Models.Matches.Match>,
+        IMapTo<Domain.Competitions.Models.Matches.Match>
     {
         public int Id { get; set; }
 
@@ -48,7 +48,7 @@
             mapper
                 .CreateMap<
                     MatchData,
-                    Domain.Championships.Models.Matches.Match>()
+                    Domain.Competitions.Models.Matches.Match>()
                 .ReverseMap();
         }
     }

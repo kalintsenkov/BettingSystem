@@ -1,9 +1,9 @@
 ﻿namespace BettingSystem.Web.Features
 {
     using System.Threading.Tasks;
-    using Application.Championships.Groups.Commands.Create;
-    using Application.Championships.Groups.Commands.Edit;
     using Application.Common;
+    using Application.Competitions.Groups.Commands.Create;
+    using Application.Competitions.Groups.Commands.Edit;
     using Common;
     using Microsoft.AspNetCore.Mvc;
 

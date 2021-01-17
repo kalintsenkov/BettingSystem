@@ -6,8 +6,8 @@
     internal class StatisticsData :
         IMapFrom<Domain.Betting.Models.Matches.Statistics>,
         IMapTo<Domain.Betting.Models.Matches.Statistics>,
-        IMapFrom<Domain.Championships.Models.Matches.Statistics>,
-        IMapTo<Domain.Championships.Models.Matches.Statistics>
+        IMapFrom<Domain.Competitions.Models.Matches.Statistics>,
+        IMapTo<Domain.Competitions.Models.Matches.Statistics>
     {
         public int? HomeScore { get; set; }
 
@@ -28,7 +28,7 @@
             mapper
                 .CreateMap<
                     StatisticsData,
-                    Domain.Championships.Models.Matches.Statistics>()
+                    Domain.Competitions.Models.Matches.Statistics>()
                 .ReverseMap();
         }
     }

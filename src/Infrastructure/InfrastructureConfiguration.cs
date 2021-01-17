@@ -7,9 +7,9 @@
     using Application.Identity;
     using AutoMapper;
     using Betting;
-    using Championships;
     using Common;
     using Common.Persistence;
+    using Competitions;
     using Domain.Common;
     using Identity;
     using Microsoft.AspNetCore.Authentication.JwtBearer;

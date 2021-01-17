@@ -7,8 +7,8 @@
     internal class StadiumData :
         IMapFrom<Domain.Betting.Models.Matches.Stadium>,
         IMapTo<Domain.Betting.Models.Matches.Stadium>,
-        IMapFrom<Domain.Championships.Models.Matches.Stadium>,
-        IMapTo<Domain.Championships.Models.Matches.Stadium>
+        IMapFrom<Domain.Competitions.Models.Matches.Stadium>,
+        IMapTo<Domain.Competitions.Models.Matches.Stadium>
     {
         public int Id { get; set; }
 
@@ -29,7 +29,7 @@
             mapper
                 .CreateMap<
                     StadiumData,
-                    Domain.Championships.Models.Matches.Stadium>()
+                    Domain.Competitions.Models.Matches.Stadium>()
                 .ReverseMap();
         }
     }

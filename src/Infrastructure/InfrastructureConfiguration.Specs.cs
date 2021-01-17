@@ -5,12 +5,12 @@
     using Application.Betting.Bets;
     using Application.Betting.Gamblers;
     using Application.Betting.Matches;
-    using Application.Championships.Tournaments;
+    using Application.Competitions.Tournaments;
     using Application.Teams;
     using AutoMapper;
     using Betting;
-    using Championships;
     using Common.Persistence;
+    using Competitions;
     using FluentAssertions;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;

@@ -1,7 +1,7 @@
 ﻿namespace BettingSystem.Web.Features
 {
     using System.Threading.Tasks;
-    using Application.Championships.Tournaments.Commands.Create;
+    using Application.Competitions.Tournaments.Commands.Create;
     using Common;
     using Microsoft.AspNetCore.Mvc;
 
