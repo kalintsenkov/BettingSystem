@@ -5,15 +5,16 @@
     using Application.Betting.Bets;
     using Application.Betting.Gamblers;
     using Application.Betting.Matches;
+    using Application.Championships.Tournaments;
     using Application.Teams;
     using AutoMapper;
     using Betting;
+    using Championships;
     using Common.Persistence;
     using FluentAssertions;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using Teams;
-    using Tournaments;
     using Xunit;
 
     public class InfrastructureConfigurationSpecs
@@ -53,6 +54,11 @@
 
             services
                 .GetService<ITeamQueryRepository>()
+                .Should()
+                .NotBeNull();
+
+            services
+                .GetService<ITournamentQueryRepository>()
                 .Should()
                 .NotBeNull();
         }

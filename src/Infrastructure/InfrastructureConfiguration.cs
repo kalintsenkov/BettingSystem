@@ -7,6 +7,7 @@
     using Application.Identity;
     using AutoMapper;
     using Betting;
+    using Championships;
     using Common;
     using Common.Persistence;
     using Domain.Common;
@@ -18,7 +19,6 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using Teams;
-    using Tournaments;
 
     using static Domain.Common.Models.ModelConstants.Identity;
 

@@ -6,8 +6,8 @@
     public class StatusData :
         IMapFrom<Domain.Betting.Models.Matches.Status>,
         IMapTo<Domain.Betting.Models.Matches.Status>,
-        IMapFrom<Domain.Tournaments.Models.Matches.Status>,
-        IMapTo<Domain.Tournaments.Models.Matches.Status>
+        IMapFrom<Domain.Championships.Models.Matches.Status>,
+        IMapTo<Domain.Championships.Models.Matches.Status>
     {
         public int Value { get; set; }
 
@@ -22,7 +22,7 @@
             mapper
                 .CreateMap<
                     StatusData,
-                    Domain.Tournaments.Models.Matches.Status>()
+                    Domain.Championships.Models.Matches.Status>()
                 .ReverseMap();
         }
     }

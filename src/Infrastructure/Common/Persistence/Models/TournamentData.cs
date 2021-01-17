@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using Application.Common.Mapping;
-    using Domain.Tournaments.Models.Tournaments;
+    using Domain.Championships.Models.Tournaments;
 
     internal class TournamentData : IMapFrom<Tournament>, IMapTo<Tournament>
     {
@@ -10,6 +10,6 @@
 
         public string Name { get; set; } = default!;
 
-        public ICollection<MatchData> Matches { get; } = new HashSet<MatchData>();
+        public ICollection<GroupData> Groups { get; } = new HashSet<GroupData>();
     }
 }

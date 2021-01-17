@@ -2,13 +2,13 @@
 {
     using System.Reflection;
     using Betting;
+    using Championships;
     using Domain.Teams.Models;
     using Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Models;
     using Teams;
-    using Tournaments;
 
     internal class BettingDbContext : IdentityDbContext<User>,
         IBettingDbContext,
@@ -31,6 +31,8 @@
         public DbSet<TeamData> Teams { get; set; } = default!;
 
         public DbSet<Player> Players { get; set; } = default!;
+
+        public DbSet<GroupData> Groups { get; set; } = default!;
 
         public DbSet<TournamentData> Tournaments { get; set; } = default!;
 

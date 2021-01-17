@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using Application.Common.Mapping;
-    using Application.Teams.Queries.All;
     using AutoMapper;
     using Domain.Teams.Models;
 
@@ -11,8 +10,8 @@
         IMapTo<Domain.Betting.Models.Matches.Team>,
         IMapFrom<Domain.Teams.Models.Team>,
         IMapTo<Domain.Teams.Models.Team>,
-        IMapFrom<Domain.Tournaments.Models.Matches.Team>,
-        IMapTo<Domain.Tournaments.Models.Matches.Team>
+        IMapFrom<Domain.Championships.Models.Matches.Team>,
+        IMapTo<Domain.Championships.Models.Matches.Team>
     {
         public int Id { get; set; }
 
@@ -37,7 +36,7 @@
             mapper
                 .CreateMap<
                     TeamData,
-                    Domain.Tournaments.Models.Matches.Team>()
+                    Domain.Championships.Models.Matches.Team>()
                 .ReverseMap();
         }
     }
