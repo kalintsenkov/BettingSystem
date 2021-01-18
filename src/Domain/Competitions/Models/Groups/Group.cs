@@ -7,6 +7,7 @@
     using Exceptions;
     using Matches;
     using Tournaments;
+
     using static Common.Models.ModelConstants.Common;
 
     public class Group : Entity<int>, IAggregateRoot

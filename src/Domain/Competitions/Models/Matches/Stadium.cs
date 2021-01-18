@@ -2,6 +2,7 @@
 {
     using Common.Models;
     using Exceptions;
+
     using static Common.Models.ModelConstants.Common;
 
     public class Stadium : Entity<int>

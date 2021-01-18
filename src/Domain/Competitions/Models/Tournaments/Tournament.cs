@@ -3,6 +3,7 @@
     using Common;
     using Common.Models;
     using Exceptions;
+
     using static Common.Models.ModelConstants.Common;
 
     public class Tournament : Entity<int>, IAggregateRoot

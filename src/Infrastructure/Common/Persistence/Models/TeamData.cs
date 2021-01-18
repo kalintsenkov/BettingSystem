@@ -17,6 +17,8 @@
 
         public string Name { get; set; } = default!;
 
+        public int Points { get; set; }
+
         public ICollection<Player> Players { get; } = new HashSet<Player>();
 
         public void Mapping(Profile mapper)

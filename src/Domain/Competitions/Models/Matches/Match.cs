@@ -134,6 +134,20 @@
 
             this.Status = Status.Finished;
 
+            if (this.Statistics.HomeScore > this.Statistics.AwayScore)
+            {
+                this.HomeTeam.GivePointsForWin();
+            }
+            else if (this.Statistics.HomeScore < this.Statistics.AwayScore)
+            {
+                this.AwayTeam.GivePointsForWin();
+            }
+            else if (this.Statistics.HomeScore == this.Statistics.AwayScore)
+            {
+                this.HomeTeam.GivePointFromDraw();
+                this.AwayTeam.GivePointFromDraw();
+            }
+
             return this;
         }
 
