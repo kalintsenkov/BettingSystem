@@ -8,8 +8,12 @@
     {
         DbSet<TournamentData> Tournaments { get; }
 
+        DbSet<GroupData> Groups { get; }
+
         DbSet<MatchData> Matches { get; }
 
-        DbSet<GroupData> Groups { get; }
+        DbSet<StadiumData> Stadiums { get; }
+
+        DbSet<TeamData> Teams { get; }
     }
 }

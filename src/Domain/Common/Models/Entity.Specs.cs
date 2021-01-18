@@ -1,7 +1,7 @@
 ﻿namespace BettingSystem.Domain.Common.Models
 {
-    using Betting.Models.Matches;
     using FluentAssertions;
+    using Teams.Models;
     using Xunit;
 
     public class EntitySpecs

@@ -10,10 +10,6 @@
 
         DbSet<MatchData> Matches { get; }
 
-        DbSet<StadiumData> Stadiums { get; }
-
         DbSet<GamblerData> Gamblers { get; }
-
-        DbSet<TeamData> Teams { get; }
     }
 }

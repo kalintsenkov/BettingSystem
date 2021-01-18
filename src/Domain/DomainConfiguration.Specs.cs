@@ -2,11 +2,11 @@
 {
     using System.Linq;
     using Betting.Factories.Bets;
-    using Betting.Factories.Gamblers;
-    using Betting.Factories.Matches;
     using Common;
+    using Competitions.Factories.Matches;
     using FluentAssertions;
     using Microsoft.Extensions.DependencyInjection;
+    using Teams.Factories;
     using Xunit;
 
     public class DomainConfigurationSpecs
@@ -26,7 +26,7 @@
                 .NotBeNull();
 
             services
-                .GetService<IGamblerFactory>()
+                .GetService<ITeamFactory>()
                 .Should()
                 .NotBeNull();
 

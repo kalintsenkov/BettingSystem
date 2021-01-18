@@ -4,7 +4,7 @@
     using System.Reflection;
     using Application.Betting.Bets;
     using Application.Betting.Gamblers;
-    using Application.Betting.Matches;
+    using Application.Competitions.Matches;
     using Application.Competitions.Tournaments;
     using Application.Teams;
     using AutoMapper;
