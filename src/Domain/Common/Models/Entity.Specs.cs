@@ -10,8 +10,8 @@
         public void EntitiesWithEqualIdsShouldBeEqual()
         {
             // Arrange
-            var first = new Team("First", 0).SetId(1);
-            var second = new Team("Second", 0).SetId(1);
+            var first = new Team("First", 0, 1).SetId(1);
+            var second = new Team("Second", 0, 1).SetId(1);
 
             // Act
             var result = first == second;
@@ -24,8 +24,8 @@
         public void EntitiesWithDifferentIdsShouldNotBeEqual()
         {
             // Arrange
-            var first = new Team("First", 0).SetId(1);
-            var second = new Team("Second", 0).SetId(2);
+            var first = new Team("First", 0, 1).SetId(1);
+            var second = new Team("Second", 0, 1).SetId(2);
 
             // Act
             var result = first == second;

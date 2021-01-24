@@ -13,7 +13,7 @@
     internal class BettingDbContext : IdentityDbContext<User>,
         IBettingDbContext,
         ITeamsDbContext,
-        ITournamentsDbContext
+        ICompetitionsDbContext
     {
         public BettingDbContext(DbContextOptions<BettingDbContext> options)
             : base(options)
@@ -32,9 +32,7 @@
 
         public DbSet<Player> Players { get; set; } = default!;
 
-        public DbSet<GroupData> Groups { get; set; } = default!;
-
-        public DbSet<TournamentData> Tournaments { get; set; } = default!;
+        public DbSet<LeagueData> Leagues { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

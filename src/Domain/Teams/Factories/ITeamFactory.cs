@@ -7,6 +7,6 @@
     {
         ITeamFactory WithName(string name);
 
-        Team Build(string name);
+        ITeamFactory InLeague(int leagueId);
     }
 }

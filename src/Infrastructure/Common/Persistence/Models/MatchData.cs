@@ -27,10 +27,6 @@
 
         public StadiumData Stadium { get; set; } = default!;
 
-        public int? GroupId { get; set; }
-
-        public GroupData Group { get; set; } = default!;
-
         public StatisticsData Statistics { get; set; } = default!;
 
         public StatusData Status { get; set; } = default!;

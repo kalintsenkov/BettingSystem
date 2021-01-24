@@ -19,6 +19,10 @@
 
         public int Points { get; set; }
 
+        public int LeagueId { get; set; }
+
+        public LeagueData League { get; set; } = default!;
+
         public ICollection<Player> Players { get; } = new HashSet<Player>();
 
         public void Mapping(Profile mapper)

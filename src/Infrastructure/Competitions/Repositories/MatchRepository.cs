@@ -16,11 +16,11 @@
     using Domain.Competitions.Repositories;
     using Microsoft.EntityFrameworkCore;
 
-    internal class MatchRepository : DataRepository<ITournamentsDbContext, Match, MatchData>,
+    internal class MatchRepository : DataRepository<ICompetitionsDbContext, Match, MatchData>,
         IMatchDomainRepository,
         IMatchQueryRepository
     {
-        public MatchRepository(ITournamentsDbContext db, IMapper mapper)
+        public MatchRepository(ICompetitionsDbContext db, IMapper mapper)
             : base(db, mapper)
         {
         }

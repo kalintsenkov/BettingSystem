@@ -7,6 +7,7 @@
         private const int DefaultTeamPoints = 0;
 
         private string teamName = default!;
+        private int teamLeagueId = default!;
 
         public ITeamFactory WithName(string name)
         {
@@ -14,8 +15,15 @@
             return this;
         }
 
-        public Team Build(string name) => this.WithName(name).Build();
+        public ITeamFactory InLeague(int leagueId)
+        {
+            this.teamLeagueId = leagueId;
+            return this;
+        }
 
-        public Team Build() => new Team(this.teamName, DefaultTeamPoints);
+        public Team Build() => new Team(
+            this.teamName,
+            this.teamLeagueId,
+            DefaultTeamPoints);
     }
 }

@@ -8,6 +8,8 @@
     {
         public DateTime StartDate { get; set; }
 
+        public int LeagueId { get; set; }
+
         public string HomeTeam { get; set; } = default!;
 
         public string AwayTeam { get; set; } = default!;

@@ -53,7 +53,7 @@
             if (!this.isHomeTeamSet || !this.isAwayTeamSet || !this.isStadiumSet)
             {
                 throw new InvalidMatchException(
-                    "Home team, away team and stadium must have a value.");
+                    "Home team, away team, stadium and league must have a value.");
             }
 
             return new Match(

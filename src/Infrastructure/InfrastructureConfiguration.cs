@@ -46,7 +46,7 @@
                     .GetService<BettingDbContext>()!)
                 .AddScoped<ITeamsDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
-                .AddScoped<ITournamentsDbContext>(provider => provider
+                .AddScoped<ICompetitionsDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
                 .AddTransient<IInitializer, BettingDbInitializer>();
 

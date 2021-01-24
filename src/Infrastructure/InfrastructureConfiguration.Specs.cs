@@ -4,8 +4,8 @@
     using System.Reflection;
     using Application.Betting.Bets;
     using Application.Betting.Gamblers;
+    using Application.Competitions.Leagues;
     using Application.Competitions.Matches;
-    using Application.Competitions.Tournaments;
     using Application.Teams;
     using AutoMapper;
     using Betting;
@@ -29,7 +29,7 @@
                     .GetService<BettingDbContext>()!)
                 .AddScoped<ITeamsDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
-                .AddScoped<ITournamentsDbContext>(provider => provider
+                .AddScoped<ICompetitionsDbContext>(provider => provider
                     .GetService<BettingDbContext>()!);
 
             var services = serviceCollection
@@ -58,7 +58,7 @@
                 .NotBeNull();
 
             services
-                .GetService<ITournamentQueryRepository>()
+                .GetService<ILeagueQueryRepository>()
                 .Should()
                 .NotBeNull();
         }

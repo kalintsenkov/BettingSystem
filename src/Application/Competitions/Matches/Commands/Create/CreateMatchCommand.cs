@@ -14,13 +14,16 @@
         {
             private readonly IMatchFactory matchFactory;
             private readonly IMatchDomainRepository matchRepository;
+            private readonly ILeagueDomainRepository leagueRepository;
 
             public CreateMatchCommandHandler(
                 IMatchFactory matchFactory,
-                IMatchDomainRepository matchRepository)
+                IMatchDomainRepository matchRepository,
+                ILeagueDomainRepository leagueRepository)
             {
                 this.matchFactory = matchFactory;
                 this.matchRepository = matchRepository;
+                this.leagueRepository = leagueRepository;
             }
 
             public async Task<CreateMatchResponseModel> Handle(
