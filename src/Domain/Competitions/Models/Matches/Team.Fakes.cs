@@ -4,6 +4,7 @@
     using Bogus;
     using Common.Models;
     using FakeItEasy;
+    using Leagues;
 
     using static Common.Models.ModelConstants.Common;
 
@@ -19,6 +20,7 @@
                         f.Random.String2(
                             MinNameLength,
                             MaxNameLength),
+                        A.Dummy<League>(),
                         Zero))
                     .Generate()
                     .SetId(1);

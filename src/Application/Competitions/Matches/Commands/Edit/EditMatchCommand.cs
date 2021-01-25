@@ -28,11 +28,11 @@
                     request.Id,
                     cancellationToken);
 
-                var homeTeam = await this.matchRepository.GetHomeTeam(
+                var homeTeam = await this.matchRepository.GetTeam(
                     request.HomeTeam,
                     cancellationToken);
 
-                var awayTeam = await this.matchRepository.GetAwayTeam(
+                var awayTeam = await this.matchRepository.GetTeam(
                     request.AwayTeam,
                     cancellationToken);
 

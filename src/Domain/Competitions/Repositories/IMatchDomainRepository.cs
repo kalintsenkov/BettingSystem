@@ -15,12 +15,8 @@
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<Team> GetHomeTeam(
-            string homeTeam,
-            CancellationToken cancellationToken = default);
-
-        Task<Team> GetAwayTeam(
-            string awayTeam,
+        Task<Team> GetTeam(
+            string team,
             CancellationToken cancellationToken = default);
 
         Task<Stadium> GetStadium(

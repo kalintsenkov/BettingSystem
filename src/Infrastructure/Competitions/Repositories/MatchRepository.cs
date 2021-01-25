@@ -72,19 +72,12 @@
                     .Where(m => m.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<Team> GetHomeTeam(
-            string homeTeam,
+        public async Task<Team> GetTeam(
+            string team,
             CancellationToken cancellationToken = default)
             => await this
                 .AllTeams()
-                .FirstOrDefaultAsync(t => t.Name == homeTeam, cancellationToken);
-
-        public async Task<Team> GetAwayTeam(
-            string awayTeam,
-            CancellationToken cancellationToken = default)
-            => await this
-                .AllTeams()
-                .FirstOrDefaultAsync(t => t.Name == awayTeam, cancellationToken);
+                .FirstOrDefaultAsync(t => t.Name == team, cancellationToken);
 
         public async Task<Stadium> GetStadium(
             string stadium,

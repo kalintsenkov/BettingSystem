@@ -14,23 +14,20 @@
         {
             private readonly IMatchFactory matchFactory;
             private readonly IMatchDomainRepository matchRepository;
-            private readonly ILeagueDomainRepository leagueRepository;
 
             public CreateMatchCommandHandler(
                 IMatchFactory matchFactory,
-                IMatchDomainRepository matchRepository,
-                ILeagueDomainRepository leagueRepository)
+                IMatchDomainRepository matchRepository)
             {
                 this.matchFactory = matchFactory;
                 this.matchRepository = matchRepository;
-                this.leagueRepository = leagueRepository;
             }
 
             public async Task<CreateMatchResponseModel> Handle(
                 CreateMatchCommand request,
                 CancellationToken cancellationToken)
             {
-                var homeTeam = await this.matchRepository.GetHomeTeam(
+                var homeTeam = await this.matchRepository.GetTeam(
                     request.HomeTeam,
                     cancellationToken);
 
@@ -39,7 +36,7 @@
                     throw new NotFoundException(nameof(homeTeam), request.HomeTeam);
                 }
 
-                var awayTeam = await this.matchRepository.GetAwayTeam(
+                var awayTeam = await this.matchRepository.GetTeam(
                     request.AwayTeam,
                     cancellationToken);
 

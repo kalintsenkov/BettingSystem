@@ -12,8 +12,6 @@
             return this;
         }
 
-        public League Build(string name) => this.WithName(this.leagueName).Build();
-
         public League Build() => new League(this.leagueName);
     }
 }

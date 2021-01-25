@@ -2,23 +2,38 @@
 {
     using Common.Models;
     using Exceptions;
+    using Leagues;
 
     using static Common.Models.ModelConstants.Common;
     using static ModelConstants.Team;
 
     public class Team : Entity<int>
     {
-        internal Team(string name, int points)
+        internal Team(
+            string name,
+            League league,
+            int points)
         {
             this.Validate(name);
 
             this.Name = name;
+            this.League = league;
             this.Points = points;
+        }
+
+        private Team(string name, int points)
+        {
+            this.Name = name;
+            this.Points = points;
+
+            this.League = default!;
         }
 
         public string Name { get; private set; }
 
         public int Points { get; private set; }
+
+        public League League { get; private set; }
 
         public void GivePointsForWin() => this.Points += WinPoints;
 
