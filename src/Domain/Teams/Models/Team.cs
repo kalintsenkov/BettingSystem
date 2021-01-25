@@ -14,23 +14,23 @@
 
         internal Team(
             string name,
-            int leagueId,
-            int points)
+            int points,
+            int leagueId)
         {
             this.Validate(name);
 
             this.Name = name;
-            this.LeagueId = leagueId;
             this.Points = points;
+            this.LeagueId = leagueId;
 
             this.players = new HashSet<Player>();
         }
 
         public string Name { get; private set; }
 
-        public int LeagueId { get; private set; }
-
         public int Points { get; private set; }
+
+        public int LeagueId { get; private set; }
 
         public IReadOnlyCollection<Player> Players => this.players.ToList();
 

@@ -11,14 +11,14 @@
     {
         internal Team(
             string name,
-            League league,
-            int points)
+            int points,
+            League league)
         {
             this.Validate(name);
 
             this.Name = name;
-            this.League = league;
             this.Points = points;
+            this.League = league;
         }
 
         private Team(string name, int points)

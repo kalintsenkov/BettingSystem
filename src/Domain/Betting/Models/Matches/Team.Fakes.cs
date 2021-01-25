@@ -19,7 +19,8 @@
                         f.Random.String2(
                             MinNameLength,
                             MaxNameLength),
-                        Zero))
+                        f.Random.Number(),
+                        f.Random.Number()))
                     .Generate()
                     .SetId(1);
 

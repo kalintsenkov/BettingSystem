@@ -23,7 +23,7 @@
 
         public Team Build() => new Team(
             this.teamName,
-            this.teamLeagueId,
-            DefaultTeamPoints);
+            DefaultTeamPoints,
+            this.teamLeagueId);
     }
 }

@@ -20,8 +20,8 @@
                         f.Random.String2(
                             MinNameLength,
                             MaxNameLength),
-                        A.Dummy<League>(),
-                        Zero))
+                        f.Random.Number(),
+                        A.Dummy<League>()))
                     .Generate()
                     .SetId(1);
 
