@@ -12,7 +12,10 @@
 
         IMatchFactory WithAwayTeam(Team team);
 
-        IMatchFactory WithStadium(string name, string imageUrl);
+        IMatchFactory WithStadium(
+            string name,
+            byte[] originalContent,
+            byte[] thumbnailContent);
 
         IMatchFactory WithStadium(Stadium stadium);
     }

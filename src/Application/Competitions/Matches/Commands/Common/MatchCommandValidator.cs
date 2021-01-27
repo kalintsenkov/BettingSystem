@@ -29,9 +29,7 @@
                 .MaximumLength(MaxNameLength)
                 .NotEmpty();
 
-            this.RuleFor(m => m.StadiumImageUrl)
-                .Must(url => Uri.IsWellFormedUriString(url, UriKind.Absolute))
-                .WithMessage("'{PropertyName}' must be a valid url.")
+            this.RuleFor(m => m.StadiumImage)
                 .NotEmpty();
         }
     }

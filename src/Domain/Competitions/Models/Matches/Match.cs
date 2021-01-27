@@ -73,16 +73,6 @@
             return this;
         }
 
-        public Match UpdateStadium(string name, string imageUrl)
-        {
-            if (this.Stadium.Name != name)
-            {
-                this.Stadium = new Stadium(name, imageUrl);
-            }
-
-            return this;
-        }
-
         public Match UpdateStadium(Stadium stadium)
         {
             this.Stadium = stadium;

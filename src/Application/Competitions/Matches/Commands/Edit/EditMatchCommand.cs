@@ -40,14 +40,11 @@
                     request.StadiumName,
                     cancellationToken);
 
-                match = stadium == null
-                    ? match.UpdateStadium(request.StadiumName, request.StadiumImageUrl)
-                    : match.UpdateStadium(stadium);
-
                 match
                     .UpdateStartDate(request.StartDate)
                     .UpdateHomeTeam(homeTeam)
                     .UpdateAwayTeam(awayTeam)
+                    .UpdateStadium(stadium)
                     .UpdateStatistics(request.HomeTeamScore, request.AwayTeamScore);
 
                 await this.matchRepository.Save(match, cancellationToken);

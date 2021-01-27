@@ -7,29 +7,30 @@
 
     public class Stadium : Entity<int>
     {
-        internal Stadium(string name, string imageUrl)
+        internal Stadium(string name, Image image)
         {
-            this.Validate(name, imageUrl);
+            this.Validate(name);
 
             this.Name = name;
-            this.ImageUrl = imageUrl;
+            this.Image = image;
+        }
+
+        private Stadium(string name)
+        {
+            this.Name = name;
+
+            this.Image = default!;
         }
 
         public string Name { get; private set; }
 
-        public string ImageUrl { get; private set; }
+        public Image Image { get; private set; }
 
-        private void Validate(string name, string image)
-        {
-            Guard.ForStringLength<InvalidMatchException>(
+        private void Validate(string name)
+            => Guard.ForStringLength<InvalidMatchException>(
                 name,
                 MinNameLength,
                 MaxNameLength,
                 nameof(this.Name));
-
-            Guard.ForValidUrl<InvalidMatchException>(
-                image,
-                nameof(this.ImageUrl));
-        }
     }
 }

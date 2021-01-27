@@ -38,8 +38,16 @@
             return this;
         }
 
-        public IMatchFactory WithStadium(string name, string imageUrl)
-            => this.WithStadium(new Stadium(name, imageUrl));
+        public IMatchFactory WithStadium(
+            string name,
+            byte[] originalContent,
+            byte[] thumbnailContent)
+        {
+            var image = new Image(originalContent, thumbnailContent);
+            var stadium = new Stadium(name, image);
+
+            return this.WithStadium(stadium);
+        }
 
         public IMatchFactory WithStadium(Stadium stadium)
         {

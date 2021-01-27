@@ -19,9 +19,13 @@
                 .IsRequired();
 
             builder
-                .Property(s => s.ImageUrl)
-                .HasMaxLength(MaxUrlLength)
-                .IsRequired();
+                .OwnsOne(s => s.Image, i =>
+                {
+                    i.WithOwner();
+
+                    i.Property(img => img.OriginalContent).IsRequired();
+                    i.Property(img => img.ThumbnailContent).IsRequired();
+                });
         }
     }
 }

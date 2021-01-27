@@ -9,6 +9,7 @@
     using Betting;
     using Common;
     using Common.Persistence;
+    using Common.Services;
     using Competitions;
     using Domain.Common;
     using Identity;
@@ -103,6 +104,7 @@
 
             services.AddTransient<IIdentity, IdentityService>();
             services.AddTransient<IJwtGenerator, JwtGeneratorService>();
+            services.AddTransient<IImageService, ImageService>();
 
             return services;
         }

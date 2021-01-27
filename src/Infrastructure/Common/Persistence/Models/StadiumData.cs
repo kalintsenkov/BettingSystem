@@ -14,7 +14,7 @@
 
         public string Name { get; set; } = default!;
 
-        public string ImageUrl { get; set; } = default!;
+        public ImageData Image { get; set; } = default!;
 
         public ICollection<MatchData> Matches { get; } = new HashSet<MatchData>();
 

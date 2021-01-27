@@ -43,7 +43,7 @@
 
         [HttpPost]
         public async Task<ActionResult<CreateMatchResponseModel>> Create(
-            CreateMatchCommand command)
+            [FromForm] CreateMatchCommand command)
             => await this.Send(command);
 
         [HttpPut]

@@ -2,6 +2,8 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Application.Common;
+    using Application.Common.Contracts;
     using Application.Common.Exceptions;
     using Common;
     using Domain.Competitions.Factories.Matches;
@@ -14,13 +16,16 @@
         {
             private readonly IMatchFactory matchFactory;
             private readonly IMatchDomainRepository matchRepository;
+            private readonly IImageService imageService;
 
             public CreateMatchCommandHandler(
                 IMatchFactory matchFactory,
-                IMatchDomainRepository matchRepository)
+                IMatchDomainRepository matchRepository,
+                IImageService imageService)
             {
                 this.matchFactory = matchFactory;
                 this.matchRepository = matchRepository;
+                this.imageService = imageService;
             }
 
             public async Task<CreateMatchResponseModel> Handle(
@@ -49,12 +54,22 @@
                     request.StadiumName,
                     cancellationToken);
 
-                var factory = stadium == null
-                    ? this.matchFactory.WithStadium(request.StadiumName, request.StadiumImageUrl)
-                    : this.matchFactory.WithStadium(stadium);
+                var factory = this.matchFactory.WithStartDate(request.StartDate);
+
+                if (stadium == null)
+                {
+                    var (original, thumbnail) = await this.imageService.Process(
+                        new ImageCommand(
+                            request.StadiumImage.OpenReadStream()));
+
+                    factory = factory.WithStadium(request.StadiumName, original, thumbnail);
+                }
+                else
+                {
+                    factory = factory.WithStadium(stadium);
+                }
 
                 var match = factory
-                    .WithStartDate(request.StartDate)
                     .WithHomeTeam(homeTeam)
                     .WithAwayTeam(awayTeam)
                     .Build();

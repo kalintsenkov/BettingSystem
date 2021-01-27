@@ -22,18 +22,17 @@
                 => new Faker<Stadium>()
                     .CustomInstantiator(f => new Stadium(
                         $"Stadium {id}",
-                        f.Image.PicsumUrl()))
+                        A.Dummy<Image>()))
                     .Generate()
                     .SetId(id);
 
             public static Stadium GetStadium(
                 string name,
-                string imageUrl,
                 int id = 1)
                 => new Faker<Stadium>()
                     .CustomInstantiator(f => new Stadium(
                         name,
-                        imageUrl))
+                        A.Dummy<Image>()))
                     .Generate()
                     .SetId(id);
         }
