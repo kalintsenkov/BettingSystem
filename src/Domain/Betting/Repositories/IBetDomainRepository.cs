@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Common;
     using Models.Bets;
+    using Models.Matches;
 
     public interface IBetDomainRepository : IDomainRepository<Bet>
     {
@@ -13,6 +14,10 @@
 
         Task<Bet> Find(
             int id,
+            CancellationToken cancellationToken = default);
+
+        Task<Match> GetMatch(
+            int matchId,
             CancellationToken cancellationToken = default);
     }
 }

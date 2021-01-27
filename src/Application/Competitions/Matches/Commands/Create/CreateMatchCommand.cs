@@ -2,9 +2,9 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using Application.Common;
     using Application.Common.Contracts;
     using Application.Common.Exceptions;
+    using Application.Common.Images;
     using Common;
     using Domain.Competitions.Factories.Matches;
     using Domain.Competitions.Repositories;
@@ -58,11 +58,14 @@
 
                 if (stadium == null)
                 {
-                    var (original, thumbnail) = await this.imageService.Process(
-                        new ImageCommand(
+                    var image = await this.imageService.Process(
+                        new ImageRequestModel(
                             request.StadiumImage.OpenReadStream()));
 
-                    factory = factory.WithStadium(request.StadiumName, original, thumbnail);
+                    factory = factory.WithStadium(
+                        request.StadiumName,
+                        image.Original,
+                        image.Thumbnail);
                 }
                 else
                 {

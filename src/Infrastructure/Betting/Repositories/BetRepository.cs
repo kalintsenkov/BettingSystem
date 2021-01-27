@@ -11,6 +11,7 @@
     using Common.Persistence.Repositories;
     using Domain.Betting.Models.Bets;
     using Domain.Betting.Models.Gamblers;
+    using Domain.Betting.Models.Matches;
     using Domain.Betting.Repositories;
     using Domain.Common;
     using Microsoft.EntityFrameworkCore;
@@ -51,6 +52,13 @@
                     .Include(b => b.Match))
                 .FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
 
+        public async Task<Match> GetMatch(
+            int matchId,
+            CancellationToken cancellationToken = default)
+            => await this
+                .AllMatches()
+                .FirstOrDefaultAsync(m => m.Id == matchId, cancellationToken);
+
         public async Task<BetDetailsResponseModel> GetDetails(
             int id,
             CancellationToken cancellationToken)
@@ -83,6 +91,13 @@
                 .ProjectTo<Gambler>(this
                     .Data
                     .Gamblers
+                    .AsNoTracking());
+
+        private IQueryable<Match> AllMatches()
+            => this.Mapper
+                .ProjectTo<Match>(this
+                    .Data
+                    .Matches
                     .AsNoTracking());
     }
 }

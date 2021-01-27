@@ -2,8 +2,8 @@
 {
     using System.IO;
     using System.Threading.Tasks;
-    using Application.Common;
     using Application.Common.Contracts;
+    using Application.Common.Images;
     using SixLabors.ImageSharp;
     using SixLabors.ImageSharp.Processing;
 
@@ -11,14 +11,14 @@
     {
         private const int ThumbnailWidth = 300;
 
-        public async Task<(byte[] Original, byte[] Thumbnail)> Process(ImageCommand image)
+        public async Task<ImageResponseModel> Process(ImageRequestModel image)
         {
             using var imageResult = await Image.LoadAsync(image.Content);
 
             var original = await this.SaveImage(imageResult, imageResult.Width);
             var thumbnail = await this.SaveImage(imageResult, ThumbnailWidth);
 
-            return (original, thumbnail);
+            return new ImageResponseModel(original, thumbnail);
         }
 
         private async Task<byte[]> SaveImage(Image image, int resizeWidth)
