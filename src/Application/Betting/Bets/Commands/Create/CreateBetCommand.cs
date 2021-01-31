@@ -63,7 +63,7 @@
 
                 gambler.AddBet(bet);
 
-                await this.gamblerRepository.Save(gambler, cancellationToken);
+                bet = await this.betRepository.Save(bet, cancellationToken);
 
                 return new CreateBetResponseModel(bet.Id);
             }

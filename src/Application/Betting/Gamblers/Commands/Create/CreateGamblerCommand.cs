@@ -35,7 +35,7 @@
                     .FromUser(this.currentUser.UserId)
                     .Build();
 
-                await this.gamblerRepository.Save(gambler, cancellationToken);
+                gambler = await this.gamblerRepository.Save(gambler, cancellationToken);
 
                 return new CreateGamblerResponseModel(gambler.Id);
             }

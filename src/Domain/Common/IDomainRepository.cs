@@ -3,10 +3,10 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    public interface IDomainRepository<in TEntity>
+    public interface IDomainRepository<TEntity>
         where TEntity : IAggregateRoot
     {
-        Task Save(
+        Task<TEntity> Save(
             TEntity entity,
             CancellationToken cancellationToken = default);
     }

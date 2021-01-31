@@ -30,7 +30,7 @@
                     .WithName(request.Name)
                     .Build();
 
-                await this.leagueRepository.Save(league, cancellationToken);
+                league = await this.leagueRepository.Save(league, cancellationToken);
 
                 return new CreateLeagueResponseModel(league.Id);
             }

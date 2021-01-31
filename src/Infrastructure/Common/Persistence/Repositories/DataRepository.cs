@@ -22,13 +22,15 @@
         protected IQueryable<TEntity> AllAsNoTracking()
             => this.All().AsNoTracking();
 
-        public async Task Save(
+        public async Task<TEntity> Save(
             TEntity entity,
             CancellationToken cancellationToken = default)
         {
             this.Data.Update(entity);
 
             await this.Data.SaveChangesAsync(cancellationToken);
+
+            return entity;
         }
     }
 
@@ -57,7 +59,7 @@
                 .ProjectTo<TEntity>(this
                     .AllAsDataModels());
 
-        public async Task Save(
+        public async Task<TEntity> Save(
             TEntity entity,
             CancellationToken cancellationToken = default)
         {
@@ -66,6 +68,8 @@
             this.Data.Update(entityData);
 
             await this.Data.SaveChangesAsync(cancellationToken);
+
+            return this.Mapper.Map<TEntity>(entityData);
         }
     }
 }

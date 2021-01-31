@@ -77,7 +77,7 @@
                     .WithAwayTeam(awayTeam)
                     .Build();
 
-                await this.matchRepository.Save(match, cancellationToken);
+                match = await this.matchRepository.Save(match, cancellationToken);
 
                 return new CreateMatchResponseModel(match.Id);
             }

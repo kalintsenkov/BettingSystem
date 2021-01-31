@@ -33,7 +33,7 @@
                     .InLeague(request.LeagueId)
                     .Build();
 
-                await this.teamRepository.Save(team, cancellationToken);
+                team = await this.teamRepository.Save(team, cancellationToken);
 
                 return new CreateTeamResponseModel(team.Id);
             }
