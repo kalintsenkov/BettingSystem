@@ -5,13 +5,14 @@
     using Application.Betting.Bets;
     using Application.Betting.Gamblers;
     using Application.Competitions.Leagues;
-    using Application.Competitions.Matches;
+    using Application.Matches;
     using Application.Teams;
     using AutoMapper;
     using Betting;
     using Common.Persistence;
     using Competitions;
     using FluentAssertions;
+    using Matches;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using Teams;
@@ -26,6 +27,8 @@
                 .AddDbContext<BettingDbContext>(options => options
                     .UseInMemoryDatabase(Guid.NewGuid().ToString()))
                 .AddScoped<IBettingDbContext>(provider => provider
+                    .GetService<BettingDbContext>()!)
+                .AddScoped<IMatchesDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
                 .AddScoped<ITeamsDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)

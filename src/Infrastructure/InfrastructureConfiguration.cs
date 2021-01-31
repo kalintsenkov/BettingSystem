@@ -13,6 +13,7 @@
     using Competitions;
     using Domain.Common;
     using Identity;
+    using Matches;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,8 @@
                         sqlServer => sqlServer.MigrationsAssembly(
                             typeof(BettingDbContext).Assembly.FullName)))
                 .AddScoped<IBettingDbContext>(provider => provider
+                    .GetService<BettingDbContext>()!)
+                .AddScoped<IMatchesDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
                 .AddScoped<ITeamsDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)

@@ -1,7 +1,7 @@
 ﻿namespace BettingSystem.Infrastructure.Common.Persistence.Models
 {
     using Application.Common.Mapping;
-    using Domain.Competitions.Models.Matches;
+    using Domain.Matches.Models;
 
     internal class ImageData : IMapFrom<Image>, IMapTo<Image>
     {

@@ -8,10 +8,6 @@
     {
         DbSet<LeagueData> Leagues { get; }
 
-        DbSet<MatchData> Matches { get; }
-
-        DbSet<StadiumData> Stadiums { get; }
-
         DbSet<TeamData> Teams { get; }
     }
 }

@@ -3,8 +3,8 @@
     using System.Linq;
     using Betting.Factories.Bets;
     using Common;
-    using Competitions.Factories.Matches;
     using FluentAssertions;
+    using Matches.Factories;
     using Microsoft.Extensions.DependencyInjection;
     using Teams.Factories;
     using Xunit;

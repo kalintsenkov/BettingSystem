@@ -5,6 +5,7 @@
     using Competitions;
     using Domain.Teams.Models;
     using Identity;
+    using Matches;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Models;
@@ -13,6 +14,7 @@
     internal class BettingDbContext : IdentityDbContext<User>,
         IBettingDbContext,
         ITeamsDbContext,
+        IMatchesDbContext,
         ICompetitionsDbContext
     {
         public BettingDbContext(DbContextOptions<BettingDbContext> options)
