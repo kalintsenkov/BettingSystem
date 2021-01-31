@@ -5,37 +5,25 @@
     using Common.Models;
     using FakeItEasy;
 
+    using static Common.Models.ModelConstants.Common;
+
     public class StadiumFakes
     {
         public class StadiumDummyFactory : IDummyFactory
         {
             public bool CanCreate(Type type) => type == typeof(Stadium);
 
-            public object? Create(Type type) => Data.GetStadium();
+            public object? Create(Type type)
+                => new Faker<Stadium>()
+                    .CustomInstantiator(f => new Stadium(
+                        f.Random.String2(
+                            MinNameLength,
+                            MaxNameLength),
+                        A.Dummy<Image>()))
+                    .Generate()
+                    .SetId(1);
 
             public Priority Priority => Priority.Default;
-        }
-
-        public static class Data
-        {
-            public static Stadium GetStadium(int id = 1)
-                => new Faker<Stadium>()
-                    .CustomInstantiator(f => new Stadium(
-                        $"Stadium {id}",
-                        f.Image.PicsumUrl()))
-                    .Generate()
-                    .SetId(id);
-
-            public static Stadium GetStadium(
-                string name,
-                string imageUrl,
-                int id = 1)
-                => new Faker<Stadium>()
-                    .CustomInstantiator(f => new Stadium(
-                        name,
-                        imageUrl))
-                    .Generate()
-                    .SetId(id);
         }
     }
 }

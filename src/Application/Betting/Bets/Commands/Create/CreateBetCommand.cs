@@ -2,15 +2,17 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Common;
     using Common.Contracts;
     using Common.Exceptions;
     using Domain.Betting.Factories.Bets;
     using Domain.Betting.Models.Bets;
+    using Domain.Betting.Models.Matches;
     using Domain.Betting.Repositories;
     using Domain.Common.Models;
     using MediatR;
 
-    public class CreateBetCommand : IRequest<CreateBetResponseModel>
+    public class CreateBetCommand : IRequest<Result<CreateBetResponseModel>>
     {
         public int MatchId { get; set; }
 
@@ -18,7 +20,7 @@
 
         public int Prediction { get; set; }
 
-        public class CreateBetCommandHandler : IRequestHandler<CreateBetCommand, CreateBetResponseModel>
+        public class CreateBetCommandHandler : IRequestHandler<CreateBetCommand, Result<CreateBetResponseModel>>
         {
             private readonly ICurrentUser currentUser;
             private readonly IBetFactory betFactory;
@@ -37,7 +39,7 @@
                 this.gamblerRepository = gamblerRepository;
             }
 
-            public async Task<CreateBetResponseModel> Handle(
+            public async Task<Result<CreateBetResponseModel>> Handle(
                 CreateBetCommand request,
                 CancellationToken cancellationToken)
             {
@@ -54,6 +56,12 @@
                     throw new NotFoundException(nameof(match), request.MatchId);
                 }
 
+                if (match.Status == Status.Finished ||
+                    match.Status == Status.Cancelled)
+                {
+                    return $"You cannot make bets on {match.Status} match.";
+                }
+
                 var bet = this.betFactory
                     .WithMatch(match)
                     .WithAmount(request.Amount)
@@ -63,7 +71,7 @@
 
                 gambler.AddBet(bet);
 
-                bet = await this.betRepository.Save(bet, cancellationToken);
+                await this.gamblerRepository.Save(gambler, cancellationToken);
 
                 return new CreateBetResponseModel(bet.Id);
             }

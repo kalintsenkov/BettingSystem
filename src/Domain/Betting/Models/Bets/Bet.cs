@@ -15,7 +15,7 @@
             Prediction prediction,
             bool isProfitable)
         {
-            this.Validate(match, amount);
+            this.Validate(amount);
 
             this.Match = match;
             this.Amount = amount;
@@ -49,7 +49,7 @@
 
         public Bet UpdateAmount(decimal amount)
         {
-            this.ValidateAmount(amount);
+            this.Validate(amount);
 
             this.Amount = amount;
 
@@ -83,25 +83,6 @@
             return this;
         }
 
-        private void Validate(Match match, decimal amount)
-        {
-            this.ValidateMatch(match);
-            this.ValidateAmount(amount);
-        }
-
-        private void ValidateMatch(Match match)
-        {
-            if (match.Status == Status.Finished)
-            {
-                throw new InvalidBetException("You cannot make bets on finished match.");
-            }
-
-            if (match.Status == Status.Cancelled)
-            {
-                throw new InvalidBetException("You cannot make bets on cancelled match.");
-            }
-        }
-
         private void ValidateIfMatchIsFinished(Match match)
         {
             if (match.Status != Status.Finished)
@@ -110,7 +91,7 @@
             }
         }
 
-        private void ValidateAmount(decimal amount)
+        private void Validate(decimal amount)
             => Guard.AgainstOutOfRange<InvalidBetException>(
                 amount,
                 MinAmountValue,

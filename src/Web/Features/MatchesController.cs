@@ -49,7 +49,7 @@
         [HttpPut]
         [Route(Id)]
         public async Task<ActionResult> Edit(
-            int id, EditMatchCommand command)
+            int id, [FromForm] EditMatchCommand command)
             => await this.Send(command.SetId(id));
 
         [HttpPut]
