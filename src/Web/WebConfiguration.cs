@@ -5,6 +5,7 @@
     using FluentValidation.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
+    using ModelBinders;
     using Services;
 
     public static class WebConfiguration
@@ -14,15 +15,16 @@
         {
             services
                 .AddScoped<ICurrentUser, CurrentUserService>()
-                .AddControllers()
+                .AddControllers(options => options
+                    .ModelBinderProviders.Insert(
+                        0, new ImageFormFileModelBinderProvider()))
                 .AddFluentValidation(validation => validation
                     .RegisterValidatorsFromAssemblyContaining<Result>())
                 .AddNewtonsoftJson();
 
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
+            services
+                .Configure<ApiBehaviorOptions>(options => options
+                    .SuppressModelStateInvalidFilter = true);
 
             return services;
         }

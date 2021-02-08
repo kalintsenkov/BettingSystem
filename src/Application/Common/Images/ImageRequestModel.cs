@@ -4,7 +4,7 @@
 
     public class ImageRequestModel
     {
-        internal ImageRequestModel(Stream content) => this.Content = content;
+        public ImageRequestModel(Stream content) => this.Content = content;
 
         public Stream Content { get; }
     }

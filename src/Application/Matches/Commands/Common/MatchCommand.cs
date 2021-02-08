@@ -2,7 +2,7 @@
 {
     using System;
     using Application.Common;
-    using Microsoft.AspNetCore.Http;
+    using Application.Common.Images;
 
     public abstract class MatchCommand<TCommand> : EntityCommand<int>
         where TCommand : EntityCommand<int>
@@ -15,6 +15,6 @@
 
         public string StadiumName { get; set; } = default!;
 
-        public IFormFile StadiumImage { get; set; } = default!;
+        public ImageRequestModel StadiumImage { get; set; } = default!;
     }
 }

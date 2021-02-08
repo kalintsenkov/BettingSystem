@@ -58,9 +58,7 @@
 
                 if (stadium == null)
                 {
-                    var image = await this.imageService.Process(
-                        new ImageRequestModel(
-                            request.StadiumImage.OpenReadStream()));
+                    var image = await this.imageService.Process(request.StadiumImage);
 
                     factory = factory.WithStadium(
                         request.StadiumName,
