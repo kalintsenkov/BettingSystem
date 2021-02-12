@@ -46,5 +46,47 @@
                     .AllAsDataModels()
                     .Where(t => t.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
+
+        public async Task GiveTeamPoints(
+            int homeTeamId,
+            int awayTeamId,
+            int homeScore,
+            int awayScore,
+            CancellationToken cancellationToken = default)
+        {
+            var homeTeam = await this.GetTeam(
+                homeTeamId,
+                cancellationToken);
+
+            var awayTeam = await this.GetTeam(
+                awayTeamId,
+                cancellationToken);
+
+            if (homeScore > awayScore)
+            {
+                homeTeam.GivePointsForWin();
+            }
+            else if (homeScore < awayScore)
+            {
+                awayTeam.GivePointsForWin();
+            }
+            else if (homeScore == awayScore)
+            {
+                homeTeam.GivePointFromDraw();
+                awayTeam.GivePointFromDraw();
+            }
+
+            await this.Save(homeTeam.League, cancellationToken);
+        }
+
+        private async Task<Team> GetTeam(
+            int id,
+            CancellationToken cancellationToken = default)
+            => await this.Mapper
+                .ProjectTo<Team>(this
+                    .Data
+                    .Teams
+                    .Where(t => t.Id == id))
+                .FirstOrDefaultAsync(cancellationToken);
     }
 }

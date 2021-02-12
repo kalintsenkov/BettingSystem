@@ -1,7 +1,7 @@
 ﻿namespace BettingSystem.Domain.Matches.Models
 {
     using System;
-    using Competitions.Exceptions;
+    using Exceptions;
     using FakeItEasy;
     using FluentAssertions;
     using Xunit;

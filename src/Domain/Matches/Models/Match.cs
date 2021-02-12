@@ -3,7 +3,8 @@
     using System;
     using Common;
     using Common.Models;
-    using Competitions.Exceptions;
+    using Events;
+    using Exceptions;
 
     using static Common.Models.ModelConstants.Common;
 
@@ -124,19 +125,15 @@
 
             this.Status = Status.Finished;
 
-            //if (this.Statistics.HomeScore > this.Statistics.AwayScore)
-            //{
-            //    this.HomeTeam.GivePointsForWin();
-            //}
-            //else if (this.Statistics.HomeScore < this.Statistics.AwayScore)
-            //{
-            //    this.AwayTeam.GivePointsForWin();
-            //}
-            //else if (this.Statistics.HomeScore == this.Statistics.AwayScore)
-            //{
-            //    this.HomeTeam.GivePointFromDraw();
-            //    this.AwayTeam.GivePointFromDraw();
-            //}
+            if (this.Statistics.HomeScore.HasValue &&
+                this.Statistics.AwayScore.HasValue)
+            {
+                this.RaiseEvent(new MatchFinishedEvent(
+                    this.HomeTeam.Id,
+                    this.AwayTeam.Id,
+                    this.Statistics.HomeScore.Value,
+                    this.Statistics.AwayScore.Value));
+            }
 
             return this;
         }

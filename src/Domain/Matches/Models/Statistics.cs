@@ -1,7 +1,7 @@
 ﻿namespace BettingSystem.Domain.Matches.Models
 {
     using Common.Models;
-    using Competitions.Exceptions;
+    using Exceptions;
 
     using static Common.Models.ModelConstants.Common;
 

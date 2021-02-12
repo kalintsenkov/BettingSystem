@@ -14,5 +14,12 @@
         Task<League> Find(
             int id,
             CancellationToken cancellationToken = default);
+
+        Task GiveTeamPoints(
+            int homeTeamId,
+            int awayTeamId,
+            int homeScore,
+            int awayScore,
+            CancellationToken cancellationToken = default);
     }
 }

@@ -8,6 +8,7 @@
     using AutoMapper;
     using Betting;
     using Common;
+    using Common.Events;
     using Common.Persistence;
     using Common.Services;
     using Competitions;
@@ -33,7 +34,9 @@
                 .AddDatabase(configuration)
                 .AddRepositories()
                 .AddIdentity(configuration)
-                .AddAutoMapper(Assembly.GetExecutingAssembly());
+                .AddAutoMapper(Assembly.GetExecutingAssembly())
+                .AddTransient<IEventDispatcher, EventDispatcher>()
+                .AddTransient<IImageService, ImageService>();
 
         private static IServiceCollection AddDatabase(
             this IServiceCollection services,
@@ -107,7 +110,6 @@
 
             services.AddTransient<IIdentity, IdentityService>();
             services.AddTransient<IJwtGenerator, JwtGeneratorService>();
-            services.AddTransient<IImageService, ImageService>();
 
             return services;
         }

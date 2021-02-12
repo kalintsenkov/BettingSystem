@@ -2,13 +2,13 @@
 {
     using System;
     using System.Reflection;
-    using Application.Betting.Bets;
     using Application.Betting.Gamblers;
     using Application.Competitions.Leagues;
     using Application.Matches;
     using Application.Teams;
     using AutoMapper;
     using Betting;
+    using Common.Events;
     using Common.Persistence;
     using Competitions;
     using FluentAssertions;
@@ -33,7 +33,8 @@
                 .AddScoped<ITeamsDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
                 .AddScoped<ICompetitionsDbContext>(provider => provider
-                    .GetService<BettingDbContext>()!);
+                    .GetService<BettingDbContext>()!)
+                .AddTransient<IEventDispatcher, EventDispatcher>();
 
             var services = serviceCollection
                 .AddAutoMapper(Assembly.GetExecutingAssembly())
@@ -47,11 +48,6 @@
 
             services
                 .GetService<IMatchQueryRepository>()
-                .Should()
-                .NotBeNull();
-
-            services
-                .GetService<IBetQueryRepository>()
                 .Should()
                 .NotBeNull();
 
