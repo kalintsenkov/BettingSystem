@@ -43,7 +43,6 @@
                     SecurityAlgorithms.HmacSha256Signature)
             };
 
-
             var isAdministrator = await this.userManager
                 .IsInRoleAsync(user, AdministratorRoleName);
 
