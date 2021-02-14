@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Application.Teams;
     using Application.Teams.Queries.All;
+    using Application.Teams.Queries.Players;
     using AutoMapper;
     using Common.Persistence.Models;
     using Common.Persistence.Repositories;
@@ -54,6 +55,16 @@
             => await this.Mapper
                 .ProjectTo<GetAllTeamsResponseModel>(this
                     .AllAsDomainModels())
+                .ToListAsync(cancellationToken);
+
+        public async Task<IEnumerable<GetTeamPlayersResponseModel>> GetTeamPlayers(
+            int teamId,
+            CancellationToken cancellationToken = default)
+            => await this.Mapper
+                .ProjectTo<GetTeamPlayersResponseModel>(this
+                    .AllAsDataModels()
+                    .Where(t => t.Id == teamId)
+                    .SelectMany(t => t.Players))
                 .ToListAsync(cancellationToken);
     }
 }

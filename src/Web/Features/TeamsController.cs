@@ -8,6 +8,7 @@
     using Application.Teams.Commands.Delete;
     using Application.Teams.Commands.Edit;
     using Application.Teams.Queries.All;
+    using Application.Teams.Queries.Players;
     using Common;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,13 @@
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<GetAllTeamsResponseModel>>> All(
             [FromQuery] GetAllTeamsQuery query)
+            => await this.Send(query);
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route(Id + PathSeparator + nameof(Players))]
+        public async Task<ActionResult<IEnumerable<GetTeamPlayersResponseModel>>> Players(
+            [FromRoute] GetTeamPlayersQuery query)
             => await this.Send(query);
 
         [HttpPost]

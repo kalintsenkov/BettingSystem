@@ -2,9 +2,10 @@
 {
     using System.Linq;
     using AutoMapper;
+    using Common.Mapping;
     using Domain.Betting.Models.Gamblers;
 
-    public class GamblerDetailsResponseModel
+    public class GamblerDetailsResponseModel : IMapFrom<Gambler>
     {
         public int Id { get; private set; }
 
