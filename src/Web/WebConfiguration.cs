@@ -16,8 +16,8 @@
             services
                 .AddScoped<ICurrentUser, CurrentUserService>()
                 .AddControllers(options => options
-                    .ModelBinderProviders.Insert(
-                        0, new ImageFormFileModelBinderProvider()))
+                    .ModelBinderProviders
+                    .Insert(0, new ImageModelBinderProvider()))
                 .AddFluentValidation(validation => validation
                     .RegisterValidatorsFromAssemblyContaining<Result>())
                 .AddNewtonsoftJson();

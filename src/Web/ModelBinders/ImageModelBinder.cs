@@ -5,7 +5,7 @@
     using Application.Common.Images;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-    public class ImageFormFileModelBinder : IModelBinder
+    public class ImageModelBinder : IModelBinder
     {
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {

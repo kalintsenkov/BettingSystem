@@ -3,11 +3,11 @@
     using Application.Common.Images;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-    public class ImageFormFileModelBinderProvider : IModelBinderProvider
+    public class ImageModelBinderProvider : IModelBinderProvider
     {
         public IModelBinder? GetBinder(ModelBinderProviderContext context)
             => context.Metadata.ModelType == typeof(ImageRequestModel)
-                ? new ImageFormFileModelBinder()
+                ? new ImageModelBinder()
                 : default;
     }
 }
