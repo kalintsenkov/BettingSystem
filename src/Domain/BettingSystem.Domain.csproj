@@ -17,7 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)' != 'Release'">
-		<PackageReference Include="Bogus" Version="32.0.2" />
+		<PackageReference Include="Bogus" Version="33.0.1" />
 		<PackageReference Include="FakeItEasy" Version="6.2.1" />
 		<PackageReference Include="FakeItEasy.Analyzer.CSharp" Version="6.0.0" />
 		<PackageReference Include="FluentAssertions" Version="5.10.3" />
