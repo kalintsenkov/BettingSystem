@@ -5,14 +5,17 @@
     using Common;
     using Models.Leagues;
 
-    public interface ILeagueDomainRepository : IDomainRepository<League>
+    public interface ITeamDomainRepository : IDomainRepository<Team>
     {
-        Task<bool> Delete(
+        Task<Team> Find(
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<League> Find(
-            int id,
+        Task GiveTeamPoints(
+            int homeTeamId,
+            int awayTeamId,
+            int homeScore,
+            int awayScore,
             CancellationToken cancellationToken = default);
     }
 }

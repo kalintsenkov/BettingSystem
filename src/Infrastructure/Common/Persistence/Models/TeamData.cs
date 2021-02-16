@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Application.Common.Mapping;
+    using Application.Competitions.Leagues.Queries.Standings;
     using AutoMapper;
     using Domain.Teams.Models;
 
@@ -52,6 +53,11 @@
                     TeamData,
                     Domain.Competitions.Models.Leagues.Team>()
                 .ReverseMap();
+
+            mapper
+                .CreateMap<
+                    TeamData,
+                    LeagueStandingsResponseModel>();
         }
     }
 }

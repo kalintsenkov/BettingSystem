@@ -1,12 +1,13 @@
 ﻿namespace BettingSystem.Domain.Competitions.Models.Leagues
 {
+    using Common;
     using Common.Models;
     using Exceptions;
 
     using static Common.Models.ModelConstants.Common;
     using static ModelConstants.Team;
 
-    public class Team : Entity<int>
+    public class Team : Entity<int>, IAggregateRoot
     {
         internal Team(
             string name,

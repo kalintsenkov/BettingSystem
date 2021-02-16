@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Application.Competitions.Leagues.Handlers
+﻿namespace BettingSystem.Application.Competitions.Teams.Handlers
 {
     using System.Threading.Tasks;
     using Common;
@@ -7,13 +7,13 @@
 
     public class MatchFinishedEventHandler : IEventHandler<MatchFinishedEvent>
     {
-        private readonly ILeagueDomainRepository leagueRepository;
+        private readonly ITeamDomainRepository teamRepository;
 
-        public MatchFinishedEventHandler(ILeagueDomainRepository leagueRepository)
-            => this.leagueRepository = leagueRepository;
+        public MatchFinishedEventHandler(ITeamDomainRepository teamRepository)
+            => this.teamRepository = teamRepository;
 
         public Task Handle(MatchFinishedEvent domainEvent)
-            => this.leagueRepository.GiveTeamPoints(
+            => this.teamRepository.GiveTeamPoints(
                 domainEvent.HomeTeamId,
                 domainEvent.AwayTeamId,
                 domainEvent.HomeScore,
