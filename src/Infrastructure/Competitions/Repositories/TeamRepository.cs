@@ -59,6 +59,7 @@
             }
 
             await this.Save(homeTeam, cancellationToken);
+            await this.Save(awayTeam, cancellationToken);
         }
     }
 }
