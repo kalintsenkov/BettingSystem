@@ -57,7 +57,7 @@
             mapper
                 .CreateMap<
                     TeamData,
-                    LeagueStandingsResponseModel>();
+                    GetStandingsResponseModel>();
         }
     }
 }

@@ -9,7 +9,7 @@
 
     public interface ILeagueQueryRepository : IQueryRepository<League>
     {
-        Task<IEnumerable<LeagueStandingsResponseModel>> GetStandings(
+        Task<IEnumerable<GetStandingsResponseModel>> GetStandings(
             int leagueId,
             CancellationToken cancellationToken = default);
     }

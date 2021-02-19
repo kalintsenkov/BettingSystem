@@ -3,7 +3,7 @@
     using Common.Mapping;
     using Domain.Competitions.Models.Leagues;
 
-    public class LeagueStandingsResponseModel : IMapFrom<Team>
+    public class GetStandingsResponseModel : IMapFrom<Team>
     {
         public int Id { get; set; }
 

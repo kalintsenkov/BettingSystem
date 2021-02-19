@@ -16,8 +16,8 @@
         [HttpGet(Id)]
         [AllowAnonymous]
         [Route(Id + PathSeparator + nameof(Standings))]
-        public async Task<ActionResult<IEnumerable<LeagueStandingsResponseModel>>> Standings(
-            [FromRoute] LeagueStandingsQuery query)
+        public async Task<ActionResult<IEnumerable<GetStandingsResponseModel>>> Standings(
+            [FromRoute] GetStandingsQuery query)
             => await this.Send(query);
 
         [HttpPost]

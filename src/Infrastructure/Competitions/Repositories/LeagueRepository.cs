@@ -49,11 +49,11 @@
                     .Where(l => l.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<IEnumerable<LeagueStandingsResponseModel>> GetStandings(
+        public async Task<IEnumerable<GetStandingsResponseModel>> GetStandings(
             int leagueId,
             CancellationToken cancellationToken = default)
             => await this.Mapper
-                .ProjectTo<LeagueStandingsResponseModel>(this
+                .ProjectTo<GetStandingsResponseModel>(this
                     .AllAsDataModels()
                     .Where(l => l.Id == leagueId)
                     .SelectMany(l => l.Teams)
