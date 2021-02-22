@@ -30,11 +30,6 @@
                     this.currentUser.UserId,
                     cancellationToken);
 
-                if (gamblerId == default)
-                {
-                    return "This user is not a gambler.";
-                }
-
                 return new GetGamblerIdResponseModel(gamblerId);
             }
         }

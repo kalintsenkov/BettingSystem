@@ -1,6 +1,7 @@
 ﻿namespace BettingSystem.Infrastructure.Betting.Repositories
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading;
@@ -26,12 +27,12 @@
 
         public async Task<Gambler> FindByUser(
             string userId,
-            CancellationToken cancellationToken = default) 
+            CancellationToken cancellationToken = default)
             => this.Mapper
                 .Map<GamblerData, Gambler>(await this
                     .FindByUser(
-                        userId, 
-                        user => user, 
+                        userId,
+                        user => user,
                         cancellationToken));
 
         public async Task<int> GetGamblerId(
@@ -72,9 +73,9 @@
                 .Select(selector)
                 .FirstOrDefaultAsync(cancellationToken);
 
-            if (gambler == null)
+            if (EqualityComparer<T>.Default.Equals(gambler, default))
             {
-                throw new InvalidGamblerException("Invalid user.");
+                throw new InvalidGamblerException("This user is not a gambler.");
             }
 
             return gambler;
