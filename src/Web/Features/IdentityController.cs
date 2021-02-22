@@ -1,6 +1,7 @@
 ﻿namespace BettingSystem.Web.Features
 {
     using System.Threading.Tasks;
+    using Application.Identity.Commands;
     using Application.Identity.Commands.LoginUser;
     using Application.Identity.Commands.RegisterUser;
     using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@
 
         [HttpPost]
         [Route(nameof(Login))]
-        public async Task<ActionResult<LoginResponseModel>> Login(
+        public async Task<ActionResult<UserResponseModel>> Login(
             LoginUserCommand command)
             => await this.Send(command);
     }

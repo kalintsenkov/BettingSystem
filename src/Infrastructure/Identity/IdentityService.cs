@@ -5,7 +5,6 @@
     using Application.Common;
     using Application.Identity;
     using Application.Identity.Commands;
-    using Application.Identity.Commands.LoginUser;
     using Microsoft.AspNetCore.Identity;
 
     internal class IdentityService : IIdentity
@@ -38,7 +37,7 @@
                 : Result<IUser>.Failure(errors);
         }
 
-        public async Task<Result<LoginSuccessModel>> Login(UserRequestModel userRequest)
+        public async Task<Result<UserResponseModel>> Login(UserRequestModel userRequest)
         {
             var user = await this.userManager.FindByEmailAsync(userRequest.Email);
             if (user == null)
@@ -57,7 +56,7 @@
 
             var token = await this.jwtGenerator.GenerateToken(user);
 
-            return new LoginSuccessModel(token, user.Id);
+            return new UserResponseModel(token);
         }
     }
 }
