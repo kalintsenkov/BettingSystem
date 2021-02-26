@@ -8,6 +8,7 @@
     using Application.Teams.Queries.All;
     using Application.Teams.Queries.Players;
     using AutoMapper;
+    using Common.Events;
     using Common.Persistence.Models;
     using Common.Persistence.Repositories;
     using Domain.Teams.Models;
@@ -18,8 +19,11 @@
         ITeamDomainRepository,
         ITeamQueryRepository
     {
-        public TeamRepository(ITeamsDbContext db, IMapper mapper)
-            : base(db, mapper)
+        public TeamRepository(
+            ITeamsDbContext db,
+            IMapper mapper,
+            IEventDispatcher eventDispatcher)
+            : base(db, mapper, eventDispatcher)
         {
         }
 

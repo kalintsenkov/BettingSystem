@@ -7,6 +7,7 @@
     using Application.Betting.Bets;
     using Application.Betting.Bets.Queries.Details;
     using AutoMapper;
+    using Common.Events;
     using Common.Persistence.Models;
     using Common.Persistence.Repositories;
     using Domain.Betting.Models.Bets;
@@ -20,8 +21,11 @@
         IBetDomainRepository,
         IBetQueryRepository
     {
-        public BetRepository(IBettingDbContext db, IMapper mapper)
-            : base(db, mapper)
+        public BetRepository(
+            IBettingDbContext db,
+            IMapper mapper,
+            IEventDispatcher eventDispatcher)
+            : base(db, mapper, eventDispatcher)
         {
         }
 

@@ -9,6 +9,7 @@
     using Application.Betting.Gamblers;
     using Application.Betting.Gamblers.Queries.Details;
     using AutoMapper;
+    using Common.Events;
     using Common.Persistence.Models;
     using Common.Persistence.Repositories;
     using Domain.Betting.Exceptions;
@@ -20,8 +21,11 @@
         IGamblerDomainRepository,
         IGamblerQueryRepository
     {
-        public GamblerRepository(IBettingDbContext db, IMapper mapper)
-            : base(db, mapper)
+        public GamblerRepository(
+            IBettingDbContext db,
+            IMapper mapper,
+            IEventDispatcher eventDispatcher)
+            : base(db, mapper, eventDispatcher)
         {
         }
 

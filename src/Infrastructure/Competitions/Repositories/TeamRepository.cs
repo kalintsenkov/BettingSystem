@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using Application.Competitions.Teams;
     using AutoMapper;
+    using Common.Events;
     using Common.Persistence.Models;
     using Common.Persistence.Repositories;
     using Domain.Competitions.Models.Leagues;
@@ -15,8 +16,11 @@
         ITeamDomainRepository,
         ITeamQueryRepository
     {
-        public TeamRepository(ICompetitionsDbContext db, IMapper mapper)
-            : base(db, mapper)
+        public TeamRepository(
+            ICompetitionsDbContext db,
+            IMapper mapper,
+            IEventDispatcher eventDispatcher)
+            : base(db, mapper, eventDispatcher)
         {
         }
 

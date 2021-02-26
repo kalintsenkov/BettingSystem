@@ -29,7 +29,7 @@
 
         public void GivePointsForWin() => this.Points += WinPoints;
 
-        public void GivePointFromDraw() => this.Points -= DrawPoint;
+        public void GivePointFromDraw() => this.Points += DrawPoint;
 
         private void Validate(string name)
             => Guard.ForStringLength<InvalidTeamException>(

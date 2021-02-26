@@ -9,6 +9,7 @@
     using Application.Matches.Queries.Details;
     using Application.Matches.Queries.Stadiums;
     using AutoMapper;
+    using Common.Events;
     using Common.Persistence.Models;
     using Common.Persistence.Repositories;
     using Domain.Common;
@@ -20,8 +21,11 @@
         IMatchDomainRepository,
         IMatchQueryRepository
     {
-        public MatchRepository(IMatchesDbContext db, IMapper mapper)
-            : base(db, mapper)
+        public MatchRepository(
+            IMatchesDbContext db,
+            IMapper mapper,
+            IEventDispatcher eventDispatcher)
+            : base(db, mapper, eventDispatcher)
         {
         }
 

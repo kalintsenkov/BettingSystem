@@ -3,7 +3,7 @@
     using Application.Common.Mapping;
     using AutoMapper;
 
-    public class StatusData :
+    internal class StatusData :
         IMapFrom<Domain.Betting.Models.Matches.Status>,
         IMapTo<Domain.Betting.Models.Matches.Status>,
         IMapFrom<Domain.Matches.Models.Status>,

@@ -6,6 +6,8 @@
     using Application.Common.Mapping;
     using AutoMapper;
     using Domain.Common;
+    using Domain.Common.Models;
+    using Events;
     using Microsoft.EntityFrameworkCore;
 
     internal abstract class DataRepository<TDbContext, TEntity> : IDomainRepository<TEntity>
@@ -36,13 +38,19 @@
 
     internal abstract class DataRepository<TDbContext, TEntity, TEntityData> : IDomainRepository<TEntity>
         where TDbContext : IDbContext
-        where TEntity : class, IAggregateRoot
+        where TEntity : class, IAggregateRoot, IEntity
         where TEntityData : class, IMapFrom<TEntity>
     {
-        protected DataRepository(TDbContext db, IMapper mapper)
+        private readonly IEventDispatcher eventDispatcher;
+
+        protected DataRepository(
+            TDbContext db,
+            IMapper mapper,
+            IEventDispatcher eventDispatcher)
         {
             this.Data = db;
             this.Mapper = mapper;
+            this.eventDispatcher = eventDispatcher;
         }
 
         protected TDbContext Data { get; }
@@ -63,6 +71,15 @@
             TEntity entity,
             CancellationToken cancellationToken = default)
         {
+            var events = entity.Events.ToArray();
+
+            entity.ClearEvents();
+
+            foreach (var domainEvent in events)
+            {
+                await this.eventDispatcher.Dispatch(domainEvent);
+            }
+
             var entityData = this.Mapper.Map<TEntityData>(entity);
 
             this.Data.Update(entityData);

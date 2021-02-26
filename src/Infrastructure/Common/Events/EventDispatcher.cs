@@ -57,7 +57,7 @@
         private static Func<object, object, Task> MakeDelegate<TEvent, TEventHandler>()
             where TEvent : IDomainEvent
             where TEventHandler : IEventHandler<TEvent>
-            => (domainEvent, eventHandler) =>
-                ((TEventHandler)eventHandler).Handle((TEvent)domainEvent);
+            => (domainEvent, eventHandler)
+                => ((TEventHandler)eventHandler).Handle((TEvent)domainEvent);
     }
 }

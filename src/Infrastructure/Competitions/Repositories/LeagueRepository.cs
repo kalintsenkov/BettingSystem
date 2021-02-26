@@ -7,6 +7,7 @@
     using Application.Competitions.Leagues;
     using Application.Competitions.Leagues.Queries.Standings;
     using AutoMapper;
+    using Common.Events;
     using Common.Persistence.Models;
     using Common.Persistence.Repositories;
     using Domain.Competitions.Models.Leagues;
@@ -17,8 +18,11 @@
         ILeagueDomainRepository,
         ILeagueQueryRepository
     {
-        public LeagueRepository(ICompetitionsDbContext db, IMapper mapper)
-            : base(db, mapper)
+        public LeagueRepository(
+            ICompetitionsDbContext db,
+            IMapper mapper,
+            IEventDispatcher eventDispatcher)
+            : base(db, mapper, eventDispatcher)
         {
         }
 
