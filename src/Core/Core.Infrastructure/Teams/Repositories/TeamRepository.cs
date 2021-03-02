@@ -9,11 +9,11 @@
     using Application.Teams.Queries.Players;
     using AutoMapper;
     using Common.Events;
-    using Common.Persistence.Models;
-    using Common.Persistence.Repositories;
+    using Common.Persistence;
     using Domain.Teams.Models;
     using Domain.Teams.Repositories;
     using Microsoft.EntityFrameworkCore;
+    using Persistence.Models;
 
     internal class TeamRepository : DataRepository<ITeamsDbContext, Team, TeamData>,
         ITeamDomainRepository,

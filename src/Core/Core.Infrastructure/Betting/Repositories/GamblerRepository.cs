@@ -10,12 +10,12 @@
     using Application.Betting.Gamblers.Queries.Details;
     using AutoMapper;
     using Common.Events;
-    using Common.Persistence.Models;
-    using Common.Persistence.Repositories;
+    using Common.Persistence;
     using Domain.Betting.Exceptions;
     using Domain.Betting.Models.Gamblers;
     using Domain.Betting.Repositories;
     using Microsoft.EntityFrameworkCore;
+    using Persistence.Models;
 
     internal class GamblerRepository : DataRepository<IBettingDbContext, Gambler, GamblerData>,
         IGamblerDomainRepository,

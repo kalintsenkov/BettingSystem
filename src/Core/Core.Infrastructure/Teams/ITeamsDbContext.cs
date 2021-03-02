@@ -1,9 +1,9 @@
 ﻿namespace BettingSystem.Infrastructure.Teams
 {
     using Common.Persistence;
-    using Common.Persistence.Models;
     using Domain.Teams.Models;
     using Microsoft.EntityFrameworkCore;
+    using Persistence.Models;
 
     internal interface ITeamsDbContext : IDbContext
     {

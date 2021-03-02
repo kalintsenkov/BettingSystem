@@ -1,9 +1,6 @@
 ﻿namespace BettingSystem.Application
 {
-    using System.Reflection;
-    using Common;
-    using Common.Behaviours;
-    using MediatR;
+    using Common.Configuration;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -12,22 +9,6 @@
         public static IServiceCollection AddApplication(
             this IServiceCollection services,
             IConfiguration configuration)
-            => services
-                .Configure<ApplicationSettings>(
-                    configuration.GetSection(nameof(ApplicationSettings)),
-                    options => options.BindNonPublicProperties = true)
-                .AddMediatR(Assembly.GetExecutingAssembly())
-                .AddEventHandlers()
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
-
-        private static IServiceCollection AddEventHandlers(
-            this IServiceCollection services)
-            => services
-                .Scan(scan => scan
-                    .FromCallingAssembly()
-                    .AddClasses(classes => classes
-                        .AssignableTo(typeof(IEventHandler<>)))
-                    .AsImplementedInterfaces()
-                    .WithTransientLifetime());
+            => services.AddCommonApplication(configuration);
     }
 }

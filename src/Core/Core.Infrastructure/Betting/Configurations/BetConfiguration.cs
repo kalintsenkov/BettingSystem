@@ -1,8 +1,8 @@
 ﻿namespace BettingSystem.Infrastructure.Betting.Configurations
 {
-    using Common.Persistence.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using Persistence.Models;
 
     internal class BetConfiguration : IEntityTypeConfiguration<BetData>
     {

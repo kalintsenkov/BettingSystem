@@ -1,10 +1,9 @@
 ﻿namespace BettingSystem.Infrastructure.Betting.Configurations
 {
-    using Common.Persistence.Models;
     using Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
+    using Persistence.Models;
     using static Domain.Common.Models.ModelConstants.Common;
 
     internal class GamblerConfiguration : IEntityTypeConfiguration<GamblerData>

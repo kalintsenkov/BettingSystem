@@ -6,15 +6,15 @@
     using Application.Competitions.Leagues;
     using Application.Matches;
     using Application.Teams;
-    using AutoMapper;
     using Betting;
+    using Common.Configuration;
     using Common.Events;
-    using Common.Persistence;
     using Competitions;
     using FluentAssertions;
     using Matches;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
+    using Persistence;
     using Teams;
     using Xunit;
 

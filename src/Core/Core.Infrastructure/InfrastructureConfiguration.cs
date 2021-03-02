@@ -5,11 +5,10 @@
     using Application.Common;
     using Application.Common.Contracts;
     using Application.Identity;
-    using AutoMapper;
     using Betting;
     using Common;
+    using Common.Configuration;
     using Common.Events;
-    using Common.Persistence;
     using Common.Services;
     using Competitions;
     using Domain.Common;
@@ -21,6 +20,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
+    using Persistence;
     using Teams;
 
     using static Domain.Common.Models.ModelConstants.Identity;
@@ -31,12 +31,9 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
+                .AddCommonInfrastructure()
                 .AddDatabase(configuration)
-                .AddRepositories()
-                .AddIdentity(configuration)
-                .AddAutoMapper(Assembly.GetExecutingAssembly())
-                .AddTransient<IEventDispatcher, EventDispatcher>()
-                .AddTransient<IImageService, ImageService>();
+                .AddIdentity(configuration);
 
         private static IServiceCollection AddDatabase(
             this IServiceCollection services,
@@ -56,17 +53,6 @@
                 .AddScoped<ICompetitionsDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
                 .AddTransient<IInitializer, BettingDbInitializer>();
-
-        internal static IServiceCollection AddRepositories(
-            this IServiceCollection services)
-            => services
-                .Scan(scan => scan
-                    .FromCallingAssembly()
-                    .AddClasses(classes => classes
-                        .AssignableTo(typeof(IDomainRepository<>))
-                        .AssignableTo(typeof(IQueryRepository<>)))
-                    .AsImplementedInterfaces()
-                    .WithTransientLifetime());
 
         private static IServiceCollection AddIdentity(
             this IServiceCollection services,

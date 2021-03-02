@@ -8,14 +8,14 @@
     using Application.Betting.Bets.Queries.Details;
     using AutoMapper;
     using Common.Events;
-    using Common.Persistence.Models;
-    using Common.Persistence.Repositories;
+    using Common.Persistence;
     using Domain.Betting.Models.Bets;
     using Domain.Betting.Models.Gamblers;
     using Domain.Betting.Models.Matches;
     using Domain.Betting.Repositories;
     using Domain.Common;
     using Microsoft.EntityFrameworkCore;
+    using Persistence.Models;
 
     internal class BetRepository : DataRepository<IBettingDbContext, Bet, BetData>,
         IBetDomainRepository,

@@ -8,11 +8,11 @@
     using Application.Competitions.Leagues.Queries.Standings;
     using AutoMapper;
     using Common.Events;
-    using Common.Persistence.Models;
-    using Common.Persistence.Repositories;
+    using Common.Persistence;
     using Domain.Competitions.Models.Leagues;
     using Domain.Competitions.Repositories;
     using Microsoft.EntityFrameworkCore;
+    using Persistence.Models;
 
     internal class LeagueRepository : DataRepository<ICompetitionsDbContext, League, LeagueData>,
         ILeagueDomainRepository,

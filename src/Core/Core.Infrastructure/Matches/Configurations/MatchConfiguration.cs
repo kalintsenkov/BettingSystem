@@ -1,8 +1,8 @@
 ﻿namespace BettingSystem.Infrastructure.Matches.Configurations
 {
-    using Common.Persistence.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using Persistence.Models;
 
     internal class MatchConfiguration : IEntityTypeConfiguration<MatchData>
     {

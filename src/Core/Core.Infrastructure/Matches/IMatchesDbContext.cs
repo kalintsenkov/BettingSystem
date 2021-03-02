@@ -1,8 +1,8 @@
 ﻿namespace BettingSystem.Infrastructure.Matches
 {
     using Common.Persistence;
-    using Common.Persistence.Models;
     using Microsoft.EntityFrameworkCore;
+    using Persistence.Models;
 
     internal interface IMatchesDbContext : IDbContext
     {

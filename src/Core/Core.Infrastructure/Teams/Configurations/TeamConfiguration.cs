@@ -1,9 +1,8 @@
 ﻿namespace BettingSystem.Infrastructure.Teams.Configurations
 {
-    using Common.Persistence.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
+    using Persistence.Models;
     using static Domain.Common.Models.ModelConstants.Common;
 
     internal class TeamConfiguration : IEntityTypeConfiguration<TeamData>

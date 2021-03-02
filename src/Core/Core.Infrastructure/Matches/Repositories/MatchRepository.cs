@@ -10,12 +10,12 @@
     using Application.Matches.Queries.Stadiums;
     using AutoMapper;
     using Common.Events;
-    using Common.Persistence.Models;
-    using Common.Persistence.Repositories;
+    using Common.Persistence;
     using Domain.Common;
     using Domain.Matches.Models;
     using Domain.Matches.Repositories;
     using Microsoft.EntityFrameworkCore;
+    using Persistence.Models;
 
     internal class MatchRepository : DataRepository<IMatchesDbContext, Match, MatchData>,
         IMatchDomainRepository,
