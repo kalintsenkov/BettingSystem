@@ -6,6 +6,8 @@
 		<Nullable>enable</Nullable>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<GenerateProgramFile>false</GenerateProgramFile>
+		<AssemblyName>BettingSystem.Startup.Core</AssemblyName>
+		<RootNamespace>BettingSystem.Startup</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -33,14 +35,14 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.3">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Infrastructure\BettingSystem.Infrastructure.csproj" />
-		<ProjectReference Include="..\Web\BettingSystem.Web.csproj" />
+		<ProjectReference Include="..\Core.Infrastructure\Core.Infrastructure.csproj" />
+		<ProjectReference Include="..\Core.Web\Core.Web.csproj" />
 	</ItemGroup>
 
 
