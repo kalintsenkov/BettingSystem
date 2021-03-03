@@ -4,6 +4,7 @@
     using Application.Identity.Commands;
     using Application.Identity.Commands.LoginUser;
     using Application.Identity.Commands.RegisterUser;
+    using Common;
     using Microsoft.AspNetCore.Mvc;
 
     public class IdentityController : ApiController

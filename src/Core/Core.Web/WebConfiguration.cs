@@ -2,11 +2,11 @@
 {
     using Application.Common;
     using Application.Common.Contracts;
+    using Common.ModelBinders;
+    using Common.Services;
     using FluentValidation.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
-    using ModelBinders;
-    using Services;
 
     public static class WebConfiguration
     {

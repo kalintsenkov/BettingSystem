@@ -6,6 +6,7 @@
     using Application.Betting.Gamblers.Queries.Details;
     using Application.Betting.Gamblers.Queries.GetId;
     using Application.Common;
+    using Common;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

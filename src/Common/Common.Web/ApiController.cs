@@ -1,8 +1,7 @@
-﻿namespace BettingSystem.Web
+﻿namespace BettingSystem.Web.Common
 {
     using System.Threading.Tasks;
     using Application.Common;
-    using Common;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;

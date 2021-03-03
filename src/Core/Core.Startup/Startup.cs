@@ -9,7 +9,7 @@ namespace BettingSystem.Startup
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Web;
-    using Web.Middleware;
+    using Web.Common.Middleware;
 
     public class Startup
     {

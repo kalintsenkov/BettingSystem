@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Web.Services
+﻿namespace BettingSystem.Web.Common.Services
 {
     using System;
     using System.Security.Claims;

@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Web.Middleware
+﻿namespace BettingSystem.Web.Common.Middleware
 {
     using System;
     using System.Net;

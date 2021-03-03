@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Web.ModelBinders
+﻿namespace BettingSystem.Web.Common.ModelBinders
 {
     using System.Linq;
     using System.Threading.Tasks;

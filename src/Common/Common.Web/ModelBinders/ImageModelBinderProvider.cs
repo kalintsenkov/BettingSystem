@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Web.ModelBinders
+﻿namespace BettingSystem.Web.Common.ModelBinders
 {
     using Application.Common.Images;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
