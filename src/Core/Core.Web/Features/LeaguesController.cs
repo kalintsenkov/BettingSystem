@@ -7,6 +7,7 @@
     using Application.Competitions.Leagues.Commands.Edit;
     using Application.Competitions.Leagues.Queries.Standings;
     using Common;
+    using Common.Attributes;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

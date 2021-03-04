@@ -10,6 +10,7 @@
     using Application.Teams.Queries.All;
     using Application.Teams.Queries.Players;
     using Common;
+    using Common.Attributes;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

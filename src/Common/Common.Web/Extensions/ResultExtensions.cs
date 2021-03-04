@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Web.Common
+﻿namespace BettingSystem.Web.Common.Extensions
 {
     using System.Threading.Tasks;
     using Application.Common;

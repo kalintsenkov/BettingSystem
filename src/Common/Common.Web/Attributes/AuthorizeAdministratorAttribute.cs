@@ -1,8 +1,8 @@
-﻿namespace BettingSystem.Web.Common
+﻿namespace BettingSystem.Web.Common.Attributes
 {
     using Microsoft.AspNetCore.Authorization;
 
-    using static Domain.Common.Models.ModelConstants.Identity;
+    using static Domain.Common.Models.ModelConstants.Common;
 
     public class AuthorizeAdministratorAttribute : AuthorizeAttribute
     {

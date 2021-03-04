@@ -8,6 +8,7 @@
     using Application.Betting.Bets.Queries.Mine;
     using Application.Betting.Bets.Queries.Search;
     using Common;
+    using Common.Attributes;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

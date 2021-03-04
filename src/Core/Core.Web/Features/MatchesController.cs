@@ -15,6 +15,7 @@
     using Application.Matches.Queries.Search;
     using Application.Matches.Queries.Stadiums;
     using Common;
+    using Common.Attributes;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

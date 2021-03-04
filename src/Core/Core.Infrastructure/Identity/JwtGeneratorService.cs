@@ -10,7 +10,7 @@
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
 
-    using static Domain.Common.Models.ModelConstants.Identity;
+    using static Domain.Common.Models.ModelConstants.Common;
 
     internal class JwtGeneratorService : IJwtGenerator
     {

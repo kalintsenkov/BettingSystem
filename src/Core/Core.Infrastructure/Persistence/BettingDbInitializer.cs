@@ -11,7 +11,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
-    using static Domain.Common.Models.ModelConstants.Identity;
+    using static Domain.Common.Models.ModelConstants.Common;
 
     internal class BettingDbInitializer : IInitializer
     {

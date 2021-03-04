@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using Application.Common;
+    using Extensions;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
