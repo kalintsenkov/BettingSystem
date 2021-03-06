@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<LangVersion>9.0</LangVersion>
+		<Nullable>enable</Nullable>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<AssemblyName>BettingSystem.Infrastructure.Identity</AssemblyName>
+		<RootNamespace>BettingSystem.Infrastructure.Identity</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectCapability Include="DynamicFileNesting" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
+	  <ProjectReference Include="..\Identity.Application\Identity.Application.csproj" />
+	</ItemGroup>
+
+</Project>

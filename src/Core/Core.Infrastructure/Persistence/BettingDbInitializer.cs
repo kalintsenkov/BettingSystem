@@ -4,39 +4,26 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Threading.Tasks;
     using Common;
     using Domain.Common;
-    using Identity;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
-
-    using static Domain.Common.Models.ModelConstants.Common;
 
     internal class BettingDbInitializer : IInitializer
     {
         private readonly BettingDbContext db;
-        private readonly UserManager<User> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
         private readonly IEnumerable<IInitialData> initialDataProviders;
 
         public BettingDbInitializer(
             BettingDbContext db,
-            UserManager<User> userManager,
-            RoleManager<IdentityRole> roleManager,
             IEnumerable<IInitialData> initialDataProviders)
         {
             this.db = db;
-            this.userManager = userManager;
-            this.roleManager = roleManager;
             this.initialDataProviders = initialDataProviders;
         }
 
         public void Initialize()
         {
             this.db.Database.Migrate();
-
-            this.SeedAdministrator();
 
             foreach (var initialDataProvider in this.initialDataProviders)
             {
@@ -53,29 +40,6 @@
 
             this.db.SaveChanges();
         }
-
-        private void SeedAdministrator()
-            => Task
-                .Run(async () =>
-                {
-                    var existingRole = await this.roleManager.FindByNameAsync(AdministratorRoleName);
-
-                    if (existingRole != null)
-                    {
-                        return;
-                    }
-
-                    var adminRole = new IdentityRole(AdministratorRoleName);
-
-                    await this.roleManager.CreateAsync(adminRole);
-
-                    var adminUser = new User("admin@bettingsystem.com");
-
-                    await this.userManager.CreateAsync(adminUser, "admin123456");
-                    await this.userManager.AddToRoleAsync(adminUser, AdministratorRoleName);
-                })
-                .GetAwaiter()
-                .GetResult();
 
         private bool DataSetIsEmpty(Type type)
         {

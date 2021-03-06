@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
@@ -6,8 +6,8 @@
 		<Nullable>enable</Nullable>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<GenerateProgramFile>false</GenerateProgramFile>
-		<AssemblyName>BettingSystem.Startup.Core</AssemblyName>
-		<RootNamespace>BettingSystem.Startup</RootNamespace>
+		<AssemblyName>BettingSystem.Startup.Identity</AssemblyName>
+		<RootNamespace>BettingSystem.Startup.Identity</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -38,8 +38,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Core.Infrastructure\Core.Infrastructure.csproj" />
-		<ProjectReference Include="..\Core.Web\Core.Web.csproj" />
+		<ProjectReference Include="..\Identity.Infrastructure\Identity.Infrastructure.csproj" />
+		<ProjectReference Include="..\Identity.Web\Identity.Web.csproj" />
 	</ItemGroup>
 
 </Project>

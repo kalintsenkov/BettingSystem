@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Web.Features
+﻿namespace BettingSystem.Web.Identity.Features
 {
     using System.Threading.Tasks;
     using Application.Identity.Commands;

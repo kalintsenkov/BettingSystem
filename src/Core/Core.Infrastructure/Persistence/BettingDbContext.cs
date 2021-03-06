@@ -4,14 +4,12 @@
     using Betting;
     using Competitions;
     using Domain.Teams.Models;
-    using Identity;
     using Matches;
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Models;
     using Teams;
 
-    internal class BettingDbContext : IdentityDbContext<User>,
+    internal class BettingDbContext : DbContext,
         IBettingDbContext,
         ITeamsDbContext,
         IMatchesDbContext,

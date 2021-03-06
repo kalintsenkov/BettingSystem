@@ -37,7 +37,7 @@
                 .AddTransient<IEventDispatcher, EventDispatcher>();
 
             var services = serviceCollection
-                .AddAutoMapper(Assembly.GetExecutingAssembly())
+                .AddAutoMapper(Assembly.GetCallingAssembly())
                 .AddRepositories()
                 .BuildServiceProvider();
 

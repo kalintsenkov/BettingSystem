@@ -3,55 +3,31 @@
     using System;
     using System.Linq;
     using System.Reflection;
-    using Application.Common.Configuration;
     using Application.Common.Mapping;
     using AutoMapper;
-    using Configuration;
 
     public class MappingProfile : Profile
     {
-        public MappingProfile()
-            => this.ApplyMappingsFromAssembly(
-                typeof(ApplicationConfiguration).Assembly,
-                typeof(InfrastructureConfiguration).Assembly);
+        public MappingProfile(Assembly assembly)
+            => this.ApplyMappingsFromAssembly(assembly);
 
-        private void ApplyMappingsFromAssembly(params Assembly[] assemblies)
+        private void ApplyMappingsFromAssembly(Assembly assembly)
         {
-            const string mappingMethodName = "Mapping";
-
-            var mapFromTypes = assemblies
-                .SelectMany(a => a.GetTypes())
+            var types = assembly
+                .GetExportedTypes()
                 .Where(t => t
                     .GetInterfaces()
-                    .Any(i => i.IsGenericType &&
-                              i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
+                    .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
                 .ToList();
 
-            foreach (var type in mapFromTypes)
+            foreach (var type in types)
             {
                 var instance = Activator.CreateInstance(type);
+
+                const string mappingMethodName = "Mapping";
 
                 var methodInfo = type.GetMethod(mappingMethodName)
                                  ?? type.GetInterface("IMapFrom`1")?.GetMethod(mappingMethodName);
-
-                methodInfo?.Invoke(instance, new object[] { this });
-            }
-
-            var mapToTypes = assemblies
-                .SelectMany(a => a.GetTypes())
-                .Where(t => t
-                    .GetInterfaces()
-                    .Any(i => i.IsGenericType &&
-                              (i.IsPublic || i.IsNotPublic) &&
-                              i.GetGenericTypeDefinition() == typeof(IMapTo<>)))
-                .ToList();
-
-            foreach (var type in mapToTypes)
-            {
-                var instance = Activator.CreateInstance(type);
-
-                var methodInfo = type.GetMethod(mappingMethodName)
-                                 ?? type.GetInterface("IMapTo`1")?.GetMethod(mappingMethodName);
 
                 methodInfo?.Invoke(instance, new object[] { this });
             }
