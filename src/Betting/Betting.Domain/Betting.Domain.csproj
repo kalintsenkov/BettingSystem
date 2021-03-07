@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<LangVersion>9.0</LangVersion>
 		<Nullable>enable</Nullable>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<AssemblyName>BettingSystem.Domain.Common</AssemblyName>
-		<RootNamespace>BettingSystem.Domain.Common</RootNamespace>
+		<AssemblyName>BettingSystem.Domain.Betting</AssemblyName>
+		<RootNamespace>BettingSystem.Domain.Betting</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -19,14 +19,6 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)' != 'Release'">
-		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-			<_Parameter1>BettingSystem.Domain.Core</_Parameter1>
-		</AssemblyAttribute>
-
-		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-			<_Parameter1>BettingSystem.Domain.Betting</_Parameter1>
-		</AssemblyAttribute>
-
 		<PackageReference Include="Bogus" Version="33.0.1" />
 		<PackageReference Include="FakeItEasy" Version="6.2.1" />
 		<PackageReference Include="FakeItEasy.Analyzer.CSharp" Version="6.0.0" />
@@ -37,8 +29,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
-		<PackageReference Include="Scrutor" Version="3.3.0" />
+		<ProjectReference Include="..\..\Common\Common.Domain\Common.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

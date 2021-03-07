@@ -1,7 +1,6 @@
 ﻿namespace BettingSystem.Domain
 {
     using System.Linq;
-    using Betting.Factories.Bets;
     using Common;
     using FluentAssertions;
     using Matches.Factories;
@@ -19,11 +18,6 @@
             var services = serviceCollection
                 .AddDomain()
                 .BuildServiceProvider();
-
-            services
-                .GetService<IBetFactory>()
-                .Should()
-                .NotBeNull();
 
             services
                 .GetService<ITeamFactory>()

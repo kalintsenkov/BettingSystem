@@ -5,8 +5,6 @@
     using AutoMapper;
 
     internal class StadiumData :
-        IMapFrom<Domain.Betting.Models.Matches.Stadium>,
-        IMapTo<Domain.Betting.Models.Matches.Stadium>,
         IMapFrom<Domain.Matches.Models.Stadium>,
         IMapTo<Domain.Matches.Models.Stadium>
     {
@@ -20,12 +18,6 @@
 
         public void Mapping(Profile mapper)
         {
-            mapper
-                .CreateMap<
-                    StadiumData,
-                    Domain.Betting.Models.Matches.Stadium>()
-                .ReverseMap();
-
             mapper
                 .CreateMap<
                     StadiumData,

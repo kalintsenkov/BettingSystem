@@ -6,8 +6,6 @@
     using AutoMapper;
 
     internal class MatchData :
-        IMapFrom<Domain.Betting.Models.Matches.Match>,
-        IMapTo<Domain.Betting.Models.Matches.Match>,
         IMapFrom<Domain.Matches.Models.Match>,
         IMapTo<Domain.Matches.Models.Match>
     {
@@ -31,16 +29,8 @@
 
         public StatusData Status { get; set; } = default!;
 
-        public ICollection<BetData> Bets { get; } = new HashSet<BetData>();
-
         public void Mapping(Profile mapper)
         {
-            mapper
-                .CreateMap<
-                    MatchData,
-                    Domain.Betting.Models.Matches.Match>()
-                .ReverseMap();
-
             mapper
                 .CreateMap<
                     MatchData,

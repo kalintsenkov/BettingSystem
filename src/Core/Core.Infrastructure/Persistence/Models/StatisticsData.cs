@@ -4,8 +4,6 @@
     using AutoMapper;
 
     internal class StatisticsData :
-        IMapFrom<Domain.Betting.Models.Matches.Statistics>,
-        IMapTo<Domain.Betting.Models.Matches.Statistics>,
         IMapFrom<Domain.Matches.Models.Statistics>,
         IMapTo<Domain.Matches.Models.Statistics>
     {
@@ -19,12 +17,6 @@
 
         public void Mapping(Profile mapper)
         {
-            mapper
-                .CreateMap<
-                    StatisticsData,
-                    Domain.Betting.Models.Matches.Statistics>()
-                .ReverseMap();
-
             mapper
                 .CreateMap<
                     StatisticsData,

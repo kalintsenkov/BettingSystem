@@ -2,11 +2,9 @@
 {
     using System;
     using System.Reflection;
-    using Application.Betting.Gamblers;
     using Application.Competitions.Leagues;
     using Application.Matches;
     using Application.Teams;
-    using Betting;
     using Common.Configuration;
     using Common.Events;
     using Competitions;
@@ -26,8 +24,6 @@
             var serviceCollection = new ServiceCollection()
                 .AddDbContext<BettingDbContext>(options => options
                     .UseInMemoryDatabase(Guid.NewGuid().ToString()))
-                .AddScoped<IBettingDbContext>(provider => provider
-                    .GetService<BettingDbContext>()!)
                 .AddScoped<IMatchesDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
                 .AddScoped<ITeamsDbContext>(provider => provider
@@ -40,11 +36,6 @@
                 .AddAutoMapper(Assembly.GetCallingAssembly())
                 .AddRepositories()
                 .BuildServiceProvider();
-
-            services
-                .GetService<IGamblerQueryRepository>()
-                .Should()
-                .NotBeNull();
 
             services
                 .GetService<IMatchQueryRepository>()

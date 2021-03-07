@@ -1,7 +1,6 @@
 ﻿namespace BettingSystem.Infrastructure.Persistence
 {
     using System.Reflection;
-    using Betting;
     using Competitions;
     using Domain.Teams.Models;
     using Matches;
@@ -10,7 +9,6 @@
     using Teams;
 
     internal class BettingDbContext : DbContext,
-        IBettingDbContext,
         ITeamsDbContext,
         IMatchesDbContext,
         ICompetitionsDbContext
@@ -20,13 +18,9 @@
         {
         }
 
-        public DbSet<BetData> Bets { get; set; } = default!;
-
         public DbSet<MatchData> Matches { get; set; } = default!;
 
         public DbSet<StadiumData> Stadiums { get; set; } = default!;
-
-        public DbSet<GamblerData> Gamblers { get; set; } = default!;
 
         public DbSet<TeamData> Teams { get; set; } = default!;
 

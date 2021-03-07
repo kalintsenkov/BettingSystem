@@ -7,8 +7,6 @@
     using Domain.Teams.Models;
 
     internal class TeamData :
-        IMapFrom<Domain.Betting.Models.Matches.Team>,
-        IMapTo<Domain.Betting.Models.Matches.Team>,
         IMapFrom<Domain.Teams.Models.Team>,
         IMapTo<Domain.Teams.Models.Team>,
         IMapFrom<Domain.Matches.Models.Team>,
@@ -30,12 +28,6 @@
 
         public void Mapping(Profile mapper)
         {
-            mapper
-                .CreateMap<
-                    TeamData,
-                    Domain.Betting.Models.Matches.Team>()
-                .ReverseMap();
-
             mapper
                 .CreateMap<
                     TeamData,

@@ -4,8 +4,6 @@
     using AutoMapper;
 
     internal class ImageData :
-        IMapFrom<Domain.Betting.Models.Matches.Image>,
-        IMapTo<Domain.Betting.Models.Matches.Image>,
         IMapFrom<Domain.Matches.Models.Image>,
         IMapTo<Domain.Matches.Models.Image>
     {
@@ -15,12 +13,6 @@
 
         public void Mapping(Profile mapper)
         {
-            mapper
-                .CreateMap<
-                    ImageData,
-                    Domain.Betting.Models.Matches.Image>()
-                .ReverseMap();
-
             mapper
                 .CreateMap<
                     ImageData,
