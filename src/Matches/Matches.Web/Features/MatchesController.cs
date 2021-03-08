@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Web.Features
+﻿namespace BettingSystem.Web.Matches.Features
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

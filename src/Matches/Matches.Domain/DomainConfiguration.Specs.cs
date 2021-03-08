@@ -1,10 +1,10 @@
-﻿namespace BettingSystem.Domain
+﻿namespace BettingSystem.Domain.Matches
 {
     using System.Linq;
     using Common;
+    using Factories;
     using FluentAssertions;
     using Microsoft.Extensions.DependencyInjection;
-    using Teams.Factories;
     using Xunit;
 
     public class DomainConfigurationSpecs
@@ -19,7 +19,7 @@
                 .BuildServiceProvider();
 
             services
-                .GetService<ITeamFactory>()
+                .GetService<IMatchFactory>()
                 .Should()
                 .NotBeNull();
         }

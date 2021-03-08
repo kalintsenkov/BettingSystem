@@ -3,13 +3,11 @@
     using System;
     using System.Reflection;
     using Application.Competitions.Leagues;
-    using Application.Matches;
     using Application.Teams;
     using Common.Configuration;
     using Common.Events;
     using Competitions;
     using FluentAssertions;
-    using Matches;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using Persistence;
@@ -24,8 +22,6 @@
             var serviceCollection = new ServiceCollection()
                 .AddDbContext<BettingDbContext>(options => options
                     .UseInMemoryDatabase(Guid.NewGuid().ToString()))
-                .AddScoped<IMatchesDbContext>(provider => provider
-                    .GetService<BettingDbContext>()!)
                 .AddScoped<ITeamsDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
                 .AddScoped<ICompetitionsDbContext>(provider => provider
@@ -36,11 +32,6 @@
                 .AddAutoMapper(Assembly.GetCallingAssembly())
                 .AddRepositories()
                 .BuildServiceProvider();
-
-            services
-                .GetService<IMatchQueryRepository>()
-                .Should()
-                .NotBeNull();
 
             services
                 .GetService<ITeamQueryRepository>()

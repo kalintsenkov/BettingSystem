@@ -18,9 +18,7 @@
                     .CustomInstantiator(f => new Team(
                         f.Random.String2(
                             MinNameLength,
-                            MaxNameLength),
-                        f.Random.Number(),
-                        f.Random.Number()))
+                            MaxNameLength)))
                     .Generate()
                     .SetId(1);
 

@@ -1,13 +1,10 @@
-﻿namespace BettingSystem.Infrastructure
+﻿namespace BettingSystem.Infrastructure.Matches
 {
-    using Common;
     using Common.Configuration;
-    using Competitions;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Persistence;
-    using Teams;
 
     public static class InfrastructureConfiguration
     {
@@ -22,15 +19,12 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                .AddDbContext<BettingDbContext>(options => options
+                .AddDbContext<MatchesDbContext>(options => options
                     .UseSqlServer(
                         configuration.GetConnectionString("DefaultConnection"),
                         sqlServer => sqlServer.MigrationsAssembly(
-                            typeof(BettingDbContext).Assembly.FullName)))
-                .AddScoped<ITeamsDbContext>(provider => provider
-                    .GetService<BettingDbContext>()!)
-                .AddScoped<ICompetitionsDbContext>(provider => provider
-                    .GetService<BettingDbContext>()!)
-                .AddTransient<IInitializer, BettingDbInitializer>();
+                            typeof(MatchesDbContext).Assembly.FullName)))
+                .AddScoped<IMatchesDbContext>(provider => provider
+                    .GetService<MatchesDbContext>()!);
     }
 }

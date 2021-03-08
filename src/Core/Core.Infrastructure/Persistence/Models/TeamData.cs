@@ -9,8 +9,6 @@
     internal class TeamData :
         IMapFrom<Domain.Teams.Models.Team>,
         IMapTo<Domain.Teams.Models.Team>,
-        IMapFrom<Domain.Matches.Models.Team>,
-        IMapTo<Domain.Matches.Models.Team>,
         IMapFrom<Domain.Competitions.Models.Leagues.Team>,
         IMapTo<Domain.Competitions.Models.Leagues.Team>
     {
@@ -32,12 +30,6 @@
                 .CreateMap<
                     TeamData,
                     Domain.Teams.Models.Team>()
-                .ReverseMap();
-
-            mapper
-                .CreateMap<
-                    TeamData,
-                    Domain.Matches.Models.Team>()
                 .ReverseMap();
 
             mapper

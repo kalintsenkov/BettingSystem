@@ -7,23 +7,14 @@
 
     public class Team : Entity<int>
     {
-        internal Team(
-            string name,
-            int points,
-            int leagueId)
+        internal Team(string name)
         {
             this.Validate(name);
 
             this.Name = name;
-            this.Points = points;
-            this.LeagueId = leagueId;
         }
 
         public string Name { get; private set; }
-
-        public int Points { get; private set; }
-
-        public int LeagueId { get; private set; }
 
         private void Validate(string name)
             => Guard.ForStringLength<InvalidMatchException>(

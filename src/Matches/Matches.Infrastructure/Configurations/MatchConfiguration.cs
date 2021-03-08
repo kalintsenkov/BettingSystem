@@ -1,12 +1,12 @@
 ﻿namespace BettingSystem.Infrastructure.Matches.Configurations
 {
+    using Domain.Matches.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Persistence.Models;
 
-    internal class MatchConfiguration : IEntityTypeConfiguration<MatchData>
+    internal class MatchConfiguration : IEntityTypeConfiguration<Match>
     {
-        public void Configure(EntityTypeBuilder<MatchData> builder)
+        public void Configure(EntityTypeBuilder<Match> builder)
         {
             builder
                 .HasKey(m => m.Id);
@@ -18,21 +18,21 @@
             builder
                 .HasOne(m => m.HomeTeam)
                 .WithMany()
-                .HasForeignKey(m => m.HomeTeamId)
+                .HasForeignKey("HomeTeamId")
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasOne(m => m.AwayTeam)
                 .WithMany()
-                .HasForeignKey(m => m.AwayTeamId)
+                .HasForeignKey("AwayTeamId")
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasOne(m => m.Stadium)
-                .WithMany(s => s.Matches)
-                .HasForeignKey(m => m.StadiumId)
+                .WithMany()
+                .HasForeignKey("StadiumId")
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 

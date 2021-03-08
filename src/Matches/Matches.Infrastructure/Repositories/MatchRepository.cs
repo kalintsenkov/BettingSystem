@@ -9,25 +9,22 @@
     using Application.Matches.Queries.Details;
     using Application.Matches.Queries.Stadiums;
     using AutoMapper;
-    using Common.Events;
     using Common.Persistence;
     using Domain.Common;
     using Domain.Matches.Models;
     using Domain.Matches.Repositories;
     using Microsoft.EntityFrameworkCore;
-    using Persistence.Models;
+    using Persistence;
 
-    internal class MatchRepository : DataRepository<IMatchesDbContext, Match, MatchData>,
+    internal class MatchRepository : DataRepository<IMatchesDbContext, Match>,
         IMatchDomainRepository,
         IMatchQueryRepository
     {
-        public MatchRepository(
-            IMatchesDbContext db,
-            IMapper mapper,
-            IEventDispatcher eventDispatcher)
-            : base(db, mapper, eventDispatcher)
-        {
-        }
+        private readonly IMapper mapper;
+
+        public MatchRepository(IMatchesDbContext db, IMapper mapper)
+            : base(db)
+            => this.mapper = mapper;
 
         public async Task<bool> Delete(
             int id,
@@ -50,9 +47,9 @@
         public async Task<Match> Find(
             int id,
             CancellationToken cancellationToken = default)
-            => await this.Mapper
+            => await this.mapper
                 .ProjectTo<Match>(this
-                    .AllAsDataModels()
+                    .All()
                     .Include(m => m.HomeTeam)
                     .Include(m => m.AwayTeam)
                     .Include(m => m.Stadium))
@@ -61,18 +58,18 @@
         public async Task<IEnumerable<MatchResponseModel>> GetMatchListings(
             Specification<Match> matchSpecification,
             CancellationToken cancellationToken = default)
-            => await this.Mapper
+            => await this.mapper
                 .ProjectTo<MatchResponseModel>(this
-                    .AllAsDomainModels()
+                    .AllAsNoTracking()
                     .Where(matchSpecification))
                 .ToListAsync(cancellationToken);
 
         public async Task<MatchDetailsResponseModel> GetDetails(
             int id,
             CancellationToken cancellationToken = default)
-            => await this.Mapper
+            => await this.mapper
                 .ProjectTo<MatchDetailsResponseModel>(this
-                    .AllAsDomainModels()
+                    .AllAsNoTracking()
                     .Where(m => m.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -92,23 +89,21 @@
 
         public async Task<IEnumerable<GetMatchStadiumsResponseModel>> GetStadiums(
             CancellationToken cancellationToken = default)
-            => await this.Mapper
+            => await this.mapper
                 .ProjectTo<GetMatchStadiumsResponseModel>(this
                     .AllStadiums())
                 .ToListAsync(cancellationToken);
 
         private IQueryable<Team> AllTeams()
-            => this.Mapper
-                .ProjectTo<Team>(this
-                    .Data
-                    .Teams
-                    .AsNoTracking());
+            => this
+                .Data
+                .Teams
+                .AsNoTracking();
 
         private IQueryable<Stadium> AllStadiums()
-            => this.Mapper
-                .ProjectTo<Stadium>(this
-                    .Data
-                    .Stadiums
-                    .AsNoTracking());
+            => this
+                .Data
+                .Stadiums
+                .AsNoTracking();
     }
 }

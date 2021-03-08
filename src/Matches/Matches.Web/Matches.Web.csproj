@@ -5,8 +5,8 @@
 		<LangVersion>9.0</LangVersion>
 		<Nullable>enable</Nullable>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<AssemblyName>BettingSystem.Web.Betting</AssemblyName>
-		<RootNamespace>BettingSystem.Web.Betting</RootNamespace>
+		<AssemblyName>BettingSystem.Web.Matches</AssemblyName>
+		<RootNamespace>BettingSystem.Web.Matches</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -19,7 +19,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Common\Common.Web\Common.Web.csproj" />
-		<ProjectReference Include="..\Betting.Application\Betting.Application.csproj" />
+		<ProjectReference Include="..\Matches.Application\Matches.Application.csproj" />
 	</ItemGroup>
 
 </Project>
