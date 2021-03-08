@@ -1,15 +1,15 @@
-namespace BettingSystem.Startup.Teams
+namespace BettingSystem.Startup.Competitions
 {
-    using Application.Teams;
-    using Domain.Teams;
-    using Infrastructure.Teams;
+    using Application.Competitions;
+    using Domain.Competitions;
+    using Infrastructure.Competitions;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Web.Common.Middleware;
-    using Web.Teams;
+    using Web.Competitions;
 
     public class Startup
     {

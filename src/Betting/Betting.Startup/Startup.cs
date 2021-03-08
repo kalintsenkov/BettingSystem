@@ -39,7 +39,8 @@ namespace BettingSystem.Startup.Betting
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints => endpoints
-                    .MapControllers());
+                    .MapControllers())
+                .Initialize();
         }
     }
 }

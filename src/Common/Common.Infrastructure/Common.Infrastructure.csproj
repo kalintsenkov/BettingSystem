@@ -23,6 +23,10 @@
 		</AssemblyAttribute>
 
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>BettingSystem.Infrastructure.Competitions</_Parameter1>
+		</AssemblyAttribute>
+
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
 			<_Parameter1>BettingSystem.Infrastructure.Matches</_Parameter1>
 		</AssemblyAttribute>
 

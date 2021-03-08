@@ -1,5 +1,6 @@
 ﻿namespace BettingSystem.Infrastructure.Teams
 {
+    using Common;
     using Common.Configuration;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -25,6 +26,7 @@
                         sqlServer => sqlServer.MigrationsAssembly(
                             typeof(TeamsDbContext).Assembly.FullName)))
                 .AddScoped<ITeamsDbContext>(provider => provider
-                    .GetService<TeamsDbContext>()!);
+                    .GetService<TeamsDbContext>()!)
+                .AddTransient<IInitializer, TeamsDbInitializer>();
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace BettingSystem.Infrastructure.Betting
 {
+    using Common;
     using Common.Configuration;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -25,6 +26,7 @@
                         sqlServer => sqlServer.MigrationsAssembly(
                             typeof(BettingDbContext).Assembly.FullName)))
                 .AddScoped<IBettingDbContext>(provider => provider
-                    .GetService<BettingDbContext>()!);
+                    .GetService<BettingDbContext>()!)
+                .AddTransient<IInitializer, BettingDbInitializer>();
     }
 }

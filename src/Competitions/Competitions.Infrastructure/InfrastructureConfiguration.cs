@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Infrastructure.Matches
+﻿namespace BettingSystem.Infrastructure.Competitions
 {
     using Common;
     using Common.Configuration;
@@ -20,13 +20,13 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                .AddDbContext<MatchesDbContext>(options => options
+                .AddDbContext<CompetitionsDbContext>(options => options
                     .UseSqlServer(
                         configuration.GetConnectionString("DefaultConnection"),
                         sqlServer => sqlServer.MigrationsAssembly(
-                            typeof(MatchesDbContext).Assembly.FullName)))
-                .AddScoped<IMatchesDbContext>(provider => provider
-                    .GetService<MatchesDbContext>()!)
-                .AddTransient<IInitializer, MatchesDbInitializer>();
+                            typeof(CompetitionsDbContext).Assembly.FullName)))
+                .AddScoped<ICompetitionsDbContext>(provider => provider
+                    .GetService<CompetitionsDbContext>()!)
+                .AddTransient<IInitializer, CompetitionsDbInitializer>();
     }
 }

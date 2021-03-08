@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<LangVersion>9.0</LangVersion>
 		<Nullable>enable</Nullable>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<AssemblyName>BettingSystem.Infrastructure.Matches</AssemblyName>
-		<RootNamespace>BettingSystem.Infrastructure.Matches</RootNamespace>
+		<AssemblyName>BettingSystem.Infrastructure.Competitions</AssemblyName>
+		<RootNamespace>BettingSystem.Infrastructure.Competitions</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -27,7 +27,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
-		<ProjectReference Include="..\Matches.Application\Matches.Application.csproj" />
+		<ProjectReference Include="..\Competitions.Application\Competitions.Application.csproj" />
 	</ItemGroup>
 
 </Project>
