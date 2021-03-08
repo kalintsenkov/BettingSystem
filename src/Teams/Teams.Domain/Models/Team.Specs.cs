@@ -17,12 +17,12 @@
         }
 
         [Theory]
-        [InlineData("", 1, 0)]
-        [InlineData("cs", 1, 1)]
-        [InlineData(null, 1, 2)]
-        public void InvalidTeamShouldThrowException(string name, int leagueId, int points)
+        [InlineData("", 0)]
+        [InlineData("cs", 1)]
+        [InlineData(null, 2)]
+        public void InvalidTeamShouldThrowException(string name, int points)
         {
-            Action act = () => new Team(name, leagueId, points);
+            Action act = () => new Team(name, points);
 
             act.Should().Throw<InvalidTeamException>();
         }

@@ -1,13 +1,12 @@
-﻿namespace BettingSystem.Infrastructure.Teams
+﻿namespace BettingSystem.Infrastructure.Teams.Persistence
 {
     using Common.Persistence;
     using Domain.Teams.Models;
     using Microsoft.EntityFrameworkCore;
-    using Persistence.Models;
 
     internal interface ITeamsDbContext : IDbContext
     {
-        DbSet<TeamData> Teams { get; }
+        DbSet<Team> Teams { get; }
 
         DbSet<Player> Players { get; }
     }

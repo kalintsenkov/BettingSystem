@@ -31,6 +31,10 @@
 			<_Parameter1>BettingSystem.Domain.Matches</_Parameter1>
 		</AssemblyAttribute>
 
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>BettingSystem.Domain.Teams</_Parameter1>
+		</AssemblyAttribute>
+
 		<PackageReference Include="Bogus" Version="33.0.1" />
 		<PackageReference Include="FakeItEasy" Version="6.2.1" />
 		<PackageReference Include="FakeItEasy.Analyzer.CSharp" Version="6.0.0" />

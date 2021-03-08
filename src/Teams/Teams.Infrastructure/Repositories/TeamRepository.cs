@@ -8,24 +8,21 @@
     using Application.Teams.Queries.All;
     using Application.Teams.Queries.Players;
     using AutoMapper;
-    using Common.Events;
     using Common.Persistence;
     using Domain.Teams.Models;
     using Domain.Teams.Repositories;
     using Microsoft.EntityFrameworkCore;
-    using Persistence.Models;
+    using Persistence;
 
-    internal class TeamRepository : DataRepository<ITeamsDbContext, Team, TeamData>,
+    internal class TeamRepository : DataRepository<ITeamsDbContext, Team>,
         ITeamDomainRepository,
         ITeamQueryRepository
     {
-        public TeamRepository(
-            ITeamsDbContext db,
-            IMapper mapper,
-            IEventDispatcher eventDispatcher)
-            : base(db, mapper, eventDispatcher)
-        {
-        }
+        private readonly IMapper mapper;
+
+        public TeamRepository(ITeamsDbContext db, IMapper mapper)
+            : base(db)
+            => this.mapper = mapper;
 
         public async Task<bool> Delete(
             int id,
@@ -48,25 +45,25 @@
         public async Task<Team> Find(
             int id,
             CancellationToken cancellationToken = default)
-            => await this.Mapper
+            => await this.mapper
                 .ProjectTo<Team>(this
-                    .AllAsDataModels()
+                    .All()
                     .Where(t => t.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
         public async Task<IEnumerable<GetAllTeamsResponseModel>> GetTeamListings(
             CancellationToken cancellationToken = default)
-            => await this.Mapper
+            => await this.mapper
                 .ProjectTo<GetAllTeamsResponseModel>(this
-                    .AllAsDomainModels())
+                    .AllAsNoTracking())
                 .ToListAsync(cancellationToken);
 
         public async Task<IEnumerable<GetTeamPlayersResponseModel>> GetTeamPlayers(
             int teamId,
             CancellationToken cancellationToken = default)
-            => await this.Mapper
+            => await this.mapper
                 .ProjectTo<GetTeamPlayersResponseModel>(this
-                    .AllAsDataModels()
+                    .AllAsNoTracking()
                     .Where(t => t.Id == teamId)
                     .SelectMany(t => t.Players))
                 .ToListAsync(cancellationToken);

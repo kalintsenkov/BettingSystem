@@ -9,8 +9,6 @@
 
     public class CreateTeamCommand : TeamCommand<CreateTeamCommand>, IRequest<CreateTeamResponseModel>
     {
-        public int LeagueId { get; set; }
-
         public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, CreateTeamResponseModel>
         {
             private readonly ITeamFactory teamFactory;
@@ -30,7 +28,6 @@
             {
                 var team = this.teamFactory
                     .WithName(request.Name)
-                    .InLeague(request.LeagueId)
                     .Build();
 
                 team = await this.teamRepository.Save(team, cancellationToken);

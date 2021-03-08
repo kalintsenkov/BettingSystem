@@ -7,7 +7,6 @@
         private const int DefaultTeamPoints = 0;
 
         private string teamName = default!;
-        private int teamLeagueId = default!;
 
         public ITeamFactory WithName(string name)
         {
@@ -15,15 +14,6 @@
             return this;
         }
 
-        public ITeamFactory InLeague(int leagueId)
-        {
-            this.teamLeagueId = leagueId;
-            return this;
-        }
-
-        public Team Build() => new Team(
-            this.teamName,
-            DefaultTeamPoints,
-            this.teamLeagueId);
+        public Team Build() => new Team(this.teamName, DefaultTeamPoints);
     }
 }

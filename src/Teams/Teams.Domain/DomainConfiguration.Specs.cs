@@ -1,8 +1,8 @@
-﻿namespace BettingSystem.Domain
+﻿namespace BettingSystem.Domain.Teams
 {
     using System.Linq;
     using Common;
-    using Competitions.Factories;
+    using Factories;
     using FluentAssertions;
     using Microsoft.Extensions.DependencyInjection;
     using Xunit;
@@ -19,7 +19,7 @@
                 .BuildServiceProvider();
 
             services
-                .GetService<ILeagueFactory>()
+                .GetService<ITeamFactory>()
                 .Should()
                 .NotBeNull();
         }

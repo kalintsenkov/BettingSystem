@@ -2,14 +2,10 @@
 {
     using System.Reflection;
     using Competitions;
-    using Domain.Teams.Models;
     using Microsoft.EntityFrameworkCore;
     using Models;
-    using Teams;
 
-    internal class BettingDbContext : DbContext,
-        ITeamsDbContext,
-        ICompetitionsDbContext
+    internal class BettingDbContext : DbContext, ICompetitionsDbContext
     {
         public BettingDbContext(DbContextOptions<BettingDbContext> options)
             : base(options)
@@ -17,8 +13,6 @@
         }
 
         public DbSet<TeamData> Teams { get; set; } = default!;
-
-        public DbSet<Player> Players { get; set; } = default!;
 
         public DbSet<LeagueData> Leagues { get; set; } = default!;
 

@@ -12,16 +12,12 @@
     {
         private readonly HashSet<Player> players;
 
-        internal Team(
-            string name,
-            int points,
-            int leagueId)
+        internal Team(string name, int points)
         {
             this.Validate(name);
 
             this.Name = name;
             this.Points = points;
-            this.LeagueId = leagueId;
 
             this.players = new HashSet<Player>();
         }
@@ -30,9 +26,7 @@
 
         public int Points { get; private set; }
 
-        public int LeagueId { get; private set; }
-
-        public IReadOnlyCollection<Player> Players => this.players.ToList();
+        public IReadOnlyCollection<Player> Players => this.players.ToList().AsReadOnly();
 
         public Team UpdateName(string name)
         {

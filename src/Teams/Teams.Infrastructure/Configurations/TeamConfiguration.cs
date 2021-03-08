@@ -1,13 +1,14 @@
 ﻿namespace BettingSystem.Infrastructure.Teams.Configurations
 {
+    using Domain.Teams.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Persistence.Models;
+
     using static Domain.Common.Models.ModelConstants.Common;
 
-    internal class TeamConfiguration : IEntityTypeConfiguration<TeamData>
+    internal class TeamConfiguration : IEntityTypeConfiguration<Team>
     {
-        public void Configure(EntityTypeBuilder<TeamData> builder)
+        public void Configure(EntityTypeBuilder<Team> builder)
         {
             builder
                 .HasKey(t => t.Id);
@@ -20,9 +21,10 @@
             builder
                 .HasMany(t => t.Players)
                 .WithOne()
-                .HasForeignKey("TeamId")
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .Metadata
+                .PrincipalToDependent
+                .SetField("players");
         }
     }
 }
