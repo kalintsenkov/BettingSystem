@@ -1,5 +1,6 @@
 ﻿namespace BettingSystem.Application.Betting
 {
+    using System.Reflection;
     using Common.Configuration;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,8 @@
         public static IServiceCollection AddApplication(
             this IServiceCollection services,
             IConfiguration configuration)
-            => services.AddCommonApplication(configuration);
+            => services.AddCommonApplication(
+                configuration,
+                Assembly.GetExecutingAssembly());
     }
 }

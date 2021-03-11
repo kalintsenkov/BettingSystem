@@ -1,5 +1,6 @@
 ﻿namespace BettingSystem.Infrastructure.Betting
 {
+    using System.Reflection;
     using Common;
     using Common.Configuration;
     using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,9 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                .AddCommonInfrastructure(configuration)
+                .AddCommonInfrastructure(
+                    configuration,
+                    Assembly.GetExecutingAssembly())
                 .AddDatabase(configuration);
 
         private static IServiceCollection AddDatabase(

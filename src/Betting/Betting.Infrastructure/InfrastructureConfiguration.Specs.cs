@@ -1,8 +1,9 @@
-﻿namespace BettingSystem.Infrastructure.Competitions
+﻿namespace BettingSystem.Infrastructure.Betting
 {
     using System;
     using System.Reflection;
-    using Application.Competitions.Leagues;
+    using Application.Betting.Bets;
+    using Application.Betting.Gamblers;
     using Common.Configuration;
     using FluentAssertions;
     using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,10 @@
         public void AddRepositoriesShouldRegisterRepositories()
         {
             var serviceCollection = new ServiceCollection()
-                .AddDbContext<CompetitionsDbContext>(options => options
+                .AddDbContext<BettingDbContext>(options => options
                     .UseInMemoryDatabase(Guid.NewGuid().ToString()))
-                .AddScoped<ICompetitionsDbContext>(provider => provider
-                    .GetService<CompetitionsDbContext>()!);
+                .AddScoped<IBettingDbContext>(provider => provider
+                    .GetService<BettingDbContext>()!);
 
             var assembly = Assembly.GetExecutingAssembly();
 
@@ -29,7 +30,12 @@
                 .BuildServiceProvider();
 
             services
-                .GetService<ILeagueQueryRepository>()
+                .GetService<IBetQueryRepository>()
+                .Should()
+                .NotBeNull();
+
+            services
+                .GetService<IGamblerQueryRepository>()
                 .Should()
                 .NotBeNull();
         }

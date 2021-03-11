@@ -18,19 +18,21 @@
     {
         public static IServiceCollection AddCommonInfrastructure(
             this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            Assembly assembly)
             => services
-                .AddRepositories()
-                .AddAutoMapperProfile(Assembly.GetCallingAssembly())
+                .AddRepositories(assembly)
+                .AddAutoMapperProfile(assembly)
                 .AddTokenAuthentication(configuration)
                 .AddTransient<IEventDispatcher, EventDispatcher>()
                 .AddTransient<IImageService, ImageService>();
 
         internal static IServiceCollection AddRepositories(
-            this IServiceCollection services)
+            this IServiceCollection services,
+            Assembly assembly)
             => services
                 .Scan(scan => scan
-                    .FromCallingAssembly()
+                    .FromAssemblies(assembly)
                     .AddClasses(classes => classes
                         .AssignableTo(typeof(IDomainRepository<>))
                         .AssignableTo(typeof(IQueryRepository<>)))

@@ -10,20 +10,22 @@
     {
         public static IServiceCollection AddCommonApplication(
             this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            Assembly assembly)
             => services
                 .Configure<ApplicationSettings>(
                     configuration.GetSection(nameof(ApplicationSettings)),
                     options => options.BindNonPublicProperties = true)
-                .AddMediatR(Assembly.GetExecutingAssembly())
-                .AddEventHandlers()
+                .AddMediatR(assembly)
+                .AddEventHandlers(assembly)
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
         private static IServiceCollection AddEventHandlers(
-            this IServiceCollection services)
+            this IServiceCollection services,
+            Assembly assembly)
             => services
                 .Scan(scan => scan
-                    .FromCallingAssembly()
+                    .FromAssemblies(assembly)
                     .AddClasses(classes => classes
                         .AssignableTo(typeof(IEventHandler<>)))
                     .AsImplementedInterfaces()

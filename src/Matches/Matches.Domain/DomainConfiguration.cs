@@ -1,5 +1,6 @@
 ﻿namespace BettingSystem.Domain.Matches
 {
+    using System.Reflection;
     using Common.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -7,6 +8,7 @@
     {
         public static IServiceCollection AddDomain(
             this IServiceCollection services)
-            => services.AddCommonDomain();
+            => services.AddCommonDomain(
+                Assembly.GetExecutingAssembly());
     }
 }

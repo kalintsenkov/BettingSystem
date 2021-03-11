@@ -1,5 +1,6 @@
 ﻿namespace BettingSystem.Infrastructure.Identity
 {
+    using System.Reflection;
     using Application.Identity;
     using Common;
     using Common.Configuration;
@@ -17,7 +18,9 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                .AddCommonInfrastructure(configuration)
+                .AddCommonInfrastructure(
+                    configuration,
+                    Assembly.GetExecutingAssembly())
                 .AddDatabase(configuration)
                 .AddIdentity()
                 .AddTransient<IIdentity, IdentityService>()
@@ -34,7 +37,7 @@
                             typeof(IdentityDbContext).Assembly.FullName)))
                 .AddTransient<IInitializer, IdentityDbInitializer>();
 
-        private static IServiceCollection AddIdentity(
+        internal static IServiceCollection AddIdentity(
             this IServiceCollection services)
         {
             services
