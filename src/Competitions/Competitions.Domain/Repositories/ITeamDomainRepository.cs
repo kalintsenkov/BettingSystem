@@ -3,7 +3,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Common;
-    using Models.Leagues;
+    using Models.Teams;
 
     public interface ITeamDomainRepository : IDomainRepository<Team>
     {

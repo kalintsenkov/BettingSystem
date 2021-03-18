@@ -2,6 +2,7 @@
 {
     using System.Reflection;
     using Domain.Competitions.Models.Leagues;
+    using Domain.Competitions.Models.Teams;
     using Microsoft.EntityFrameworkCore;
 
     internal class CompetitionsDbContext : DbContext, ICompetitionsDbContext

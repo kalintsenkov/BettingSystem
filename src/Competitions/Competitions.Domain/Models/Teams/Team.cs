@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Domain.Competitions.Models.Leagues
+﻿namespace BettingSystem.Domain.Competitions.Models.Teams
 {
     using Common;
     using Common.Models;

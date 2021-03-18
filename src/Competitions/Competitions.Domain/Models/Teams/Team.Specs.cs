@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Domain.Teams.Models
+﻿namespace BettingSystem.Domain.Competitions.Models.Teams
 {
     using System;
     using Exceptions;
@@ -17,12 +17,12 @@
         }
 
         [Theory]
-        [InlineData("")]
-        [InlineData("cs")]
-        [InlineData(null)]
-        public void InvalidTeamShouldThrowException(string name)
+        [InlineData("", -1)]
+        [InlineData("cs", 0)]
+        [InlineData(null, 1)]
+        public void InvalidTeamShouldThrowException(string name, int points)
         {
-            Action act = () => new Team(name);
+            Action act = () => new Team(name, points);
 
             act.Should().Throw<InvalidTeamException>();
         }

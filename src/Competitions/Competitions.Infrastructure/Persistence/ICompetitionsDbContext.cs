@@ -2,6 +2,7 @@
 {
     using Common.Persistence;
     using Domain.Competitions.Models.Leagues;
+    using Domain.Competitions.Models.Teams;
     using Microsoft.EntityFrameworkCore;
 
     internal interface ICompetitionsDbContext : IDbContext

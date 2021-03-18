@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Domain.Teams.Models
+﻿namespace BettingSystem.Domain.Competitions.Models.Teams
 {
     using System;
     using Bogus;
@@ -18,7 +18,8 @@
                     .CustomInstantiator(f => new Team(
                         f.Random.String2(
                             MinNameLength,
-                            MaxNameLength)))
+                            MaxNameLength),
+                        f.Random.Number()))
                     .Generate()
                     .SetId(1);
 

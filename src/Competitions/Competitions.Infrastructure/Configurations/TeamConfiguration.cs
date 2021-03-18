@@ -1,6 +1,6 @@
 ﻿namespace BettingSystem.Infrastructure.Competitions.Configurations
 {
-    using Domain.Competitions.Models.Leagues;
+    using Domain.Competitions.Models.Teams;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

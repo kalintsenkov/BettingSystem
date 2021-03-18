@@ -4,9 +4,8 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Application.Competitions.Teams;
-    using AutoMapper;
     using Common.Persistence;
-    using Domain.Competitions.Models.Leagues;
+    using Domain.Competitions.Models.Teams;
     using Domain.Competitions.Repositories;
     using Microsoft.EntityFrameworkCore;
     using Persistence;
@@ -15,11 +14,10 @@
         ITeamDomainRepository,
         ITeamQueryRepository
     {
-        private readonly IMapper mapper;
-
-        public TeamRepository(ICompetitionsDbContext db, IMapper mapper)
+        public TeamRepository(ICompetitionsDbContext db)
             : base(db)
-            => this.mapper = mapper;
+        {
+        }
 
         public async Task<Team> Find(
             int id,

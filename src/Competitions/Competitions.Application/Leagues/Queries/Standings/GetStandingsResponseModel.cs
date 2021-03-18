@@ -1,7 +1,7 @@
 ﻿namespace BettingSystem.Application.Competitions.Leagues.Queries.Standings
 {
     using Common.Mapping;
-    using Domain.Competitions.Models.Leagues;
+    using Domain.Competitions.Models.Teams;
 
     public class GetStandingsResponseModel : IMapFrom<Team>
     {
