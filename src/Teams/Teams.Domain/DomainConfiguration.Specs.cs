@@ -1,0 +1,28 @@
+﻿namespace BettingSystem.Domain.Teams
+{
+    using System.Linq;
+    using Common;
+    using FluentAssertions;
+    using Microsoft.Extensions.DependencyInjection;
+    using Xunit;
+
+    public class DomainConfigurationSpecs
+    {
+        [Fact]
+        public void AddDomainShouldRegisterInitialData()
+        {
+            var serviceCollection = new ServiceCollection();
+
+            var services = serviceCollection
+                .AddDomain()
+                .BuildServiceProvider();
+
+            services
+                .GetServices<IInitialData>()
+                .ToList()
+                .ForEach(initialData => initialData
+                    .Should()
+                    .NotBeNull());
+        }
+    }
+}
