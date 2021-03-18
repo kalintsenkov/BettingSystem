@@ -18,13 +18,13 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                .AddCommonInfrastructure(
-                    configuration,
-                    Assembly.GetExecutingAssembly())
                 .AddDatabase(configuration)
                 .AddIdentity()
                 .AddTransient<IIdentity, IdentityService>()
-                .AddTransient<IJwtGenerator, JwtGeneratorService>();
+                .AddTransient<IJwtGenerator, JwtGeneratorService>()
+                .AddCommonInfrastructure(
+                    configuration,
+                    Assembly.GetExecutingAssembly());
 
         private static IServiceCollection AddDatabase(
             this IServiceCollection services,

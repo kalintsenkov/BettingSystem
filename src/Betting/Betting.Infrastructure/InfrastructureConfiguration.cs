@@ -14,10 +14,10 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
+                .AddDatabase(configuration)
                 .AddCommonInfrastructure(
                     configuration,
-                    Assembly.GetExecutingAssembly())
-                .AddDatabase(configuration);
+                    Assembly.GetExecutingAssembly());
 
         private static IServiceCollection AddDatabase(
             this IServiceCollection services,

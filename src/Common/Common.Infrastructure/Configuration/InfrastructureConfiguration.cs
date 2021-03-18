@@ -1,13 +1,11 @@
 ﻿namespace BettingSystem.Infrastructure.Common.Configuration
 {
-    using System;
     using System.Reflection;
     using System.Text;
     using Application.Common;
     using Application.Common.Contracts;
     using Domain.Common;
     using Events;
-    using Mapping;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -22,10 +20,9 @@
             Assembly assembly)
             => services
                 .AddRepositories(assembly)
-                .AddAutoMapperProfile(assembly)
                 .AddTokenAuthentication(configuration)
-                .AddTransient<IEventDispatcher, EventDispatcher>()
-                .AddTransient<IImageService, ImageService>();
+                .AddTransient<IImageService, ImageService>()
+                .AddTransient<IEventDispatcher, EventDispatcher>();
 
         internal static IServiceCollection AddRepositories(
             this IServiceCollection services,
@@ -38,15 +35,6 @@
                         .AssignableTo(typeof(IQueryRepository<>)))
                     .AsImplementedInterfaces()
                     .WithTransientLifetime());
-
-        private static IServiceCollection AddAutoMapperProfile(
-            this IServiceCollection services,
-            Assembly assembly)
-            => services
-                .AddAutoMapper(
-                    (_, config) => config
-                        .AddProfile(new MappingProfile(assembly)),
-                    Array.Empty<Assembly>());
 
         private static IServiceCollection AddTokenAuthentication(
             this IServiceCollection services,

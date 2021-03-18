@@ -1,9 +1,8 @@
-﻿namespace BettingSystem.Infrastructure.Common.Mapping
+﻿namespace BettingSystem.Application.Common.Mapping
 {
     using System;
     using System.Linq;
     using System.Reflection;
-    using Application.Common.Mapping;
     using AutoMapper;
 
     public class MappingProfile : Profile

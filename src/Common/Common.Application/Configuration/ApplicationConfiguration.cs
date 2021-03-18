@@ -1,7 +1,9 @@
 ﻿namespace BettingSystem.Application.Common.Configuration
 {
+    using System;
     using System.Reflection;
     using Behaviours;
+    using Mapping;
     using MediatR;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,7 @@
                     options => options.BindNonPublicProperties = true)
                 .AddMediatR(assembly)
                 .AddEventHandlers(assembly)
+                .AddAutoMapperProfile(assembly)
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
         private static IServiceCollection AddEventHandlers(
@@ -30,5 +33,14 @@
                         .AssignableTo(typeof(IEventHandler<>)))
                     .AsImplementedInterfaces()
                     .WithTransientLifetime());
+
+        private static IServiceCollection AddAutoMapperProfile(
+            this IServiceCollection services,
+            Assembly assembly)
+            => services
+                .AddAutoMapper(
+                    (_, config) => config
+                        .AddProfile(new MappingProfile(assembly)),
+                    Array.Empty<Assembly>());
     }
 }
