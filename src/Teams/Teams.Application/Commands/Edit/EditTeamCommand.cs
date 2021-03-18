@@ -2,14 +2,13 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Application.Common;
     using Common;
     using Domain.Teams.Repositories;
     using MediatR;
 
-    public class EditTeamCommand : EntityCommand<int>, IRequest<Result>
+    public class EditTeamCommand : TeamCommand<EditTeamCommand>, IRequest<Result>
     {
-        public string Name { get; set; } = default!;
-
         public class EditTeamCommandHandler : IRequestHandler<EditTeamCommand, Result>
         {
             private readonly ITeamDomainRepository teamRepository;

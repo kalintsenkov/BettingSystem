@@ -1,11 +1,9 @@
-﻿namespace BettingSystem.Domain.Competitions.Factories.Teams
+﻿namespace BettingSystem.Domain.Teams.Factories
 {
-    using Models.Teams;
+    using Models;
 
     internal class TeamFactory : ITeamFactory
     {
-        private const int DefaultTeamPoints = 0;
-
         private string teamName = default!;
 
         public ITeamFactory WithName(string name)
@@ -14,6 +12,6 @@
             return this;
         }
 
-        public Team Build() => new Team(this.teamName, DefaultTeamPoints);
+        public Team Build() => new Team(this.teamName);
     }
 }

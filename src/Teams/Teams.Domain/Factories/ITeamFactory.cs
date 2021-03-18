@@ -1,7 +1,7 @@
-﻿namespace BettingSystem.Domain.Competitions.Factories.Teams
+﻿namespace BettingSystem.Domain.Teams.Factories
 {
     using Common;
-    using Models.Teams;
+    using Models;
 
     public interface ITeamFactory : IFactory<Team>
     {

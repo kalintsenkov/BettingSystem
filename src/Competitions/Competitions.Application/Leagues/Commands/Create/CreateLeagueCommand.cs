@@ -3,7 +3,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Common;
-    using Domain.Competitions.Factories.Leagues;
+    using Domain.Competitions.Factories;
     using Domain.Competitions.Repositories;
     using MediatR;
 

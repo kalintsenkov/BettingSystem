@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Application.Common;
     using Application.Teams.Commands.AddPlayer;
+    using Application.Teams.Commands.Create;
     using Application.Teams.Commands.Delete;
     using Application.Teams.Commands.Edit;
     using Application.Teams.Queries.All;
@@ -28,6 +29,11 @@
         public async Task<ActionResult<IEnumerable<GetTeamPlayersResponseModel>>> Players(
             [FromRoute] GetTeamPlayersQuery query)
             => await this.Send(query);
+
+        [HttpPost]
+        public async Task<ActionResult<CreateTeamResponseModel>> Create(
+            CreateTeamCommand command)
+            => await this.Send(command);
 
         [HttpPut]
         [Route(Id)]
