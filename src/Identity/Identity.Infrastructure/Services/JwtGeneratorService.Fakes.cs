@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Infrastructure.Identity
+﻿namespace BettingSystem.Infrastructure.Identity.Services
 {
     using FakeItEasy;
 

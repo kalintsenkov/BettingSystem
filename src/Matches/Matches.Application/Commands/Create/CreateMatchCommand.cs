@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
     using Application.Common.Contracts;
     using Application.Common.Exceptions;
-    using Application.Common.Images;
     using Common;
     using Domain.Matches.Factories;
     using Domain.Matches.Repositories;
@@ -75,7 +74,7 @@
                     .WithAwayTeam(awayTeam)
                     .Build();
 
-                match = await this.matchRepository.Save(match, cancellationToken);
+                await this.matchRepository.Save(match, cancellationToken);
 
                 return new CreateMatchResponseModel(match.Id);
             }

@@ -2,7 +2,7 @@
 {
     using System.Linq;
     using Common;
-    using Factories;
+    using Factories.Leagues;
     using FluentAssertions;
     using Microsoft.Extensions.DependencyInjection;
     using Xunit;

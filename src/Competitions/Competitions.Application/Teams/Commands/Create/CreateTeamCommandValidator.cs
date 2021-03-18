@@ -1,14 +1,12 @@
-﻿namespace BettingSystem.Application.Teams.Commands.Common
+﻿namespace BettingSystem.Application.Competitions.Teams.Commands.Create
 {
-    using Application.Common;
     using FluentValidation;
 
     using static Domain.Common.Models.ModelConstants.Common;
 
-    public class TeamCommandValidator<TCommand> : AbstractValidator<TeamCommand<TCommand>>
-        where TCommand : EntityCommand<int>
+    public class CreateTeamCommandValidator : AbstractValidator<CreateTeamCommand>
     {
-        public TeamCommandValidator()
+        public CreateTeamCommandValidator()
             => this.RuleFor(t => t.Name)
                 .MinimumLength(MinNameLength)
                 .MaximumLength(MaxNameLength)

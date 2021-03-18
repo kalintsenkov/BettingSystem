@@ -1,14 +1,16 @@
-﻿namespace BettingSystem.Application.Teams.Commands.Create
+﻿namespace BettingSystem.Application.Competitions.Teams.Commands.Create
 {
     using System.Threading;
     using System.Threading.Tasks;
     using Common;
-    using Domain.Teams.Factories;
-    using Domain.Teams.Repositories;
+    using Domain.Competitions.Factories.Teams;
+    using Domain.Competitions.Repositories;
     using MediatR;
 
-    public class CreateTeamCommand : TeamCommand<CreateTeamCommand>, IRequest<CreateTeamResponseModel>
+    public class CreateTeamCommand : EntityCommand<int>, IRequest<CreateTeamResponseModel>
     {
+        public string Name { get; set; } = default!;
+
         public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, CreateTeamResponseModel>
         {
             private readonly ITeamFactory teamFactory;
@@ -30,7 +32,7 @@
                     .WithName(request.Name)
                     .Build();
 
-                team = await this.teamRepository.Save(team, cancellationToken);
+                await this.teamRepository.Save(team, cancellationToken);
 
                 return new CreateTeamResponseModel(team.Id);
             }

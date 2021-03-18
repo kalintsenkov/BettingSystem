@@ -3,7 +3,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Common;
-    using Domain.Competitions.Factories;
+    using Domain.Competitions.Factories.Leagues;
     using Domain.Competitions.Repositories;
     using MediatR;
 
@@ -30,7 +30,7 @@
                     .WithName(request.Name)
                     .Build();
 
-                league = await this.leagueRepository.Save(league, cancellationToken);
+                await this.leagueRepository.Save(league, cancellationToken);
 
                 return new CreateLeagueResponseModel(league.Id);
             }

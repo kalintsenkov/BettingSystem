@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Infrastructure.Identity
+﻿namespace BettingSystem.Infrastructure.Identity.Services
 {
     using System.Linq;
     using System.Threading.Tasks;

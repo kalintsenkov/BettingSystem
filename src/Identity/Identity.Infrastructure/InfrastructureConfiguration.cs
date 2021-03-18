@@ -9,6 +9,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Persistence;
+    using Services;
 
     using static Domain.Common.Models.ModelConstants.Identity;
 

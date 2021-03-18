@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Application.Teams.Commands.Create
+﻿namespace BettingSystem.Application.Competitions.Teams.Commands.Create
 {
     public class CreateTeamResponseModel
     {
