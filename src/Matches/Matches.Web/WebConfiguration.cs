@@ -1,6 +1,6 @@
 ﻿namespace BettingSystem.Web.Matches
 {
-    using Common.Configuration;
+    using Common;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class WebConfiguration

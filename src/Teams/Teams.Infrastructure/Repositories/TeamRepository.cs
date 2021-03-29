@@ -8,7 +8,7 @@
     using Application.Teams.Queries.All;
     using Application.Teams.Queries.Players;
     using AutoMapper;
-    using Common.Persistence;
+    using Common.Repositories;
     using Domain.Teams.Models;
     using Domain.Teams.Repositories;
     using Microsoft.EntityFrameworkCore;

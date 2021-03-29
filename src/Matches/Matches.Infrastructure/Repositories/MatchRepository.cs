@@ -9,7 +9,7 @@
     using Application.Matches.Queries.Details;
     using Application.Matches.Queries.Stadiums;
     using AutoMapper;
-    using Common.Persistence;
+    using Common.Repositories;
     using Domain.Common;
     using Domain.Matches.Models;
     using Domain.Matches.Repositories;

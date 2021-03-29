@@ -7,7 +7,7 @@
     using Application.Betting.Bets;
     using Application.Betting.Bets.Queries.Details;
     using AutoMapper;
-    using Common.Persistence;
+    using Common.Repositories;
     using Domain.Betting.Models.Bets;
     using Domain.Betting.Models.Gamblers;
     using Domain.Betting.Models.Matches;

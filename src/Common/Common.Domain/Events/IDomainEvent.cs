@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Domain.Common
+﻿namespace BettingSystem.Domain.Common.Events
 {
     public interface IDomainEvent
     {

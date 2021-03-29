@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Domain.Common.Configuration
+﻿namespace BettingSystem.Domain.Common
 {
     using System.Reflection;
     using Microsoft.Extensions.DependencyInjection;

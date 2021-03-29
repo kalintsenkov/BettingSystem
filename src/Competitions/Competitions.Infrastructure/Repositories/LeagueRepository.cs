@@ -7,7 +7,7 @@
     using Application.Competitions.Leagues;
     using Application.Competitions.Leagues.Queries.Standings;
     using AutoMapper;
-    using Common.Persistence;
+    using Common.Repositories;
     using Domain.Competitions.Models.Leagues;
     using Domain.Competitions.Repositories;
     using Microsoft.EntityFrameworkCore;
@@ -20,7 +20,7 @@
         private readonly IMapper mapper;
 
         public LeagueRepository(ICompetitionsDbContext db, IMapper mapper)
-            : base(db) 
+            : base(db)
             => this.mapper = mapper;
 
         public async Task<bool> Delete(

@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Web.Common.Configuration
+﻿namespace BettingSystem.Web.Common
 {
     using Application.Common;
     using Application.Common.Contracts;

@@ -1,7 +1,5 @@
-﻿namespace BettingSystem.Domain.Matches.Events
+﻿namespace BettingSystem.Domain.Common.Events.Matches
 {
-    using Common;
-
     public class MatchFinishedEvent : IDomainEvent
     {
         internal MatchFinishedEvent(

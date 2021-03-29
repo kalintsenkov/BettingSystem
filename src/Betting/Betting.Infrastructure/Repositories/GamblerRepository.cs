@@ -9,7 +9,7 @@
     using Application.Betting.Gamblers;
     using Application.Betting.Gamblers.Queries.Details;
     using AutoMapper;
-    using Common.Persistence;
+    using Common.Repositories;
     using Domain.Betting.Exceptions;
     using Domain.Betting.Models.Gamblers;
     using Domain.Betting.Repositories;

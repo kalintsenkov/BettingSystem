@@ -1,7 +1,7 @@
 ﻿namespace BettingSystem.Application.Betting
 {
     using System.Reflection;
-    using Common.Configuration;
+    using Common;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 

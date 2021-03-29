@@ -4,7 +4,7 @@
     using System.Reflection;
     using Application.Betting.Bets;
     using Application.Betting.Gamblers;
-    using Common.Configuration;
+    using Common;
     using FluentAssertions;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;

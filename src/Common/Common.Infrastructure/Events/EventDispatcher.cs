@@ -5,7 +5,7 @@
     using System.Reflection;
     using System.Threading.Tasks;
     using Application.Common;
-    using Domain.Common;
+    using Domain.Common.Events;
     using Microsoft.Extensions.DependencyInjection;
 
     internal class EventDispatcher : IEventDispatcher

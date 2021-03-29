@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Application.Common.Configuration
+﻿namespace BettingSystem.Application.Common
 {
     using System;
     using System.Reflection;

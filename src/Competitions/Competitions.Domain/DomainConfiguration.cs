@@ -1,7 +1,7 @@
 ﻿namespace BettingSystem.Domain.Competitions
 {
     using System.Reflection;
-    using Common.Configuration;
+    using Common;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class DomainConfiguration

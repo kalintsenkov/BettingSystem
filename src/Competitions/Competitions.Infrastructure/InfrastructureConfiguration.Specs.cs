@@ -3,7 +3,7 @@
     using System;
     using System.Reflection;
     using Application.Competitions.Leagues;
-    using Common.Configuration;
+    using Common;
     using FluentAssertions;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;

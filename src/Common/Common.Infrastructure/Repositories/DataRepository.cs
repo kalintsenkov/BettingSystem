@@ -1,10 +1,11 @@
-﻿namespace BettingSystem.Infrastructure.Common.Persistence
+﻿namespace BettingSystem.Infrastructure.Common.Repositories
 {
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using Domain.Common;
     using Microsoft.EntityFrameworkCore;
+    using Persistence;
 
     internal abstract class DataRepository<TDbContext, TEntity> : IDomainRepository<TEntity>
         where TDbContext : IDbContext

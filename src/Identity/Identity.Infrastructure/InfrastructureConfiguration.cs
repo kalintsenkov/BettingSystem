@@ -3,7 +3,6 @@
     using System.Reflection;
     using Application.Identity;
     using Common;
-    using Common.Configuration;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;

@@ -4,7 +4,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Application.Competitions.Teams;
-    using Common.Persistence;
+    using Common.Repositories;
     using Domain.Competitions.Models.Teams;
     using Domain.Competitions.Repositories;
     using Microsoft.EntityFrameworkCore;

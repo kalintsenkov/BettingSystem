@@ -2,8 +2,8 @@
 {
     using System;
     using Common;
+    using Common.Events.Matches;
     using Common.Models;
-    using Events;
     using Exceptions;
 
     using static Common.Models.ModelConstants.Common;
