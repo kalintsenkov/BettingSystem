@@ -3,8 +3,8 @@
     using System.Threading.Tasks;
     using Domain.Common.Events;
 
-    internal interface IEventDispatcher
+    internal interface IEventPublisher
     {
-        Task Dispatch(IDomainEvent domainEvent);
+        Task Publish(IDomainEvent domainEvent);
     }
 }

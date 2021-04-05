@@ -20,6 +20,7 @@
             => services
                 .AddDatabase(configuration)
                 .AddIdentity()
+                .AddEvents()
                 .AddTransient<IIdentity, IdentityService>()
                 .AddTransient<IJwtGenerator, JwtGeneratorService>()
                 .AddCommonInfrastructure(
