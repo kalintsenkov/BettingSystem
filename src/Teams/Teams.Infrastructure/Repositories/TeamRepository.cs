@@ -45,10 +45,9 @@
         public async Task<Team> Find(
             int id,
             CancellationToken cancellationToken = default)
-            => await this.mapper
-                .ProjectTo<Team>(this
-                    .All()
-                    .Where(t => t.Id == id))
+            => await this
+                .All()
+                .Where(t => t.Id == id)
                 .FirstOrDefaultAsync(cancellationToken);
 
         public async Task<IEnumerable<GetAllTeamsResponseModel>> GetTeamListings(
