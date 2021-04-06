@@ -19,18 +19,18 @@
                     configuration.GetSection(nameof(ApplicationSettings)),
                     options => options.BindNonPublicProperties = true)
                 .AddMediatR(assembly)
-                .AddEventConsumers(assembly)
+                .AddEventHandlers(assembly)
                 .AddAutoMapperProfile(assembly)
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
-        private static IServiceCollection AddEventConsumers(
+        private static IServiceCollection AddEventHandlers(
             this IServiceCollection services,
             Assembly assembly)
             => services
                 .Scan(scan => scan
                     .FromAssemblies(assembly)
                     .AddClasses(classes => classes
-                        .AssignableTo(typeof(IEventConsumer<>)))
+                        .AssignableTo(typeof(IEventHandler<>)))
                     .AsImplementedInterfaces()
                     .WithTransientLifetime());
 

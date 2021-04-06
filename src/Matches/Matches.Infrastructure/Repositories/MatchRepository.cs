@@ -47,11 +47,12 @@
         public async Task<Match> Find(
             int id,
             CancellationToken cancellationToken = default)
-            => await this
-                .All()
-                .Include(m => m.HomeTeam)
-                .Include(m => m.AwayTeam)
-                .Include(m => m.Stadium)
+            => await this.mapper
+                .ProjectTo<Match>(this
+                    .All()
+                    .Include(m => m.HomeTeam)
+                    .Include(m => m.AwayTeam)
+                    .Include(m => m.Stadium))
                 .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 
         public async Task<IEnumerable<MatchResponseModel>> GetMatchListings(
