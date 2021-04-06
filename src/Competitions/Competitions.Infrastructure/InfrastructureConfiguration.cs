@@ -1,6 +1,7 @@
 ﻿namespace BettingSystem.Infrastructure.Competitions
 {
     using System.Reflection;
+    using Application.Competitions.Teams.Handlers;
     using Common;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -14,6 +15,7 @@
             IConfiguration configuration)
             => services
                 .AddDatabase(configuration)
+                .AddEvents(typeof(MatchFinishedEventConsumer))
                 .AddCommonInfrastructure(
                     configuration,
                     Assembly.GetExecutingAssembly());

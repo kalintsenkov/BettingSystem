@@ -14,6 +14,7 @@
             IConfiguration configuration)
             => services
                 .AddDatabase(configuration)
+                .AddEvents()
                 .AddCommonInfrastructure(
                     configuration,
                     Assembly.GetExecutingAssembly());

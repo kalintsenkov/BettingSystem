@@ -7,7 +7,6 @@
     using Application.Common.Contracts;
     using Domain.Common;
     using Events;
-    using Extensions;
     using MassTransit;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.Extensions.Configuration;
@@ -25,27 +24,30 @@
                 .AddRepositories(assembly)
                 .AddTokenAuthentication(configuration)
                 .AddTransient<IImageService, ImageService>()
-                .AddTransient<IEventDispatcher, EventDispatcher>();
+                .AddTransient<IEventPublisher, EventPublisher>();
 
         public static IServiceCollection AddEvents(
             this IServiceCollection services,
-            params Type[] handlers)
+            params Type[] consumers)
             => services
                 .AddMassTransit(massTransit =>
                 {
-                    handlers
-                        .ForEach(handler => massTransit
-                            .AddConsumer(handler));
+                    foreach (var consumer in consumers)
+                    {
+                        massTransit.AddConsumer(consumer);
+                    }
 
                     massTransit.AddBus(bus => Bus.Factory.CreateUsingRabbitMq(rabbitMq =>
                     {
                         rabbitMq.Host("localhost");
 
-                        handlers
-                            .ForEach(handler => rabbitMq
+                        foreach (var consumer in consumers)
+                        {
+                            rabbitMq
                                 .ReceiveEndpoint(
-                                    handler.FullName,
-                                    endpoint => endpoint.ConfigureConsumer(bus, handler)));
+                                    consumer.FullName,
+                                    endpoint => endpoint.ConfigureConsumer(bus, consumer));
+                        }
                     }));
                 })
                 .AddMassTransitHostedService();
