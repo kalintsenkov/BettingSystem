@@ -7,6 +7,8 @@
     using Application.Common.Contracts;
     using Domain.Common;
     using Events;
+    using Extensions;
+    using GreenPipes;
     using MassTransit;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.Extensions.Configuration;
@@ -23,34 +25,31 @@
             => services
                 .AddRepositories(assembly)
                 .AddTokenAuthentication(configuration)
-                .AddTransient<IImageService, ImageService>()
-                .AddTransient<IEventPublisher, EventPublisher>();
+                .AddTransient<IImageService, ImageService>();
 
         public static IServiceCollection AddEvents(
             this IServiceCollection services,
             params Type[] consumers)
             => services
-                .AddMassTransit(massTransit =>
+                .AddMassTransit(mt =>
                 {
-                    foreach (var consumer in consumers)
-                    {
-                        massTransit.AddConsumer(consumer);
-                    }
+                    consumers.ForEach(consumer => mt.AddConsumer(consumer));
 
-                    massTransit.AddBus(bus => Bus.Factory.CreateUsingRabbitMq(rabbitMq =>
+                    mt.AddBus(context => Bus.Factory.CreateUsingRabbitMq(rmq =>
                     {
-                        rabbitMq.Host("localhost");
+                        rmq.Host("localhost");
 
-                        foreach (var consumer in consumers)
+                        consumers.ForEach(consumer => rmq.ReceiveEndpoint(consumer.FullName, endpoint =>
                         {
-                            rabbitMq
-                                .ReceiveEndpoint(
-                                    consumer.FullName,
-                                    endpoint => endpoint.ConfigureConsumer(bus, consumer));
-                        }
+                            endpoint.PrefetchCount = 6;
+                            endpoint.UseMessageRetry(retry => retry.Interval(10, 1000));
+
+                            endpoint.ConfigureConsumer(context, consumer);
+                        }));
                     }));
                 })
-                .AddMassTransitHostedService();
+                .AddMassTransitHostedService()
+                .AddTransient<IEventPublisher, EventPublisher>();
 
         internal static IServiceCollection AddRepositories(
             this IServiceCollection services,
