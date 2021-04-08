@@ -1,6 +1,6 @@
 ﻿namespace BettingSystem.Startup.Competitions
 {
-    using Infrastructure.Common;
+    using Infrastructure.Common.Persistence;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -10,7 +10,7 @@
         {
             using var serviceScope = app.ApplicationServices.CreateScope();
 
-            var initializers = serviceScope.ServiceProvider.GetServices<IInitializer>();
+            var initializers = serviceScope.ServiceProvider.GetServices<IDbInitializer>();
 
             foreach (var initializer in initializers)
             {

@@ -3,6 +3,7 @@
     using System.Reflection;
     using Application.Competitions.Teams.Handlers;
     using Common;
+    using Common.Persistence;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,6 @@
                             typeof(CompetitionsDbContext).Assembly.FullName)))
                 .AddScoped<ICompetitionsDbContext>(provider => provider
                     .GetService<CompetitionsDbContext>()!)
-                .AddTransient<IInitializer, CompetitionsDbInitializer>();
+                .AddTransient<IDbInitializer, CompetitionsDbInitializer>();
     }
 }

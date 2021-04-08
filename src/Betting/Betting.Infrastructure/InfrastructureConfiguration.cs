@@ -2,6 +2,7 @@
 {
     using System.Reflection;
     using Common;
+    using Common.Persistence;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,6 @@
                             typeof(BettingDbContext).Assembly.FullName)))
                 .AddScoped<IBettingDbContext>(provider => provider
                     .GetService<BettingDbContext>()!)
-                .AddTransient<IInitializer, BettingDbInitializer>();
+                .AddTransient<IDbInitializer, BettingDbInitializer>();
     }
 }

@@ -3,6 +3,7 @@
     using System.Reflection;
     using Application.Identity;
     using Common;
+    using Common.Persistence;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -35,7 +36,7 @@
                         configuration.GetConnectionString("DefaultConnection"),
                         sqlServer => sqlServer.MigrationsAssembly(
                             typeof(IdentityDbContext).Assembly.FullName)))
-                .AddTransient<IInitializer, IdentityDbInitializer>();
+                .AddTransient<IDbInitializer, IdentityDbInitializer>();
 
         internal static IServiceCollection AddIdentity(
             this IServiceCollection services)

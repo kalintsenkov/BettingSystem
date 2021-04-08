@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Common;
+    using Common.Persistence;
     using Domain.Common;
     using Microsoft.EntityFrameworkCore;
 
-    internal class CompetitionsDbInitializer : IInitializer
+    internal class CompetitionsDbInitializer : IDbInitializer
     {
         private readonly CompetitionsDbContext db;
         private readonly IEnumerable<IInitialData> initialDataProviders;

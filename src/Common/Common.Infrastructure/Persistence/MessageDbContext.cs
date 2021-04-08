@@ -16,7 +16,7 @@
         private readonly Stack<object> savesChangesTracker;
 
         protected MessageDbContext(
-            DbContextOptions options, 
+            DbContextOptions options,
             IEventPublisher eventPublisher)
             : base(options)
         {

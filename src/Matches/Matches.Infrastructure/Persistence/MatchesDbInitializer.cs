@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Common;
+    using Common.Persistence;
     using Domain.Common;
     using Microsoft.EntityFrameworkCore;
 
-    internal class MatchesDbInitializer : IInitializer
+    internal class MatchesDbInitializer : IDbInitializer
     {
         private readonly MatchesDbContext db;
         private readonly IEnumerable<IInitialData> initialDataProviders;

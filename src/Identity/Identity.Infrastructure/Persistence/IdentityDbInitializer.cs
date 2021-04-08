@@ -1,13 +1,13 @@
 ﻿namespace BettingSystem.Infrastructure.Identity.Persistence
 {
     using System.Threading.Tasks;
-    using Common;
+    using Common.Persistence;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     using static Domain.Common.Models.ModelConstants.Common;
 
-    internal class IdentityDbInitializer : IInitializer
+    internal class IdentityDbInitializer : IDbInitializer
     {
         private readonly IdentityDbContext db;
         private readonly UserManager<User> userManager;

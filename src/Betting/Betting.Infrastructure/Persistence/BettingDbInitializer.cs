@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Common;
+    using Common.Persistence;
     using Domain.Common;
     using Microsoft.EntityFrameworkCore;
 
-    internal class BettingDbInitializer : IInitializer
+    internal class BettingDbInitializer : IDbInitializer
     {
         private readonly BettingDbContext db;
         private readonly IEnumerable<IInitialData> initialDataProviders;

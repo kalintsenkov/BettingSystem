@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Common;
+    using Common.Persistence;
     using Domain.Common;
     using Microsoft.EntityFrameworkCore;
 
-    internal class TeamsDbInitializer : IInitializer
+    internal class TeamsDbInitializer : IDbInitializer
     {
         private readonly TeamsDbContext db;
         private readonly IEnumerable<IInitialData> initialDataProviders;
