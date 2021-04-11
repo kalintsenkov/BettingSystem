@@ -19,7 +19,8 @@
                 .AddDbContext<MatchesDbContext>(options => options
                     .UseInMemoryDatabase(Guid.NewGuid().ToString()))
                 .AddScoped<IMatchesDbContext>(provider => provider
-                    .GetService<MatchesDbContext>()!);
+                    .GetService<MatchesDbContext>()!)
+                .AddEvents();
 
             var assembly = Assembly.GetExecutingAssembly();
 
