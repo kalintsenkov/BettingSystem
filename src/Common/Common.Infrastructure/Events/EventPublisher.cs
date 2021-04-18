@@ -6,12 +6,12 @@
 
     internal class EventPublisher : IEventPublisher
     {
-        private readonly IBus publisher;
+        private readonly IBus bus;
 
-        public EventPublisher(IBus publisher)
-            => this.publisher = publisher;
+        public EventPublisher(IBus bus)
+            => this.bus = bus;
 
         public async Task Publish(IDomainEvent domainEvent)
-            => await this.publisher.Publish(domainEvent);
+            => await this.bus.Publish(domainEvent);
     }
 }

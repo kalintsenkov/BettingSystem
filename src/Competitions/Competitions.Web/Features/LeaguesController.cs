@@ -15,7 +15,7 @@
     [AuthorizeAdministrator]
     public class LeaguesController : ApiController
     {
-        [HttpGet(Id)]
+        [HttpGet]
         [AllowAnonymous]
         [Route(Id + PathSeparator + nameof(Standings))]
         public async Task<ActionResult<IEnumerable<GetStandingsResponseModel>>> Standings(
