@@ -11,6 +11,7 @@
     using GreenPipes;
     using MassTransit;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
@@ -18,13 +19,15 @@
 
     public static class InfrastructureConfiguration
     {
-        public static IServiceCollection AddCommonInfrastructure(
+        public static IServiceCollection AddCommonInfrastructure<TDbContext>(
             this IServiceCollection services,
             IConfiguration configuration,
             Assembly assembly)
+            where TDbContext : DbContext
             => services
-                .AddRepositories(assembly)
+                .AddDatabase<TDbContext>(configuration)
                 .AddTokenAuthentication(configuration)
+                .AddRepositories(assembly)
                 .AddTransient<IImageService, ImageService>();
 
         public static IServiceCollection AddEvents(
@@ -62,6 +65,23 @@
                         .AssignableTo(typeof(IQueryRepository<>)))
                     .AsImplementedInterfaces()
                     .WithTransientLifetime());
+
+        private static IServiceCollection AddDatabase<TDbContext>(
+            this IServiceCollection services,
+            IConfiguration configuration)
+            where TDbContext : DbContext
+            => services
+                .AddScoped<DbContext, TDbContext>()
+                .AddDbContext<TDbContext>(options => options
+                    .UseSqlServer(
+                        configuration.GetDefaultConnectionString(),
+                        sqlOptions => sqlOptions
+                            .EnableRetryOnFailure(
+                                maxRetryCount: 10,
+                                maxRetryDelay: TimeSpan.FromSeconds(30),
+                                errorNumbersToAdd: null)
+                            .MigrationsAssembly(
+                                typeof(TDbContext).Assembly.FullName)));
 
         private static IServiceCollection AddTokenAuthentication(
             this IServiceCollection services,

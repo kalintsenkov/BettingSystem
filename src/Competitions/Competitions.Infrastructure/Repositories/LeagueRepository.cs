@@ -13,13 +13,13 @@
     using Microsoft.EntityFrameworkCore;
     using Persistence;
 
-    internal class LeagueRepository : DataRepository<ICompetitionsDbContext, League>,
+    internal class LeagueRepository : DataRepository<CompetitionsDbContext, League>,
         ILeagueDomainRepository,
         ILeagueQueryRepository
     {
         private readonly IMapper mapper;
 
-        public LeagueRepository(ICompetitionsDbContext db, IMapper mapper)
+        public LeagueRepository(CompetitionsDbContext db, IMapper mapper)
             : base(db)
             => this.mapper = mapper;
 

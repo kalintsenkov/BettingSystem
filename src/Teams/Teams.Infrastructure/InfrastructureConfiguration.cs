@@ -3,7 +3,6 @@
     using System.Reflection;
     using Common;
     using Common.Persistence;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Persistence;
@@ -14,22 +13,9 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                .AddDatabase(configuration)
-                .AddCommonInfrastructure(
+                .AddCommonInfrastructure<TeamsDbContext>(
                     configuration,
-                    Assembly.GetExecutingAssembly());
-
-        private static IServiceCollection AddDatabase(
-            this IServiceCollection services,
-            IConfiguration configuration)
-            => services
-                .AddDbContext<TeamsDbContext>(options => options
-                    .UseSqlServer(
-                        configuration.GetConnectionString("DefaultConnection"),
-                        sqlServer => sqlServer.MigrationsAssembly(
-                            typeof(TeamsDbContext).Assembly.FullName)))
-                .AddScoped<ITeamsDbContext>(provider => provider
-                    .GetService<TeamsDbContext>()!)
+                    Assembly.GetExecutingAssembly())
                 .AddTransient<IDbInitializer, TeamsDbInitializer>();
     }
 }

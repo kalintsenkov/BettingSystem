@@ -5,7 +5,6 @@
     using Common;
     using Common.Persistence;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Persistence;
@@ -19,29 +18,18 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                .AddDatabase(configuration)
                 .AddIdentity()
-                .AddTransient<IIdentity, IdentityService>()
-                .AddTransient<IJwtGenerator, JwtGeneratorService>()
-                .AddCommonInfrastructure(
+                .AddCommonInfrastructure<IdentityDbContext>(
                     configuration,
-                    Assembly.GetExecutingAssembly());
-
-        private static IServiceCollection AddDatabase(
-            this IServiceCollection services,
-            IConfiguration configuration)
-            => services
-                .AddDbContext<IdentityDbContext>(options => options
-                    .UseSqlServer(
-                        configuration.GetConnectionString("DefaultConnection"),
-                        sqlServer => sqlServer.MigrationsAssembly(
-                            typeof(IdentityDbContext).Assembly.FullName)))
+                    Assembly.GetExecutingAssembly())
                 .AddTransient<IDbInitializer, IdentityDbInitializer>();
 
         internal static IServiceCollection AddIdentity(
             this IServiceCollection services)
         {
             services
+                .AddTransient<IIdentity, IdentityService>()
+                .AddTransient<IJwtGenerator, JwtGeneratorService>()
                 .AddIdentity<User, IdentityRole>(options =>
                 {
                     options.Password.RequireDigit = false;

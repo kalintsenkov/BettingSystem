@@ -5,10 +5,9 @@
     using System.Threading.Tasks;
     using Domain.Common;
     using Microsoft.EntityFrameworkCore;
-    using Persistence;
 
     internal abstract class DataRepository<TDbContext, TEntity> : IDomainRepository<TEntity>
-        where TDbContext : IDbContext
+        where TDbContext : DbContext
         where TEntity : class, IAggregateRoot
     {
         protected DataRepository(TDbContext db) => this.Data = db;
@@ -19,15 +18,13 @@
 
         protected IQueryable<TEntity> AllAsNoTracking() => this.All().AsNoTracking();
 
-        public async Task<TEntity> Save(
+        public async Task Save(
             TEntity entity,
             CancellationToken cancellationToken = default)
         {
             this.Data.Update(entity);
 
             await this.Data.SaveChangesAsync(cancellationToken);
-
-            return entity;
         }
     }
 }

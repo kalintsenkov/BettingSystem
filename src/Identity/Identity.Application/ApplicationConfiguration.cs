@@ -10,8 +10,9 @@
         public static IServiceCollection AddApplication(
             this IServiceCollection services,
             IConfiguration configuration)
-            => services.AddCommonApplication(
-                configuration,
-                Assembly.GetExecutingAssembly());
+            => services
+                .AddCommonApplication(
+                    configuration, 
+                    Assembly.GetExecutingAssembly());
     }
 }

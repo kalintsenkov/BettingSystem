@@ -10,11 +10,11 @@
     using Microsoft.EntityFrameworkCore;
     using Persistence;
 
-    internal class TeamRepository : DataRepository<ICompetitionsDbContext, Team>,
+    internal class TeamRepository : DataRepository<CompetitionsDbContext, Team>,
         ITeamDomainRepository,
         ITeamQueryRepository
     {
-        public TeamRepository(ICompetitionsDbContext db)
+        public TeamRepository(CompetitionsDbContext db)
             : base(db)
         {
         }

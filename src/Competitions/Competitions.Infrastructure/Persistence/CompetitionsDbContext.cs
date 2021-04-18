@@ -5,7 +5,7 @@
     using Domain.Competitions.Models.Teams;
     using Microsoft.EntityFrameworkCore;
 
-    internal class CompetitionsDbContext : DbContext, ICompetitionsDbContext
+    internal class CompetitionsDbContext : DbContext
     {
         public CompetitionsDbContext(DbContextOptions<CompetitionsDbContext> options)
             : base(options)

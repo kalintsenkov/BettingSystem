@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Application.Competitions.Teams.Handlers
+﻿namespace BettingSystem.Application.Competitions.Teams.Consumers
 {
     using System.Threading.Tasks;
     using Common;

@@ -14,13 +14,13 @@
     using Microsoft.EntityFrameworkCore;
     using Persistence;
 
-    internal class TeamRepository : DataRepository<ITeamsDbContext, Team>,
+    internal class TeamRepository : DataRepository<TeamsDbContext, Team>,
         ITeamDomainRepository,
         ITeamQueryRepository
     {
         private readonly IMapper mapper;
 
-        public TeamRepository(ITeamsDbContext db, IMapper mapper)
+        public TeamRepository(TeamsDbContext db, IMapper mapper)
             : base(db)
             => this.mapper = mapper;
 

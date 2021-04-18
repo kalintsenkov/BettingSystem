@@ -16,13 +16,13 @@
     using Microsoft.EntityFrameworkCore;
     using Persistence;
 
-    internal class BetRepository : DataRepository<IBettingDbContext, Bet>,
+    internal class BetRepository : DataRepository<BettingDbContext, Bet>,
         IBetDomainRepository,
         IBetQueryRepository
     {
         private readonly IMapper mapper;
 
-        public BetRepository(IBettingDbContext db, IMapper mapper)
+        public BetRepository(BettingDbContext db, IMapper mapper)
             : base(db)
             => this.mapper = mapper;
 

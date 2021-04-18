@@ -17,9 +17,7 @@
         {
             var serviceCollection = new ServiceCollection()
                 .AddDbContext<TeamsDbContext>(options => options
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString()))
-                .AddScoped<ITeamsDbContext>(provider => provider
-                    .GetService<TeamsDbContext>()!);
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
             var assembly = Assembly.GetExecutingAssembly();
 

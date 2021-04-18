@@ -17,9 +17,7 @@
         {
             var serviceCollection = new ServiceCollection()
                 .AddDbContext<CompetitionsDbContext>(options => options
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString()))
-                .AddScoped<ICompetitionsDbContext>(provider => provider
-                    .GetService<CompetitionsDbContext>()!);
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
             var assembly = Assembly.GetExecutingAssembly();
 

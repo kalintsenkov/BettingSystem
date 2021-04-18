@@ -6,7 +6,7 @@
     using Domain.Matches.Models;
     using Microsoft.EntityFrameworkCore;
 
-    internal class MatchesDbContext : MessageDbContext, IMatchesDbContext
+    internal class MatchesDbContext : MessageDbContext
     {
         public MatchesDbContext(
             DbContextOptions<MatchesDbContext> options,
@@ -21,6 +21,6 @@
 
         public DbSet<Team> Teams { get; set; } = default!;
 
-        protected override Assembly ConfigurationsAssembly => Assembly.GetExecutingAssembly(); 
+        protected override Assembly ConfigurationsAssembly => Assembly.GetExecutingAssembly();
     }
 }

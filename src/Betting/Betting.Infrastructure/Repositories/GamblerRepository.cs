@@ -16,13 +16,13 @@
     using Microsoft.EntityFrameworkCore;
     using Persistence;
 
-    internal class GamblerRepository : DataRepository<IBettingDbContext, Gambler>,
+    internal class GamblerRepository : DataRepository<BettingDbContext, Gambler>,
         IGamblerDomainRepository,
         IGamblerQueryRepository
     {
         private readonly IMapper mapper;
 
-        public GamblerRepository(IBettingDbContext db, IMapper mapper)
+        public GamblerRepository(BettingDbContext db, IMapper mapper)
             : base(db)
             => this.mapper = mapper;
 

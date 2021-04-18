@@ -4,7 +4,7 @@
     using Domain.Teams.Models;
     using Microsoft.EntityFrameworkCore;
 
-    internal class TeamsDbContext : DbContext, ITeamsDbContext
+    internal class TeamsDbContext : DbContext
     {
         public TeamsDbContext(DbContextOptions<TeamsDbContext> options)
             : base(options)

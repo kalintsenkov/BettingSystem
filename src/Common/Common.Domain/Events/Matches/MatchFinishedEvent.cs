@@ -2,7 +2,7 @@
 {
     public class MatchFinishedEvent : IDomainEvent
     {
-        internal MatchFinishedEvent(
+        public MatchFinishedEvent(
             int homeTeamId,
             int awayTeamId,
             int homeScore,

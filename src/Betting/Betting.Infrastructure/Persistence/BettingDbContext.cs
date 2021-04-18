@@ -6,7 +6,7 @@
     using Domain.Betting.Models.Matches;
     using Microsoft.EntityFrameworkCore;
 
-    internal class BettingDbContext : DbContext, IBettingDbContext
+    internal class BettingDbContext : DbContext
     {
         public BettingDbContext(DbContextOptions<BettingDbContext> options)
             : base(options)

@@ -18,9 +18,7 @@
         {
             var serviceCollection = new ServiceCollection()
                 .AddDbContext<BettingDbContext>(options => options
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString()))
-                .AddScoped<IBettingDbContext>(provider => provider
-                    .GetService<BettingDbContext>()!);
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
             var assembly = Assembly.GetExecutingAssembly();
 

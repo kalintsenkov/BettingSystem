@@ -17,16 +17,14 @@
         {
             var serviceCollection = new ServiceCollection()
                 .AddDbContext<MatchesDbContext>(options => options
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString()))
-                .AddScoped<IMatchesDbContext>(provider => provider
-                    .GetService<MatchesDbContext>()!)
-                .AddEvents();
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
             var assembly = Assembly.GetExecutingAssembly();
 
             var services = serviceCollection
                 .AddAutoMapper(assembly)
                 .AddRepositories(assembly)
+                .AddEvents()
                 .BuildServiceProvider();
 
             services

@@ -19,11 +19,10 @@
                     configuration.GetSection(nameof(ApplicationSettings)),
                     options => options.BindNonPublicProperties = true)
                 .AddMediatR(assembly)
-                .AddEventConsumers(assembly)
                 .AddAutoMapperProfile(assembly)
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
-        private static IServiceCollection AddEventConsumers(
+        public static IServiceCollection AddEventConsumers(
             this IServiceCollection services,
             Assembly assembly)
             => services

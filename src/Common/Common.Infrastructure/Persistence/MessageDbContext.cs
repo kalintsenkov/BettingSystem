@@ -1,6 +1,5 @@
 ﻿namespace BettingSystem.Infrastructure.Common.Persistence
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using System.Threading;
@@ -13,17 +12,12 @@
     internal abstract class MessageDbContext : DbContext
     {
         private readonly IEventPublisher eventPublisher;
-        private readonly Stack<object> savesChangesTracker;
 
         protected MessageDbContext(
             DbContextOptions options,
             IEventPublisher eventPublisher)
             : base(options)
-        {
-            this.eventPublisher = eventPublisher;
-
-            this.savesChangesTracker = new Stack<object>();
-        }
+            => this.eventPublisher = eventPublisher;
 
         public DbSet<Message> Messages { get; set; } = default!;
 
@@ -39,8 +33,6 @@
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
-            this.savesChangesTracker.Push(new object());
-
             var entities = this.ChangeTracker
                 .Entries<IEntity>()
                 .Select(e => e.Entity)
@@ -53,20 +45,29 @@
 
                 entity.ClearEvents();
 
-                foreach (var domainEvent in events)
+                var eventMessages = events
+                    .ToDictionary(
+                        domainEvent => domainEvent,
+                        domainEvent => new Message(domainEvent));
+
+                foreach (var (_, message) in eventMessages)
+                {
+                    this.Add(message);
+                }
+
+                await base.SaveChangesAsync(cancellationToken);
+
+                foreach (var (domainEvent, message) in eventMessages)
                 {
                     await this.eventPublisher.Publish(domainEvent);
+
+                    message.MarkAsPublished();
+
+                    await base.SaveChangesAsync(cancellationToken);
                 }
             }
 
-            this.savesChangesTracker.Pop();
-
-            if (!this.savesChangesTracker.Any())
-            {
-                return await base.SaveChangesAsync(cancellationToken);
-            }
-
-            return 0;
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }

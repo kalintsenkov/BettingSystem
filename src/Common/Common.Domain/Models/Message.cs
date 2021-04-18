@@ -7,18 +7,16 @@
     {
         private string serializedData = default!;
 
-        public Message(object data)
+        public Message(object data) 
+            => this.Data = data;
+
+        private Message()
         {
-            this.Data = data;
-
-            this.Type = default!;
         }
-
-        private Message() => this.Type = default!;
 
         public int Id { get; private set; }
 
-        public Type Type { get; private set; }
+        public Type Type { get; private set; } = default!;
 
         public bool Published { get; private set; }
 

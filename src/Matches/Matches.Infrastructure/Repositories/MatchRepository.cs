@@ -16,13 +16,13 @@
     using Microsoft.EntityFrameworkCore;
     using Persistence;
 
-    internal class MatchRepository : DataRepository<IMatchesDbContext, Match>,
+    internal class MatchRepository : DataRepository<MatchesDbContext, Match>,
         IMatchDomainRepository,
         IMatchQueryRepository
     {
         private readonly IMapper mapper;
 
-        public MatchRepository(IMatchesDbContext db, IMapper mapper)
+        public MatchRepository(MatchesDbContext db, IMapper mapper)
             : base(db)
             => this.mapper = mapper;
 
