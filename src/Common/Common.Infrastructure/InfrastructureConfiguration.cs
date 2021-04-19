@@ -9,8 +9,11 @@
     using Events;
     using Extensions;
     using GreenPipes;
+    using Hangfire;
+    using Hangfire.SqlServer;
     using MassTransit;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.Data.SqlClient;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -32,8 +35,11 @@
 
         public static IServiceCollection AddEvents(
             this IServiceCollection services,
+            IConfiguration configuration,
+            bool usePolling = true,
             params Type[] consumers)
-            => services
+        {
+            services
                 .AddMassTransit(mt =>
                 {
                     consumers.ForEach(consumer => mt.AddConsumer(consumer));
@@ -53,6 +59,31 @@
                 })
                 .AddMassTransitHostedService()
                 .AddTransient<IEventPublisher, EventPublisher>();
+
+            if (usePolling)
+            {
+                services
+                    .AddHangfireDatabase(configuration)
+                    .AddHangfire(config => config
+                        .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                        .UseSimpleAssemblyNameTypeSerializer()
+                        .UseRecommendedSerializerSettings()
+                        .UseSqlServerStorage(
+                            configuration.GetCronJobsConnectionString(),
+                            new SqlServerStorageOptions
+                            {
+                                CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                                SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                                QueuePollInterval = TimeSpan.Zero,
+                                UseRecommendedIsolationLevel = true,
+                                DisableGlobalLocks = true
+                            }))
+                    .AddHangfireServer()
+                    .AddHostedService<MessagesHostedService>();
+            }
+
+            return services;
+        }
 
         internal static IServiceCollection AddRepositories(
             this IServiceCollection services,
@@ -113,6 +144,29 @@
                 });
 
             services.AddHttpContextAccessor();
+
+            return services;
+        }
+
+        private static IServiceCollection AddHangfireDatabase(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var connectionString = configuration.GetCronJobsConnectionString();
+
+            var dbName = connectionString
+                .Split(";")[1]
+                .Split("=")[1];
+
+            using var connection = new SqlConnection(connectionString.Replace(dbName, "master"));
+
+            connection.Open();
+
+            using var command = new SqlCommand(
+                $"IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'{dbName}') create database [{dbName}];",
+                connection);
+
+            command.ExecuteNonQuery();
 
             return services;
         }

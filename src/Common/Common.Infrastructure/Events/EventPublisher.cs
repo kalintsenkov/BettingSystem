@@ -21,6 +21,12 @@
                 domainEvent.GetType(),
                 GetCancellationToken());
 
+        public async Task Publish<TDomainEvent>(TDomainEvent domainEvent, Type domainEventType)
+            => await this.bus.Publish(
+                domainEvent,
+                domainEventType,
+                GetCancellationToken());
+
         private static CancellationToken GetCancellationToken()
         {
             var timeout = TimeSpan.FromMilliseconds(TimeoutMilliseconds);

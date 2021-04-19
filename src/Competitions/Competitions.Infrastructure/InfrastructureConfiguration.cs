@@ -14,7 +14,10 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                .AddEvents(typeof(MatchFinishedEventConsumer))
+                .AddEvents(
+                    configuration,
+                    usePolling: false,
+                    consumers: typeof(MatchFinishedEventConsumer))
                 .AddCommonInfrastructure<CompetitionsDbContext>(
                     configuration,
                     Assembly.GetExecutingAssembly())

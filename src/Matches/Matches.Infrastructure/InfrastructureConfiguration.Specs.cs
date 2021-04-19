@@ -10,6 +10,8 @@
     using Persistence;
     using Xunit;
 
+    using static Common.InfrastructureConfigurationFakes;
+
     public class InfrastructureConfigurationSpecs
     {
         [Fact]
@@ -24,7 +26,9 @@
             var services = serviceCollection
                 .AddAutoMapper(assembly)
                 .AddRepositories(assembly)
-                .AddEvents()
+                .AddEvents(
+                    configuration: FakeConfiguration,
+                    usePolling: false)
                 .BuildServiceProvider();
 
             services
