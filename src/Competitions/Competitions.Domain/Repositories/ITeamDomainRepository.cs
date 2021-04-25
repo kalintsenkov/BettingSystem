@@ -11,7 +11,7 @@
             int id,
             CancellationToken cancellationToken = default);
 
-        Task GiveTeamPoints(
+        Task GivePoints(
             int homeTeamId,
             int awayTeamId,
             int homeScore,

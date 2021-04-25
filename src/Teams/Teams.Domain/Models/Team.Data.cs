@@ -14,9 +14,7 @@
                 new Team("Man City"),
                 new Team("Man United"),
                 new Team("Real Madrid"),
-                new Team("Barcelona"),
-                new Team("Arsenal"),
-                new Team("Chelsea")
+                new Team("Barcelona")
             };
     }
 }

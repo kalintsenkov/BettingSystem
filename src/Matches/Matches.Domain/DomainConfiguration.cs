@@ -8,7 +8,8 @@
     {
         public static IServiceCollection AddDomain(
             this IServiceCollection services)
-            => services.AddCommonDomain(
-                Assembly.GetExecutingAssembly());
+            => services
+                .AddCommonDomain(
+                    Assembly.GetExecutingAssembly());
     }
 }

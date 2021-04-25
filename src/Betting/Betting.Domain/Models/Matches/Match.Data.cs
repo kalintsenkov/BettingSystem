@@ -23,14 +23,7 @@
                     new Team("Barcelona"),
                     new Team("Real Madrid"),
                     new Statistics(0, 3),
-                    Status.FirstHalf),
-
-                new Match(
-                    DateTime.Today.AddDays(3),
-                    new Team("Chelsea"),
-                    new Team("Arsenal"),
-                    new Statistics(0, 0),
-                    Status.Cancelled)
+                    Status.FirstHalf)
             };
     }
 }

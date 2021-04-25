@@ -1,5 +1,6 @@
 ﻿namespace BettingSystem.Infrastructure.Competitions
 {
+    using System;
     using System.Reflection;
     using Application.Competitions.Teams.Consumers;
     using Common;
@@ -10,6 +11,12 @@
 
     public static class InfrastructureConfiguration
     {
+        private static readonly Type[] Consumers =
+        {
+            typeof(MatchFinishedEventConsumer),
+            typeof(TeamUpdatedEventConsumer)
+        };
+
         public static IServiceCollection AddInfrastructure(
             this IServiceCollection services,
             IConfiguration configuration)
@@ -17,7 +24,7 @@
                 .AddEvents(
                     configuration,
                     usePolling: false,
-                    consumers: typeof(MatchFinishedEventConsumer))
+                    consumers: Consumers)
                 .AddCommonInfrastructure<CompetitionsDbContext>(
                     configuration,
                     Assembly.GetExecutingAssembly())

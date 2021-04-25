@@ -13,6 +13,7 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
+                .AddEvents(configuration)
                 .AddCommonInfrastructure<TeamsDbContext>(
                     configuration,
                     Assembly.GetExecutingAssembly())

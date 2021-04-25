@@ -2,6 +2,7 @@
 {
     using Application.Common;
     using FluentValidation;
+
     using static Domain.Common.Models.ModelConstants.Common;
 
     public class LeagueCommandValidator<TCommand> : AbstractValidator<LeagueCommand<TCommand>>

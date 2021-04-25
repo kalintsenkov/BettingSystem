@@ -1,13 +1,17 @@
 ﻿namespace BettingSystem.Infrastructure.Teams.Persistence
 {
     using System.Reflection;
+    using Common.Events;
+    using Common.Persistence;
     using Domain.Teams.Models;
     using Microsoft.EntityFrameworkCore;
 
-    internal class TeamsDbContext : DbContext
+    internal class TeamsDbContext : MessagesDbContext
     {
-        public TeamsDbContext(DbContextOptions<TeamsDbContext> options)
-            : base(options)
+        public TeamsDbContext(
+            DbContextOptions<TeamsDbContext> options,
+            IEventPublisher eventPublisher)
+            : base(options, eventPublisher)
         {
         }
 
@@ -15,11 +19,6 @@
 
         public DbSet<Player> Players { get; set; } = default!;
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-            base.OnModelCreating(builder);
-        }
+        protected override Assembly ConfigurationsAssembly => Assembly.GetExecutingAssembly();
     }
 }

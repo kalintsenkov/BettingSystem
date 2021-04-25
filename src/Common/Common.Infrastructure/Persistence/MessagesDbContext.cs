@@ -9,11 +9,11 @@
     using Events;
     using Microsoft.EntityFrameworkCore;
 
-    internal abstract class MessageDbContext : DbContext
+    internal abstract class MessagesDbContext : DbContext
     {
         private readonly IEventPublisher eventPublisher;
 
-        protected MessageDbContext(
+        protected MessagesDbContext(
             DbContextOptions options,
             IEventPublisher eventPublisher)
             : base(options)
@@ -41,14 +41,13 @@
 
             foreach (var entity in entities)
             {
-                var events = entity.Events.ToArray();
-
-                entity.ClearEvents();
-
-                var eventMessages = events
+                var eventMessages = entity
+                    .Events
                     .ToDictionary(
                         domainEvent => domainEvent,
                         domainEvent => new Message(domainEvent));
+
+                entity.ClearEvents();
 
                 foreach (var (_, message) in eventMessages)
                 {

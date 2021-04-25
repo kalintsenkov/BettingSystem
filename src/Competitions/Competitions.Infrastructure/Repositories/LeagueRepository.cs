@@ -27,14 +27,14 @@
             int id,
             CancellationToken cancellationToken = default)
         {
-            var group = await this.Data.Leagues.FindAsync(id);
+            var league = await this.Data.Leagues.FindAsync(id);
 
-            if (group == null)
+            if (league == null)
             {
                 return false;
             }
 
-            this.Data.Leagues.Remove(group);
+            this.Data.Leagues.Remove(league);
 
             await this.Data.SaveChangesAsync(cancellationToken);
 

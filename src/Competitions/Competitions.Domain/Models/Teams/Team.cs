@@ -21,6 +21,15 @@
 
         public int Points { get; private set; }
 
+        public Team UpdateName(string name)
+        {
+            this.Validate(name);
+
+            this.Name = name;
+
+            return this;
+        }
+
         public void GivePointsForWin() => this.Points += WinPoints;
 
         public void GivePointFromDraw() => this.Points += DrawPoint;

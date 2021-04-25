@@ -47,12 +47,7 @@
                 return;
             }
 
-            if (min <= number && number <= max)
-            {
-                return;
-            }
-
-            ThrowException<TException>($"{name} must be between {min} and {max}.");
+            AgainstOutOfRange<TException>(number.Value, min, max, name);
         }
 
         public static void AgainstOutOfRange<TException>(decimal number, decimal min, decimal max, string name = "Value")

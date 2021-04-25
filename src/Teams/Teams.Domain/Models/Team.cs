@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Common;
+    using Common.Events.Teams;
     using Common.Models;
     using Exceptions;
 
@@ -30,6 +31,10 @@
             this.Validate(name);
 
             this.Name = name;
+
+            this.RaiseEvent(new TeamUpdatedEvent(
+                this.Id,
+                this.Name));
 
             return this;
         }

@@ -6,7 +6,7 @@
     using Domain.Matches.Models;
     using Microsoft.EntityFrameworkCore;
 
-    internal class MatchesDbContext : MessageDbContext
+    internal class MatchesDbContext : MessagesDbContext
     {
         public MatchesDbContext(
             DbContextOptions<MatchesDbContext> options,
