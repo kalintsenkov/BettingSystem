@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Application.Common
+﻿namespace BettingSystem.Application.Common.Contracts
 {
     using Domain.Common.Events;
     using MassTransit;

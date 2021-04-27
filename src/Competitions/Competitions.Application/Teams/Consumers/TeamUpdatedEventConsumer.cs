@@ -1,7 +1,7 @@
 ﻿namespace BettingSystem.Application.Competitions.Teams.Consumers
 {
     using System.Threading.Tasks;
-    using Common;
+    using Common.Contracts;
     using Domain.Common.Events.Teams;
     using Domain.Competitions.Repositories;
     using MassTransit;

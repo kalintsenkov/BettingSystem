@@ -3,6 +3,7 @@
     using System;
     using System.Reflection;
     using Behaviours;
+    using Contracts;
     using Mapping;
     using MediatR;
     using Microsoft.Extensions.Configuration;
