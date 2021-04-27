@@ -22,6 +22,14 @@
             this.teams = new HashSet<Team>();
         }
 
+        internal League(string name, HashSet<Team> teams)
+        {
+            this.Validate(name);
+
+            this.Name = name;
+            this.teams = teams;
+        }
+
         public string Name { get; private set; }
 
         public IReadOnlyCollection<Team> Teams => this.teams.ToList().AsReadOnly();
