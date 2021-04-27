@@ -19,8 +19,6 @@
 
         public DbSet<Gambler> Gamblers { get; set; } = default!;
 
-        public DbSet<Team> Teams { get; set; } = default!;
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

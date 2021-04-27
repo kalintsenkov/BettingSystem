@@ -17,20 +17,6 @@
                 .IsRequired();
 
             builder
-                .HasOne(m => m.HomeTeam)
-                .WithMany()
-                .HasForeignKey("HomeTeamId")
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .HasOne(m => m.AwayTeam)
-                .WithMany()
-                .HasForeignKey("AwayTeamId")
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
                 .OwnsOne(m => m.Statistics, s =>
                 {
                     s.WithOwner();

@@ -9,16 +9,12 @@
     {
         internal Match(
             DateTime startDate,
-            Team homeTeam,
-            Team awayTeam,
             Statistics statistics,
             Status status)
         {
             this.Validate(startDate);
 
             this.StartDate = startDate;
-            this.HomeTeam = homeTeam;
-            this.AwayTeam = awayTeam;
             this.Statistics = statistics;
             this.Status = status;
         }
@@ -27,17 +23,11 @@
         {
             this.StartDate = startDate;
 
-            this.HomeTeam = default!;
-            this.AwayTeam = default!;
             this.Statistics = default!;
             this.Status = default!;
         }
 
         public DateTime StartDate { get; }
-
-        public Team HomeTeam { get; }
-
-        public Team AwayTeam { get; }
 
         public Statistics Statistics { get; }
 

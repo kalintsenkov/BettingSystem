@@ -2,7 +2,6 @@
 {
     using System;
     using Exceptions;
-    using FakeItEasy;
     using FluentAssertions;
     using Matches;
     using Xunit;
@@ -14,8 +13,6 @@
         {
             var match = new Match(
                 DateTime.Today,
-                A.Dummy<Team>(),
-                A.Dummy<Team>(),
                 new Statistics(0, 3),
                 Status.NotStarted);
 
@@ -35,8 +32,6 @@
         {
             var match = new Match(
                 DateTime.Today,
-                A.Dummy<Team>(),
-                A.Dummy<Team>(),
                 new Statistics(3, 0),
                 Status.NotStarted);
 
@@ -54,8 +49,6 @@
         {
             var match = new Match(
                 DateTime.Today,
-                A.Dummy<Team>(),
-                A.Dummy<Team>(),
                 new Statistics(3, 0),
                 Status.NotStarted);
 
@@ -77,8 +70,6 @@
         {
             var match = new Match(
                 DateTime.Today,
-                A.Dummy<Team>(),
-                A.Dummy<Team>(),
                 new Statistics(3, 0),
                 Status.FirstHalf);
 
