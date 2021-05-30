@@ -1,12 +1,11 @@
 ﻿namespace BettingSystem.Application.Competitions.Teams.Consumers
 {
     using System.Threading.Tasks;
-    using Common.Contracts;
     using Domain.Common.Events.Teams;
     using Domain.Competitions.Repositories;
     using MassTransit;
 
-    public class TeamUpdatedEventConsumer : IEventConsumer<TeamUpdatedEvent>
+    public class TeamUpdatedEventConsumer : IConsumer<TeamUpdatedEvent>
     {
         private readonly ITeamDomainRepository teamRepository;
 

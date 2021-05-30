@@ -3,8 +3,8 @@
     using System;
     using System.Reflection;
     using Behaviours;
-    using Contracts;
     using Mapping;
+    using MassTransit;
     using MediatR;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +30,7 @@
                 .Scan(scan => scan
                     .FromAssemblies(assembly)
                     .AddClasses(classes => classes
-                        .AssignableTo(typeof(IEventConsumer<>)))
+                        .AssignableTo(typeof(IConsumer<>)))
                     .AsImplementedInterfaces()
                     .WithTransientLifetime());
 
