@@ -11,12 +11,12 @@
         public IEnumerable<object> GetData()
             => new List<Match>
             {
-                new Match(
+                new(
                     DateTime.Today.AddHours(5),
                     new Statistics(null, null),
                     Status.NotStarted),
 
-                new Match(
+                new(
                     DateTime.Today.AddDays(2),
                     new Statistics(0, 3),
                     Status.FirstHalf)

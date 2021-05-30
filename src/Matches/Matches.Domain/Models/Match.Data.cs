@@ -11,7 +11,7 @@
         public IEnumerable<object> GetData()
             => new List<Match>
             {
-                new Match(
+                new(
                     DateTime.Today.AddHours(5),
                     new Team("Man United"),
                     new Team("Man City"),
@@ -21,7 +21,7 @@
                     new Statistics(null, null),
                     Status.NotStarted),
 
-                new Match(
+                new(
                     DateTime.Today.AddDays(2),
                     new Team("Barcelona"),
                     new Team("Real Madrid"),

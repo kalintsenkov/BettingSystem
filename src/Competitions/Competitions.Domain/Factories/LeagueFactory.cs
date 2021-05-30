@@ -12,6 +12,6 @@
             return this;
         }
 
-        public League Build() => new League(this.leagueName);
+        public League Build() => new(this.leagueName);
     }
 }

@@ -11,10 +11,10 @@
         public IEnumerable<object> GetData()
             => new List<Team>
             {
-                new Team("Man City"),
-                new Team("Man United"),
-                new Team("Real Madrid"),
-                new Team("Barcelona")
+                new("Man City"),
+                new("Man United"),
+                new("Real Madrid"),
+                new("Barcelona")
             };
     }
 }

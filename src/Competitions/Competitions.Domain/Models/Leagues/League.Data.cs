@@ -12,20 +12,20 @@
         public IEnumerable<object> GetData()
             => new List<League>
             {
-                new League(
+                new(
                     name: "Premier League",
                     teams: new HashSet<Team>
                     {
-                        new Team("Man City", 0),
-                        new Team("Man United", 0)
+                        new("Man City", 0),
+                        new("Man United", 0)
                     }),
 
-                new League(
+                new(
                     name: "La Liga",
                     teams: new HashSet<Team>
                     {
-                        new Team("Real Madrid", 0),
-                        new Team("Barcelona", 0)
+                        new("Real Madrid", 0),
+                        new("Barcelona", 0)
                     })
             };
     }

@@ -16,7 +16,7 @@
             return this;
         }
 
-        public Match Build() => new Match(
+        public Match Build() => new(
             this.matchStartDate,
             this.defaultMatchStatistics,
             this.defaultMatchStatus);

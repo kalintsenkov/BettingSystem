@@ -12,6 +12,6 @@
             return this;
         }
 
-        public Team Build() => new Team(this.teamName);
+        public Team Build() => new(this.teamName);
     }
 }
