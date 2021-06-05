@@ -18,7 +18,7 @@
 		<Compile Remove="**\*.Fakes.cs" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(Configuration)' != 'Release'">
+	<ItemGroup>
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
 			<_Parameter1>BettingSystem.Domain.Core</_Parameter1>
 		</AssemblyAttribute>
