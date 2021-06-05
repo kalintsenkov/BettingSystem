@@ -3,13 +3,11 @@
     using System.Threading.Tasks;
     using Common.Persistence;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
 
     using static Domain.Common.Models.ModelConstants.Common;
 
-    internal class IdentityDbInitializer : IDbInitializer
+    internal class IdentityDbInitializer : DbInitializer
     {
-        private readonly IdentityDbContext db;
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
@@ -17,15 +15,15 @@
             IdentityDbContext db,
             UserManager<User> userManager,
             RoleManager<IdentityRole> roleManager)
+            : base(db)
         {
-            this.db = db;
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
 
-        public void Initialize()
+        public override void Initialize()
         {
-            this.db.Database.Migrate();
+            base.Initialize();
 
             this.SeedAdministrator();
         }
