@@ -67,7 +67,10 @@
             private readonly Specification<T> right;
             private readonly bool andOperator;
 
-            public BinarySpecification(Specification<T> left, Specification<T> right, bool andOperator)
+            public BinarySpecification(
+                Specification<T> left,
+                Specification<T> right,
+                bool andOperator)
             {
                 this.right = right;
                 this.left = left;

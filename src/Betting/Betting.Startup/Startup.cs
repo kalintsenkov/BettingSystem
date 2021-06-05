@@ -7,8 +7,8 @@ namespace BettingSystem.Startup.Betting
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
     using Web.Betting;
+    using Web.Common.Extensions;
     using Web.Common.Middleware;
 
     public class Startup
@@ -26,13 +26,8 @@ namespace BettingSystem.Startup.Betting
                 .AddWebComponents();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app
+            => app
+                .UseExceptionHandling(env)
                 .UseValidationExceptionHandler()
                 .UseHttpsRedirection()
                 .UseRouting()
@@ -41,6 +36,5 @@ namespace BettingSystem.Startup.Betting
                 .UseEndpoints(endpoints => endpoints
                     .MapControllers())
                 .Initialize();
-        }
     }
 }

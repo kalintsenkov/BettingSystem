@@ -6,7 +6,7 @@ namespace BettingSystem.Startup.Identity
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
+    using Web.Common.Extensions;
     using Web.Common.Middleware;
     using Web.Identity;
 
@@ -24,13 +24,8 @@ namespace BettingSystem.Startup.Identity
                 .AddWebComponents();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app
+            => app
+                .UseExceptionHandling(env)
                 .UseValidationExceptionHandler()
                 .UseHttpsRedirection()
                 .UseRouting()
@@ -39,6 +34,5 @@ namespace BettingSystem.Startup.Identity
                 .UseEndpoints(endpoints => endpoints
                     .MapControllers())
                 .Initialize();
-        }
     }
 }

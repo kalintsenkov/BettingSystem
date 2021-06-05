@@ -85,18 +85,6 @@
             return services;
         }
 
-        internal static IServiceCollection AddRepositories(
-            this IServiceCollection services,
-            Assembly assembly)
-            => services
-                .Scan(scan => scan
-                    .FromAssemblies(assembly)
-                    .AddClasses(classes => classes
-                        .AssignableTo(typeof(IDomainRepository<>))
-                        .AssignableTo(typeof(IQueryRepository<>)))
-                    .AsImplementedInterfaces()
-                    .WithTransientLifetime());
-
         private static IServiceCollection AddDatabase<TDbContext>(
             this IServiceCollection services,
             IConfiguration configuration)
@@ -113,6 +101,18 @@
                                 errorNumbersToAdd: null)
                             .MigrationsAssembly(
                                 typeof(TDbContext).Assembly.FullName)));
+
+        internal static IServiceCollection AddRepositories(
+            this IServiceCollection services,
+            Assembly assembly)
+            => services
+                .Scan(scan => scan
+                    .FromAssemblies(assembly)
+                    .AddClasses(classes => classes
+                        .AssignableTo(typeof(IDomainRepository<>))
+                        .AssignableTo(typeof(IQueryRepository<>)))
+                    .AsImplementedInterfaces()
+                    .WithTransientLifetime());
 
         private static IServiceCollection AddTokenAuthentication(
             this IServiceCollection services,
