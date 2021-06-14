@@ -26,6 +26,8 @@
             this.Stadium = stadium;
             this.Statistics = statistics;
             this.Status = status;
+
+            this.RaiseEvent(new MatchCreatedEvent(this.StartDate));
         }
 
         private Match(DateTime startDate)
@@ -57,6 +59,10 @@
 
             this.StartDate = startDate;
 
+            this.RaiseEvent(new MatchStartDateUpdatedEvent(
+                this.Id,
+                this.StartDate));
+
             return this;
         }
 
@@ -87,6 +93,13 @@
                 .UpdateHomeScore(homeScore)
                 .UpdateAwayScore(awayScore);
 
+            this.RaiseEvent(new MatchStatisticsUpdatedEvent(
+                this.Id,
+                this.Statistics.HomeScore,
+                this.Statistics.AwayScore,
+                this.Statistics.HalfTimeHomeScore,
+                this.Statistics.HalfTimeAwayScore));
+
             return this;
         }
 
@@ -95,6 +108,17 @@
             this.UpdateStatistics(Zero, Zero);
 
             this.Status = Status.FirstHalf;
+
+            this.RaiseEvent(new MatchStatusUpdatedEvent(
+                this.Id,
+                this.Status.Value));
+
+            this.RaiseEvent(new MatchStatisticsUpdatedEvent(
+                this.Id,
+                this.Statistics.HomeScore,
+                this.Statistics.AwayScore,
+                this.Statistics.HalfTimeHomeScore,
+                this.Statistics.HalfTimeAwayScore));
 
             return this;
         }
@@ -107,6 +131,17 @@
 
             this.Status = Status.HalfTime;
 
+            this.RaiseEvent(new MatchStatusUpdatedEvent(
+                this.Id,
+                this.Status.Value));
+
+            this.RaiseEvent(new MatchStatisticsUpdatedEvent(
+                this.Id,
+                this.Statistics.HomeScore,
+                this.Statistics.AwayScore,
+                this.Statistics.HalfTimeHomeScore,
+                this.Statistics.HalfTimeAwayScore));
+
             return this;
         }
 
@@ -116,6 +151,10 @@
 
             this.Status = Status.SecondHalf;
 
+            this.RaiseEvent(new MatchStatusUpdatedEvent(
+                this.Id,
+                this.Status.Value));
+
             return this;
         }
 
@@ -124,6 +163,10 @@
             this.ValidateIfMatchIsStarted();
 
             this.Status = Status.Finished;
+
+            this.RaiseEvent(new MatchStatusUpdatedEvent(
+                this.Id,
+                this.Status.Value));
 
             if (this.Statistics.HomeScore.HasValue &&
                 this.Statistics.AwayScore.HasValue)
@@ -141,6 +184,10 @@
         public Match Cancel()
         {
             this.Status = Status.Cancelled;
+
+            this.RaiseEvent(new MatchStatusUpdatedEvent(
+                this.Id,
+                this.Status.Value));
 
             return this;
         }

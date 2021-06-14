@@ -16,9 +16,9 @@
         {
             var eventMessage = context.Message;
 
-            var team = await this.teamRepository.Find(eventMessage.TeamId);
+            var team = await this.teamRepository.Find(eventMessage.Id);
 
-            team.UpdateName(eventMessage.TeamName);
+            team.UpdateName(eventMessage.Name);
 
             await this.teamRepository.Save(team);
         }

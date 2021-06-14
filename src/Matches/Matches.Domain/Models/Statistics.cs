@@ -25,7 +25,7 @@
 
         internal Statistics UpdateHomeScore(int homeScore)
         {
-            this.ValidateHomeScore(homeScore);
+            this.ValidateScore(homeScore, nameof(this.HomeScore));
 
             this.HomeScore = homeScore;
 
@@ -34,7 +34,7 @@
 
         internal Statistics UpdateAwayScore(int awayScore)
         {
-            this.ValidateAwayScore(awayScore);
+            this.ValidateScore(awayScore, nameof(this.AwayScore));
 
             this.AwayScore = awayScore;
 
@@ -49,22 +49,15 @@
 
         private void Validate(int? homeScore, int? awayScore)
         {
-            this.ValidateHomeScore(homeScore);
-            this.ValidateAwayScore(awayScore);
+            this.ValidateScore(homeScore, nameof(this.HomeScore));
+            this.ValidateScore(awayScore, nameof(this.AwayScore));
         }
 
-        private void ValidateHomeScore(int? homeScore)
+        private void ValidateScore(int? score, string name)
             => Guard.AgainstOutOfRange<InvalidMatchException>(
-                homeScore,
+                score,
                 Zero,
                 int.MaxValue,
-                nameof(this.HomeScore));
-
-        private void ValidateAwayScore(int? awayScore)
-            => Guard.AgainstOutOfRange<InvalidMatchException>(
-                awayScore,
-                Zero,
-                int.MaxValue,
-                nameof(this.AwayScore));
+                name);
     }
 }

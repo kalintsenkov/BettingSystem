@@ -27,14 +27,27 @@
             this.Status = default!;
         }
 
-        public DateTime StartDate { get; }
+        public DateTime StartDate { get; private set; }
 
-        public Statistics Statistics { get; }
+        public Statistics Statistics { get; private set; }
 
         public Status Status { get; private set; }
 
-        // For testing purposes
-        internal void Finish() => this.Status = Status.Finished;
+        public Match UpdateStartDate(DateTime startDate)
+        {
+            this.Validate(startDate);
+
+            this.StartDate = startDate;
+
+            return this;
+        }
+
+        public Match UpdateStatus(Status status)
+        {
+            this.Status = status;
+
+            return this;
+        }
 
         private void Validate(DateTime startDate)
         {

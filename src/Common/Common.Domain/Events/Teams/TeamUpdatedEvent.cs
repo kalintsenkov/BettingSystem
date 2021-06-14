@@ -2,14 +2,14 @@
 {
     public class TeamUpdatedEvent : IDomainEvent
     {
-        public TeamUpdatedEvent(int teamId, string teamName)
+        public TeamUpdatedEvent(int id, string name)
         {
-            this.TeamId = teamId;
-            this.TeamName = teamName;
+            this.Id = id;
+            this.Name = name;
         }
 
-        public int TeamId { get; }
+        public int Id { get; }
 
-        public string TeamName { get; }
+        public string Name { get; }
     }
 }

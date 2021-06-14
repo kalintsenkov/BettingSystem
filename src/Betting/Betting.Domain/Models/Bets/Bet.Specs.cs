@@ -58,7 +58,7 @@
                 Prediction.Home,
                 false);
 
-            match.Finish();
+            match.UpdateStatus(Status.Finished);
 
             bet.MakeProfitable();
 

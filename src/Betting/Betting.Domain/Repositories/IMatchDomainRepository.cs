@@ -3,15 +3,15 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Common;
-    using Models.Bets;
+    using Models.Matches;
 
-    public interface IBetDomainRepository : IDomainRepository<Bet>
+    public interface IMatchDomainRepository : IDomainRepository<Match>
     {
         Task<bool> Delete(
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<Bet> Find(
+        Task<Match> Find(
             int id,
             CancellationToken cancellationToken = default);
     }

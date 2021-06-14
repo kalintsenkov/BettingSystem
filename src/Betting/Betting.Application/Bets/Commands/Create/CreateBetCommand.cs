@@ -24,18 +24,18 @@
         {
             private readonly ICurrentUser currentUser;
             private readonly IBetFactory betFactory;
-            private readonly IBetDomainRepository betRepository;
+            private readonly IMatchDomainRepository matchRepository;
             private readonly IGamblerDomainRepository gamblerRepository;
 
             public CreateBetCommandHandler(
                 ICurrentUser currentUser,
                 IBetFactory betFactory,
-                IBetDomainRepository betRepository,
+                IMatchDomainRepository matchRepository,
                 IGamblerDomainRepository gamblerRepository)
             {
                 this.currentUser = currentUser;
                 this.betFactory = betFactory;
-                this.betRepository = betRepository;
+                this.matchRepository = matchRepository;
                 this.gamblerRepository = gamblerRepository;
             }
 
@@ -47,7 +47,7 @@
                     this.currentUser.UserId,
                     cancellationToken);
 
-                var match = await this.betRepository.GetMatch(
+                var match = await this.matchRepository.Find(
                     request.MatchId,
                     cancellationToken);
 

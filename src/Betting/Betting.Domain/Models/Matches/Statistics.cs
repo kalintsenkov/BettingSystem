@@ -23,19 +23,45 @@
 
         public int? HalfTimeAwayScore { get; private set; }
 
+        public Statistics UpdateHomeScore(int? homeScore)
+        {
+            this.ValidateScore(homeScore, nameof(this.HomeScore));
+
+            this.HomeScore = homeScore;
+
+            return this;
+        }
+
+        public Statistics UpdateAwayScore(int? awayScore)
+        {
+            this.ValidateScore(awayScore, nameof(this.AwayScore));
+
+            this.AwayScore = awayScore;
+
+            return this;
+        }
+
+        public Statistics UpdateHalfTimeScore(int? homeScore, int? awayScore)
+        {
+            this.Validate(homeScore, awayScore);
+
+            this.HalfTimeHomeScore = homeScore;
+            this.HalfTimeAwayScore = awayScore;
+
+            return this;
+        }
+
         private void Validate(int? homeScore, int? awayScore)
         {
-            Guard.AgainstOutOfRange<InvalidMatchException>(
-                homeScore,
-                Zero,
-                int.MaxValue,
-                nameof(this.HomeScore));
-
-            Guard.AgainstOutOfRange<InvalidMatchException>(
-                awayScore,
-                Zero,
-                int.MaxValue,
-                nameof(this.AwayScore));
+            this.ValidateScore(homeScore, nameof(this.HomeScore));
+            this.ValidateScore(awayScore, nameof(this.AwayScore));
         }
+
+        private void ValidateScore(int? score, string name)
+            => Guard.AgainstOutOfRange<InvalidMatchException>(
+                score,
+                Zero,
+                int.MaxValue,
+                name);
     }
 }
