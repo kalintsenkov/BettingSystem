@@ -16,6 +16,15 @@
 
         public string Name { get; private set; }
 
+        public Team UpdateName(string name)
+        {
+            this.Validate(name);
+
+            this.Name = name;
+
+            return this;
+        }
+
         private void Validate(string name)
             => Guard.ForStringLength<InvalidMatchException>(
                 name,

@@ -19,6 +19,14 @@
             string team,
             CancellationToken cancellationToken = default);
 
+        Task<Team> GetTeam(
+            int teamId,
+            CancellationToken cancellationToken = default);
+
+        Task SaveTeam(
+            Team team,
+            CancellationToken cancellationToken = default);
+
         Task<Stadium> GetStadium(
             string stadium,
             CancellationToken cancellationToken = default);

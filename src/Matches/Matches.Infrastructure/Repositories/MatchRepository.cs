@@ -77,7 +77,23 @@
             CancellationToken cancellationToken = default)
             => await this
                 .AllTeams()
+                .AsNoTracking()
                 .FirstOrDefaultAsync(t => t.Name == team, cancellationToken);
+
+        public async Task<Team> GetTeam(
+            int teamId, 
+            CancellationToken cancellationToken = default)
+            => await this
+                .AllTeams()
+                .FirstOrDefaultAsync(t => t.Id == teamId, cancellationToken);
+
+        public async Task SaveTeam(
+            Team team, 
+            CancellationToken cancellationToken = default)
+        {
+            await this.Data.Teams.AddAsync(team, cancellationToken);
+            await this.Data.SaveChangesAsync(cancellationToken);
+        }
 
         public async Task<Stadium> GetStadium(
             string stadium,
@@ -96,8 +112,7 @@
         private IQueryable<Team> AllTeams()
             => this
                 .Data
-                .Teams
-                .AsNoTracking();
+                .Teams;
 
         private IQueryable<Stadium> AllStadiums()
             => this
