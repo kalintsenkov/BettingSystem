@@ -14,6 +14,7 @@
         private static readonly Type[] Consumers =
         {
             typeof(MatchFinishedEventConsumer),
+            typeof(TeamCreatedEventConsumer),
             typeof(TeamUpdatedEventConsumer)
         };
 

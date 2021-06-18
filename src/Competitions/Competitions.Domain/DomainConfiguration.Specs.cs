@@ -2,7 +2,8 @@
 {
     using System.Linq;
     using Common;
-    using Factories;
+    using Factories.Leagues;
+    using Factories.Teams;
     using FluentAssertions;
     using Microsoft.Extensions.DependencyInjection;
     using Xunit;
@@ -20,6 +21,11 @@
 
             services
                 .GetService<ILeagueFactory>()
+                .Should()
+                .NotBeNull();
+
+            services
+                .GetService<ITeamFactory>()
                 .Should()
                 .NotBeNull();
         }

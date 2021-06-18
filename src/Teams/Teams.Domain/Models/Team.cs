@@ -20,6 +20,8 @@
             this.Name = name;
 
             this.players = new HashSet<Player>();
+
+            this.RaiseEvent(new TeamCreatedEvent(this.Name));
         }
 
         public string Name { get; private set; }

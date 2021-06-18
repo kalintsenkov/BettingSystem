@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Domain.Competitions.Factories
+﻿namespace BettingSystem.Domain.Competitions.Factories.Leagues
 {
     using Models.Leagues;
 
