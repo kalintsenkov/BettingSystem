@@ -1,0 +1,155 @@
+version: "3.8"
+
+services:
+
+    data:
+        container_name: sqlserver
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports: 
+            - "1433:1433"
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=yourStrongPassword12!@
+        volumes: 
+            - sqldata:/var/opt/mssql 
+        networks: 
+            - bettingsystem-network
+    
+    messages:
+        container_name: rabbitmq
+        image: rabbitmq:3-management
+        ports:
+            - "5672:5672"
+        hostname: "rabbitmq"
+        environment:
+            - RABBITMQ_DEFAULT_USER=rabbitmquser
+            - RABBITMQ_DEFAULT_PASS=rabbitmqPassword12!
+        volumes:
+            - rabbitmq:/var/lib/rabbitmq/mnesia
+        networks: 
+            - bettingsystem-network
+
+    identity:
+        container_name: identity
+        image: kalintsenkov/bettingsystem-identity-service:1.0
+        build:
+            context: ./Server
+            dockerfile: ./Identity/Identity.Startup/Dockerfile
+        ports: 
+            - "5001:80"
+        env_file: 
+            - Server/Common/Common.Application/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=BettingSystemIdentityDb;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/identity/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - bettingsystem-network
+        depends_on:
+            - data
+            
+    betting:
+        container_name: betting
+        image: kalintsenkov/bettingsystem-betting-service:1.0
+        build:
+            context: ./Server
+            dockerfile: ./Betting/Betting.Startup/Dockerfile
+        ports: 
+            - "5002:80"
+        env_file: 
+            - Server/Common/Common.Application/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=BettingSystemBettingDb;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - MessageQueueSettings__Host=rabbitmq
+            - MessageQueueSettings__UserName=rabbitmquser
+            - MessageQueueSettings__Password=rabbitmqPassword12!
+        restart: on-failure
+        volumes:
+            - ./.aspnet/betting/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - bettingsystem-network
+        depends_on:
+            - data
+            - messages
+            
+    competitions:
+        container_name: competitions
+        image: kalintsenkov/bettingsystem-competitions-service:1.0
+        build:
+            context: ./Server
+            dockerfile: ./Competitions/Competitions.Startup/Dockerfile
+        ports: 
+            - "5003:80"
+        env_file: 
+            - Server/Common/Common.Application/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=BettingSystemCompetitionsDb;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - MessageQueueSettings__Host=rabbitmq
+            - MessageQueueSettings__UserName=rabbitmquser
+            - MessageQueueSettings__Password=rabbitmqPassword12!
+        restart: on-failure
+        volumes:
+            - ./.aspnet/competitions/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - bettingsystem-network
+        depends_on:
+            - data
+            - messages
+            
+    games:
+        container_name: games
+        image: kalintsenkov/bettingsystem-games-service:1.0
+        build:
+            context: ./Server
+            dockerfile: ./Games/Games.Startup/Dockerfile
+        ports: 
+            - "5004:80"
+        env_file: 
+            - Server/Common/Common.Application/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=BettingSystemGamesDb;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - ConnectionStrings__CronJobsConnection=Server=sqlserver;Database=BettingSystemGamesCronJobsDb;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - MessageQueueSettings__Host=rabbitmq
+            - MessageQueueSettings__UserName=rabbitmquser
+            - MessageQueueSettings__Password=rabbitmqPassword12!
+        restart: on-failure
+        volumes:
+            - ./.aspnet/games/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - bettingsystem-network
+        depends_on:
+            - data
+            - messages
+            
+    teams:
+        container_name: teams
+        image: kalintsenkov/bettingsystem-teams-service:1.0
+        build:
+            context: ./Server
+            dockerfile: ./Teams/Teams.Startup/Dockerfile
+        ports: 
+            - "5005:80"
+        env_file: 
+            - Server/Common/Common.Application/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=BettingSystemTeamsDb;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - ConnectionStrings__CronJobsConnection=Server=sqlserver;Database=BettingSystemTeamsCronJobsDb;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - MessageQueueSettings__Host=rabbitmq
+            - MessageQueueSettings__UserName=rabbitmquser
+            - MessageQueueSettings__Password=rabbitmqPassword12!
+        restart: on-failure
+        volumes:
+            - ./.aspnet/teams/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - bettingsystem-network
+        depends_on:
+            - data
+            - messages
+
+networks:
+    bettingsystem-network:
+
+volumes:
+    sqldata:
+    rabbitmq:
