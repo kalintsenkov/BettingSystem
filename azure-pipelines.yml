@@ -6,7 +6,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  solution: 'src/BettingSystem.sln'
+  solution: 'src/Server/BettingSystem.sln'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -36,5 +36,5 @@ steps:
   displayName: Test
   inputs:
     command: test
-    projects: 'src/*/*.csproj'
+    projects: 'src/Server/*/*.csproj'
     arguments: '--configuration Debug'
