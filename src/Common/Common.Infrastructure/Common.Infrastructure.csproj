@@ -31,7 +31,7 @@
 		</AssemblyAttribute>
 
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-			<_Parameter1>BettingSystem.Infrastructure.Matches</_Parameter1>
+			<_Parameter1>BettingSystem.Infrastructure.Games</_Parameter1>
 		</AssemblyAttribute>
 
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">

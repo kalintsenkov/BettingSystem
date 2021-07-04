@@ -35,17 +35,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Betting.Startup", "Betting\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Betting.Web", "Betting\Betting.Web\Betting.Web.csproj", "{62B67DF8-CE45-4541-9464-37BECFB5D219}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Matches", "Matches", "{DBD0ACAE-32D4-4FA6-B35A-38D8ADF62F12}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{DBD0ACAE-32D4-4FA6-B35A-38D8ADF62F12}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matches.Domain", "Matches\Matches.Domain\Matches.Domain.csproj", "{BD28E874-C41E-455B-A0CD-85E6D33B0C50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Games.Domain", "Games\Games.Domain\Games.Domain.csproj", "{BD28E874-C41E-455B-A0CD-85E6D33B0C50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matches.Application", "Matches\Matches.Application\Matches.Application.csproj", "{131736D0-7317-45DE-8096-002283E76F03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Games.Application", "Games\Games.Application\Games.Application.csproj", "{131736D0-7317-45DE-8096-002283E76F03}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matches.Infrastructure", "Matches\Matches.Infrastructure\Matches.Infrastructure.csproj", "{5816F74E-DD97-41C1-AFBF-38398D100F8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Games.Infrastructure", "Games\Games.Infrastructure\Games.Infrastructure.csproj", "{5816F74E-DD97-41C1-AFBF-38398D100F8E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matches.Startup", "Matches\Matches.Startup\Matches.Startup.csproj", "{E75B3EA7-14D6-487B-8F0A-B548DE371F61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Games.Startup", "Games\Games.Startup\Games.Startup.csproj", "{E75B3EA7-14D6-487B-8F0A-B548DE371F61}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matches.Web", "Matches\Matches.Web\Matches.Web.csproj", "{5025EB2C-77A5-4341-9906-AA0D6C6D6FDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Games.Web", "Games\Games.Web\Games.Web.csproj", "{5025EB2C-77A5-4341-9906-AA0D6C6D6FDA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Teams", "Teams", "{974CAC8E-39D6-49DD-9D77-D61D11DBEA4F}"
 EndProject
@@ -65,11 +65,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Competitions.Domain", "Comp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Competitions.Application", "Competitions\Competitions.Application\Competitions.Application.csproj", "{15F9EDFD-C008-47BC-B53F-AEEFF04DC0A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Competitions.Infrastructure", "Competitions\Competitions.Infrastructure\Competitions.Infrastructure.csproj", "{CF602105-DC3E-4934-8879-24E84D68164E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Competitions.Infrastructure", "Competitions\Competitions.Infrastructure\Competitions.Infrastructure.csproj", "{CF602105-DC3E-4934-8879-24E84D68164E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Competitions.Web", "Competitions\Competitions.Web\Competitions.Web.csproj", "{AA9E3ADD-2675-4240-A5D1-D5A17E96A605}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Competitions.Web", "Competitions\Competitions.Web\Competitions.Web.csproj", "{AA9E3ADD-2675-4240-A5D1-D5A17E96A605}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Competitions.Startup", "Competitions\Competitions.Startup\Competitions.Startup.csproj", "{D4C0B799-885F-4865-8A1D-22E51CDC3DF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Competitions.Startup", "Competitions\Competitions.Startup\Competitions.Startup.csproj", "{D4C0B799-885F-4865-8A1D-22E51CDC3DF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
