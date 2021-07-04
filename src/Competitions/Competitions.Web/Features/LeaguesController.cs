@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Application.Common;
+    using Application.Competitions.Leagues.Commands.AddTeam;
     using Application.Competitions.Leagues.Commands.Create;
     using Application.Competitions.Leagues.Commands.Delete;
     using Application.Competitions.Leagues.Commands.Edit;
@@ -31,6 +32,12 @@
         [Route(Id)]
         public async Task<ActionResult> Edit(
             int id, EditLeagueCommand command)
+            => await this.Send(command.SetId(id));
+
+        [HttpPut]
+        [Route(Id + PathSeparator + nameof(AddTeam))]
+        public async Task<ActionResult> AddTeam(
+            int id, AddTeamCommand command)
             => await this.Send(command.SetId(id));
 
         [HttpDelete]
