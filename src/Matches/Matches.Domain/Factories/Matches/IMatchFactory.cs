@@ -1,0 +1,23 @@
+﻿namespace BettingSystem.Domain.Matches.Factories.Matches
+{
+    using System;
+    using Common;
+    using Models.Matches;
+    using Models.Teams;
+
+    public interface IMatchFactory : IFactory<Match>
+    {
+        IMatchFactory WithStartDate(DateTime startDate);
+
+        IMatchFactory WithHomeTeam(Team team);
+
+        IMatchFactory WithAwayTeam(Team team);
+
+        IMatchFactory WithStadium(
+            string name,
+            byte[] originalContent,
+            byte[] thumbnailContent);
+
+        IMatchFactory WithStadium(Stadium stadium);
+    }
+}

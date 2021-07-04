@@ -6,5 +6,7 @@
     public interface ILeagueFactory : IFactory<League>
     {
         ILeagueFactory WithName(string name);
+
+        League Build(string name);
     }
 }

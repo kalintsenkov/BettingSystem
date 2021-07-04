@@ -13,5 +13,7 @@
         }
 
         public League Build() => new(this.leagueName);
+
+        public League Build(string name) => this.WithName(name).Build();
     }
 }

@@ -26,9 +26,7 @@
                 CreateTeamCommand request,
                 CancellationToken cancellationToken)
             {
-                var team = this.teamFactory
-                    .WithName(request.Name)
-                    .Build();
+                var team = this.teamFactory.Build(request.Name);
 
                 await this.teamRepository.Save(team, cancellationToken);
 

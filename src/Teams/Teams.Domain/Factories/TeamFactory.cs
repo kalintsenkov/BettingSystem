@@ -13,5 +13,7 @@
         }
 
         public Team Build() => new(this.teamName);
+
+        public Team Build(string name) => this.WithName(name).Build();
     }
 }

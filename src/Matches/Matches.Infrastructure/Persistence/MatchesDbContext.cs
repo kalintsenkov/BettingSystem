@@ -3,7 +3,8 @@
     using System.Reflection;
     using Common.Events;
     using Common.Persistence;
-    using Domain.Matches.Models;
+    using Domain.Matches.Models.Matches;
+    using Domain.Matches.Models.Teams;
     using Microsoft.EntityFrameworkCore;
 
     internal class MatchesDbContext : MessagesDbContext

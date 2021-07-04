@@ -21,7 +21,6 @@
             builder
                 .HasMany(l => l.Teams)
                 .WithOne()
-                .IsRequired()
                 .Metadata
                 .PrincipalToDependent
                 .SetField("teams");

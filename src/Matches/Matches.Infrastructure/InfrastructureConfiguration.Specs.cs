@@ -2,7 +2,8 @@
 {
     using System;
     using System.Reflection;
-    using Application.Matches;
+    using Application.Matches.Matches;
+    using Application.Matches.Teams;
     using Common;
     using FluentAssertions;
     using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,11 @@
 
             services
                 .GetService<IMatchQueryRepository>()
+                .Should()
+                .NotBeNull();
+
+            services
+                .GetService<ITeamQueryRepository>()
                 .Should()
                 .NotBeNull();
         }

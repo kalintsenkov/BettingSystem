@@ -13,5 +13,7 @@
         }
 
         public Team Build() => new(this.teamName, points: 0);
+
+        public Team Build(string name) => this.WithName(name).Build();
     }
 }

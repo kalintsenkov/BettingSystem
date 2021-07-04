@@ -3,7 +3,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Common;
-    using Models;
+    using Models.Matches;
 
     public interface IMatchDomainRepository : IDomainRepository<Match>
     {
@@ -13,18 +13,6 @@
 
         Task<Match> Find(
             int id,
-            CancellationToken cancellationToken = default);
-
-        Task<Team> GetTeam(
-            string team,
-            CancellationToken cancellationToken = default);
-
-        Task<Team> GetTeam(
-            int teamId,
-            CancellationToken cancellationToken = default);
-
-        Task SaveTeam(
-            Team team,
             CancellationToken cancellationToken = default);
 
         Task<Stadium> GetStadium(

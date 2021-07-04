@@ -26,9 +26,7 @@
                 CreateLeagueCommand request,
                 CancellationToken cancellationToken)
             {
-                var league = this.leagueFactory
-                    .WithName(request.Name)
-                    .Build();
+                var league = this.leagueFactory.Build(request.Name);
 
                 await this.leagueRepository.Save(league, cancellationToken);
 

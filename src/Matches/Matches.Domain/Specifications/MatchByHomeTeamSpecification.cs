@@ -3,7 +3,7 @@
     using System;
     using System.Linq.Expressions;
     using Common;
-    using Models;
+    using Models.Matches;
 
     public class MatchByHomeTeamSpecification : Specification<Match>
     {

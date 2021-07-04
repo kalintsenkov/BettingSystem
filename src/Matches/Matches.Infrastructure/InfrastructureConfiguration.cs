@@ -1,7 +1,8 @@
 ﻿namespace BettingSystem.Infrastructure.Matches
 {
+    using System;
     using System.Reflection;
-    using Application.Matches.Consumers;
+    using Application.Matches.Teams.Consumers;
     using Common;
     using Common.Persistence;
     using Microsoft.Extensions.Configuration;
@@ -10,6 +11,12 @@
 
     public static class InfrastructureConfiguration
     {
+        private static readonly Type[] Consumers =
+        {
+            typeof(TeamCreatedEventConsumer),
+            typeof(TeamUpdatedEventConsumer)
+        };
+
         public static IServiceCollection AddInfrastructure(
             this IServiceCollection services,
             IConfiguration configuration)
@@ -17,7 +24,7 @@
                 .AddEvents(
                     configuration,
                     usePolling: false,
-                    consumers: typeof(TeamUpdatedEventConsumer))
+                    consumers: Consumers)
                 .AddCommonInfrastructure<MatchesDbContext>(
                     configuration,
                     Assembly.GetExecutingAssembly())

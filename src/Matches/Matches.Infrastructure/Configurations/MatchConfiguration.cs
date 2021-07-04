@@ -1,6 +1,6 @@
 ﻿namespace BettingSystem.Infrastructure.Matches.Configurations
 {
-    using Domain.Matches.Models;
+    using Domain.Matches.Models.Matches;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

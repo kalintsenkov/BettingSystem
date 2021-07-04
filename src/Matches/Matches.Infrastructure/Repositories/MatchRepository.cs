@@ -4,14 +4,14 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using Application.Matches;
-    using Application.Matches.Queries.Common;
-    using Application.Matches.Queries.Details;
-    using Application.Matches.Queries.Stadiums;
+    using Application.Matches.Matches;
+    using Application.Matches.Matches.Queries.Common;
+    using Application.Matches.Matches.Queries.Details;
+    using Application.Matches.Matches.Queries.Stadiums;
     using AutoMapper;
     using Common.Repositories;
     using Domain.Common;
-    using Domain.Matches.Models;
+    using Domain.Matches.Models.Matches;
     using Domain.Matches.Repositories;
     using Microsoft.EntityFrameworkCore;
     using Persistence;
@@ -72,29 +72,6 @@
                     .Where(m => m.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<Team> GetTeam(
-            string team,
-            CancellationToken cancellationToken = default)
-            => await this
-                .AllTeams()
-                .AsNoTracking()
-                .FirstOrDefaultAsync(t => t.Name == team, cancellationToken);
-
-        public async Task<Team> GetTeam(
-            int teamId, 
-            CancellationToken cancellationToken = default)
-            => await this
-                .AllTeams()
-                .FirstOrDefaultAsync(t => t.Id == teamId, cancellationToken);
-
-        public async Task SaveTeam(
-            Team team, 
-            CancellationToken cancellationToken = default)
-        {
-            await this.Data.Teams.AddAsync(team, cancellationToken);
-            await this.Data.SaveChangesAsync(cancellationToken);
-        }
-
         public async Task<Stadium> GetStadium(
             string stadium,
             CancellationToken cancellationToken = default)
@@ -108,11 +85,6 @@
                 .ProjectTo<GetMatchStadiumsResponseModel>(this
                     .AllStadiums())
                 .ToListAsync(cancellationToken);
-
-        private IQueryable<Team> AllTeams()
-            => this
-                .Data
-                .Teams;
 
         private IQueryable<Stadium> AllStadiums()
             => this
