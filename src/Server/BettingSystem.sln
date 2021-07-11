@@ -71,6 +71,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Competitions.Web", "Competi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Competitions.Startup", "Competitions\Competitions.Startup\Competitions.Startup.csproj", "{D4C0B799-885F-4865-8A1D-22E51CDC3DF9}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{72823AFC-5692-4356-A82E-1EAFB4D16178}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -189,6 +191,10 @@ Global
 		{D4C0B799-885F-4865-8A1D-22E51CDC3DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4C0B799-885F-4865-8A1D-22E51CDC3DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4C0B799-885F-4865-8A1D-22E51CDC3DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72823AFC-5692-4356-A82E-1EAFB4D16178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72823AFC-5692-4356-A82E-1EAFB4D16178}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72823AFC-5692-4356-A82E-1EAFB4D16178}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72823AFC-5692-4356-A82E-1EAFB4D16178}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
