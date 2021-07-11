@@ -25,7 +25,6 @@
             => services
                 .AddEvents(
                     configuration,
-                    usePolling: false,
                     consumers: Consumers)
                 .AddCommonInfrastructure<GamesDbContext>(
                     configuration,
