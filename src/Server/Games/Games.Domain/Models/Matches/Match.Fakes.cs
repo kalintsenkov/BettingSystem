@@ -14,7 +14,7 @@
 
             public object? Create(Type type)
                 => new Faker<Match>()
-                    .CustomInstantiator(f => new Match(
+                    .CustomInstantiator(_ => new Match(
                         DateTime.UtcNow,
                         A.Dummy<Team>(),
                         A.Dummy<Team>(),
