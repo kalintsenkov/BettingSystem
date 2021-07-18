@@ -24,7 +24,7 @@
                     Assembly.GetExecutingAssembly())
                 .AddTransient<IDbInitializer, IdentityDbInitializer>();
 
-        internal static IServiceCollection AddIdentity(
+        private static IServiceCollection AddIdentity(
             this IServiceCollection services)
         {
             services
