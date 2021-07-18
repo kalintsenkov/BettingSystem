@@ -5,6 +5,7 @@
     using FakeItEasy;
     using FluentAssertions;
     using Xunit;
+
     using static StadiumFakes.Data;
 
     public class StadiumSpecs

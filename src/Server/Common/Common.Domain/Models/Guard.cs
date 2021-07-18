@@ -7,12 +7,12 @@
         public static void AgainstEmptyString<TException>(string value, string name = "Value")
             where TException : BaseDomainException, new()
         {
-            if (!string.IsNullOrEmpty(value))
+            if (!string.IsNullOrWhiteSpace(value))
             {
                 return;
             }
 
-            ThrowException<TException>($"{name} cannot be null ot empty.");
+            ThrowException<TException>($"{name} cannot be null or empty.");
         }
 
         public static void ForStringLength<TException>(string value, int minLength, int maxLength, string name = "Value")

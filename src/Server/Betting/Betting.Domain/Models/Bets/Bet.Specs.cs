@@ -2,6 +2,7 @@
 {
     using System;
     using Exceptions;
+    using FakeItEasy;
     using FluentAssertions;
     using Matches;
     using Xunit;
@@ -11,16 +12,9 @@
         [Fact]
         public void ValidBetShouldNotThrowException()
         {
-            var match = new Match(
-                DateTime.Today,
-                new Statistics(0, 3),
-                Status.NotStarted);
+            var match = A.Dummy<Match>();
 
-            Action act = () => new Bet(
-                match,
-                55.5m,
-                Prediction.Home,
-                true);
+            Action act = () => new Bet(match, 10, Prediction.Home, true);
 
             act.Should().NotThrow<InvalidBetException>();
         }
@@ -30,16 +24,9 @@
         [InlineData(-1)]
         public void InvalidBetAmountShouldThrowException(decimal amount)
         {
-            var match = new Match(
-                DateTime.Today,
-                new Statistics(3, 0),
-                Status.NotStarted);
+            var match = A.Dummy<Match>();
 
-            Action act = () => new Bet(
-                match,
-                amount,
-                Prediction.Away,
-                false);
+            Action act = () => new Bet(match, amount, Prediction.Away, false);
 
             act.Should().Throw<InvalidBetException>();
         }
@@ -47,16 +34,9 @@
         [Fact]
         public void MakeProfitableShouldSetIsProfitableToTrueIfBetPredictionIsCorrect()
         {
-            var match = new Match(
-                DateTime.Today,
-                new Statistics(3, 0),
-                Status.NotStarted);
+            var match = A.Dummy<Match>();
 
-            var bet = new Bet(
-                match,
-                55.5m,
-                Prediction.Home,
-                false);
+            var bet = new Bet(match, 10, Prediction.Home, false);
 
             match.UpdateStatus(Status.Finished);
 
@@ -68,16 +48,9 @@
         [Fact]
         public void MakeProfitableShouldThrowExceptionIfMatchIsNotFinished()
         {
-            var match = new Match(
-                DateTime.Today,
-                new Statistics(3, 0),
-                Status.FirstHalf);
+            var match = A.Dummy<Match>();
 
-            var bet = new Bet(
-                match,
-                55.5m,
-                Prediction.Home,
-                false);
+            var bet = new Bet(match, 10, Prediction.Home, false);
 
             Action act = () => bet.MakeProfitable();
 
