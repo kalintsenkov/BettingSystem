@@ -147,6 +147,22 @@ services:
             - data
             - messages
 
+    client:
+        container_name: client
+        image: kalintsenkov/bettingsystem-user-client:1.0
+        build:
+            context: ./Client
+            dockerfile: ./Dockerfile
+        ports: 
+            - "80:80"
+        restart: on-failure
+        depends_on:
+            - identity
+            - betting
+            - competitions
+            - games
+            - teams
+
 networks:
     bettingsystem-network:
 
