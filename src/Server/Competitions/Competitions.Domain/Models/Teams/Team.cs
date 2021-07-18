@@ -4,8 +4,8 @@
     using Common.Models;
     using Exceptions;
 
-    using static Common.Models.ModelConstants.Common;
     using static ModelConstants.Team;
+    using static Common.Models.ModelConstants.Common;
 
     public class Team : Entity<int>, IAggregateRoot
     {
