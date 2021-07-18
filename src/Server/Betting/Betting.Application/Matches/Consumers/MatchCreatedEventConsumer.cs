@@ -21,9 +21,7 @@
 
         public async Task Consume(ConsumeContext<MatchCreatedEvent> context)
         {
-            var match = this.matchFactory
-                .WithStartDate(context.Message.StartDate)
-                .Build();
+            var match = this.matchFactory.Build(context.Message.StartDate);
 
             await this.matchRepository.Save(match);
         }

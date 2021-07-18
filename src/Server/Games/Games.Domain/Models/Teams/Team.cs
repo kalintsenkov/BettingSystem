@@ -27,7 +27,7 @@
         }
 
         private void Validate(string name)
-            => Guard.ForStringLength<InvalidMatchException>(
+            => Guard.ForStringLength<InvalidTeamException>(
                 name,
                 MinNameLength,
                 MaxNameLength,

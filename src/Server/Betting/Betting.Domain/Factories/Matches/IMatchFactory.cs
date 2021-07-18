@@ -7,5 +7,7 @@
     public interface IMatchFactory : IFactory<Match>
     {
         IMatchFactory WithStartDate(DateTime startDate);
+
+        Match Build(DateTime startDate);
     }
 }

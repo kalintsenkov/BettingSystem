@@ -7,5 +7,14 @@
             public const decimal MinAmountValue = decimal.One;
             public const decimal MaxAmountValue = decimal.MaxValue;
         }
+
+        public class Gambler
+        {
+            public const decimal MinAmountValue = 10;
+            public const decimal MaxAmountValue = decimal.MaxValue;
+
+            public const decimal MinBalanceValue = decimal.Zero;
+            public const decimal MaxBalanceValue = decimal.MaxValue;
+        }
     }
 }

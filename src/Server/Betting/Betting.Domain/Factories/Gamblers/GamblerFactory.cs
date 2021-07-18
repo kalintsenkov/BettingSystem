@@ -19,6 +19,9 @@
             return this;
         }
 
-        public Gambler Build() => new(this.gamblerName, this.gamblerUserId);
+        public Gambler Build() => new(
+            this.gamblerName,
+            this.gamblerUserId,
+            balance: decimal.Zero);
     }
 }

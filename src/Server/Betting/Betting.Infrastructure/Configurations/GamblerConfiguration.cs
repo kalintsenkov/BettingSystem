@@ -23,6 +23,11 @@
                 .IsRequired();
 
             builder
+                .Property(g => g.Balance)
+                .HasPrecision(19, 4)
+                .IsRequired();
+
+            builder
                 .HasMany(g => g.Bets)
                 .WithOne()
                 .IsRequired()

@@ -20,5 +20,7 @@
             this.matchStartDate,
             this.defaultMatchStatistics,
             this.defaultMatchStatus);
+
+        public Match Build(DateTime startDate) => this.WithStartDate(startDate).Build();
     }
 }
