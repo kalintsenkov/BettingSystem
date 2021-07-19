@@ -57,13 +57,19 @@
         public Gambler Withdraw(decimal amount)
         {
             this.ValidateAmount(amount);
+            this.ValidateBalance(this.Balance - amount);
 
             this.Balance -= amount;
 
             return this;
         }
 
-        public void AddBet(Bet bet) => this.bets.Add(bet);
+        public Gambler AddBet(Bet bet)
+        {
+            this.bets.Add(bet);
+
+            return this;
+        }
 
         private void Validate(string name, decimal balance)
         {

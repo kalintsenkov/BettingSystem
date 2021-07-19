@@ -2,7 +2,9 @@
 {
     using System.Threading.Tasks;
     using Application.Betting.Gamblers.Commands.Create;
+    using Application.Betting.Gamblers.Commands.Deposit;
     using Application.Betting.Gamblers.Commands.Edit;
+    using Application.Betting.Gamblers.Commands.Withdraw;
     using Application.Betting.Gamblers.Queries.Details;
     using Application.Betting.Gamblers.Queries.GetId;
     using Application.Common;
@@ -15,15 +17,15 @@
     {
         [HttpGet]
         [Route(Id)]
-        public Task<ActionResult<GamblerDetailsResponseModel>> Details(
+        public async Task<ActionResult<GamblerDetailsResponseModel>> Details(
             [FromRoute] GamblerDetailsQuery query)
-            => this.Send(query);
+            => await this.Send(query);
 
         [HttpGet]
         [Route(nameof(Id))]
-        public Task<ActionResult<GetGamblerIdResponseModel>> GetGamblerId(
+        public async Task<ActionResult<GetGamblerIdResponseModel>> GetGamblerId(
             [FromRoute] GetGamblerIdQuery query)
-            => this.Send(query);
+            => await this.Send(query);
 
         [HttpPost]
         public async Task<ActionResult<CreateGamblerResponseModel>> Create(
@@ -32,8 +34,20 @@
 
         [HttpPut]
         [Route(Id)]
-        public Task<ActionResult> Edit(
+        public async Task<ActionResult> Edit(
             int id, EditGamblerCommand command)
-            => this.Send(command.SetId(id));
+            => await this.Send(command.SetId(id));
+
+        [HttpPut]
+        [Route(Id + PathSeparator + nameof(Deposit))]
+        public async Task<ActionResult> Deposit(
+            int id, GamblerDepositMoneyCommand command)
+            => await this.Send(command.SetId(id));
+
+        [HttpPut]
+        [Route(Id + PathSeparator + nameof(Withdraw))]
+        public async Task<ActionResult> Withdraw(
+            int id, GamblerWithdrawMoneyCommand command)
+            => await this.Send(command.SetId(id));
     }
 }

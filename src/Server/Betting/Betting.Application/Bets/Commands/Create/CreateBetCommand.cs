@@ -69,7 +69,9 @@
                         request.Prediction))
                     .Build();
 
-                gambler.AddBet(bet);
+                gambler
+                    .AddBet(bet)
+                    .Withdraw(request.Amount);
 
                 await this.gamblerRepository.Save(gambler, cancellationToken);
 

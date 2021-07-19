@@ -69,8 +69,7 @@
 
         [Theory]
         [InlineData("Test 1", 5, 0)]
-        [InlineData("Test 2", 0, 1)]
-        [InlineData("Test 3", 0, -1)]
+        [InlineData("Test 2", 0, -1)]
         public void DepositShouldThrowExceptionIfAmountIsInvalid(string name, decimal balance, decimal amount)
         {
             var gambler = new Gambler(name, Guid.NewGuid().ToString(), balance);
@@ -81,9 +80,9 @@
         }
 
         [Theory]
-        [InlineData("Test 1", 5, 10)]
-        [InlineData("Test 2", 0, 20)]
-        [InlineData("Test 3", 0, 30)]
+        [InlineData("Test 1", 10, 10)]
+        [InlineData("Test 2", 30, 20)]
+        [InlineData("Test 3", 40, 30)]
         public void WithdrawShouldDecreaseBalanceIfAmountIsValid(string name, decimal balance, decimal amount)
         {
             var gambler = new Gambler(name, Guid.NewGuid().ToString(), balance);

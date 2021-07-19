@@ -11,6 +11,8 @@
 
         public string Name { get; private set; } = default!;
 
+        public decimal Balance { get; private set; }
+
         public int TotalWins { get; private set; }
 
         public void Mapping(Profile mapper)

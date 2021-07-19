@@ -10,8 +10,11 @@
 
         public class Gambler
         {
-            public const decimal MinAmountValue = 10;
+            public const decimal MinAmountValue = decimal.One;
             public const decimal MaxAmountValue = decimal.MaxValue;
+
+            public const decimal MinDepositWithdrawValue = 10;
+            public const decimal MaxDepositWithdrawValue = decimal.MaxValue;
 
             public const decimal MinBalanceValue = decimal.Zero;
             public const decimal MaxBalanceValue = decimal.MaxValue;
