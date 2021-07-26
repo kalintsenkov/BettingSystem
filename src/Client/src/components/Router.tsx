@@ -7,14 +7,16 @@ import {
 import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
+import Header from "./shared/Header";
 
 const AppRouter = (): JSX.Element => {
     return (
         <Router>
+            <Header />
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
             </Switch>
         </Router>
     );

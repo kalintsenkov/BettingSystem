@@ -6,15 +6,7 @@ import "./../assets/css/jquery-ui.css";
 import "./../assets/css/main.css";
 
 import Router from "./Router";
-import Header from "./shared/Header";
 
-const App = (): JSX.Element => {
-    return (
-        <>
-            <Router />
-            <Header />
-        </>
-    );
-};
+const App = (): JSX.Element => <Router />;
 
 export default App;
