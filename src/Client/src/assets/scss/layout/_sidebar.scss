@@ -1,0 +1,134 @@
+/*
+
+===============================
+Sidebar
+===============================
+
+*/
+
+.site-sidebar {
+    .single-sidebar {
+      div {
+        overflow: hidden;
+      }
+      margin-bottom: 40px;
+      padding: 30px;
+      box-shadow: 0px 0px 8px 0px rgba(96, 187, 191, 0.15);
+      &:last-child {
+        margin-bottom: 0;
+      }
+      h3 {
+        font-size: 24px;
+        font-weight: 600;
+        position: relative;
+        margin-bottom: 20px;
+        text-transform: capitalize;
+      }
+      form {
+        width: 100%;
+        position: relative;
+        height: 50px;
+        border-radius: 4px;
+        input {
+          width: 100%;
+          height: 100%;
+          transition: 0.4s;
+          text-indent: 15px;
+          border: 2px solid #e4e4e4;
+          &:hover, &:focus {
+            border-color: $cl-primary;
+          }
+        }
+        button {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          background: none;
+          color: $cl-primary;
+          height: 100%;
+          width: 50px;
+        }
+      }
+      ul {
+        li {
+          margin-bottom: 20px;
+          position: relative;
+          transition: 0.4s;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          &:before {
+            position: absolute;
+            content: "\f101";
+            font-family: 'Fontawesome';
+            color: $cl-primary;
+            left: -10px;
+            opacity: 0;
+            transition: 0.4s;
+          }
+          &:hover {
+              padding-left: 15px;
+            &:before {
+                left: 0px;
+                opacity: 1;
+            }
+          }
+          a {
+            color: $cl-black-2;
+            display: block;
+            text-transform: capitalize;
+            &:hover {
+              color: $cl-primary;
+            }
+          }
+        }
+      }
+      .social-follow {
+        a {
+          padding: 25px 30px;
+          border-radius: 4px;
+          color: $cl-white;
+          text-align: center;
+          display: inline-block;
+          font-family: $headding-font;
+          margin: 0 1px;
+          &:hover {
+              background: $cl-primary;
+          }
+          i {
+            display: block;
+            font-size: 18px;
+            }
+          @media(max-width: 991px){
+            margin-bottom: 5px;
+          }
+          @media(max-width: 767px){
+            width: 100%;
+          }
+        }
+      }
+      .archives {
+        a {
+            display: block;
+            margin-bottom: 15px;
+            font-family: $headding-font;
+            color: $cl-black;
+            &:hover {
+                color: $cl-primary;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+            span {
+                float: right;
+            }
+        }
+      }
+      a {
+        img {
+          width: 100%;
+        }
+      }
+    }
+}

@@ -1,24 +1,20 @@
-import React from 'react';
-import {
-  BrowserRouter,
-  Route,
-  Switch
-} from 'react-router-dom';
+import React from "react";
 
-import Home from './Home';
-import Login from './Login';
-import Register from './Register';
+import "./../assets/css/bootstrap.min.css";
+import "./../assets/css/font-awesome.min.css";
+import "./../assets/css/jquery-ui.css";
+import "./../assets/css/main.css";
+
+import Router from "./Router";
+import Header from "./shared/Header";
 
 const App = (): JSX.Element => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-      </Switch>
-    </BrowserRouter>
-  );
-}
+    return (
+        <>
+            <Router />
+            <Header />
+        </>
+    );
+};
 
 export default App;

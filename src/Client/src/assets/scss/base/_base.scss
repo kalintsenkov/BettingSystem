@@ -1,0 +1,631 @@
+
+/*** 
+
+==================
+    Color Classes
+==================
+
+***/
+
+.cl-black {
+    color: $cl-black;
+}
+.cl-primary {
+    color: $cl-primary;
+}
+.cl-white {
+    color: $cl-white;
+}
+.cl-blue {
+    color: $cl-blue;
+}
+.cl-blue-2 {
+    color: $cl-blue;
+}
+.cl-green {
+    color: $cl-green;
+}
+.cl-mint {
+    color: $cl-mint;
+}
+.cl-yellow {
+    color: $cl-yellow;
+}
+
+
+
+.cl-facebook {
+    color: $cl-facebook;
+}
+
+.cl-twitter {
+    color: $cl-twitter;
+}
+
+.cl-youtube {
+    color: $cl-youtube;
+}
+
+.cl-pinterest {
+    color: $cl-pinterest;
+}
+
+.cl-instagram {
+    color: $cl-instagram;
+}
+
+
+.facebook-bg {
+    background: $facebook-bg;
+}
+
+.twitter-bg {
+    background: $twitter-bg;
+}
+
+.youtube-bg {
+    background: $youtube-bg;
+}
+
+.pinterest-bg {
+    background: $pinterest-bg;
+}
+
+.google-plus-bg {
+    background: $google-plus-bg;
+}
+
+.linkedin-bg {
+    background: $linkedin-bg;
+}
+
+.instagram-bg {
+    background: $instagram-bg;
+}
+
+
+
+
+/*** 
+
+==================
+    Section Styles
+==================
+
+***/
+
+.container {
+    max-width: 1200px;
+}
+
+.section-padding {
+    padding: 50px 0;
+}
+
+.section-padding-2 {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.section-padding-3 {
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+
+
+.section-title {
+    margin-bottom: 20px;
+    h2 {
+        position: relative;
+        display: inline-block;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.4;
+        z-index: 1;
+        text-transform: capitalize;
+        margin-bottom: 15px;
+        margin-top: -6px;
+        span {
+            color: $cl-primary;
+        }
+    }
+    h4 {
+        font-size: 16px;
+        font-family: $headding-font;
+        margin-bottom: 10px;
+        color: $cl-primary;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-top: 3px;
+    }
+    p {
+        margin-bottom: 50px;
+    }
+}
+
+
+
+
+
+
+
+@media (max-width: 991px){
+    .section-padding {
+        padding: 40px 0;
+    }
+    .section-padding-2 {
+        padding-top: 40px;
+        padding-bottom: 10px;
+    }
+    .section-padding-3 {
+        padding-top: 40px;
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-width: 575px){
+    .section-title h2 {
+        font-size: 36px;
+    }
+}
+@media (max-width: 450px){
+    .section-title h2 {
+        font-size: 32px;
+    }
+}
+
+
+
+
+/*** 
+
+=======================
+    Margin and Padding
+=======================
+
+***/
+
+/* 
+    Margin Top styles
+*/
+
+.mar-0 {
+    margin: 0;
+}
+.mt-10 {
+    margin-top: 10px;
+}
+.mt-20 {
+    margin-top: 20px;
+}
+.mt-30 {
+    margin-top: 30px;
+}
+.mt-40 {
+    margin-top: 40px;
+}
+.mt-50 {
+    margin-top: 50px;
+}
+.mt-60 {
+    margin-top: 60px;
+}
+
+
+/* 
+    Margin Bottom Styles
+*/
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+.mb-30 {
+    margin-bottom: 30px;
+}
+.mb-40 {
+    margin-bottom: 40px;
+}
+.mb-50 {
+    margin-bottom: 50px;
+}
+.mb-60 {
+    margin-bottom: 60px;
+}
+
+
+
+/* 
+    Margin Right Styles
+*/
+
+.mr-10 {
+    margin-right: 10px;
+}
+.mr-20 {
+    margin-right: 20px;
+}
+.mr-30 {
+    margin-right: 30px;
+}
+.mr-40 {
+    margin-right: 40px;
+}
+.mr-50 {
+    margin-right: 50px;
+}
+.mr-60 {
+    margin-right: 60px;
+}
+
+
+/* 
+    Padding Top Styles
+*/
+
+.pad-0 {
+    padding: 0;
+}
+.pt-10 {
+    padding-top: 10px;
+}
+.pt-20 {
+    padding-top: 20px;
+}
+.pt-30 {
+    padding-top: 30px;
+}
+.pt-40 {
+    padding-top: 40px;
+}
+.pt-50 {
+    padding-top: 50px;
+}
+.pt-60 {
+    padding-top: 60px;
+}
+
+
+/* 
+    Padding Bottom Styles
+*/
+
+.pb-10 {
+    padding-bottom: 10px;
+}
+.pb-20 {
+    padding-bottom: 20px;
+}
+.pb-30 {
+    padding-bottom: 30px;
+}
+.pb-40 {
+    padding-bottom: 40px;
+}
+.pb-50 {
+    padding-bottom: 50px;
+}
+.pb-60 {
+    padding-bottom: 60px;
+}
+
+
+
+
+/*** 
+
+============================
+    Background and Overlay
+============================
+
+***/
+
+.gray-bg {
+    background: #F9F9F9;
+}
+
+.black-bg {
+    background: #292929;
+}
+
+.black-bg-2 {
+    background: #555555;
+}
+
+.primary-bg {
+    background: $cl-primary;
+}
+
+.primary-light-bg {
+    background: #00C9B72c;
+}
+
+.primary-bg-dark {
+    background: #037EBD;
+}
+
+.white-bg {
+    background: #ffffff;
+}
+
+
+.blue-bg {
+    background: $cl-blue;
+}
+
+.light-blue-bg {
+    background: #234BA5;
+}
+
+.green-bg {
+    background: $cl-green;
+}
+
+.blue-bg-2 {
+    background: #000040;
+}
+
+.yellow-bg {
+    background: #FDB62F;
+}
+
+.yellow-light-bg {
+    background: #FEEDCD;
+}
+
+.purple-bg {
+    background: #8E0EF0;
+}
+
+.purple-light-bg {
+    background: #E8CFFC;
+}
+
+.mint-bg {
+    background: $cl-mint;
+}
+
+.transparent-bg {
+    background: transparent;
+}
+
+
+.gradient-bg {
+    background-image: linear-gradient(to left, #150b1b 0%, #18263e 100%);
+}
+
+
+
+
+.dark-overlay {
+    background-size: cover !important;
+    position: relative;
+    z-index: 1;
+}
+
+.dark-overlay:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: #111;
+    content: "";
+    z-index: -1;
+    opacity: .6;
+}
+
+
+.mint-overlay {
+    background-size: cover !important;
+    position: relative;
+    z-index: 1;
+}
+
+.mint-overlay:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: $cl-mint;
+    content: "";
+    z-index: -1;
+    opacity: .7;
+}
+
+
+.blue-overlay {
+    background-size: cover !important;
+    position: relative;
+    z-index: 1;
+}
+
+.blue-overlay:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: #240e9a;
+    content: "";
+    z-index: -1;
+    opacity: .65;
+}
+
+
+
+.gradient-overlay {
+    background-size: cover !important;
+    position: relative;
+    z-index: 1;
+}
+
+.gradient-overlay:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgb(48, 142, 10);
+    content: "";
+    z-index: -1;
+    opacity: .8;
+}
+
+
+
+/*** 
+
+===================
+    Buttons Style
+===================
+
+***/
+
+
+.bttn-mid {
+    position: relative;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    padding: 12px 38px;
+    border-radius: 3px;
+    display: inline-block;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.4s;
+    font-family: $headding-font;
+}
+
+
+
+.bttn-small {
+    position: relative;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 8px 28px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.4s;
+    font-family: $headding-font;
+    text-transform: uppercase;
+}
+
+
+.bttn-mid i, .bttn-small i {
+    margin-right: 7px;
+}
+
+.btn-fill {
+    color: $cl-black;
+    background: $cl-primary;
+    &:hover {
+        background: $cl-blue;
+        color: $cl-primary;
+        box-shadow: 0px 0px 16px 4px rgba(0, 0, 0, 0.05);
+    }
+}
+
+.bttn-mid.btn-emt {
+    padding: 12px 41px;
+}
+
+.btn-emt {
+    background: transparent;
+    color: $cl-white;
+    border: 2px solid $cl-white;
+    &:hover {
+        color: #fff;
+        box-shadow: none;
+        background: $cl-primary;
+        border: 2px solid transparent;
+    }
+}
+
+.btn-wht {
+    background: $cl-white;
+    color: $cl-black;
+}
+
+.btn-wht:hover {
+    background: $cl-primary;
+    color: $cl-black;
+}
+
+
+
+
+
+/* ==============================
+    Preloader
+    ============================== */
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    background: none repeat scroll 0 0 $cl-blue;
+}
+
+.spinner {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    position: relative;
+}
+
+.spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 4px solid $cl-primary;
+    border-top-color: transparent;
+    animation: spinner 1s linear infinite;
+}
+
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+
+
+/* 
+==============================
+    ScrollUp Button 
+============================== 
+*/
+
+a#scrollUp {
+    right: 10px;
+    bottom: 10px;
+    width: 35px;
+    height: 35px;
+    background: rgba($cl-primary, $alpha: 1.0);
+    text-align: center;
+    line-height: 35px;
+    color: $cl-white;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+
+  
