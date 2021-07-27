@@ -6,7 +6,14 @@ import "./../assets/css/jquery-ui.css";
 import "./../assets/css/main.css";
 
 import Router from "./Router";
+import ContextWrapper from "./contexts/ContextWrapper";
 
-const App = (): JSX.Element => <Router />;
+const App = (): JSX.Element => {
+    return (
+        <ContextWrapper>
+            <Router />
+        </ContextWrapper>
+    )
+};
 
 export default App;

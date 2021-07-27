@@ -5,8 +5,8 @@ import {
 } from "react-router-dom";
 
 import Home from "./Home";
-import Login from "./Login";
-import Register from "./Register";
+import Login from "./authentication/Login";
+import Register from "./authentication/Register";
 import Header from "./shared/Header";
 
 const AppRouter = (): JSX.Element => {
