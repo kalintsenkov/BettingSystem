@@ -25,7 +25,20 @@ Then go to [http://localhost](http://localhost)
 
 ## :construction_worker: Built with
 
- - TODO
+- [.NET Core 5](https://github.com/dotnet/core) 
+- [ASP.NET Core 5](https://github.com/dotnet/aspnetcore)
+- [Entity Framework Core 5](https://github.com/dotnet/efcore)
+- [MediatR](https://github.com/jbogard/MediatR)
+- [FluentValidation](https://github.com/FluentValidation/FluentValidation)
+- [RabbitMQ](https://github.com/rabbitmq)
+- [MassTransit](https://github.com/MassTransit/MassTransit)
+- [AutoMapper](https://github.com/AutoMapper/AutoMapper)
+- [Hangfire](https://github.com/HangfireIO/Hangfire)
+- [Bogus](https://github.com/bchavez/Bogus)
+- [Scrutor](https://github.com/khellang/Scrutor)
+- [xUnit](https://github.com/xunit/xunit)
+- [FakeItEasy](https://github.com/FakeItEasy/FakeItEasy)
+- [FluentAssertions](https://github.com/fluentassertions/fluentassertions)
 
 ## 👨‍💻 Template Author
 
