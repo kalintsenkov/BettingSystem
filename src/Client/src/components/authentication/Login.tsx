@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Login = (): JSX.Element => {
   return (
@@ -16,8 +16,12 @@ const Login = (): JSX.Element => {
                       <h3>Login to your account</h3>
                     </div>
                     <div className="via-login">
-                      <a href="" className="facebook-bg"><i className="fa fa-facebook"></i>Login with Facebook</a>
-                      <a href="" className="google-plus-bg"><i className="fa fa-google"></i>Login with Google</a>
+                      <a href="" className="facebook-bg">
+                        <i className="fa fa-facebook"></i>Login with Facebook
+                      </a>
+                      <a href="" className="google-plus-bg">
+                        <i className="fa fa-google"></i>Login with Google
+                      </a>
                     </div>
                     <form action="#">
                       <div className="row">
@@ -32,13 +36,17 @@ const Login = (): JSX.Element => {
                         </div>
 
                         <div className="col-xl-12">
-                          <button type="submit" className="bttn-small btn-fill w-100">Login Account</button>
+                          <button type="submit" className="bttn-small btn-fill w-100">
+                            Login Account
+                          </button>
                         </div>
                         <div className="col-xl-12">
                           <p>Don't you have an account?</p>
                         </div>
                         <div className="col-xl-12 centered">
-                          <Link to="/register" className="bttn-small btn-wht w-100">Create a new account</Link>
+                          <Link to="/register" className="bttn-small btn-wht w-100">
+                            Create a new account
+                          </Link>
                         </div>
                       </div>
                     </form>

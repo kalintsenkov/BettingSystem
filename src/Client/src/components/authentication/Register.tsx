@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Register = (): JSX.Element => {
   return (
@@ -16,8 +16,12 @@ const Register = (): JSX.Element => {
                       <h3>Create your account</h3>
                     </div>
                     <div className="via-login">
-                      <a href="" className="facebook-bg"><i className="fa fa-facebook"></i>Signup with Facebook</a>
-                      <a href="" className="google-plus-bg"><i className="fa fa-google"></i>Signup with Google</a>
+                      <a href="" className="facebook-bg">
+                        <i className="fa fa-facebook"></i>Signup with Facebook
+                      </a>
+                      <a href="" className="google-plus-bg">
+                        <i className="fa fa-google"></i>Signup with Google
+                      </a>
                     </div>
                     <form action="#">
                       <div className="row">
@@ -34,13 +38,20 @@ const Register = (): JSX.Element => {
                           <input type="password" placeholder="Password" />
                         </div>
                         <div className="col-xl-12">
-                          <p>By signing up to betsb you confirm that you agree with the <a href="">member terms and conditions</a></p>
+                          <p>
+                            By signing up to betsb you confirm that you agree with the{' '}
+                            <a href="">member terms and conditions</a>
+                          </p>
                         </div>
                         <div className="col-xl-12">
-                          <button type="submit" className="bttn-small btn-fill w-100">Create my account</button>
+                          <button type="submit" className="bttn-small btn-fill w-100">
+                            Create my account
+                          </button>
                         </div>
                         <div className="col-xl-12">
-                          <p><Link to="/login">Do you already have an account?</Link></p>
+                          <p>
+                            <Link to="/login">Do you already have an account?</Link>
+                          </p>
                         </div>
                       </div>
                     </form>
