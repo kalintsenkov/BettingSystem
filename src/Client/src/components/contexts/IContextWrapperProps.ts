@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react';
 
 export default interface IContextWrapperProps {
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 }
