@@ -5,7 +5,7 @@ import jwtService from './jwt.service';
 const axiosInstance = axios.create();
 
 axiosInstance.interceptors.request.use(
-  (config) => {
+  config => {
     config.headers = {
       Authorization: `Bearer ${jwtService.getToken()}`,
       Accept: 'application/json',
@@ -13,16 +13,16 @@ axiosInstance.interceptors.request.use(
     };
     return config;
   },
-  (error) => {
+  error => {
     Promise.reject(error);
   }
 );
 
 axiosInstance.interceptors.response.use(
-  (response) => {
+  response => {
     return response;
   },
-  (error) => {
+  error => {
     const originalRequest = error.config;
     if (error.response.status === 403 && !originalRequest._retry) {
       originalRequest._retry = true;

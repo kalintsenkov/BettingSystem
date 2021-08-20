@@ -1,9 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import logo from '../../assets/images/logo.png';
+import jwtService from '../../services/jwt.service';
+import usersService from '../../services/users.service';
 
 const Header = (): JSX.Element => {
+  const history = useHistory();
+
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsAuthenticated(usersService.isAuthenticated());
+  }, []);
+
+  const logout = (): void => {
+    jwtService.removeToken();
+    setIsAuthenticated(usersService.isAuthenticated());
+    history.push('/');
+  };
+
   return (
     <header className="header-area gradient-bg">
       <nav className="navbar navbar-expand-lg main-menu">
@@ -112,12 +128,20 @@ const Header = (): JSX.Element => {
               </li>
             </ul>
             <div className="header-btn justify-content-end">
-              <Link to="/register" className="bttn-small btn-fill">
-                <i className="fa fa-key"></i>Register
-              </Link>
-              <Link to="/login" className="bttn-small btn-fill ml-2">
-                <i className="fa fa-lock"></i>Login
-              </Link>
+              {isAuthenticated ? (
+                <a className="bttn-small btn-fill" onClick={logout}>
+                  <i className="fa fa-lock"></i>Logout
+                </a>
+              ) : (
+                <>
+                  <Link to="/register" className="bttn-small btn-fill">
+                    <i className="fa fa-key"></i>Register
+                  </Link>
+                  <Link to="/login" className="bttn-small btn-fill ml-2">
+                    <i className="fa fa-lock"></i>Login
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

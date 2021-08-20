@@ -17,6 +17,10 @@
                 .UseValidationExceptionHandler()
                 .UseHttpsRedirection()
                 .UseRouting()
+                .UseCors(options => options
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod())
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints => endpoints

@@ -1,7 +1,42 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+
+import { toast } from 'react-toastify';
+
+import jwtService from '../../services/jwt.service';
+import usersService from '../../services/users.service';
+import ICredentials from '../models/credentials.model';
 
 const Login = (): JSX.Element => {
+  const history = useHistory();
+
+  const [credentials, setCredentials] = useState<ICredentials>({
+    email: '',
+    password: ''
+  });
+
+  const login = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    usersService.login(credentials).then(
+      res => {
+        jwtService.saveToken(res.data.token);
+        history.push('/');
+      },
+      err => {
+        const errors: string[] = err.response.data;
+        errors.map(e => toast.error(e));
+      }
+    );
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCredentials({
+      ...credentials,
+      [event.target.name]: event.target.value
+    });
+  };
+
   return (
     <section>
       <div className="container-fluid">
@@ -23,16 +58,28 @@ const Login = (): JSX.Element => {
                         <i className="fa fa-google"></i>Login with Google
                       </a>
                     </div>
-                    <form action="#">
+                    <form action="POST" onSubmit={login}>
                       <div className="row">
                         <div className="col-xl-12">
-                          <p>Or with your username and password</p>
+                          <p>Or with your email and password</p>
                         </div>
                         <div className="col-xl-12">
-                          <input type="text" placeholder="Username" />
+                          <input
+                            type="text"
+                            name="email"
+                            value={credentials.email}
+                            onChange={handleChange}
+                            placeholder="Email"
+                          />
                         </div>
                         <div className="col-xl-12">
-                          <input type="password" placeholder="Password" />
+                          <input
+                            type="password"
+                            name="password"
+                            value={credentials.password}
+                            onChange={handleChange}
+                            placeholder="Password"
+                          />
                         </div>
 
                         <div className="col-xl-12">
