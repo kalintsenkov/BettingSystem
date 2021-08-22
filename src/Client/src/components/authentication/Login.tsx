@@ -1,39 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 
+import { AuthenticationContext } from '../contexts/ContextWrapper';
+import ICredentials from '../models/credentials.model';
 import jwtService from '../../services/jwt.service';
 import usersService from '../../services/users.service';
-import ICredentials from '../models/credentials.model';
 
 const Login = (): JSX.Element => {
   const history = useHistory();
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthenticationContext);
 
   const [credentials, setCredentials] = useState<ICredentials>({
     email: '',
     password: ''
   });
 
-  const login = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    usersService.login(credentials).then(
-      res => {
-        jwtService.saveToken(res.data.token);
-        history.push('/');
-      },
-      err => {
-        const errors: string[] = err.response.data;
-        errors.map(e => toast.error(e));
-      }
-    );
-  };
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push('/');
+    }
+  }, [isAuthenticated]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({
       ...credentials,
       [event.target.name]: event.target.value
+    });
+  };
+
+  const login = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    usersService.login(credentials).subscribe({
+      next: res => {
+        jwtService.saveToken(res.data.token);
+        setIsAuthenticated(true);
+        history.push('/');
+      },
+      error: err => {
+        const errors: string[] = err.response.data;
+        errors.map(e => toast.error(e));
+      }
     });
   };
 
@@ -65,7 +75,7 @@ const Login = (): JSX.Element => {
                         </div>
                         <div className="col-xl-12">
                           <input
-                            type="text"
+                            type="email"
                             name="email"
                             value={credentials.email}
                             onChange={handleChange}

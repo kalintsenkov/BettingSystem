@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { from } from 'rxjs';
 
 import jwtService from './jwt.service';
 
@@ -35,19 +36,19 @@ axiosInstance.interceptors.response.use(
 
 const apiService = {
   get: (path: string, config?: AxiosRequestConfig) => {
-    return axiosInstance.get(path, config);
+    return from(axiosInstance.get(path, config));
   },
 
   post: (path: string, body?: Object, config?: AxiosRequestConfig) => {
-    return axiosInstance.post(path, body, config);
+    return from(axiosInstance.post(path, body, config));
   },
 
   put: (path: string, body?: Object, config?: AxiosRequestConfig) => {
-    return axiosInstance.put(path, body, config);
+    return from(axiosInstance.put(path, body, config));
   },
 
   delete: (path: string, config?: AxiosRequestConfig) => {
-    return axiosInstance.delete(path, config);
+    return from(axiosInstance.delete(path, config));
   }
 };
 

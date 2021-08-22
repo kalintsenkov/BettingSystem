@@ -2,25 +2,23 @@ import React, { createContext, useState } from 'react';
 
 import IContextWrapperProps from './IContextWrapperProps';
 
-export const AuthContext = createContext({
+export const AuthenticationContext = createContext({
   isAuthenticated: false,
-  authenticate: (isAuth: boolean) => {}
+  setIsAuthenticated: (isAuthenticated: boolean) => {}
 });
 
 const ContextWrapper = ({ children }: IContextWrapperProps): JSX.Element => {
-  const [isAuthenticated, setAuth] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   return (
-    <AuthContext.Provider
+    <AuthenticationContext.Provider
       value={{
         isAuthenticated,
-        authenticate: (isAuthenticated: boolean) => {
-          setAuth(isAuthenticated);
-        }
+        setIsAuthenticated
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </AuthenticationContext.Provider>
   );
 };
 

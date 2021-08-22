@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import logo from '../../assets/images/logo.png';
 import jwtService from '../../services/jwt.service';
-import usersService from '../../services/users.service';
+import { AuthenticationContext } from '../contexts/ContextWrapper';
 
 const Header = (): JSX.Element => {
   const history = useHistory();
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthenticationContext);
 
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsAuthenticated(usersService.isAuthenticated());
-  }, []);
+  useEffect(() => {}, [isAuthenticated]);
 
   const logout = (): void => {
     jwtService.removeToken();
-    setIsAuthenticated(usersService.isAuthenticated());
+    setIsAuthenticated(false);
     history.push('/');
   };
 
