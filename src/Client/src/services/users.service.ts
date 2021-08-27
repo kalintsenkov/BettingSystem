@@ -1,5 +1,6 @@
 import apiService from './api.service';
-import ICredentials from '../components/models/credentials.model';
+import jwtService from './jwt.service';
+import ICredentials from '../models/credentials.model';
 
 const identityPath = 'http://localhost:5001/identity/';
 const loginPath = identityPath + 'login';
@@ -12,6 +13,16 @@ const usersService = {
 
   register: (credentials: ICredentials) => {
     return apiService.post(registerPath, credentials);
+  },
+
+  getRole: (): string => {
+    const decoded = jwtService.decode();
+
+    if (!decoded) {
+      return '';
+    }
+
+    return decoded.role;
   }
 };
 

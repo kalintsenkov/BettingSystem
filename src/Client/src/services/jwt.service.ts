@@ -1,3 +1,5 @@
+import jwtDecode from "jwt-decode";
+
 const key: string = 'token';
 
 const jwtService = {
@@ -11,6 +13,18 @@ const jwtService = {
 
   removeToken: (): void => {
     return localStorage.removeItem(key);
+  },
+
+  decode: (): any => {
+    const jwt = jwtService.getToken();
+
+    if (!jwt) {
+      return null;
+    }
+
+    const decodedToken = jwtDecode(jwt);
+
+    return decodedToken;
   }
 };
 

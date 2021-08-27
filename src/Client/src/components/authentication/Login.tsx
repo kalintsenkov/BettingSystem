@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { AuthenticationContext } from '../contexts/ContextWrapper';
-import ICredentials from '../models/credentials.model';
+import ICredentials from '../../models/credentials.model';
 import jwtService from '../../services/jwt.service';
 import usersService from '../../services/users.service';
 

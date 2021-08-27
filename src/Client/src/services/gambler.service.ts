@@ -1,5 +1,5 @@
-import IGambler from '../components/models/gambler.model';
 import apiService from './api.service';
+import IGambler from '../models/gambler.model';
 
 const gamblersPath = 'http://localhost:5002/gamblers/';
 

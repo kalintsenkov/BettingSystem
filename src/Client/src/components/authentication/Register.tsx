@@ -5,8 +5,8 @@ import { map, mergeMap } from 'rxjs';
 import { toast } from 'react-toastify';
 
 import { AuthenticationContext } from '../contexts/ContextWrapper';
-import ICredentials from '../models/credentials.model';
-import IGambler from '../models/gambler.model';
+import ICredentials from '../../models/credentials.model';
+import IGambler from '../../models/gambler.model';
 import gamblerService from '../../services/gambler.service';
 import usersService from '../../services/users.service';
 import jwtService from '../../services/jwt.service';
