@@ -59,8 +59,6 @@
                             host.Password(messageQueueSettings.Password);
                         });
 
-                        rmq.UseHealthCheck(context);
-
                         consumers.ForEach(consumer => rmq.ReceiveEndpoint(consumer.FullName, endpoint =>
                         {
                             endpoint.PrefetchCount = 6;

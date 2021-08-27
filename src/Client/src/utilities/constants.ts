@@ -1,5 +1,5 @@
 export const Role = {
-  Administrator: 'Administrator'
+  ADMINISTRATOR: 'Administrator'
 };
 
 export const Endpoints = {
