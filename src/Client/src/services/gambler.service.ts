@@ -1,11 +1,10 @@
 import apiService from './api.service';
 import IGambler from '../models/gambler.model';
-
-const gamblersPath = 'http://localhost:5002/gamblers/';
+import { Endpoints } from '../utilities/constants';
 
 const gamblerService = {
   create: (gambler: IGambler) => {
-    return apiService.post(gamblersPath, gambler);
+    return apiService.post(Endpoints.GAMBLERS_PATH, gambler);
   }
 };
 

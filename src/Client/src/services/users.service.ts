@@ -1,10 +1,10 @@
 import apiService from './api.service';
 import jwtService from './jwt.service';
 import ICredentials from '../models/credentials.model';
+import { Endpoints } from '../utilities/constants';
 
-const identityPath = 'http://localhost:5001/identity/';
-const loginPath = identityPath + 'login';
-const registerPath = identityPath + 'register';
+const loginPath = Endpoints.IDENTITY_PATH + 'login';
+const registerPath = Endpoints.IDENTITY_PATH + 'register';
 
 const usersService = {
   login: (credentials: ICredentials) => {
