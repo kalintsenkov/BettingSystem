@@ -2,11 +2,11 @@ import { AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
 
 import apiService from './api.service';
-import IMatch from '../models/match.model';
+import ISearchMatches from '../models/search-matches.mode';
 import { Endpoints } from '../utilities/constants';
 
 const matchesService = {
-  getAll: (): Observable<AxiosResponse<IMatch[]>> => {
+  getAll: (): Observable<AxiosResponse<ISearchMatches>> => {
     return apiService.get(Endpoints.MATCHES_PATH);
   }
 };
