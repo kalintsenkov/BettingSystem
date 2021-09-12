@@ -16,7 +16,8 @@
         private static readonly Type[] Consumers =
         {
             typeof(TeamCreatedEventConsumer),
-            typeof(TeamUpdatedEventConsumer)
+            typeof(TeamNameUpdatedEventConsumer),
+            typeof(TeamLogoUpdatedEventConsumer)
         };
 
         public static IServiceCollection AddInfrastructure(

@@ -30,13 +30,13 @@
                 CreateTeamCommand request,
                 CancellationToken cancellationToken)
             {
-                var image = await this.imageService.Process(request.Image);
+                var logo = await this.imageService.Process(request.Logo);
 
                 var team = this.teamFactory
                     .WithName(request.Name)
-                    .WithImage(
-                        image.Original,
-                        image.Thumbnail)
+                    .WithLogo(
+                        logo.OriginalContent,
+                        logo.ThumbnailContent)
                     .Build();
 
                 await this.teamRepository.Save(team, cancellationToken);

@@ -1,18 +1,18 @@
 ﻿namespace BettingSystem.Domain.Common.Events.Teams
 {
-    public class TeamCreatedEvent : IDomainEvent
+    public class TeamLogoUpdatedEvent : IDomainEvent
     {
-        public TeamCreatedEvent(
-            string name, 
-            byte[] logoOriginalContent, 
+        public TeamLogoUpdatedEvent(
+            int id,
+            byte[] logoOriginalContent,
             byte[] logoThumbnailContent)
         {
-            this.Name = name;
+            this.Id = id;
             this.LogoOriginalContent = logoOriginalContent;
             this.LogoThumbnailContent = logoThumbnailContent;
         }
 
-        public string Name { get; }
+        public int Id { get; }
 
         public byte[] LogoOriginalContent { get; }
 

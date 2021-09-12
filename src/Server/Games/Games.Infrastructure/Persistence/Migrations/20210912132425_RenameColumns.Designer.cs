@@ -4,14 +4,16 @@ using BettingSystem.Infrastructure.Games.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BettingSystem.Infrastructure.Matches.Persistence.Migrations
 {
     [DbContext(typeof(GamesDbContext))]
-    partial class MatchesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210912132425_RenameColumns")]
+    partial class RenameColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

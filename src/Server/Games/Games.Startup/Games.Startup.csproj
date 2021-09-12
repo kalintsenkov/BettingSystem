@@ -30,10 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)' != 'Release'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
 		<PackageReference Include="xunit" Version="2.4.1" />

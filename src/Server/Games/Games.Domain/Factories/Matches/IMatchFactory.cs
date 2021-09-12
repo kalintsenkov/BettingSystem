@@ -15,8 +15,8 @@
 
         IMatchFactory WithStadium(
             string name,
-            byte[] imageOriginal,
-            byte[] imageThumbnail);
+            byte[] imageOriginalContent,
+            byte[] imageThumbnailContent);
 
         IMatchFactory WithStadium(Stadium stadium);
     }

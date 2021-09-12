@@ -63,9 +63,9 @@
                     var image = await this.imageService.Process(request.StadiumImage);
 
                     factory = factory.WithStadium(
-                        request.StadiumName,
-                        image.Original,
-                        image.Thumbnail);
+                        request.StadiumName, 
+                        image.OriginalContent, 
+                        image.ThumbnailContent);
                 }
                 else
                 {

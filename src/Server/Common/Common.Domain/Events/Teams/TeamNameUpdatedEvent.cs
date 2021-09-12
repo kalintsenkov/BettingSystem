@@ -1,8 +1,8 @@
 ﻿namespace BettingSystem.Domain.Common.Events.Teams
 {
-    public class TeamUpdatedEvent : IDomainEvent
+    public class TeamNameUpdatedEvent : IDomainEvent
     {
-        public TeamUpdatedEvent(int id, string name)
+        public TeamNameUpdatedEvent(int id, string name)
         {
             this.Id = id;
             this.Name = name;

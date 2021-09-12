@@ -19,12 +19,12 @@
                 .IsRequired();
 
             builder
-                .OwnsOne(s => s.Image, i =>
+                .OwnsOne(s => s.Logo, i =>
                 {
                     i.WithOwner();
 
-                    i.Property(img => img.Original).IsRequired();
-                    i.Property(img => img.Thumbnail).IsRequired();
+                    i.Property(img => img.OriginalContent).IsRequired();
+                    i.Property(img => img.ThumbnailContent).IsRequired();
                 });
 
             builder

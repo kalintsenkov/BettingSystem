@@ -2,14 +2,16 @@
 {
     public class ImageResponseModel
     {
-        public ImageResponseModel(byte[] original, byte[] thumbnail)
+        public ImageResponseModel(
+            byte[] originalContent,
+            byte[] thumbnailContent)
         {
-            this.Original = original;
-            this.Thumbnail = thumbnail;
+            this.OriginalContent = originalContent;
+            this.ThumbnailContent = thumbnailContent;
         }
 
-        public byte[] Original { get; }
+        public byte[] OriginalContent { get; }
 
-        public byte[] Thumbnail { get; }
+        public byte[] ThumbnailContent { get; }
     }
 }

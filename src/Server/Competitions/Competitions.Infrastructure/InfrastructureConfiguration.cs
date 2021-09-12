@@ -15,7 +15,7 @@
         {
             typeof(MatchFinishedEventConsumer),
             typeof(TeamCreatedEventConsumer),
-            typeof(TeamUpdatedEventConsumer)
+            typeof(TeamNameUpdatedEventConsumer)
         };
 
         public static IServiceCollection AddInfrastructure(

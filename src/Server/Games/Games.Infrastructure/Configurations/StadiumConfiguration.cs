@@ -23,8 +23,8 @@
                 {
                     i.WithOwner();
 
-                    i.Property(img => img.Original).IsRequired();
-                    i.Property(img => img.Thumbnail).IsRequired();
+                    i.Property(img => img.OriginalContent).IsRequired();
+                    i.Property(img => img.ThumbnailContent).IsRequired();
                 });
         }
     }

@@ -7,8 +7,8 @@
     {
         ITeamFactory WithName(string name);
 
-        ITeamFactory WithImage(
-            byte[] imageOriginal,
-            byte[] imageThumbnail);
+        ITeamFactory WithLogo(
+            byte[] logoOriginalContent,
+            byte[] logoThumbnailContent);
     }
 }

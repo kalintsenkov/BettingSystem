@@ -9,30 +9,37 @@
 
     public class Team : Entity<int>, IAggregateRoot
     {
-        internal Team(string name, Image image)
+        internal Team(string name, Image logo)
         {
             this.Validate(name);
 
             this.Name = name;
-            this.Image = image;
+            this.Logo = logo;
         }
 
         private Team(string name)
         {
             this.Name = name;
 
-            this.Image = default!;
+            this.Logo = default!;
         }
 
         public string Name { get; private set; }
 
-        public Image Image { get; private set; }
+        public Image Logo { get; private set; }
 
         public Team UpdateName(string name)
         {
             this.Validate(name);
 
             this.Name = name;
+
+            return this;
+        }
+
+        public Team UpdateLogo(byte[] originalContent, byte[] thumbnailContent)
+        {
+            this.Logo = new Image(originalContent, thumbnailContent);
 
             return this;
         }

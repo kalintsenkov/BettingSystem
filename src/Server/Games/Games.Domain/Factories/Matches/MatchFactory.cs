@@ -42,10 +42,10 @@
 
         public IMatchFactory WithStadium(
             string name,
-            byte[] imageOriginal,
-            byte[] imageThumbnail)
+            byte[] imageOriginalContent,
+            byte[] imageThumbnailContent)
         {
-            var image = new Image(imageOriginal, imageThumbnail);
+            var image = new Image(imageOriginalContent, imageThumbnailContent);
             var stadium = new Stadium(name, image);
 
             return this.WithStadium(stadium);

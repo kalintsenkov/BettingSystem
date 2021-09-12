@@ -14,33 +14,33 @@
     {
         private readonly HashSet<Player> players;
 
-        internal Team(string name, Image image)
+        internal Team(string name, Image logo)
         {
             this.Validate(name);
 
             this.Name = name;
-            this.Image = image;
+            this.Logo = logo;
 
             this.players = new HashSet<Player>();
 
             this.RaiseEvent(new TeamCreatedEvent(
                 this.Name,
-                this.Image.Original,
-                this.Image.Thumbnail));
+                this.Logo.OriginalContent,
+                this.Logo.ThumbnailContent));
         }
 
         private Team(string name)
         {
             this.Name = name;
 
-            this.Image = default!;
+            this.Logo = default!;
 
             this.players = new HashSet<Player>();
         }
 
         public string Name { get; private set; }
 
-        public Image Image { get; private set; }
+        public Image Logo { get; private set; }
 
         public IReadOnlyCollection<Player> Players => this.players.ToList().AsReadOnly();
 
@@ -50,9 +50,21 @@
 
             this.Name = name;
 
-            this.RaiseEvent(new TeamUpdatedEvent(
+            this.RaiseEvent(new TeamNameUpdatedEvent(
                 this.Id,
                 this.Name));
+
+            return this;
+        }
+
+        public Team UpdateLogo(byte[] originalContent, byte[] thumbnailContent)
+        {
+            this.Logo = new Image(originalContent, thumbnailContent);
+
+            this.RaiseEvent(new TeamLogoUpdatedEvent(
+                this.Id,
+                this.Logo.OriginalContent,
+                this.Logo.ThumbnailContent));
 
             return this;
         }

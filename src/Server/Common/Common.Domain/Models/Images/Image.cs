@@ -2,14 +2,16 @@
 {
     public class Image : ValueObject
     {
-        internal Image(byte[] original, byte[] thumbnail)
+        internal Image(
+            byte[] originalContent, 
+            byte[] thumbnailContent)
         {
-            this.Original = original;
-            this.Thumbnail = thumbnail;
+            this.OriginalContent = originalContent;
+            this.ThumbnailContent = thumbnailContent;
         }
 
-        public byte[] Original { get; }
+        public byte[] OriginalContent { get; }
 
-        public byte[] Thumbnail { get; }
+        public byte[] ThumbnailContent { get; }
     }
 }

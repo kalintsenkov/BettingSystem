@@ -6,7 +6,7 @@
     internal class TeamFactory : ITeamFactory
     {
         private string teamName = default!;
-        private Image teamImage = default!;
+        private Image teamLogo = default!;
 
         public ITeamFactory WithName(string name)
         {
@@ -14,14 +14,14 @@
             return this;
         }
 
-        public ITeamFactory WithImage(
-            byte[] imageOriginal, 
-            byte[] imageThumbnail)
+        public ITeamFactory WithLogo(
+            byte[] logoOriginalContent,
+            byte[] logoThumbnailContent)
         {
-            this.teamImage = new Image(imageOriginal, imageThumbnail);
+            this.teamLogo = new Image(logoOriginalContent, logoThumbnailContent);
             return this;
         }
 
-        public Team Build() => new(this.teamName, this.teamImage);
+        public Team Build() => new(this.teamName, this.teamLogo);
     }
 }

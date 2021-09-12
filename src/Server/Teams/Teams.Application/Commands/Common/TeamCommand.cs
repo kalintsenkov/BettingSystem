@@ -8,6 +8,6 @@
     {
         public string Name { get; set; } = default!;
 
-        public ImageRequestModel Image { get; set; } = default!;
+        public ImageRequestModel Logo { get; set; } = default!;
     }
 }
