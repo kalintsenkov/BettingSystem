@@ -72,8 +72,8 @@
                 Specification<T> right,
                 bool andOperator)
             {
-                this.right = right;
                 this.left = left;
+                this.right = right;
                 this.andOperator = andOperator;
             }
 

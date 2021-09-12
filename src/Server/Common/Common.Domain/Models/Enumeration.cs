@@ -34,10 +34,10 @@
         }
 
         public static T FromValue<T>(int value) where T : Enumeration
-            => Parse<T, int>(value, "value", item => item.Value == value);
+            => Parse<T, int>(value, nameof(value), item => item.Value == value);
 
         public static T FromName<T>(string name) where T : Enumeration
-            => Parse<T, string>(name, "name", item => item.Name == name);
+            => Parse<T, string>(name, nameof(name), item => item.Name == name);
 
         public static string NameFromValue<T>(int value) where T : Enumeration
             => FromValue<T>(value).Name;
@@ -57,7 +57,7 @@
 
         public override bool Equals(object? obj)
         {
-            if (!(obj is Enumeration otherValue))
+            if (obj is not Enumeration otherValue)
             {
                 return false;
             }

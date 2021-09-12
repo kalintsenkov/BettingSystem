@@ -20,10 +20,6 @@
 
 	<ItemGroup>
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-			<_Parameter1>BettingSystem.Domain.Core</_Parameter1>
-		</AssemblyAttribute>
-
-		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
 			<_Parameter1>BettingSystem.Domain.Betting</_Parameter1>
 		</AssemblyAttribute>
 

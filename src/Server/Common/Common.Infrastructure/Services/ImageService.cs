@@ -9,7 +9,7 @@
 
     internal class ImageService : IImageService
     {
-        private const int ThumbnailWidth = 300;
+        private const int ThumbnailWidth = 100;
 
         public async Task<ImageResponseModel> Process(ImageRequestModel image)
         {
@@ -38,7 +38,7 @@
 
             image.Metadata.ExifProfile = null;
 
-            var memoryStream = new MemoryStream();
+            await using var memoryStream = new MemoryStream();
 
             await image.SaveAsJpegAsync(memoryStream);
 

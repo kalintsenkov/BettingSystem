@@ -21,7 +21,14 @@
 
         public async Task Consume(ConsumeContext<TeamCreatedEvent> context)
         {
-            var team = this.teamFactory.Build(context.Message.Name);
+            var message = context.Message;
+
+            var team = this.teamFactory
+                .WithName(message.Name)
+                .WithImage(
+                    message.ImageOriginal,
+                    message.ImageThumbnail)
+                .Build();
 
             await this.teamRepository.Save(team);
         }

@@ -1,6 +1,7 @@
 ﻿namespace BettingSystem.Domain.Teams.Models
 {
     using System;
+    using Common.Models.Images;
     using Exceptions;
     using FakeItEasy;
     using FluentAssertions;
@@ -22,7 +23,7 @@
         [InlineData(null)]
         public void InvalidTeamShouldThrowException(string name)
         {
-            Action act = () => new Team(name);
+            Action act = () => new Team(name, A.Dummy<Image>());
 
             act.Should().Throw<InvalidTeamException>();
         }

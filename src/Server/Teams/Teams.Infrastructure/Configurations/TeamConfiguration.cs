@@ -19,6 +19,15 @@
                 .IsRequired();
 
             builder
+                .OwnsOne(s => s.Image, i =>
+                {
+                    i.WithOwner();
+
+                    i.Property(img => img.Original).IsRequired();
+                    i.Property(img => img.Thumbnail).IsRequired();
+                });
+
+            builder
                 .HasMany(t => t.Players)
                 .WithOne()
                 .IsRequired()

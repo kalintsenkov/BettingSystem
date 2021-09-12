@@ -1,4 +1,4 @@
-﻿namespace BettingSystem.Domain.Games.Models.Matches
+﻿namespace BettingSystem.Domain.Common.Models.Images
 {
     using System;
     using Bogus;

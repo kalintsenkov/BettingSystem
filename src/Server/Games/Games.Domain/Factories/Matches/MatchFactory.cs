@@ -1,6 +1,7 @@
 ﻿namespace BettingSystem.Domain.Games.Factories.Matches
 {
     using System;
+    using Common.Models.Images;
     using Exceptions;
     using Models.Matches;
     using Models.Teams;
@@ -41,10 +42,10 @@
 
         public IMatchFactory WithStadium(
             string name,
-            byte[] originalContent,
-            byte[] thumbnailContent)
+            byte[] imageOriginal,
+            byte[] imageThumbnail)
         {
-            var image = new Image(originalContent, thumbnailContent);
+            var image = new Image(imageOriginal, imageThumbnail);
             var stadium = new Stadium(name, image);
 
             return this.WithStadium(stadium);

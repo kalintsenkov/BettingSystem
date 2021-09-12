@@ -3,6 +3,7 @@
     using System;
     using Bogus;
     using Common.Models;
+    using Common.Models.Images;
     using FakeItEasy;
 
     public class StadiumFakes
@@ -20,7 +21,7 @@
         {
             public static Stadium GetStadium(int id = 1)
                 => new Faker<Stadium>()
-                    .CustomInstantiator(f => new Stadium(
+                    .CustomInstantiator(_ => new Stadium(
                         $"Stadium {id}",
                         A.Dummy<Image>()))
                     .Generate()
@@ -30,7 +31,7 @@
                 string name,
                 int id = 1)
                 => new Faker<Stadium>()
-                    .CustomInstantiator(f => new Stadium(
+                    .CustomInstantiator(_ => new Stadium(
                         name,
                         A.Dummy<Image>()))
                     .Generate()

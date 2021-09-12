@@ -3,6 +3,7 @@
     using System;
     using Bogus;
     using Common.Models;
+    using Common.Models.Images;
     using FakeItEasy;
 
     using static Common.Models.ModelConstants.Common;
@@ -18,7 +19,8 @@
                     .CustomInstantiator(f => new Team(
                         f.Random.String2(
                             MinNameLength,
-                            MaxNameLength)))
+                            MaxNameLength),
+                        A.Dummy<Image>()))
                     .Generate()
                     .SetId(1);
 

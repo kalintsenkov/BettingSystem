@@ -3,6 +3,7 @@
     using Domain.Games.Models.Matches;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
     using static Domain.Common.Models.ModelConstants.Common;
 
     internal class StadiumConfiguration : IEntityTypeConfiguration<Stadium>
@@ -22,8 +23,8 @@
                 {
                     i.WithOwner();
 
-                    i.Property(img => img.OriginalContent).IsRequired();
-                    i.Property(img => img.ThumbnailContent).IsRequired();
+                    i.Property(img => img.Original).IsRequired();
+                    i.Property(img => img.Thumbnail).IsRequired();
                 });
         }
     }

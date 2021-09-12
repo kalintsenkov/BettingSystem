@@ -2,6 +2,7 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Application.Common.Contracts;
     using Common;
     using Domain.Teams.Factories;
     using Domain.Teams.Repositories;
@@ -11,13 +12,16 @@
     {
         public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, CreateTeamResponseModel>
         {
+            private readonly IImageService imageService;
             private readonly ITeamFactory teamFactory;
             private readonly ITeamDomainRepository teamRepository;
 
             public CreateTeamCommandHandler(
+                IImageService imageService,
                 ITeamFactory teamFactory,
                 ITeamDomainRepository teamRepository)
             {
+                this.imageService = imageService;
                 this.teamFactory = teamFactory;
                 this.teamRepository = teamRepository;
             }
@@ -26,7 +30,14 @@
                 CreateTeamCommand request,
                 CancellationToken cancellationToken)
             {
-                var team = this.teamFactory.Build(request.Name);
+                var image = await this.imageService.Process(request.Image);
+
+                var team = this.teamFactory
+                    .WithName(request.Name)
+                    .WithImage(
+                        image.Original,
+                        image.Thumbnail)
+                    .Build();
 
                 await this.teamRepository.Save(team, cancellationToken);
 

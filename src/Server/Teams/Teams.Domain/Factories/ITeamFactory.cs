@@ -7,6 +7,8 @@
     {
         ITeamFactory WithName(string name);
 
-        Team Build(string name);
+        ITeamFactory WithImage(
+            byte[] imageOriginal,
+            byte[] imageThumbnail);
     }
 }
