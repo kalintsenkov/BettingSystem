@@ -21,7 +21,8 @@
                 .AddIdentity()
                 .AddCommonInfrastructure<IdentityDbContext>(
                     configuration,
-                    Assembly.GetExecutingAssembly())
+                    Assembly.GetExecutingAssembly(),
+                    messagingHealthChecks: false)
                 .AddTransient<IDbInitializer, IdentityDbInitializer>();
 
         private static IServiceCollection AddIdentity(

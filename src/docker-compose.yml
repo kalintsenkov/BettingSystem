@@ -163,6 +163,35 @@ services:
             - games
             - teams
 
+    watchdog:
+        container_name: watchdog
+        image: kalintsenkov/bettingsystem-watchdog-service
+        build:
+            context: ./Server
+            dockerfile: ./Watchdog/Dockerfile
+        ports: 
+            - "5500:80"
+        environment:
+            - HealthChecks-UI__HealthChecks__0__Name=Identity
+            - HealthChecks-UI__HealthChecks__0__Uri=http://identity/health
+            - HealthChecks-UI__HealthChecks__1__Name=Betting
+            - HealthChecks-UI__HealthChecks__1__Uri=http://betting/health
+            - HealthChecks-UI__HealthChecks__2__Name=Competitions
+            - HealthChecks-UI__HealthChecks__2__Uri=http://competitions/health
+            - HealthChecks-UI__HealthChecks__3__Name=Games
+            - HealthChecks-UI__HealthChecks__3__Uri=http://games/health
+            - HealthChecks-UI__HealthChecks__4__Name=Teams
+            - HealthChecks-UI__HealthChecks__4__Uri=http://teams/health
+        restart: on-failure
+        networks: 
+            - bettingsystem-network
+        depends_on:
+            - identity
+            - betting
+            - competitions
+            - games
+            - teams
+
 networks:
     bettingsystem-network:
 
