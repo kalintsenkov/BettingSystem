@@ -8,10 +8,6 @@
 
     internal class MatchData : IInitialData
     {
-        private readonly Image emptyImage = new(
-            Array.Empty<byte>(),
-            Array.Empty<byte>());
-
         public Type EntityType => typeof(Match);
 
         public IEnumerable<object> GetData()
@@ -19,17 +15,41 @@
             {
                 new(
                     DateTime.Today.AddHours(5),
-                    new Team("Man United", this.emptyImage),
-                    new Team("Man City", this.emptyImage),
-                    new Stadium("Old Trafford", this.emptyImage),
+                    new Team(
+                        "Man United",
+                        new Image(
+                            Array.Empty<byte>(),
+                            Array.Empty<byte>())),
+                    new Team(
+                        "Man City",
+                        new Image(
+                            Array.Empty<byte>(),
+                            Array.Empty<byte>())),
+                    new Stadium(
+                        "Old Trafford",
+                        new Image(
+                            Array.Empty<byte>(),
+                            Array.Empty<byte>())),
                     new Statistics(null, null),
                     Status.NotStarted),
 
                 new(
                     DateTime.Today.AddDays(2),
-                    new Team("Barcelona", this.emptyImage),
-                    new Team("Real Madrid", this.emptyImage),
-                    new Stadium("Camp Nou", this.emptyImage),
+                    new Team(
+                        "Barcelona",
+                        new Image(
+                            Array.Empty<byte>(),
+                            Array.Empty<byte>())),
+                    new Team(
+                        "Real Madrid",
+                        new Image(
+                            Array.Empty<byte>(),
+                            Array.Empty<byte>())),
+                    new Stadium(
+                        "Camp Nou",
+                        new Image(
+                            Array.Empty<byte>(),
+                            Array.Empty<byte>())),
                     new Statistics(0, 3),
                     Status.FirstHalf)
             };

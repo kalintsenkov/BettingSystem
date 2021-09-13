@@ -63,6 +63,7 @@
 
             this.RaiseEvent(new TeamLogoUpdatedEvent(
                 this.Id,
+                this.Name,
                 this.Logo.OriginalContent,
                 this.Logo.ThumbnailContent));
 

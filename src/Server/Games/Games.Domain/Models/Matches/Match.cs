@@ -69,21 +69,30 @@
 
         public Match UpdateHomeTeam(Team homeTeam)
         {
-            this.HomeTeam = homeTeam;
+            if (this.HomeTeam != homeTeam)
+            {
+                this.HomeTeam = homeTeam;
+            }
 
             return this;
         }
 
         public Match UpdateAwayTeam(Team awayTeam)
         {
-            this.AwayTeam = awayTeam;
+            if (this.AwayTeam != awayTeam)
+            {
+                this.AwayTeam = awayTeam;
+            }
 
             return this;
         }
 
         public Match UpdateStadium(Stadium stadium)
         {
-            this.Stadium = stadium;
+            if (this.Stadium != stadium)
+            {
+                this.Stadium = stadium;
+            }
 
             return this;
         }

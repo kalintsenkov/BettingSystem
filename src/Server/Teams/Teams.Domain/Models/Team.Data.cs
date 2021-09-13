@@ -7,19 +7,23 @@
 
     internal class TeamData : IInitialData
     {
-        private readonly Image emptyImage = new(
-            Array.Empty<byte>(),
-            Array.Empty<byte>());
-
         public Type EntityType => typeof(Team);
 
         public IEnumerable<object> GetData()
             => new List<Team>
             {
-                new("Man City", this.emptyImage),
-                new("Man United", this.emptyImage),
-                new("Real Madrid", this.emptyImage),
-                new("Barcelona", this.emptyImage)
+                new("Man City", new Image(
+                    Array.Empty<byte>(),
+                    Array.Empty<byte>())),
+                new("Man United", new Image(
+                    Array.Empty<byte>(),
+                    Array.Empty<byte>())),
+                new("Real Madrid", new Image(
+                    Array.Empty<byte>(),
+                    Array.Empty<byte>())),
+                new("Barcelona", new Image(
+                    Array.Empty<byte>(),
+                    Array.Empty<byte>()))
             };
     }
 }

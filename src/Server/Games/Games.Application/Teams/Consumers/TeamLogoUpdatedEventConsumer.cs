@@ -18,9 +18,11 @@
 
             var team = await this.teamRepository.Find(eventMessage.Id);
 
-            team.UpdateLogo(
-                eventMessage.LogoOriginalContent,
-                eventMessage.LogoThumbnailContent);
+            team
+                .UpdateName(eventMessage.Name)
+                .UpdateLogo(
+                    eventMessage.LogoOriginalContent,
+                    eventMessage.LogoThumbnailContent);
 
             await this.teamRepository.Save(team);
         }
