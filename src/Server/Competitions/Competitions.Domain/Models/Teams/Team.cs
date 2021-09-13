@@ -34,6 +34,8 @@
 
         public void GivePointFromDraw() => this.Points += DrawPoint;
 
+        public override int GetHashCode() => (this.Id, this.Name).GetHashCode();
+
         private void Validate(string name)
             => Guard.ForStringLength<InvalidTeamException>(
                 name,
