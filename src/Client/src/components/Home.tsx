@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import { toast } from 'react-toastify';
 
-import logo from './../assets/images/icons/teams/1.png';
+import defaultLogo from './../assets/images/icons/teams/1.png';
 import IMatch from '../models/match.model';
 import matchesService from '../services/matches.service';
+import { IMAGE_DATA } from '../utilities/constants';
 
 const Home = (): JSX.Element => {
   const [matches, setMatches] = useState<IMatch[]>([]);
@@ -81,9 +82,23 @@ const Home = (): JSX.Element => {
                             {match.startDate.split(' ')[1]}
                           </td>
                           <td>
-                            <img src={logo} alt="logo" />
+                            <img
+                              src={
+                                match.homeTeamLogoThumbnailContent
+                                  ? IMAGE_DATA + match.homeTeamLogoThumbnailContent
+                                  : defaultLogo
+                              }
+                              alt="logo"
+                            />
                             <br />
-                            <img src={logo} alt="logo" />
+                            <img
+                              src={
+                                match.awayTeamLogoThumbnailContent
+                                  ? IMAGE_DATA + match.awayTeamLogoThumbnailContent
+                                  : defaultLogo
+                              }
+                              alt="logo"
+                            />
                           </td>
                           <td>
                             {match.homeTeamScore ?? 0}

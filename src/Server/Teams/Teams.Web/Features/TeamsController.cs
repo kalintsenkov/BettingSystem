@@ -32,13 +32,13 @@
 
         [HttpPost]
         public async Task<ActionResult<CreateTeamResponseModel>> Create(
-            CreateTeamCommand command)
+            [FromForm] CreateTeamCommand command)
             => await this.Send(command);
 
         [HttpPut]
         [Route(Id)]
         public async Task<ActionResult> Edit(
-            int id, EditTeamCommand command)
+            int id, [FromForm] EditTeamCommand command)
             => await this.Send(command.SetId(id));
 
         [HttpPut]

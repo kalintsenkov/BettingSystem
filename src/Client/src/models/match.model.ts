@@ -5,6 +5,8 @@ interface IMatch {
   awayTeamName: string;
   homeTeamScore?: number;
   awayTeamScore?: number;
+  homeTeamLogoThumbnailContent: any;
+  awayTeamLogoThumbnailContent: any;
 }
 
 export default IMatch;

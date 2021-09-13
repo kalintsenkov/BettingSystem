@@ -7,3 +7,5 @@ export const Endpoints = {
   GAMBLERS_PATH: 'http://localhost:5002/gamblers/',
   MATCHES_PATH: 'http://localhost:5004/matches/'
 };
+
+export const IMAGE_DATA = 'data:image/png;base64,';

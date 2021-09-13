@@ -18,6 +18,10 @@
 
         public int? AwayTeamScore { get; private set; }
 
+        public byte[] HomeTeamLogoThumbnailContent { get; private set; } = default!;
+
+        public byte[] AwayTeamLogoThumbnailContent { get; private set; } = default!;
+
         public virtual void Mapping(Profile mapper)
             => mapper
                 .CreateMap<Match, MatchResponseModel>()
