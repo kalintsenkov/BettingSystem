@@ -7,6 +7,7 @@ import Header from './shared/Header';
 import Footer from './shared/Footer';
 import RightSidebar from './shared/RightSidebar';
 import LeftSidebar from './shared/LeftSidebar';
+import LeagueStandings from './LeagueStandings';
 
 const AppRouter = (): JSX.Element => {
   return (
@@ -21,6 +22,7 @@ const AppRouter = (): JSX.Element => {
               <Route path="/home" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
+              <Route path="/standings/:league/:id" component={LeagueStandings} />
             </Switch>
             <RightSidebar />
           </div>

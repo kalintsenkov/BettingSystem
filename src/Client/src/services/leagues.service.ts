@@ -8,6 +8,10 @@ import { Endpoints } from '../utilities/constants';
 const leaguesService = {
   getAll: (): Observable<AxiosResponse<ILeague[]>> => {
     return apiService.get(Endpoints.LEAGUES_PATH);
+  },
+
+  getStandings: (leagueId: number) => {
+    return apiService.get(Endpoints.LEAGUES_PATH + leagueId + '/standings');
   }
 };
 

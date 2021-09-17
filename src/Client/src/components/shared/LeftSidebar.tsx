@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import logo from '../../assets/images/icons/leagues/1.png';
 import ILeague from '../../models/league.model';
@@ -23,9 +24,9 @@ const LeftSidebar = (): JSX.Element => {
           {leagues &&
             leagues.map(league => (
               <li>
-                <a href="">
+                <Link to={`/standings/${league.name.replace(' ', '-')}/${league.id}`}>
                   <img src={logo} alt="logo" /> {league.name}
-                </a>
+                </Link>
               </li>
             ))}
         </ul>
