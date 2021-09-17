@@ -2,16 +2,18 @@ import React, { useState, useContext } from 'react';
 import { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import { map, mergeMap } from 'rxjs';
 import { toast } from 'react-toastify';
 
 import { AuthenticationContext } from '../contexts/ContextWrapper';
 import ICredentials from '../../models/credentials.model';
+import gamblerService from '../../services/gambler.service';
 import jwtService from '../../services/jwt.service';
 import usersService from '../../services/users.service';
 
 const Login = (): JSX.Element => {
   const history = useHistory();
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthenticationContext);
+  const { isAuthenticated, setIsAuthenticated, setGamblerId } = useContext(AuthenticationContext);
 
   const [credentials, setCredentials] = useState<ICredentials>({
     email: '',
@@ -22,7 +24,7 @@ const Login = (): JSX.Element => {
     if (isAuthenticated) {
       history.push('/');
     }
-  }, [isAuthenticated]);
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({
@@ -34,17 +36,30 @@ const Login = (): JSX.Element => {
   const login = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    usersService.login(credentials).subscribe({
-      next: res => {
-        jwtService.saveToken(res.data.token);
-        setIsAuthenticated(true);
-        history.push('/');
-      },
-      error: err => {
-        const errors: string[] = err.response.data;
-        errors.map(e => toast.error(e));
-      }
-    });
+    usersService
+      .login(credentials)
+      .pipe(
+        map(res => {
+          jwtService.saveToken(res.data.token);
+          setIsAuthenticated(true);
+        }),
+        mergeMap(_ =>
+          gamblerService.getId().pipe(
+            map(res => {
+              setGamblerId(res.data.id);
+            })
+          )
+        )
+      )
+      .subscribe({
+        next: _ => {
+          history.push('/');
+        },
+        error: err => {
+          const errors: string[] = err.response.data;
+          errors.map(e => toast.error(e));
+        }
+      });
   };
 
   return (

@@ -8,12 +8,12 @@ import { AuthenticationContext } from '../contexts/ContextWrapper';
 import ICredentials from '../../models/credentials.model';
 import IGambler from '../../models/gambler.model';
 import gamblerService from '../../services/gambler.service';
-import usersService from '../../services/users.service';
 import jwtService from '../../services/jwt.service';
+import usersService from '../../services/users.service';
 
 const Register = (): JSX.Element => {
   const history = useHistory();
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthenticationContext);
+  const { isAuthenticated, setIsAuthenticated, setGamblerId } = useContext(AuthenticationContext);
 
   const [credentials, setCredentials] = useState<ICredentials & IGambler>({
     name: '',
@@ -26,7 +26,7 @@ const Register = (): JSX.Element => {
     if (isAuthenticated) {
       history.push('/');
     }
-  }, [isAuthenticated]);
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({
@@ -49,7 +49,13 @@ const Register = (): JSX.Element => {
             })
           )
         ),
-        mergeMap(_ => gamblerService.create({ name: credentials.name }))
+        mergeMap(_ =>
+          gamblerService.create({ name: credentials.name }).pipe(
+            map(res => {
+              setGamblerId(res.data.gamblerId);
+            })
+          )
+        )
       )
       .subscribe({
         next: () => {

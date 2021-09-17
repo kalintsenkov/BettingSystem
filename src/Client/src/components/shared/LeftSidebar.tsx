@@ -1,6 +1,6 @@
 import logo from '../../assets/images/icons/leagues/1.png';
 
-const LeaguesSidebar = (): JSX.Element => {
+const LeftSidebar = (): JSX.Element => {
   return (
     <div className="col-xl-2 col-lg-2 col-md-3 col-sm-6">
       <aside className="content-sidebar">
@@ -62,4 +62,4 @@ const LeaguesSidebar = (): JSX.Element => {
   );
 };
 
-export default LeaguesSidebar;
+export default LeftSidebar;
