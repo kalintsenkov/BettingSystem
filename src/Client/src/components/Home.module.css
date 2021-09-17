@@ -1,0 +1,12 @@
+.searchGame {
+  display: flex;
+  align-items: baseline;
+}
+
+.searchGame i {
+  padding-left: 5px;
+}
+
+.searchGame div.react-datepicker-wrapper > div.react-datepicker__input-container {
+  display: none;
+}

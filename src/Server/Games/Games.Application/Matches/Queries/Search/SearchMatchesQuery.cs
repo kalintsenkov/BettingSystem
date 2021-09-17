@@ -9,11 +9,11 @@
 
     public class SearchMatchesQuery : IRequest<SearchMatchesResponseModel>
     {
+        public string? StartDate { get; set; }
+
         public string? HomeTeam { get; set; }
 
         public string? AwayTeam { get; set; }
-
-        public string? Stadium { get; set; }
 
         public class SearchMatchesQueryHandler : IRequestHandler<SearchMatchesQuery, SearchMatchesResponseModel>
         {
@@ -37,9 +37,9 @@
 
             private Specification<Match> GetMatchSpecification(
                 SearchMatchesQuery request)
-                => new MatchByHomeTeamSpecification(request.HomeTeam)
-                    .And(new MatchByAwayTeamSpecification(request.AwayTeam))
-                    .And(new MatchByStadiumSpecification(request.Stadium));
+                => new MatchByStartDateSpecification(request.StartDate)
+                    .And(new MatchByHomeTeamSpecification(request.HomeTeam))
+                    .And(new MatchByAwayTeamSpecification(request.AwayTeam));
         }
     }
 }

@@ -16,6 +16,7 @@
     "history": "^5.0.1",
     "jwt-decode": "^3.1.2",
     "react": "^17.0.2",
+    "react-datepicker": "^4.2.1",
     "react-dom": "^17.0.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
@@ -48,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-datepicker": "^4.1.7"
   }
 }

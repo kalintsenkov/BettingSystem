@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import styles from './Home.module.css';
 import defaultLogo from './../assets/images/icons/teams/1.png';
 import IMatch from '../models/match.model';
 import errorsService from '../services/errors.service';
@@ -8,13 +12,33 @@ import { IMAGE_DATA } from '../utilities/constants';
 
 const Home = (): JSX.Element => {
   const [matches, setMatches] = useState<IMatch[]>([]);
+  const [startDate, setStartDate] = useState<Date>();
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    matchesService.getAll().subscribe({
+    matchesService.search().subscribe({
       next: res => setMatches(res.data.matches),
       error: errorsService.handle
     });
   }, []);
+
+  useEffect(() => {
+    const startDateAsString = startDate?.toDateString();
+    if (startDateAsString) {
+      matchesService.search(startDateAsString).subscribe({
+        next: res => setMatches(res.data.matches),
+        error: errorsService.handle
+      });
+    }
+  }, [startDate]);
+
+  const handleDatePickerChange = (date: Date) => {
+    setStartDate(date);
+  };
+
+  const toggleDatePicker = () => {
+    setIsDatePickerOpen(!isDatePickerOpen);
+  };
 
   return (
     <div
@@ -40,9 +64,16 @@ const Home = (): JSX.Element => {
                   All Matches
                 </a>
               </li>
-              <li className="search-game">
+              <li className={`search-game ` + styles.searchGame}>
                 <input type="text" placeholder="Search" />
-                <i className="fa fa-print"></i>
+                <DatePicker
+                  selected={startDate}
+                  showTimeInput={false}
+                  open={isDatePickerOpen}
+                  onChange={handleDatePickerChange}
+                  onClickOutside={toggleDatePicker}
+                />
+                <i className="fa fa-calendar" onClick={toggleDatePicker}></i>
               </li>
             </ul>
             <div className="tab-content" id="myTabContent">
