@@ -7,6 +7,7 @@
     using Application.Competitions.Leagues.Commands.Create;
     using Application.Competitions.Leagues.Commands.Delete;
     using Application.Competitions.Leagues.Commands.Edit;
+    using Application.Competitions.Leagues.Queries.All;
     using Application.Competitions.Leagues.Queries.Standings;
     using Common;
     using Common.Attributes;
@@ -16,6 +17,12 @@
     [AuthorizeAdministrator]
     public class LeaguesController : ApiController
     {
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<GetAllLeaguesResponseModel>>> All(
+            [FromQuery] GetAllLeaguesQuery query)
+            => await this.Send(query);
+
         [HttpGet]
         [AllowAnonymous]
         [Route(Id + PathSeparator + nameof(Standings))]

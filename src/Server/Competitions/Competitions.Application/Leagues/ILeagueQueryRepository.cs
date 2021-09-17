@@ -5,10 +5,14 @@
     using System.Threading.Tasks;
     using Common.Contracts;
     using Domain.Competitions.Models.Leagues;
+    using Queries.All;
     using Queries.Standings;
 
     public interface ILeagueQueryRepository : IQueryRepository<League>
     {
+        Task<IEnumerable<GetAllLeaguesResponseModel>> GetLeagueListings(
+            CancellationToken cancellationToken = default);
+
         Task<IEnumerable<GetStandingsResponseModel>> GetStandings(
             int leagueId,
             CancellationToken cancellationToken = default);

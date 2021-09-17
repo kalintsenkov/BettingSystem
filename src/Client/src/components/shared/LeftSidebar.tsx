@@ -1,31 +1,33 @@
+import { useEffect, useState } from 'react';
+
 import logo from '../../assets/images/icons/leagues/1.png';
+import ILeague from '../../models/league.model';
+import errorsService from '../../services/errors.service';
+import leaguesService from '../../services/leagues.service';
 
 const LeftSidebar = (): JSX.Element => {
+  const [leagues, setLeagues] = useState<ILeague[]>([]);
+
+  useEffect(() => {
+    leaguesService.getAll().subscribe({
+      next: res => setLeagues(res.data),
+      error: errorsService.handle
+    });
+  }, []);
+
   return (
     <div className="col-xl-2 col-lg-2 col-md-3 col-sm-6">
       <aside className="content-sidebar">
         <h3>Leagues</h3>
         <ul>
-          <li>
-            <a href="">
-              <img src={logo} alt="" /> Premier League
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img src={logo} alt="" /> LaLiga
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img src={logo} alt="" /> UEFA Champions League
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img src={logo} alt="" /> Premier League
-            </a>
-          </li>
+          {leagues &&
+            leagues.map(league => (
+              <li>
+                <a href="">
+                  <img src={logo} alt="logo" /> {league.name}
+                </a>
+              </li>
+            ))}
         </ul>
       </aside>
       <aside className="content-sidebar">

@@ -5,6 +5,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Application.Competitions.Leagues;
+    using Application.Competitions.Leagues.Queries.All;
     using Application.Competitions.Leagues.Queries.Standings;
     using AutoMapper;
     using Common.Repositories;
@@ -48,6 +49,13 @@
                 .All()
                 .Where(l => l.Id == id)
                 .FirstOrDefaultAsync(cancellationToken);
+
+        public async Task<IEnumerable<GetAllLeaguesResponseModel>> GetLeagueListings(
+            CancellationToken cancellationToken = default)
+            => await this.mapper
+                .ProjectTo<GetAllLeaguesResponseModel>(this
+                    .AllAsNoTracking())
+                .ToListAsync(cancellationToken);
 
         public async Task<IEnumerable<GetStandingsResponseModel>> GetStandings(
             int leagueId,
