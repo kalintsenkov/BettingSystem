@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import { toast } from 'react-toastify';
-
 import defaultLogo from './../assets/images/icons/teams/1.png';
 import IMatch from '../models/match.model';
+import errorsService from '../services/errors.service';
 import matchesService from '../services/matches.service';
 import { IMAGE_DATA } from '../utilities/constants';
 
@@ -12,13 +11,8 @@ const Home = (): JSX.Element => {
 
   useEffect(() => {
     matchesService.getAll().subscribe({
-      next: res => {
-        setMatches(res.data.matches);
-      },
-      error: err => {
-        const errors: string[] = err.response.data;
-        errors.map(e => toast.error(e));
-      }
+      next: res => setMatches(res.data.matches),
+      error: errorsService.handle
     });
   }, []);
 

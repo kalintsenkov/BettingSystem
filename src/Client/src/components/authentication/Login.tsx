@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { map, mergeMap } from 'rxjs';
-import { toast } from 'react-toastify';
 
 import { AuthenticationContext } from '../contexts/ContextWrapper';
 import ICredentials from '../../models/credentials.model';
+import errorsService from '../../services/errors.service';
 import gamblerService from '../../services/gambler.service';
 import jwtService from '../../services/jwt.service';
 import usersService from '../../services/users.service';
@@ -52,13 +52,8 @@ const Login = (): JSX.Element => {
         )
       )
       .subscribe({
-        next: _ => {
-          history.push('/');
-        },
-        error: err => {
-          const errors: string[] = err.response.data;
-          errors.map(e => toast.error(e));
-        }
+        next: _ => history.push('/'),
+        error: errorsService.handle
       });
   };
 

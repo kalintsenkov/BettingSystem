@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { toast } from 'react-toastify';
-
 import { AuthenticationContext } from '../contexts/ContextWrapper';
 import IGamblerDetails from '../../models/gambler-details.model';
+import errorsService from '../../services/errors.service';
 import gamblerService from '../../services/gambler.service';
 
 const GamblerInfo = (): JSX.Element => {
@@ -12,13 +11,12 @@ const GamblerInfo = (): JSX.Element => {
   const [gamblerDetails, setGamblerDetails] = useState<IGamblerDetails>();
 
   useEffect(() => {
-    gamblerService.details(gamblerId).subscribe({
-      next: res => setGamblerDetails(res.data),
-      error: err => {
-        const errors: string[] = err.response.data;
-        errors.map(e => toast.error(e));
-      }
-    });
+    if (gamblerId) {
+      gamblerService.details(gamblerId).subscribe({
+        next: res => setGamblerDetails(res.data),
+        error: errorsService.handle
+      });
+    }
   }, [gamblerId]);
 
   return (
