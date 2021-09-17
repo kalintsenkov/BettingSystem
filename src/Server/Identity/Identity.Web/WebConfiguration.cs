@@ -1,5 +1,6 @@
 ﻿namespace BettingSystem.Web.Identity
 {
+    using Application.Identity;
     using Common;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -7,6 +8,7 @@
     {
         public static IServiceCollection AddWebComponents(
             this IServiceCollection services)
-            => services.AddCommonWebComponents();
+            => services.AddCommonWebComponents(
+                typeof(ApplicationConfiguration));
     }
 }

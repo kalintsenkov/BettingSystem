@@ -32,7 +32,7 @@
 
         public void GivePointsForWin() => this.Points += WinPoints;
 
-        public void GivePointFromDraw() => this.Points += DrawPoint;
+        public void GivePointForDraw() => this.Points += DrawPoint;
 
         public override int GetHashCode() => (this.Id, this.Name).GetHashCode();
 

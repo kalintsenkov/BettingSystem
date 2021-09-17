@@ -1,6 +1,6 @@
 ﻿namespace BettingSystem.Web.Common
 {
-    using Application.Common;
+    using System;
     using Application.Common.Contracts;
     using FluentValidation.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
@@ -11,7 +11,8 @@
     public static class WebConfiguration
     {
         public static IServiceCollection AddCommonWebComponents(
-            this IServiceCollection services)
+            this IServiceCollection services,
+            Type applicationConfigurationType)
         {
             services
                 .AddScoped<ICurrentUser, CurrentUserService>()
@@ -19,7 +20,7 @@
                     .ModelBinderProviders
                     .Insert(0, new ImageModelBinderProvider()))
                 .AddFluentValidation(validation => validation
-                    .RegisterValidatorsFromAssemblyContaining<Result>())
+                    .RegisterValidatorsFromAssemblyContaining(applicationConfigurationType))
                 .AddNewtonsoftJson();
 
             services

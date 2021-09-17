@@ -72,7 +72,7 @@
 
             var points = team.Points;
 
-            team.GivePointFromDraw();
+            team.GivePointForDraw();
 
             team.Points.Should().Be(points + 1);
         }

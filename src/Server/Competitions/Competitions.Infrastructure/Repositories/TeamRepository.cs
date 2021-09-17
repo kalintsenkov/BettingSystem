@@ -47,8 +47,8 @@
             }
             else if (homeScore == awayScore)
             {
-                homeTeam.GivePointFromDraw();
-                awayTeam.GivePointFromDraw();
+                homeTeam.GivePointForDraw();
+                awayTeam.GivePointForDraw();
             }
 
             await this.Save(homeTeam, cancellationToken);
