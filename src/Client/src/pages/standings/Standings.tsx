@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
-import ILeagueStandings from '../models/league-standings.model';
-import errorsService from '../services/errors.service';
-import leaguesService from '../services/leagues.service';
+import ILeagueStandings from '../../models/leagueStandings';
+import errorsService from '../../services/errorsService';
+import leaguesService from '../../services/leaguesService';
 
-const LeagueStandings = (): JSX.Element => {
+const Standings = (): JSX.Element => {
   const { id, league } = useParams<{ id: string; league: string }>();
 
   const [standings, setStandings] = useState<ILeagueStandings[]>([]);
@@ -76,4 +76,4 @@ const LeagueStandings = (): JSX.Element => {
   );
 };
 
-export default LeagueStandings;
+export default Standings;

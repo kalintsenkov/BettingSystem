@@ -3,7 +3,7 @@ import { Redirect, Route } from 'react-router-dom';
 
 import IPrivateRouteProps from './IPrivateRouteProps';
 import { AuthenticationContext } from '../contexts/ContextWrapper';
-import usersService from '../../services/users.service';
+import usersService from '../../services/usersService';
 
 const PrivateRoute = ({
   roles,

@@ -4,11 +4,11 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import styles from './Home.module.css';
-import defaultLogo from './../assets/images/icons/teams/1.png';
-import IMatch from '../models/match.model';
-import errorsService from '../services/errors.service';
-import matchesService from '../services/matches.service';
-import { IMAGE_DATA } from '../utilities/constants';
+import defaultLogo from './../../assets/images/icons/teams/1.png';
+import matchesService from '../../services/matchesService';
+import errorsService from '../../services/errorsService';
+import IMatch from '../../models/match';
+import { IMAGE_DATA } from '../../common/constants';
 
 const Home = (): JSX.Element => {
   const [matches, setMatches] = useState<IMatch[]>([]);

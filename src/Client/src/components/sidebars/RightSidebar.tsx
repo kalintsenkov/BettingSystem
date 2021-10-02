@@ -1,5 +1,5 @@
-import Ad from './Ad';
-import GamblerInfo from './GamblerInfo';
+import Ad from "../ad/Ad";
+import GamblerInfo from "../gamblerInfo/GamblerInfo";
 
 const RightSidebar = (): JSX.Element => {
   return (

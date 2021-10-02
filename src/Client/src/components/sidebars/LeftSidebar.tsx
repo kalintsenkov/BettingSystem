@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 import logo from '../../assets/images/icons/leagues/1.png';
 import ILeague from '../../models/league.model';
-import errorsService from '../../services/errors.service';
-import leaguesService from '../../services/leagues.service';
+import errorsService from '../../services/errorsService';
+import leaguesService from '../../services/leaguesService';
 
 const LeftSidebar = (): JSX.Element => {
   const [leagues, setLeagues] = useState<ILeague[]>([]);

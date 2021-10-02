@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import logo from '../../assets/images/logo.png';
-import jwtService from '../../services/jwt.service';
+import jwtService from '../../services/jwtService';
 import { AuthenticationContext } from '../contexts/ContextWrapper';
 
 const Header = (): JSX.Element => {

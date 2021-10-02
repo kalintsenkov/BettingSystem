@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { from } from 'rxjs';
 
-import jwtService from './jwt.service';
+import jwtService from './jwtService';
 
 const axiosInstance = axios.create();
 

@@ -4,12 +4,12 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { map, mergeMap } from 'rxjs';
 
-import { AuthenticationContext } from '../contexts/ContextWrapper';
-import ICredentials from '../../models/credentials.model';
-import errorsService from '../../services/errors.service';
-import gamblerService from '../../services/gambler.service';
-import jwtService from '../../services/jwt.service';
-import usersService from '../../services/users.service';
+import { AuthenticationContext } from '../../components/contexts/ContextWrapper';
+import ICredentials from '../../models/credentials';
+import errorsService from '../../services/errorsService';
+import gamblerService from '../../services/gamblerService';
+import jwtService from '../../services/jwtService';
+import usersService from '../../services/usersService';
 
 const Login = (): JSX.Element => {
   const history = useHistory();

@@ -1,4 +1,4 @@
-import IMatch from './match.model';
+import IMatch from './match';
 
 interface ISearchMatches {
   matches: IMatch[];

@@ -1,4 +1,4 @@
-import IGambler from "./gambler.model";
+import IGambler from "./gambler";
 
 interface IGamblerDetails extends IGambler {
     id: number;

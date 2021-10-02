@@ -1,10 +1,10 @@
-import apiService from './api.service';
-import jwtService from './jwt.service';
-import ICredentials from '../models/credentials.model';
-import { Endpoints } from '../utilities/constants';
+import apiService from './apiService';
+import jwtService from './jwtService';
+import ICredentials from '../models/credentials';
+import { ENDPOINTS } from '../common/constants';
 
-const loginPath = Endpoints.IDENTITY_PATH + 'login';
-const registerPath = Endpoints.IDENTITY_PATH + 'register';
+const loginPath = ENDPOINTS.IDENTITY_PATH + 'login';
+const registerPath = ENDPOINTS.IDENTITY_PATH + 'register';
 
 const usersService = {
   login: (credentials: ICredentials) => {

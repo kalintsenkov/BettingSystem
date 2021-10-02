@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 
 import { AuthenticationContext } from '../contexts/ContextWrapper';
-import IGamblerDetails from '../../models/gambler-details.model';
-import errorsService from '../../services/errors.service';
-import gamblerService from '../../services/gambler.service';
+import IGamblerDetails from '../../models/gamblerDetails';
+import errorsService from '../../services/errorsService';
+import gamblerService from '../../services/gamblerService';
 
 const GamblerInfo = (): JSX.Element => {
   const { isAuthenticated, gamblerId } = useContext(AuthenticationContext);
