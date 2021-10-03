@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../../assets/images/icons/leagues/1.png';
-import ILeague from '../../models/league.model';
+import ILeague from '../../models/league';
 import errorsService from '../../services/errorsService';
 import leaguesService from '../../services/leaguesService';
 

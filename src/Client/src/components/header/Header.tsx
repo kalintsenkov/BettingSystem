@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import jwtService from '../../services/jwtService';
 import { AuthenticationContext } from '../contexts/ContextWrapper';
+import UserMenu from '../userMenu/UserMenu';
 
 const Header = (): JSX.Element => {
   const history = useHistory();
@@ -127,9 +128,10 @@ const Header = (): JSX.Element => {
             </ul>
             <div className="header-btn justify-content-end">
               {isAuthenticated ? (
-                <a className="bttn-small btn-fill" onClick={logout}>
-                  <i className="fa fa-lock"></i>Logout
-                </a>
+                // <a className="bttn-small btn-fill" onClick={logout}>
+                //   <i className="fa fa-lock"></i>Logout
+                // </a>
+                <UserMenu />
               ) : (
                 <>
                   <Link to="/register" className="bttn-small btn-fill">

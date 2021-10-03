@@ -1,0 +1,205 @@
+$primary: #202734;
+$secondary: #7dcfc6;
+$secondyshadow: #006e63;
+$white: #f2f2f2;
+$grey: #8e9299;
+$softgrey: #ddd;
+
+.ui {
+  &.btn {
+    line-height: normal;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &.normal {
+      padding: 4% 6%;
+      background: $secondary;
+      border-radius: 20%;
+      color: $white;
+      font-size: 12.5px;
+
+      &:hover,
+      &:focus {
+        outline: none;
+        background: $secondyshadow;
+      }
+    }
+  }
+}
+
+.userUi {
+  position: absolute;
+  display: inline-block;
+  right: 0;
+  z-index: 1;
+
+  .userMenuToggle {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+
+    .profileImg {
+      width: 35px;
+      height: 35px;
+      display: inline-block;
+      vertical-align: middle;
+      border-radius: 50%;
+      background-size: cover;
+    }
+
+    .simpleArrow {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 5px;
+      font-size: 12px;
+      color: $white;
+    }
+  }
+
+  .signOutIcon {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20px;
+    color: $white;
+    margin-left: 20px;
+
+    &:hover {
+      color: $secondary;
+    }
+  }
+
+  .userMenu {
+    &::after {
+      display: none;
+      right: 0;
+      content: ' ';
+      height: 0;
+      top: -10px;
+      width: 0;
+      position: absolute;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid #f9f9f9;
+    }
+
+    &::before {
+      display: block;
+      right: -1px;
+      content: ' ';
+      height: 0;
+      top: -11px;
+      width: 0;
+      position: absolute;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-bottom: 11px solid $white;
+    }
+    width: 300px;
+    background: #f9f9f9;
+    position: absolute;
+    right: 40%;
+    border: 1px solid $white;
+    border-radius: 2px;
+
+    .userInfo {
+      border-bottom: 1px solid $white;
+      padding: 0px 10px;
+      position: relative;
+
+      .profileImg {
+        width: 45px;
+        height: 45px;
+        display: inline-block;
+        vertical-align: middle;
+        border-radius: 50%;
+        background-size: cover;
+      }
+
+      h3 {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0;
+        color: $grey;
+        font-weight: normal;
+        line-height: normal;
+        font-size: 15px;
+        padding-left: 20px;
+      }
+
+      .btn {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 12px;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+      }
+    }
+
+    .invitesInfo {
+      border: 1px solid $white;
+      padding: 10px;
+      height: 110px;
+      display: block;
+      .nextInviteBar {
+        height: 20px;
+        background: $softgrey;
+        border: 1px solid #fff;
+        border-radius: 20px;
+        position: relative;
+        .progress {
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-radius: 20px 0px 0px 20px;
+          background: $secondary;
+          height: 100%;
+        }
+      }
+      span {
+        margin: 0;
+        padding: 5px 0;
+        color: $softgrey;
+        font-size: 12.5px;
+        line-height: normal !important;
+        display: block;
+      }
+      p {
+        font-size: 14px;
+        line-height: normal;
+        color: $grey;
+        float: left;
+        margin: 18px 0;
+      }
+
+      .btn {
+        float: right;
+        font-size: 12px;
+        margin: 5px 0;
+      }
+    }
+
+    .menuNav {
+      list-style-type: none;
+
+      li {
+        padding: 15px 10px;
+        line-height: normal;
+        color: $grey;
+        border-bottom: 1px solid $white;
+        cursor: pointer;
+
+        span {
+          width: 20px;
+          margin-right: 10px;
+          text-align: center;
+        }
+
+        &:hover {
+          background: $white;
+          color: $secondary;
+        }
+      }
+    }
+  }
+}
