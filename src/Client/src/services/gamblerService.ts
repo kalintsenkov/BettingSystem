@@ -25,6 +25,10 @@ const gamblerService = {
 
   withdraw: (amount: number): Observable<AxiosResponse<void>> => {
     return apiService.put(ENDPOINTS.GAMBLERS_PATH + 'Withdraw', { amount });
+  },
+
+  getIdFromLocalStorage: (): string | null => {
+    return localStorage.getItem('gamblerId');
   }
 };
 

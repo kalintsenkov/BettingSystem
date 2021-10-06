@@ -1,23 +1,14 @@
-import React, { useEffect } from 'react';
-import { useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 
-import logo from '../../assets/images/logo.png';
-import jwtService from '../../services/jwtService';
-import { AuthenticationContext } from '../contexts/ContextWrapper';
 import UserMenu from '../userMenu/UserMenu';
+import logo from '../../assets/images/logo.png';
+import { AuthenticationContext } from '../contexts/ContextWrapper';
 
 const Header = (): JSX.Element => {
-  const history = useHistory();
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthenticationContext);
 
   useEffect(() => {}, [isAuthenticated]);
-
-  const logout = (): void => {
-    jwtService.removeToken();
-    setIsAuthenticated(false);
-    history.push('/');
-  };
 
   return (
     <header className="header-area gradient-bg">
@@ -128,9 +119,6 @@ const Header = (): JSX.Element => {
             </ul>
             <div className="header-btn justify-content-end">
               {isAuthenticated ? (
-                // <a className="bttn-small btn-fill" onClick={logout}>
-                //   <i className="fa fa-lock"></i>Logout
-                // </a>
                 <UserMenu />
               ) : (
                 <>

@@ -1,5 +1,5 @@
 $primary: #202734;
-$secondary: #7dcfc6;
+$secondary: #fdd50b;
 $secondyshadow: #006e63;
 $white: #f2f2f2;
 $grey: #8e9299;
@@ -32,6 +32,7 @@ $softgrey: #ddd;
   display: inline-block;
   right: 0;
   z-index: 1;
+  margin-top: -15px;
 
   .userMenuToggle {
     display: inline-block;
@@ -69,31 +70,8 @@ $softgrey: #ddd;
   }
 
   .userMenu {
-    &::after {
-      display: none;
-      right: 0;
-      content: ' ';
-      height: 0;
-      top: -10px;
-      width: 0;
-      position: absolute;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 10px solid #f9f9f9;
-    }
-
-    &::before {
-      display: block;
-      right: -1px;
-      content: ' ';
-      height: 0;
-      top: -11px;
-      width: 0;
-      position: absolute;
-      border-left: 11px solid transparent;
-      border-right: 11px solid transparent;
-      border-bottom: 11px solid $white;
-    }
+    display: none;
+    margin-top: 45px;
     width: 300px;
     background: #f9f9f9;
     position: absolute;
@@ -141,12 +119,14 @@ $softgrey: #ddd;
       padding: 10px;
       height: 110px;
       display: block;
+
       .nextInviteBar {
         height: 20px;
         background: $softgrey;
         border: 1px solid #fff;
         border-radius: 20px;
         position: relative;
+
         .progress {
           position: absolute;
           top: 0;
@@ -156,6 +136,7 @@ $softgrey: #ddd;
           height: 100%;
         }
       }
+
       span {
         margin: 0;
         padding: 5px 0;
@@ -164,6 +145,7 @@ $softgrey: #ddd;
         line-height: normal !important;
         display: block;
       }
+
       p {
         font-size: 14px;
         line-height: normal;

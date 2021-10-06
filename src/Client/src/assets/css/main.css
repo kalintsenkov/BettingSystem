@@ -1929,10 +1929,10 @@ Footer Area
 
 */
 footer {
-  position: absolute;
   bottom: 0;
   width: 100%;
-  height: 50px;
+  clear: both;
+  position: absolute;
 }
 
 .footer-area {

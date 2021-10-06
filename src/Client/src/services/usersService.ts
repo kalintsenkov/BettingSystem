@@ -23,6 +23,10 @@ const usersService = {
     }
 
     return decoded.role;
+  },
+
+  isAuthenticated: (): boolean => {
+    return jwtService.getToken() != null;
   }
 };
 

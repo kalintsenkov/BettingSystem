@@ -47,6 +47,7 @@ const Login = (): JSX.Element => {
           gamblerService.getId().pipe(
             map(res => {
               setGamblerId(res.data.id);
+              localStorage.setItem('gamblerId', res.data.id);
             })
           )
         )

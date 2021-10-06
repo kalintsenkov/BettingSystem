@@ -53,6 +53,7 @@ const Register = (): JSX.Element => {
           gamblerService.create({ name: credentials.name }).pipe(
             map(res => {
               setGamblerId(res.data.gamblerId);
+              localStorage.setItem('gamblerId', res.data.gamblerId);
             })
           )
         )
