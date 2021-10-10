@@ -18,14 +18,14 @@
         {
         }
 
-        public async Task<Team> Find(
+        public async Task<Team?> Find(
             string team,
             CancellationToken cancellationToken = default)
             => await this
                 .AllAsNoTracking()
                 .FirstOrDefaultAsync(t => t.Name == team, cancellationToken);
 
-        public async Task<Team> Find(
+        public async Task<Team?> Find(
             int id,
             CancellationToken cancellationToken = default)
             => await this

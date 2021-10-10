@@ -18,7 +18,7 @@
 
             var team = await this.teamRepository.Find(eventMessage.Id);
 
-            team
+            team!
                 .UpdateName(eventMessage.Name)
                 .UpdateLogo(
                     eventMessage.LogoOriginalContent,

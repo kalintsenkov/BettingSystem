@@ -36,7 +36,7 @@
             return true;
         }
 
-        public async Task<Match> Find(
+        public async Task<Match?> Find(
             int id,
             CancellationToken cancellationToken = default)
             => await this

@@ -18,7 +18,7 @@
 
             var match = await this.matchRepository.Find(eventMessage.Id);
 
-            match.UpdateStartDate(eventMessage.StartDate);
+            match!.UpdateStartDate(eventMessage.StartDate);
 
             await this.matchRepository.Save(match);
         }

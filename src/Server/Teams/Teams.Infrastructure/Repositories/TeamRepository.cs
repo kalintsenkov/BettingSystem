@@ -42,7 +42,7 @@
             return true;
         }
 
-        public async Task<Team> Find(
+        public async Task<Team?> Find(
             int id,
             CancellationToken cancellationToken = default)
             => await this

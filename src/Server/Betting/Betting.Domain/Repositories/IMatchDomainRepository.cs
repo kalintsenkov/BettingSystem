@@ -11,7 +11,7 @@
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<Match> Find(
+        Task<Match?> Find(
             int id,
             CancellationToken cancellationToken = default);
     }

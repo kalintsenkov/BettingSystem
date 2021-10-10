@@ -18,7 +18,7 @@
 
             var match = await this.matchRepository.Find(eventMessage.Id);
 
-            match
+            match!
                 .Statistics
                 .UpdateHomeScore(eventMessage.HomeScore)
                 .UpdateAwayScore(eventMessage.AwayScore)

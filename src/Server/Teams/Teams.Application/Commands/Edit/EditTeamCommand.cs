@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Application.Common;
     using Application.Common.Contracts;
+    using Application.Common.Exceptions;
     using Common;
     using Domain.Teams.Repositories;
     using MediatR;
@@ -30,6 +31,11 @@
                 var team = await this.teamRepository.Find(
                     request.Id,
                     cancellationToken);
+
+                if (team == null)
+                {
+                    throw new NotFoundException(nameof(team), request.Id);
+                }
 
                 var logo = await this.imageService.Process(request.Logo);
 

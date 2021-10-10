@@ -44,7 +44,7 @@
             return true;
         }
 
-        public async Task<Match> Find(
+        public async Task<Match?> Find(
             int id,
             CancellationToken cancellationToken = default)
             => await this
@@ -72,7 +72,7 @@
                     .Where(m => m.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<Stadium> GetStadium(
+        public async Task<Stadium?> GetStadium(
             string stadium,
             CancellationToken cancellationToken = default)
             => await this

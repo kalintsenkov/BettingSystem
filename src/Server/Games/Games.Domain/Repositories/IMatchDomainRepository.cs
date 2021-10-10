@@ -11,11 +11,11 @@
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<Match> Find(
+        Task<Match?> Find(
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<Stadium> GetStadium(
+        Task<Stadium?> GetStadium(
             string stadium,
             CancellationToken cancellationToken = default);
     }

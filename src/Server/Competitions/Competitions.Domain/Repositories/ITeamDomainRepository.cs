@@ -7,15 +7,8 @@
 
     public interface ITeamDomainRepository : IDomainRepository<Team>
     {
-        Task<Team> Find(
+        Task<Team?> Find(
             int id,
-            CancellationToken cancellationToken = default);
-
-        Task GivePoints(
-            int homeTeamId,
-            int awayTeamId,
-            int homeScore,
-            int awayScore,
             CancellationToken cancellationToken = default);
     }
 }

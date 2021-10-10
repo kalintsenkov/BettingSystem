@@ -43,7 +43,7 @@
             return true;
         }
 
-        public async Task<League> Find(
+        public async Task<League?> Find(
             int id,
             CancellationToken cancellationToken = default)
             => await this
@@ -51,7 +51,7 @@
                 .Where(l => l.Id == id)
                 .FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<Country> GetCountry(
+        public async Task<Country?> GetCountry(
             string country,
             CancellationToken cancellationToken = default)
             => await this

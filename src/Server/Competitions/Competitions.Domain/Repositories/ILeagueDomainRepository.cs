@@ -11,11 +11,11 @@
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<League> Find(
+        Task<League?> Find(
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<Country> GetCountry(
+        Task<Country?> GetCountry(
             string country,
             CancellationToken cancellationToken = default);
     }

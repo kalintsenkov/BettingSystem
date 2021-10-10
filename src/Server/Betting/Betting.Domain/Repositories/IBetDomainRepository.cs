@@ -11,7 +11,7 @@
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<Bet> Find(
+        Task<Bet?> Find(
             int id,
             CancellationToken cancellationToken = default);
     }

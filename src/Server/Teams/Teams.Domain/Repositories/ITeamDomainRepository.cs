@@ -11,7 +11,7 @@
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<Team> Find(
+        Task<Team?> Find(
             int id,
             CancellationToken cancellationToken = default);
     }

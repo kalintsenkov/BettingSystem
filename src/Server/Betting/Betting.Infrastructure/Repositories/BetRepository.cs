@@ -43,7 +43,7 @@
             return true;
         }
 
-        public async Task<Bet> Find(
+        public async Task<Bet?> Find(
             int id,
             CancellationToken cancellationToken = default)
             => await this

@@ -22,40 +22,7 @@
             : base(db)
             => this.mapper = mapper;
 
-        public async Task GivePoints(
-            int homeTeamId,
-            int awayTeamId,
-            int homeScore,
-            int awayScore,
-            CancellationToken cancellationToken = default)
-        {
-            var homeTeam = await this.Find(
-                homeTeamId,
-                cancellationToken);
-
-            var awayTeam = await this.Find(
-                awayTeamId,
-                cancellationToken);
-
-            if (homeScore > awayScore)
-            {
-                homeTeam.GivePointsForWin();
-            }
-            else if (homeScore < awayScore)
-            {
-                awayTeam.GivePointsForWin();
-            }
-            else if (homeScore == awayScore)
-            {
-                homeTeam.GivePointForDraw();
-                awayTeam.GivePointForDraw();
-            }
-
-            await this.Save(homeTeam, cancellationToken);
-            await this.Save(awayTeam, cancellationToken);
-        }
-
-        public async Task<Team> Find(
+        public async Task<Team?> Find(
             int id,
             CancellationToken cancellationToken = default)
             => await this

@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Common;
     using Common.Contracts;
+    using Common.Exceptions;
     using Domain.Betting.Models.Matches;
     using Domain.Betting.Repositories;
     using MediatR;
@@ -49,6 +50,11 @@
                 var bet = await this.betRepository.Find(
                     request.Id,
                     cancellationToken);
+
+                if (bet == null)
+                {
+                    throw new NotFoundException(nameof(bet), request.Id);
+                }
 
                 var matchStatus = bet.Match.Status;
 

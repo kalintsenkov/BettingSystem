@@ -13,10 +13,31 @@
             => this.teamRepository = teamRepository;
 
         public async Task Consume(ConsumeContext<MatchFinishedEvent> context)
-            => await this.teamRepository.GivePoints(
-                context.Message.HomeTeamId,
-                context.Message.AwayTeamId,
-                context.Message.HomeScore,
-                context.Message.AwayScore);
+        {
+            var message = context.Message;
+
+            var homeScore = message.HomeScore;
+            var awayScore = message.AwayScore;
+
+            var homeTeam = await this.teamRepository.Find(message.HomeTeamId);
+            var awayTeam = await this.teamRepository.Find(message.AwayTeamId);
+
+            if (homeScore > awayScore)
+            {
+                homeTeam!.GivePointsForWin();
+            }
+            else if (homeScore < awayScore)
+            {
+                awayTeam!.GivePointsForWin();
+            }
+            else if (homeScore == awayScore)
+            {
+                homeTeam!.GivePointForDraw();
+                awayTeam!.GivePointForDraw();
+            }
+
+            await this.teamRepository.Save(homeTeam!);
+            await this.teamRepository.Save(awayTeam!);
+        }
     }
 }

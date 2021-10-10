@@ -20,7 +20,7 @@
 
             var match = await this.matchRepository.Find(eventMessage.Id);
 
-            match.UpdateStatus(Enumeration.FromValue<Status>(
+            match!.UpdateStatus(Enumeration.FromValue<Status>(
                 eventMessage.Status));
 
             await this.matchRepository.Save(match);
