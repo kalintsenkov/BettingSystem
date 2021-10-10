@@ -6,9 +6,9 @@
 
     public class GetTeamPlayersResponseModel : IMapFrom<Player>
     {
-        public string Name { get; set; } = default!;
+        public string Name { get; private set; } = default!;
 
-        public string Position { get; set; } = default!;
+        public string Position { get; private set; } = default!;
 
         public void Mapping(Profile mapper)
             => mapper
