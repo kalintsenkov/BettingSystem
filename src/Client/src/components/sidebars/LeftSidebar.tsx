@@ -2,16 +2,23 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../../assets/images/icons/leagues/1.png';
+import ICountry from '../../models/country';
 import ILeague from '../../models/league';
 import errorsService from '../../services/errorsService';
 import leaguesService from '../../services/leaguesService';
 
 const LeftSidebar = (): JSX.Element => {
   const [leagues, setLeagues] = useState<ILeague[]>([]);
+  const [countries, setCountries] = useState<ICountry[]>([]);
 
   useEffect(() => {
     leaguesService.getAll().subscribe({
       next: res => setLeagues(res.data),
+      error: errorsService.handle
+    });
+
+    leaguesService.getCountries().subscribe({
+      next: res => setCountries(res.data),
       error: errorsService.handle
     });
   }, []);
@@ -34,31 +41,14 @@ const LeftSidebar = (): JSX.Element => {
       <aside className="content-sidebar">
         <h3>Countries</h3>
         <ul>
-          <li>
-            <a href="">
-              <img src={logo} alt="" /> England
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img src={logo} alt="" /> Spain
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img src={logo} alt="" /> Germany
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img src={logo} alt="" /> Italy
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img src={logo} alt="" /> France
-            </a>
-          </li>
+          {countries &&
+            countries.map(country => (
+              <li>
+                <Link to={''}>
+                  <img src={logo} alt="logo" /> {country.name}
+                </Link>
+              </li>
+            ))}
         </ul>
       </aside>
     </div>
