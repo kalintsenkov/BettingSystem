@@ -42,11 +42,11 @@
 		<PackageReference Include="Hangfire.AspNetCore" Version="1.7.25" />
 		<PackageReference Include="Hangfire.Core" Version="1.7.25" />
 		<PackageReference Include="Hangfire.SqlServer" Version="1.7.25" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.9" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.9" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.9" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.9" />
-		<PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.10" />
+		<PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>
