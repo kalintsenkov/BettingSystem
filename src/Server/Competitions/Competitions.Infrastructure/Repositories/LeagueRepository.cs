@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Application.Competitions.Leagues;
     using Application.Competitions.Leagues.Queries.All;
+    using Application.Competitions.Leagues.Queries.Countries;
     using Application.Competitions.Leagues.Queries.Standings;
     using AutoMapper;
     using Common.Repositories;
@@ -50,11 +51,25 @@
                 .Where(l => l.Id == id)
                 .FirstOrDefaultAsync(cancellationToken);
 
+        public async Task<Country> GetCountry(
+            string country,
+            CancellationToken cancellationToken = default)
+            => await this
+                .AllCountries()
+                .FirstOrDefaultAsync(s => s.Name == country, cancellationToken);
+
         public async Task<IEnumerable<GetAllLeaguesResponseModel>> GetLeagueListings(
             CancellationToken cancellationToken = default)
             => await this.mapper
                 .ProjectTo<GetAllLeaguesResponseModel>(this
                     .AllAsNoTracking())
+                .ToListAsync(cancellationToken);
+
+        public async Task<IEnumerable<GetCountriesResponseModel>> GetCountries(
+            CancellationToken cancellationToken = default)
+            => await this.mapper
+                .ProjectTo<GetCountriesResponseModel>(this
+                    .AllCountries())
                 .ToListAsync(cancellationToken);
 
         public async Task<IEnumerable<GetStandingsResponseModel>> GetStandings(
@@ -67,5 +82,11 @@
                     .SelectMany(l => l.Teams)
                     .OrderByDescending(t => t.Points))
                 .ToListAsync(cancellationToken);
+
+        private IQueryable<Country> AllCountries()
+            => this
+                .Data
+                .Countries
+                .AsNoTracking();
     }
 }

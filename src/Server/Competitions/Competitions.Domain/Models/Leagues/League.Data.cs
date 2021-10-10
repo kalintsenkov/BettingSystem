@@ -14,6 +14,7 @@
             {
                 new(
                     name: "Premier League",
+                    country: new Country("England"),
                     teams: new HashSet<Team>
                     {
                         new("Man City", 0),
@@ -22,6 +23,7 @@
 
                 new(
                     name: "La Liga",
+                    country: new Country("Spain"),
                     teams: new HashSet<Team>
                     {
                         new("Real Madrid", 0),

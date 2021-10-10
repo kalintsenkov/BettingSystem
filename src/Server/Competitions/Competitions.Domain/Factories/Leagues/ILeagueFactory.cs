@@ -7,6 +7,8 @@
     {
         ILeagueFactory WithName(string name);
 
-        League Build(string name);
+        ILeagueFactory WithCountry(string name);
+
+        ILeagueFactory WithCountry(Country country);
     }
 }

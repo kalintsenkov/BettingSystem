@@ -13,24 +13,40 @@
     {
         private readonly HashSet<Team> teams;
 
-        internal League(string name)
+        internal League(string name, Country country)
         {
             this.Validate(name);
 
             this.Name = name;
+            this.Country = country;
 
             this.teams = new HashSet<Team>();
         }
 
-        internal League(string name, HashSet<Team> teams)
+        internal League(
+            string name,
+            Country country,
+            HashSet<Team> teams)
         {
             this.Validate(name);
 
             this.Name = name;
+            this.Country = country;
             this.teams = teams;
         }
 
+        private League(string name)
+        {
+            this.Name = name;
+
+            this.Country = default!;
+
+            this.teams = new HashSet<Team>();
+        }
+
         public string Name { get; private set; }
+
+        public Country Country { get; private set; }
 
         public IReadOnlyCollection<Team> Teams => this.teams.ToList().AsReadOnly();
 
@@ -39,6 +55,16 @@
             this.Validate(name);
 
             this.Name = name;
+
+            return this;
+        }
+
+        public League UpdateCountry(Country country)
+        {
+            if (this.Country != country)
+            {
+                this.Country = country;
+            }
 
             return this;
         }

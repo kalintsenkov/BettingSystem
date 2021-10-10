@@ -26,7 +26,17 @@
                 CreateLeagueCommand request,
                 CancellationToken cancellationToken)
             {
-                var league = this.leagueFactory.Build(request.Name);
+                var country = await this.leagueRepository.GetCountry(
+                    request.Country,
+                    cancellationToken);
+
+                var factory = this.leagueFactory.WithName(request.Name);
+
+                factory = country != null
+                    ? factory.WithCountry(country)
+                    : factory.WithCountry(request.Country);
+
+                var league = factory.Build();
 
                 await this.leagueRepository.Save(league, cancellationToken);
 

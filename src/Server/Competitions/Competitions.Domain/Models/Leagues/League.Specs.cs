@@ -23,7 +23,7 @@
         [InlineData(null)]
         public void InvalidMatchDateShouldThrowException(string name)
         {
-            Action act = () => new League(name);
+            Action act = () => new League(name, A.Dummy<Country>());
 
             act.Should().Throw<InvalidLeagueException>();
         }
@@ -52,6 +52,20 @@
             Action act = () => league.UpdateName(newName);
 
             act.Should().Throw<InvalidLeagueException>();
+        }
+
+        [Theory]
+        [InlineData("Test 1")]
+        [InlineData("Test 2")]
+        [InlineData("Test 3")]
+        public void UpdateCountryShouldSetNewCountry(string countryName)
+        {
+            var league = A.Dummy<League>();
+            var country = new Country(countryName);
+
+            league.UpdateCountry(country);
+
+            league.Country.Should().Be(country);
         }
 
         [Fact]

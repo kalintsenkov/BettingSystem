@@ -14,6 +14,8 @@
 
         public DbSet<League> Leagues { get; set; } = default!;
 
+        public DbSet<Country> Countries { get; set; } = default!;
+
         public DbSet<Team> Teams { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)

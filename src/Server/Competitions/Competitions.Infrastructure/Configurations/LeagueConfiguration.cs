@@ -19,6 +19,13 @@
                 .IsRequired();
 
             builder
+                .HasOne(m => m.Country)
+                .WithMany()
+                .HasForeignKey("CountryId")
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
                 .HasMany(l => l.Teams)
                 .WithOne()
                 .Metadata

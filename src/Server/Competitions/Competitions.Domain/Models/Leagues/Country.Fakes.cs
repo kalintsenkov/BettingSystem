@@ -7,21 +7,18 @@
 
     using static Common.Models.ModelConstants.Common;
 
-    public class LeagueFakes
+    public class CountryFakes
     {
-        public class LeagueDummyFactory : IDummyFactory
+        public class CountryDummyFactory : IDummyFactory
         {
-            public bool CanCreate(Type type) => type == typeof(League);
+            public bool CanCreate(Type type) => type == typeof(Country);
 
             public object? Create(Type type)
-                => new Faker<League>()
-                    .CustomInstantiator(f => new League(
+                => new Faker<Country>()
+                    .CustomInstantiator(f => new Country(
                         f.Random.String2(
                             MinNameLength,
-                            MaxNameLength),
-                        new Country(f.Random.String2(
-                            MinNameLength,
-                            MaxNameLength))))
+                            MaxNameLength)))
                     .Generate()
                     .SetId(1);
 

@@ -8,6 +8,7 @@
     using Application.Competitions.Leagues.Commands.Delete;
     using Application.Competitions.Leagues.Commands.Edit;
     using Application.Competitions.Leagues.Queries.All;
+    using Application.Competitions.Leagues.Queries.Countries;
     using Application.Competitions.Leagues.Queries.Standings;
     using Common;
     using Common.Attributes;
@@ -21,6 +22,13 @@
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<GetAllLeaguesResponseModel>>> All(
             [FromQuery] GetAllLeaguesQuery query)
+            => await this.Send(query);
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route(nameof(Countries))]
+        public async Task<ActionResult<IEnumerable<GetCountriesResponseModel>>> Countries(
+            [FromQuery] GetCountriesQuery query)
             => await this.Send(query);
 
         [HttpGet]

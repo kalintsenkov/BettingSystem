@@ -6,11 +6,15 @@
     using Common.Contracts;
     using Domain.Competitions.Models.Leagues;
     using Queries.All;
+    using Queries.Countries;
     using Queries.Standings;
 
     public interface ILeagueQueryRepository : IQueryRepository<League>
     {
         Task<IEnumerable<GetAllLeaguesResponseModel>> GetLeagueListings(
+            CancellationToken cancellationToken = default);
+
+        Task<IEnumerable<GetCountriesResponseModel>> GetCountries(
             CancellationToken cancellationToken = default);
 
         Task<IEnumerable<GetStandingsResponseModel>> GetStandings(

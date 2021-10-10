@@ -30,7 +30,18 @@
                     throw new NotFoundException(nameof(league), request.Id);
                 }
 
-                league.UpdateName(request.Name);
+                var country = await this.leagueRepository.GetCountry(
+                    request.Country,
+                    cancellationToken);
+
+                if (country == null)
+                {
+                    throw new NotFoundException(nameof(country), request.Country);
+                }
+
+                league
+                    .UpdateName(request.Name)
+                    .UpdateCountry(country);
 
                 await this.leagueRepository.Save(league, cancellationToken);
 
