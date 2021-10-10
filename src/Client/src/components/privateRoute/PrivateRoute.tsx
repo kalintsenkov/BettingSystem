@@ -10,7 +10,7 @@ const PrivateRoute = ({
   component: Component,
   ...rest
 }: IPrivateRouteProps): JSX.Element => {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthenticationContext);
+  const { isAuthenticated } = useContext(AuthenticationContext);
 
   return (
     <Route

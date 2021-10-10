@@ -52,6 +52,7 @@ const UserMenu = (): JSX.Element => {
 
   const logout = (): void => {
     jwtService.removeToken();
+    gamblerService.removeIdFromLocalStorage();
     setIsAuthenticated(false);
     history.push('/');
   };
@@ -72,7 +73,7 @@ const UserMenu = (): JSX.Element => {
         <div className={styles.userInfo}>
           <h3>{gamblerDetails?.name}</h3>
           <h3>
-            Balance: <strong>{gamblerDetails?.balance.toFixed()}</strong>
+            Balance: <strong>{gamblerDetails?.balance.toFixed(2)}</strong>
           </h3>
         </div>
 

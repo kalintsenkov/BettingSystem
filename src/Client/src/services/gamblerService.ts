@@ -27,8 +27,16 @@ const gamblerService = {
     return apiService.put(ENDPOINTS.GAMBLERS_PATH + 'Withdraw', { amount });
   },
 
+  setIdInLocalStorage: (gamblerId: string): void => {
+    localStorage.setItem('gamblerId', gamblerId);
+  },
+
   getIdFromLocalStorage: (): string | null => {
     return localStorage.getItem('gamblerId');
+  },
+
+  removeIdFromLocalStorage: (): void => {
+    localStorage.removeItem('gamblerId');
   }
 };
 
