@@ -16,6 +16,7 @@
         private Team matchAwayTeam = default!;
         private Stadium matchStadium = default!;
 
+        private bool isStartDateSet = false;
         private bool isHomeTeamSet = false;
         private bool isAwayTeamSet = false;
         private bool isStadiumSet = false;
@@ -23,6 +24,8 @@
         public IMatchFactory WithStartDate(DateTime startDate)
         {
             this.matchStartDate = startDate;
+            this.isStartDateSet = true;
+
             return this;
         }
 
@@ -30,6 +33,7 @@
         {
             this.matchHomeTeam = team;
             this.isHomeTeamSet = true;
+
             return this;
         }
 
@@ -37,6 +41,7 @@
         {
             this.matchAwayTeam = team;
             this.isAwayTeamSet = true;
+
             return this;
         }
 
@@ -55,15 +60,19 @@
         {
             this.matchStadium = stadium;
             this.isStadiumSet = true;
+
             return this;
         }
 
         public Match Build()
         {
-            if (!this.isHomeTeamSet || !this.isAwayTeamSet || !this.isStadiumSet)
+            if (!this.isStartDateSet ||
+                !this.isHomeTeamSet ||
+                !this.isAwayTeamSet ||
+                !this.isStadiumSet)
             {
                 throw new InvalidMatchException(
-                    "Home team, away team, stadium must have a value.");
+                    "Start date, home team, away team and stadium must have a value.");
             }
 
             return new Match(

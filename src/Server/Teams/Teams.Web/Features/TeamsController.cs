@@ -8,6 +8,7 @@
     using Application.Teams.Commands.Delete;
     using Application.Teams.Commands.Edit;
     using Application.Teams.Queries.All;
+    using Application.Teams.Queries.Coaches;
     using Application.Teams.Queries.Players;
     using Common;
     using Common.Attributes;
@@ -21,6 +22,13 @@
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<GetAllTeamsResponseModel>>> All(
             [FromQuery] GetAllTeamsQuery query)
+            => await this.Send(query);
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route(nameof(Coaches))]
+        public async Task<ActionResult<IEnumerable<GetAllCoachesResponseModel>>> Coaches(
+            [FromQuery] GetAllCoachesQuery query)
             => await this.Send(query);
 
         [HttpGet]

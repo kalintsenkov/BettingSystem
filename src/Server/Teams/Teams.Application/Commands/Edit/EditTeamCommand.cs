@@ -37,13 +37,23 @@
                     throw new NotFoundException(nameof(team), request.Id);
                 }
 
+                var coach = await this.teamRepository.GetCoach(
+                    request.Coach,
+                    cancellationToken);
+
+                if (coach == null)
+                {
+                    throw new NotFoundException(nameof(coach), request.Coach);
+                }
+
                 var logo = await this.imageService.Process(request.Logo);
 
                 team
                     .UpdateName(request.Name)
                     .UpdateLogo(
                         logo.OriginalContent,
-                        logo.ThumbnailContent);
+                        logo.ThumbnailContent)
+                    .UpdateCoach(coach);
 
                 await this.teamRepository.Save(team, cancellationToken);
 

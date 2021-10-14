@@ -10,5 +10,9 @@
         ITeamFactory WithLogo(
             byte[] logoOriginalContent,
             byte[] logoThumbnailContent);
+
+        ITeamFactory WithCoach(string name);
+
+        ITeamFactory WithCoach(Coach coach);
     }
 }

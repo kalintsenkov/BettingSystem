@@ -9,9 +9,20 @@
         where TCommand : EntityCommand<int>
     {
         public TeamCommandValidator()
-            => this.RuleFor(m => m.Name)
+        {
+            this.RuleFor(m => m.Name)
                 .MinimumLength(MinNameLength)
                 .MaximumLength(MaxNameLength)
                 .NotEmpty();
+
+            this.RuleFor(m => m.Logo)
+                .NotNull()
+                .NotEmpty();
+
+            this.RuleFor(m => m.Coach)
+                .MinimumLength(MinNameLength)
+                .MaximumLength(MaxNameLength)
+                .NotEmpty();
+        }
     }
 }

@@ -14,12 +14,16 @@
     {
         private readonly HashSet<Player> players;
 
-        internal Team(string name, Image logo)
+        internal Team(
+            string name,
+            Image logo,
+            Coach coach)
         {
             this.Validate(name);
 
             this.Name = name;
             this.Logo = logo;
+            this.Coach = coach;
 
             this.players = new HashSet<Player>();
 
@@ -34,6 +38,7 @@
             this.Name = name;
 
             this.Logo = default!;
+            this.Coach = default!;
 
             this.players = new HashSet<Player>();
         }
@@ -41,6 +46,8 @@
         public string Name { get; private set; }
 
         public Image Logo { get; private set; }
+
+        public Coach Coach { get; private set; }
 
         public IReadOnlyCollection<Player> Players => this.players.ToList().AsReadOnly();
 
@@ -66,6 +73,16 @@
                 this.Name,
                 this.Logo.OriginalContent,
                 this.Logo.ThumbnailContent));
+
+            return this;
+        }
+
+        public Team UpdateCoach(Coach coach)
+        {
+            if (this.Coach != coach)
+            {
+                this.Coach = coach;
+            }
 
             return this;
         }

@@ -19,6 +19,8 @@
 
         public DbSet<Player> Players { get; set; } = default!;
 
+        public DbSet<Coach> Coaches { get; set; } = default!;
+
         protected override Assembly ConfigurationsAssembly => Assembly.GetExecutingAssembly();
     }
 }

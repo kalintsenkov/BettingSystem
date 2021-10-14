@@ -9,5 +9,7 @@
         public string Name { get; set; } = default!;
 
         public ImageRequestModel Logo { get; set; } = default!;
+
+        public string Coach { get; set; } = default!;
     }
 }

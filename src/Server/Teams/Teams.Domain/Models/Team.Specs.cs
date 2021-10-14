@@ -23,7 +23,10 @@
         [InlineData(null)]
         public void InvalidTeamShouldThrowException(string name)
         {
-            Action act = () => new Team(name, A.Dummy<Image>());
+            Action act = () => new Team(
+                name, 
+                A.Dummy<Image>(),
+                A.Dummy<Coach>());
 
             act.Should().Throw<InvalidTeamException>();
         }

@@ -32,12 +32,21 @@
             {
                 var logo = await this.imageService.Process(request.Logo);
 
-                var team = this.teamFactory
+                var coach = await this.teamRepository.GetCoach(
+                    request.Coach,
+                    cancellationToken);
+
+                var factory = this.teamFactory
                     .WithName(request.Name)
                     .WithLogo(
                         logo.OriginalContent,
-                        logo.ThumbnailContent)
-                    .Build();
+                        logo.ThumbnailContent);
+
+                factory = coach != null
+                    ? factory.WithCoach(coach)
+                    : factory.WithCoach(request.Coach);
+
+                var team = factory.Build();
 
                 await this.teamRepository.Save(team, cancellationToken);
 

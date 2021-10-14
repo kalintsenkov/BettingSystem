@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Application.Teams;
     using Application.Teams.Queries.All;
+    using Application.Teams.Queries.Coaches;
     using Application.Teams.Queries.Players;
     using AutoMapper;
     using Common.Repositories;
@@ -50,11 +51,26 @@
                 .Where(t => t.Id == id)
                 .FirstOrDefaultAsync(cancellationToken);
 
+        public async Task<Coach?> GetCoach(
+            string name,
+            CancellationToken cancellationToken = default)
+            => await this
+                .AllCoaches()
+                .Where(c => c.Name == name)
+                .FirstOrDefaultAsync(cancellationToken);
+
         public async Task<IEnumerable<GetAllTeamsResponseModel>> GetTeamListings(
             CancellationToken cancellationToken = default)
             => await this.mapper
                 .ProjectTo<GetAllTeamsResponseModel>(this
                     .AllAsNoTracking())
+                .ToListAsync(cancellationToken);
+
+        public async Task<IEnumerable<GetAllCoachesResponseModel>> GetCoaches(
+            CancellationToken cancellationToken = default)
+            => await this.mapper
+                .ProjectTo<GetAllCoachesResponseModel>(this
+                    .AllCoaches())
                 .ToListAsync(cancellationToken);
 
         public async Task<IEnumerable<GetTeamPlayersResponseModel>> GetTeamPlayers(
@@ -66,5 +82,11 @@
                     .Where(t => t.Id == teamId)
                     .SelectMany(t => t.Players))
                 .ToListAsync(cancellationToken);
+
+        private IQueryable<Coach> AllCoaches()
+            => this
+                .Data
+                .Coaches
+                .AsNoTracking();
     }
 }

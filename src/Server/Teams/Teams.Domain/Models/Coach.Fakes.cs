@@ -3,25 +3,22 @@
     using System;
     using Bogus;
     using Common.Models;
-    using Common.Models.Images;
     using FakeItEasy;
 
     using static Common.Models.ModelConstants.Common;
 
-    public class TeamFakes
+    public class CoachFakes
     {
-        public class TeamDummyFactory : IDummyFactory
+        public class CoachDummyFactory : IDummyFactory
         {
-            public bool CanCreate(Type type) => type == typeof(Team);
+            public bool CanCreate(Type type) => type == typeof(Coach);
 
             public object? Create(Type type)
-                => new Faker<Team>()
-                    .CustomInstantiator(f => new Team(
+                => new Faker<Coach>()
+                    .CustomInstantiator(f => new Coach(
                         f.Random.String2(
                             MinNameLength,
-                            MaxNameLength),
-                        A.Dummy<Image>(),
-                        A.Dummy<Coach>()))
+                            MaxNameLength)))
                     .Generate()
                     .SetId(1);
 

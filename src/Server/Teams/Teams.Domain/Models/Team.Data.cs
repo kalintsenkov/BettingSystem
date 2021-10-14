@@ -12,18 +12,33 @@
         public IEnumerable<object> GetData()
             => new List<Team>
             {
-                new("Man City", new Image(
-                    Array.Empty<byte>(),
-                    Array.Empty<byte>())),
-                new("Man United", new Image(
-                    Array.Empty<byte>(),
-                    Array.Empty<byte>())),
-                new("Real Madrid", new Image(
-                    Array.Empty<byte>(),
-                    Array.Empty<byte>())),
-                new("Barcelona", new Image(
-                    Array.Empty<byte>(),
-                    Array.Empty<byte>()))
+                new(
+                    "Man City",
+                    new Image(
+                        Array.Empty<byte>(),
+                        Array.Empty<byte>()),
+                    new Coach("Coach 1")),
+
+                new(
+                    "Man United",
+                    new Image(
+                        Array.Empty<byte>(),
+                        Array.Empty<byte>()),
+                    new Coach("Coach 2")),
+
+                new(
+                    "Real Madrid",
+                    new Image(
+                        Array.Empty<byte>(),
+                        Array.Empty<byte>()),
+                    new Coach("Coach 3")),
+
+                new(
+                    "Barcelona",
+                    new Image(
+                        Array.Empty<byte>(),
+                        Array.Empty<byte>()),
+                    new Coach("Coach 4"))
             };
     }
 }

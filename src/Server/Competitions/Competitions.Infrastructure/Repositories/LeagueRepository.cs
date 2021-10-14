@@ -56,7 +56,8 @@
             CancellationToken cancellationToken = default)
             => await this
                 .AllCountries()
-                .FirstOrDefaultAsync(s => s.Name == country, cancellationToken);
+                .Where(c => c.Name == country)
+                .FirstOrDefaultAsync(cancellationToken);
 
         public async Task<IEnumerable<GetAllLeaguesResponseModel>> GetLeagueListings(
             CancellationToken cancellationToken = default)

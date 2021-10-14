@@ -28,6 +28,13 @@
                 });
 
             builder
+                .HasOne(t => t.Coach)
+                .WithMany()
+                .HasForeignKey("CoachId")
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
                 .HasMany(t => t.Players)
                 .WithOne()
                 .IsRequired()

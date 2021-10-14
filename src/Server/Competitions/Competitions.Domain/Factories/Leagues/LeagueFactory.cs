@@ -8,11 +8,14 @@
         private string leagueName = default!;
         private Country leagueCountry = default!;
 
+        private bool isNameSet = false;
         private bool isCountrySet = false;
 
         public ILeagueFactory WithName(string name)
         {
             this.leagueName = name;
+            this.isNameSet = true;
+
             return this;
         }
 
@@ -27,14 +30,15 @@
         {
             this.leagueCountry = country;
             this.isCountrySet = true;
+
             return this;
         }
 
         public League Build()
         {
-            if (!this.isCountrySet)
+            if (!this.isNameSet || !this.isCountrySet)
             {
-                throw new InvalidLeagueException("Country must have a value.");
+                throw new InvalidLeagueException("Name and country must have a value.");
             }
 
             return new League(this.leagueName, this.leagueCountry);

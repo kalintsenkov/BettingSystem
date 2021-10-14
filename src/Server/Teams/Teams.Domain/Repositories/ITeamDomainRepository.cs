@@ -14,5 +14,9 @@
         Task<Team?> Find(
             int id,
             CancellationToken cancellationToken = default);
+
+        Task<Coach?> GetCoach(
+            string name,
+            CancellationToken cancellationToken = default);
     }
 }
