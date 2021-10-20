@@ -1,6 +1,6 @@
 ﻿namespace BettingSystem.Domain.Teams.Factories
 {
-    using Common.Models.Images;
+    using Common.Models;
     using Exceptions;
     using Models;
 

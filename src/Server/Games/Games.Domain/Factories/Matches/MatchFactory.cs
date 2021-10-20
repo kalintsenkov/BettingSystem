@@ -1,7 +1,7 @@
 ﻿namespace BettingSystem.Domain.Games.Factories.Matches
 {
     using System;
-    using Common.Models.Images;
+    using Common.Models;
     using Exceptions;
     using Models.Matches;
     using Models.Teams;

@@ -1,9 +1,12 @@
 ﻿namespace BettingSystem.Domain.Betting.Models.Bets
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using Common;
     using Common.Models;
     using Exceptions;
     using Matches;
+    using Rules;
 
     using static ModelConstants.Bet;
 
@@ -60,18 +63,14 @@
         {
             this.ValidateIfMatchIsFinished(this.Match);
 
-            var homeScore = this.Match.Statistics.HomeScore;
-            var awayScore = this.Match.Statistics.AwayScore;
+            var winningRules = new List<Rule<Bet>>
+            {
+                new HomeWinningRule(),
+                new AwayWinningRule(),
+                new DrawWinningRule()
+            };
 
-            if (homeScore > awayScore && this.Prediction == Prediction.Home)
-            {
-                this.IsProfitable = true;
-            }
-            else if (homeScore < awayScore && this.Prediction == Prediction.Away)
-            {
-                this.IsProfitable = true;
-            }
-            else if (homeScore == awayScore && this.Prediction == Prediction.Draw)
+            if (winningRules.Any(rule => rule.IsSatisfiedBy(this)))
             {
                 this.IsProfitable = true;
             }

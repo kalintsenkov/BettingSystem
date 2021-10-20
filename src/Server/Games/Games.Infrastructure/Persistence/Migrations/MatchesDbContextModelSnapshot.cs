@@ -16,8 +16,28 @@ namespace BettingSystem.Infrastructure.Matches.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.9")
+                .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("BettingSystem.Domain.Common.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte[]>("OriginalContent")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("ThumbnailContent")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images");
+                });
 
             modelBuilder.Entity("BettingSystem.Domain.Common.Models.Message", b =>
                 {
@@ -79,12 +99,17 @@ namespace BettingSystem.Infrastructure.Matches.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Stadiums");
                 });
@@ -96,12 +121,17 @@ namespace BettingSystem.Infrastructure.Matches.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("LogoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LogoId");
 
                     b.ToTable("Teams");
                 });
@@ -186,60 +216,24 @@ namespace BettingSystem.Infrastructure.Matches.Persistence.Migrations
 
             modelBuilder.Entity("BettingSystem.Domain.Games.Models.Matches.Stadium", b =>
                 {
-                    b.OwnsOne("BettingSystem.Domain.Common.Models.Images.Image", "Image", b1 =>
-                        {
-                            b1.Property<int>("StadiumId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<byte[]>("OriginalContent")
-                                .IsRequired()
-                                .HasColumnType("varbinary(max)");
-
-                            b1.Property<byte[]>("ThumbnailContent")
-                                .IsRequired()
-                                .HasColumnType("varbinary(max)");
-
-                            b1.HasKey("StadiumId");
-
-                            b1.ToTable("Stadiums");
-
-                            b1.WithOwner()
-                                .HasForeignKey("StadiumId");
-                        });
-
-                    b.Navigation("Image")
+                    b.HasOne("BettingSystem.Domain.Common.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("BettingSystem.Domain.Games.Models.Teams.Team", b =>
                 {
-                    b.OwnsOne("BettingSystem.Domain.Common.Models.Images.Image", "Logo", b1 =>
-                        {
-                            b1.Property<int>("TeamId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<byte[]>("OriginalContent")
-                                .IsRequired()
-                                .HasColumnType("varbinary(max)");
-
-                            b1.Property<byte[]>("ThumbnailContent")
-                                .IsRequired()
-                                .HasColumnType("varbinary(max)");
-
-                            b1.HasKey("TeamId");
-
-                            b1.ToTable("Teams");
-
-                            b1.WithOwner()
-                                .HasForeignKey("TeamId");
-                        });
-
-                    b.Navigation("Logo")
+                    b.HasOne("BettingSystem.Domain.Common.Models.Image", "Logo")
+                        .WithMany()
+                        .HasForeignKey("LogoId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Logo");
                 });
 #pragma warning restore 612, 618
         }

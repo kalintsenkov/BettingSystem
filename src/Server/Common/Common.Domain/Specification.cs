@@ -99,11 +99,11 @@
         {
             private readonly ParameterExpression parameter;
 
-            protected override Expression VisitParameter(ParameterExpression node)
-                => base.VisitParameter(this.parameter);
-
             internal ParameterReplacer(ParameterExpression parameter)
                 => this.parameter = parameter;
+
+            protected override Expression VisitParameter(ParameterExpression node)
+                => base.VisitParameter(this.parameter);
         }
     }
 }

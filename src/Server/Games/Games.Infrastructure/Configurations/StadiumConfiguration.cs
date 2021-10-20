@@ -19,13 +19,11 @@
                 .IsRequired();
 
             builder
-                .OwnsOne(s => s.Image, i =>
-                {
-                    i.WithOwner();
-
-                    i.Property(img => img.OriginalContent).IsRequired();
-                    i.Property(img => img.ThumbnailContent).IsRequired();
-                });
+                .HasOne(s => s.Image)
+                .WithMany()
+                .HasForeignKey("ImageId")
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

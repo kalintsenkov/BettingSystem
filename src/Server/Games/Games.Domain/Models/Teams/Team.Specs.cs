@@ -1,7 +1,7 @@
 ﻿namespace BettingSystem.Domain.Games.Models.Teams
 {
     using System;
-    using Common.Models.Images;
+    using Common.Models;
     using Exceptions;
     using FakeItEasy;
     using FluentAssertions;

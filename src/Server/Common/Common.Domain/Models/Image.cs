@@ -1,6 +1,6 @@
-﻿namespace BettingSystem.Domain.Common.Models.Images
+﻿namespace BettingSystem.Domain.Common.Models
 {
-    public class Image : ValueObject
+    public class Image : Entity<int>
     {
         internal Image(
             byte[] originalContent, 

@@ -5,7 +5,6 @@
     using Common;
     using Common.Events.Teams;
     using Common.Models;
-    using Common.Models.Images;
     using Exceptions;
 
     using static Common.Models.ModelConstants.Common;

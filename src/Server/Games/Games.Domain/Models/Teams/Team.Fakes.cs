@@ -3,7 +3,6 @@
     using System;
     using Bogus;
     using Common.Models;
-    using Common.Models.Images;
     using FakeItEasy;
 
     using static Common.Models.ModelConstants.Common;

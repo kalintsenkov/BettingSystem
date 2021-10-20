@@ -3,6 +3,7 @@
     using System.Reflection;
     using Common.Events;
     using Common.Persistence;
+    using Domain.Common.Models;
     using Domain.Teams.Models;
     using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,8 @@
         public DbSet<Player> Players { get; set; } = default!;
 
         public DbSet<Coach> Coaches { get; set; } = default!;
+
+        public DbSet<Image> Images { get; set; } = default!;
 
         protected override Assembly ConfigurationsAssembly => Assembly.GetExecutingAssembly();
     }
