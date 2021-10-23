@@ -10,6 +10,10 @@
 
         public string StartDate { get; private set; } = default!;
 
+        public int HomeTeamId { get; private set; }
+
+        public int AwayTeamId { get; private set; }
+
         public string HomeTeamName { get; private set; } = default!;
 
         public string AwayTeamName { get; private set; } = default!;
@@ -17,10 +21,6 @@
         public int? HomeTeamScore { get; private set; }
 
         public int? AwayTeamScore { get; private set; }
-
-        public byte[] HomeTeamLogoThumbnailContent { get; private set; } = default!;
-
-        public byte[] AwayTeamLogoThumbnailContent { get; private set; } = default!;
 
         public virtual void Mapping(Profile mapper)
             => mapper

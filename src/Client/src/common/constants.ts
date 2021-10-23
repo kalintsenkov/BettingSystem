@@ -8,5 +8,3 @@ export const ENDPOINTS = {
   LEAGUES_PATH: 'http://localhost:5003/leagues/',
   MATCHES_PATH: 'http://localhost:5004/matches/'
 };
-
-export const IMAGE_DATA = 'data:image/png;base64,';

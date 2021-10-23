@@ -7,8 +7,8 @@ import styles from './Home.module.css';
 import defaultLogo from './../../assets/images/icons/teams/1.png';
 import matchesService from '../../services/matchesService';
 import errorsService from '../../services/errorsService';
+import teamsService from '../../services/teamsService';
 import IMatch from '../../models/match';
-import { IMAGE_DATA } from '../../common/constants';
 
 const Home = (): JSX.Element => {
   const [matches, setMatches] = useState<IMatch[]>([]);
@@ -38,6 +38,11 @@ const Home = (): JSX.Element => {
 
   const toggleDatePicker = () => {
     setIsDatePickerOpen(!isDatePickerOpen);
+  };
+
+  const onImageError = (event: any) => {
+    event.target.onerror = null;
+    event.target.src = defaultLogo;
   };
 
   return (
@@ -108,21 +113,15 @@ const Home = (): JSX.Element => {
                           </td>
                           <td>
                             <img
-                              src={
-                                match.homeTeamLogoThumbnailContent
-                                  ? IMAGE_DATA + match.homeTeamLogoThumbnailContent
-                                  : defaultLogo
-                              }
                               alt="logo"
+                              src={teamsService.getThumbnailLogo(match.homeTeamId)}
+                              onError={onImageError}
                             />
                             <br />
                             <img
-                              src={
-                                match.awayTeamLogoThumbnailContent
-                                  ? IMAGE_DATA + match.awayTeamLogoThumbnailContent
-                                  : defaultLogo
-                              }
                               alt="logo"
+                              src={teamsService.getThumbnailLogo(match.awayTeamId)}
+                              onError={onImageError}
                             />
                           </td>
                           <td>

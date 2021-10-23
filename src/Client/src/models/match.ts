@@ -1,12 +1,12 @@
 interface IMatch {
   id: number;
   startDate: string;
+  homeTeamId: number;
+  awayTeamId: number;
   homeTeamName: string;
   awayTeamName: string;
   homeTeamScore?: number;
   awayTeamScore?: number;
-  homeTeamLogoThumbnailContent: any;
-  awayTeamLogoThumbnailContent: any;
 }
 
 export default IMatch;

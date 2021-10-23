@@ -1,5 +1,7 @@
 ﻿namespace BettingSystem.Web.Common.Extensions
 {
+    using System.IO;
+    using System.Net.Mime;
     using System.Threading.Tasks;
     using Application.Common;
     using Microsoft.AspNetCore.Mvc;
@@ -40,6 +42,13 @@
             }
 
             return result.Data;
+        }
+
+        public static async Task<ActionResult> ToActionResult(this Task<Stream?> resultTask)
+        {
+            var result = await resultTask;
+
+            return new FileStreamResult(result, MediaTypeNames.Image.Jpeg);
         }
     }
 }

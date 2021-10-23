@@ -16,7 +16,7 @@
             Specification<Match> matchSpecification,
             CancellationToken cancellationToken = default);
 
-        Task<MatchDetailsResponseModel> GetDetails(
+        Task<MatchDetailsResponseModel?> GetDetails(
             int id,
             CancellationToken cancellationToken = default);
 

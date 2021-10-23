@@ -31,7 +31,7 @@
         [HttpGet]
         [Route(Id)]
         [AllowAnonymous]
-        public async Task<ActionResult<MatchDetailsResponseModel>> Details(
+        public async Task<ActionResult<MatchDetailsResponseModel?>> Details(
             [FromRoute] MatchDetailsQuery query)
             => await this.Send(query);
 

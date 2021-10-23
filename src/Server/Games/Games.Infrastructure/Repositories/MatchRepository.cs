@@ -63,7 +63,7 @@
                     .Where(matchSpecification))
                 .ToListAsync(cancellationToken);
 
-        public async Task<MatchDetailsResponseModel> GetDetails(
+        public async Task<MatchDetailsResponseModel?> GetDetails(
             int id,
             CancellationToken cancellationToken = default)
             => await this.mapper
