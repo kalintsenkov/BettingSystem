@@ -19,7 +19,7 @@
             public async Task<IEnumerable<GetCountriesResponseModel>> Handle(
                 GetCountriesQuery request,
                 CancellationToken cancellationToken)
-                => await this.leaguesRepository.GetCountries(cancellationToken);
+                => await this.leaguesRepository.GetCountriesListing(cancellationToken);
         }
     }
 }

@@ -11,11 +11,11 @@
 
     public interface IBetQueryRepository : IQueryRepository<Bet>
     {
-        Task<BetDetailsResponseModel> GetDetails(
+        Task<BetDetailsResponseModel?> GetDetails(
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<TResponseModel>> GetBetListings<TResponseModel>(
+        Task<IEnumerable<TResponseModel>> GetBetsListing<TResponseModel>(
             Specification<Bet> betSpecification,
             Specification<Gambler> gamblerSpecification,
             CancellationToken cancellationToken = default);

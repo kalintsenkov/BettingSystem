@@ -28,7 +28,7 @@
             {
                 var matchSpecification = this.GetMatchSpecification(request);
 
-                var matchListings = await this.matchRepository.GetMatchListings(
+                var matchListings = await this.matchRepository.GetMatchesListing(
                     matchSpecification,
                     cancellationToken);
 

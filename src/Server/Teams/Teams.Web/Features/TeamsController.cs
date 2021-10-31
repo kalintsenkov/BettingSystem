@@ -27,8 +27,8 @@
         [HttpGet]
         [AllowAnonymous]
         [Route(nameof(Coaches))]
-        public async Task<ActionResult<IEnumerable<GetAllCoachesResponseModel>>> Coaches(
-            [FromQuery] GetAllCoachesQuery query)
+        public async Task<ActionResult<IEnumerable<GetCoachesResponseModel>>> Coaches(
+            [FromQuery] GetCoachesQuery query)
             => await this.Send(query);
 
         [HttpGet]

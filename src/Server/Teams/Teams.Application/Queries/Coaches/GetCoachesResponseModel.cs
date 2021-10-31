@@ -3,7 +3,7 @@
     using Common.Mapping;
     using Domain.Teams.Models;
 
-    public class GetAllCoachesResponseModel : IMapFrom<Coach>
+    public class GetCoachesResponseModel : IMapFrom<Coach>
     {
         public int Id { get; private set; }
 

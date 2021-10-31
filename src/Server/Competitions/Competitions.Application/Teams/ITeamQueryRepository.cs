@@ -8,7 +8,7 @@
 
     public interface ITeamQueryRepository : IQueryRepository<Team>
     {
-        Task<TeamDetailsResponseModel> GetDetails(
+        Task<TeamDetailsResponseModel?> GetDetails(
             int id,
             CancellationToken cancellationToken = default);
     }

@@ -59,14 +59,14 @@
                 .Where(c => c.Name == country)
                 .FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<IEnumerable<GetAllLeaguesResponseModel>> GetLeagueListings(
+        public async Task<IEnumerable<GetAllLeaguesResponseModel>> GetLeaguesListing(
             CancellationToken cancellationToken = default)
             => await this.mapper
                 .ProjectTo<GetAllLeaguesResponseModel>(this
                     .AllAsNoTracking())
                 .ToListAsync(cancellationToken);
 
-        public async Task<IEnumerable<GetCountriesResponseModel>> GetCountries(
+        public async Task<IEnumerable<GetCountriesResponseModel>> GetCountriesListing(
             CancellationToken cancellationToken = default)
             => await this.mapper
                 .ProjectTo<GetCountriesResponseModel>(this

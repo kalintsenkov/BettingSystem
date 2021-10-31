@@ -34,7 +34,7 @@
                     this.currentUser.UserId,
                     cancellationToken);
 
-                var betListings = await base.GetBetListings<MineBetResponseModel>(
+                var betListings = await base.GetBetsListing<MineBetResponseModel>(
                     request,
                     gamblerId,
                     cancellationToken);

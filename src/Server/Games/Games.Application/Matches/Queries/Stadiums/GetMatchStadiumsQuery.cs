@@ -19,7 +19,7 @@
             public async Task<IEnumerable<GetMatchStadiumsResponseModel>> Handle(
                 GetMatchStadiumsQuery request,
                 CancellationToken cancellationToken)
-                => await this.matchRepository.GetStadiums(cancellationToken);
+                => await this.matchRepository.GetStadiumsListing(cancellationToken);
         }
     }
 }

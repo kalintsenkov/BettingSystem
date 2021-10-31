@@ -59,21 +59,21 @@
                 .Where(c => c.Name == name)
                 .FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<IEnumerable<GetAllTeamsResponseModel>> GetTeamListings(
+        public async Task<IEnumerable<GetAllTeamsResponseModel>> GetTeamsListing(
             CancellationToken cancellationToken = default)
             => await this.mapper
                 .ProjectTo<GetAllTeamsResponseModel>(this
                     .AllAsNoTracking())
                 .ToListAsync(cancellationToken);
 
-        public async Task<IEnumerable<GetAllCoachesResponseModel>> GetCoaches(
+        public async Task<IEnumerable<GetCoachesResponseModel>> GetCoachesListing(
             CancellationToken cancellationToken = default)
             => await this.mapper
-                .ProjectTo<GetAllCoachesResponseModel>(this
+                .ProjectTo<GetCoachesResponseModel>(this
                     .AllCoaches())
                 .ToListAsync(cancellationToken);
 
-        public async Task<IEnumerable<GetTeamPlayersResponseModel>> GetTeamPlayers(
+        public async Task<IEnumerable<GetTeamPlayersResponseModel>> GetTeamPlayersListing(
             int teamId,
             CancellationToken cancellationToken = default)
             => await this.mapper

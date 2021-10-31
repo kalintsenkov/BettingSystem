@@ -21,7 +21,7 @@
             public async Task<IEnumerable<GetTeamPlayersResponseModel>> Handle(
                 GetTeamPlayersQuery request,
                 CancellationToken cancellationToken)
-                => await this.teamRepository.GetTeamPlayers(
+                => await this.teamRepository.GetTeamPlayersListing(
                     request.Id,
                     cancellationToken);
         }

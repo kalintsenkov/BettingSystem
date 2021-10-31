@@ -30,7 +30,7 @@
                 .Where(t => t.Id == id)
                 .FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<TeamDetailsResponseModel> GetDetails(
+        public async Task<TeamDetailsResponseModel?> GetDetails(
             int id,
             CancellationToken cancellationToken = default)
             => await this.mapper

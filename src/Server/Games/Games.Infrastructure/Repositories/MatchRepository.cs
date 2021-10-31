@@ -54,7 +54,7 @@
                 .Include(m => m.Stadium)
                 .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 
-        public async Task<IEnumerable<MatchResponseModel>> GetMatchListings(
+        public async Task<IEnumerable<MatchResponseModel>> GetMatchesListing(
             Specification<Match> matchSpecification,
             CancellationToken cancellationToken = default)
             => await this.mapper
@@ -79,7 +79,7 @@
                 .AllStadiums()
                 .FirstOrDefaultAsync(s => s.Name == stadium, cancellationToken);
 
-        public async Task<IEnumerable<GetMatchStadiumsResponseModel>> GetStadiums(
+        public async Task<IEnumerable<GetMatchStadiumsResponseModel>> GetStadiumsListing(
             CancellationToken cancellationToken = default)
             => await this.mapper
                 .ProjectTo<GetMatchStadiumsResponseModel>(this

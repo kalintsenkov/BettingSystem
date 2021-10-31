@@ -12,7 +12,7 @@
 
     public interface IMatchQueryRepository : IQueryRepository<Match>
     {
-        Task<IEnumerable<MatchResponseModel>> GetMatchListings(
+        Task<IEnumerable<MatchResponseModel>> GetMatchesListing(
             Specification<Match> matchSpecification,
             CancellationToken cancellationToken = default);
 
@@ -20,7 +20,7 @@
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<GetMatchStadiumsResponseModel>> GetStadiums(
+        Task<IEnumerable<GetMatchStadiumsResponseModel>> GetStadiumsListing(
             CancellationToken cancellationToken = default);
     }
 }

@@ -20,7 +20,7 @@
             protected BetsQueryHandler(IBetQueryRepository betRepository)
                 => this.betRepository = betRepository;
 
-            protected async Task<IEnumerable<TResponseModel>> GetBetListings<TResponseModel>(
+            protected async Task<IEnumerable<TResponseModel>> GetBetsListing<TResponseModel>(
                 BetsQuery request,
                 int? gamblerId = default,
                 CancellationToken cancellationToken = default)
@@ -29,7 +29,7 @@
 
                 var gamblerSpecification = this.GetGamblerSpecification(gamblerId);
 
-                return await this.betRepository.GetBetListings<TResponseModel>(
+                return await this.betRepository.GetBetsListing<TResponseModel>(
                     betSpecification,
                     gamblerSpecification,
                     cancellationToken);

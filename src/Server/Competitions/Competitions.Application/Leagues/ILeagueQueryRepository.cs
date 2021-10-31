@@ -11,10 +11,10 @@
 
     public interface ILeagueQueryRepository : IQueryRepository<League>
     {
-        Task<IEnumerable<GetAllLeaguesResponseModel>> GetLeagueListings(
+        Task<IEnumerable<GetAllLeaguesResponseModel>> GetLeaguesListing(
             CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<GetCountriesResponseModel>> GetCountries(
+        Task<IEnumerable<GetCountriesResponseModel>> GetCountriesListing(
             CancellationToken cancellationToken = default);
 
         Task<IEnumerable<GetStandingsResponseModel>> GetStandings(

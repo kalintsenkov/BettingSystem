@@ -28,7 +28,7 @@
 
         [HttpGet]
         [Route(Id)]
-        public async Task<ActionResult<BetDetailsResponseModel>> Details(
+        public async Task<ActionResult<BetDetailsResponseModel?>> Details(
             [FromRoute] BetDetailsQuery query)
             => await this.Send(query);
 

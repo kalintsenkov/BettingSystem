@@ -20,7 +20,7 @@
                 SearchBetsQuery request,
                 CancellationToken cancellationToken)
             {
-                var betListings = await base.GetBetListings<BetResponseModel>(
+                var betListings = await base.GetBetsListing<BetResponseModel>(
                     request,
                     cancellationToken: cancellationToken);
 

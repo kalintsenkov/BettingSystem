@@ -19,7 +19,7 @@
             public async Task<IEnumerable<GetAllTeamsResponseModel>> Handle(
                 GetAllTeamsQuery request,
                 CancellationToken cancellationToken)
-                => await this.teamRepository.GetTeamListings(cancellationToken);
+                => await this.teamRepository.GetTeamsListing(cancellationToken);
         }
     }
 }

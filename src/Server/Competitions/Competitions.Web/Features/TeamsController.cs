@@ -9,7 +9,7 @@
     {
         [HttpGet]
         [Route(Id)]
-        public async Task<ActionResult<TeamDetailsResponseModel>> Details(
+        public async Task<ActionResult<TeamDetailsResponseModel?>> Details(
             [FromRoute] TeamDetailsQuery query)
             => await this.Send(query);
     }

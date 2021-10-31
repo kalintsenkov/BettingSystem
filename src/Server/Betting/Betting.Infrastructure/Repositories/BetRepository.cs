@@ -51,7 +51,7 @@
                 .Include(b => b.Match)
                 .FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
 
-        public async Task<BetDetailsResponseModel> GetDetails(
+        public async Task<BetDetailsResponseModel?> GetDetails(
             int id,
             CancellationToken cancellationToken)
             => await this.mapper
@@ -60,7 +60,7 @@
                     .Where(b => b.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<IEnumerable<TResponseModel>> GetBetListings<TResponseModel>(
+        public async Task<IEnumerable<TResponseModel>> GetBetsListing<TResponseModel>(
             Specification<Bet> betSpecification,
             Specification<Gambler> gamblerSpecification,
             CancellationToken cancellationToken = default)

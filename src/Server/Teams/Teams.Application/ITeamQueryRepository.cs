@@ -11,13 +11,13 @@
 
     public interface ITeamQueryRepository : IQueryRepository<Team>
     {
-        Task<IEnumerable<GetAllTeamsResponseModel>> GetTeamListings(
+        Task<IEnumerable<GetAllTeamsResponseModel>> GetTeamsListing(
             CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<GetAllCoachesResponseModel>> GetCoaches(
+        Task<IEnumerable<GetCoachesResponseModel>> GetCoachesListing(
             CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<GetTeamPlayersResponseModel>> GetTeamPlayers(
+        Task<IEnumerable<GetTeamPlayersResponseModel>> GetTeamPlayersListing(
             int teamId,
             CancellationToken cancellationToken = default);
     }
