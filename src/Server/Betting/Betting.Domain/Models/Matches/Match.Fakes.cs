@@ -11,16 +11,21 @@
         {
             public bool CanCreate(Type type) => type == typeof(Match);
 
-            public object? Create(Type type)
+            public object? Create(Type type) => Data.GetMatch();
+
+            public Priority Priority => Priority.Default;
+        }
+
+        public static class Data
+        {
+            public static Match GetMatch(int id = 1)
                 => new Faker<Match>()
                     .CustomInstantiator(_ => new Match(
                         DateTime.Today,
                         A.Dummy<Statistics>(),
                         Status.FirstHalf))
                     .Generate()
-                    .SetId(1);
-
-            public Priority Priority => Priority.Default;
+                    .SetId(id);
         }
     }
 }
