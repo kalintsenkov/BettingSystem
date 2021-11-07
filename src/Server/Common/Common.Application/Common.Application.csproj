@@ -15,9 +15,9 @@
 
 	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-		<PackageReference Include="FluentValidation" Version="10.3.3" />
-		<PackageReference Include="MassTransit.AspNetCore" Version="7.2.2" />
-		<PackageReference Include="MassTransit.RabbitMQ" Version="7.2.2" />
+		<PackageReference Include="FluentValidation" Version="10.3.4" />
+		<PackageReference Include="MassTransit.AspNetCore" Version="7.2.4" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="7.2.4" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
 	</ItemGroup>
