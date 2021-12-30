@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
-		<LangVersion>9.0</LangVersion>
+		<TargetFramework>net6.0</TargetFramework>
+		<LangVersion>10.0</LangVersion>
 		<Nullable>enable</Nullable>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<AssemblyName>BettingSystem.Application.Common</AssemblyName>
@@ -15,11 +15,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-		<PackageReference Include="FluentValidation" Version="10.3.4" />
-		<PackageReference Include="MassTransit.AspNetCore" Version="7.2.4" />
-		<PackageReference Include="MassTransit.RabbitMQ" Version="7.2.4" />
+		<PackageReference Include="FluentValidation" Version="10.3.6" />
+		<PackageReference Include="MassTransit.AspNetCore" Version="7.3.0" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="7.3.0" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -44,7 +44,7 @@
             return result.Data;
         }
 
-        public static async Task<ActionResult> ToActionResult(this Task<Stream?> resultTask)
+        public static async Task<ActionResult> ToActionResult(this Task<Stream> resultTask)
         {
             var result = await resultTask;
 

@@ -38,7 +38,7 @@
             => this.Mediator.Send(request).ToActionResult();
 
         protected Task<ActionResult> Send(
-            IRequest<Stream?> request)
+            IRequest<Stream> request)
         {
             var headers = this.Response.GetTypedHeaders();
 

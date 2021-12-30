@@ -52,7 +52,7 @@
                 .AnyAsync(g => g.Bets
                     .Any(b => b.Id == betId), cancellationToken);
 
-        public async Task<GamblerDetailsResponseModel> GetDetails(
+        public async Task<GamblerDetailsResponseModel?> GetDetails(
             int id,
             CancellationToken cancellationToken = default)
             => await this.mapper
@@ -77,7 +77,7 @@
                 throw new InvalidGamblerException("This user is not a gambler.");
             }
 
-            return gambler;
+            return gambler!;
         }
     }
 }

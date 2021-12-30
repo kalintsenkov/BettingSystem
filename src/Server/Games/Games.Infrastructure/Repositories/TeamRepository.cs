@@ -37,7 +37,7 @@
                 .All()
                 .FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
 
-        public async Task<Stream?> GetThumbnailLogo(
+        public async Task<Stream> GetThumbnailLogo(
             int teamId,
             CancellationToken cancellationToken = default)
             => await this.GetLogo(
@@ -45,7 +45,7 @@
                 team => team.Logo.ThumbnailContent,
                 cancellationToken);
 
-        public async Task<Stream?> GetOriginalLogo(
+        public async Task<Stream> GetOriginalLogo(
             int teamId,
             CancellationToken cancellationToken = default)
             => await this.GetLogo(
@@ -53,7 +53,7 @@
                 team => team.Logo.OriginalContent,
                 cancellationToken);
 
-        private async Task<Stream?> GetLogo(
+        private async Task<Stream> GetLogo(
             int teamId,
             Expression<Func<Team, byte[]>> logoSelector,
             CancellationToken cancellationToken = default)

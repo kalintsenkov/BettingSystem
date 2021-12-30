@@ -37,7 +37,7 @@
                 .WithOne()
                 .IsRequired()
                 .Metadata
-                .PrincipalToDependent
+                .PrincipalToDependent!
                 .SetField("players");
         }
     }

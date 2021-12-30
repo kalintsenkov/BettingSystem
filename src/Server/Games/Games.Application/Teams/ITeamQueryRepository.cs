@@ -8,11 +8,11 @@
 
     public interface ITeamQueryRepository : IQueryRepository<Team>
     {
-        Task<Stream?> GetThumbnailLogo(
+        Task<Stream> GetThumbnailLogo(
             int teamId,
             CancellationToken cancellationToken = default);
 
-        Task<Stream?> GetOriginalLogo(
+        Task<Stream> GetOriginalLogo(
             int teamId,
             CancellationToken cancellationToken = default);
     }

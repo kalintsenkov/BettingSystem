@@ -8,7 +8,7 @@
 
     public interface IGamblerQueryRepository : IQueryRepository<Gambler>
     {
-        Task<GamblerDetailsResponseModel> GetDetails(
+        Task<GamblerDetailsResponseModel?> GetDetails(
             int id,
             CancellationToken cancellationToken = default);
     }

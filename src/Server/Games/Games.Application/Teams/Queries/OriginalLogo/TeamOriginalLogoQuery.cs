@@ -5,18 +5,18 @@
     using System.Threading.Tasks;
     using MediatR;
 
-    public class TeamOriginalLogoQuery : IRequest<Stream?>
+    public class TeamOriginalLogoQuery : IRequest<Stream>
     {
         public int Id { get; set; }
 
-        public class TeamOriginalLogoQueryHandler : IRequestHandler<TeamOriginalLogoQuery, Stream?>
+        public class TeamOriginalLogoQueryHandler : IRequestHandler<TeamOriginalLogoQuery, Stream>
         {
             private readonly ITeamQueryRepository teamRepository;
 
             public TeamOriginalLogoQueryHandler(ITeamQueryRepository teamRepository)
                 => this.teamRepository = teamRepository;
 
-            public async Task<Stream?> Handle(
+            public async Task<Stream> Handle(
                 TeamOriginalLogoQuery request,
                 CancellationToken cancellationToken)
                 => await this.teamRepository.GetOriginalLogo(

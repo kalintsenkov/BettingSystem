@@ -29,7 +29,7 @@
                 .HasMany(l => l.Teams)
                 .WithOne()
                 .Metadata
-                .PrincipalToDependent
+                .PrincipalToDependent!
                 .SetField("teams");
         }
     }
