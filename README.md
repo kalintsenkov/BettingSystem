@@ -26,9 +26,9 @@ Then go to [http://localhost](http://localhost)
 ## :construction_worker: Built with
 
 - [React](https://github.com/facebook/react) 
-- [.NET Core 5](https://github.com/dotnet/core) 
-- [ASP.NET Core 5](https://github.com/dotnet/aspnetcore)
-- [Entity Framework Core 5](https://github.com/dotnet/efcore)
+- [.NET Core 6](https://github.com/dotnet/core) 
+- [ASP.NET Core 6](https://github.com/dotnet/aspnetcore)
+- [Entity Framework Core 6](https://github.com/dotnet/efcore)
 - [MediatR](https://github.com/jbogard/MediatR)
 - [FluentValidation](https://github.com/FluentValidation/FluentValidation)
 - [RabbitMQ](https://github.com/rabbitmq)
