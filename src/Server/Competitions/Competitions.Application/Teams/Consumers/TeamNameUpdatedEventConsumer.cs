@@ -1,26 +1,25 @@
-﻿namespace BettingSystem.Application.Competitions.Teams.Consumers
+﻿namespace BettingSystem.Application.Competitions.Teams.Consumers;
+
+using System.Threading.Tasks;
+using Domain.Common.Events.Teams;
+using Domain.Competitions.Repositories;
+using MassTransit;
+
+public class TeamNameUpdatedEventConsumer : IConsumer<TeamNameUpdatedEvent>
 {
-    using System.Threading.Tasks;
-    using Domain.Common.Events.Teams;
-    using Domain.Competitions.Repositories;
-    using MassTransit;
+    private readonly ITeamDomainRepository teamRepository;
 
-    public class TeamNameUpdatedEventConsumer : IConsumer<TeamNameUpdatedEvent>
+    public TeamNameUpdatedEventConsumer(ITeamDomainRepository teamRepository)
+        => this.teamRepository = teamRepository;
+
+    public async Task Consume(ConsumeContext<TeamNameUpdatedEvent> context)
     {
-        private readonly ITeamDomainRepository teamRepository;
+        var eventMessage = context.Message;
 
-        public TeamNameUpdatedEventConsumer(ITeamDomainRepository teamRepository)
-            => this.teamRepository = teamRepository;
+        var team = await this.teamRepository.Find(eventMessage.Id);
 
-        public async Task Consume(ConsumeContext<TeamNameUpdatedEvent> context)
-        {
-            var eventMessage = context.Message;
+        team!.UpdateName(eventMessage.Name);
 
-            var team = await this.teamRepository.Find(eventMessage.Id);
-
-            team!.UpdateName(eventMessage.Name);
-
-            await this.teamRepository.Save(team);
-        }
+        await this.teamRepository.Save(team);
     }
 }

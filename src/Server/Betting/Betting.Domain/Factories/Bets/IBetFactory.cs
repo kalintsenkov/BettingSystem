@@ -1,15 +1,14 @@
-﻿namespace BettingSystem.Domain.Betting.Factories.Bets
+﻿namespace BettingSystem.Domain.Betting.Factories.Bets;
+
+using Common;
+using Models.Bets;
+using Models.Matches;
+
+public interface IBetFactory : IFactory<Bet>
 {
-    using Common;
-    using Models.Bets;
-    using Models.Matches;
+    IBetFactory WithMatch(Match match);
 
-    public interface IBetFactory : IFactory<Bet>
-    {
-        IBetFactory WithMatch(Match match);
+    IBetFactory WithAmount(decimal amount);
 
-        IBetFactory WithAmount(decimal amount);
-
-        IBetFactory WithPrediction(Prediction prediction);
-    }
+    IBetFactory WithPrediction(Prediction prediction);
 }

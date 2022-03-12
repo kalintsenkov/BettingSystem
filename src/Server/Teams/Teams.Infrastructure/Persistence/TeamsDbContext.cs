@@ -1,29 +1,28 @@
-﻿namespace BettingSystem.Infrastructure.Teams.Persistence
+﻿namespace BettingSystem.Infrastructure.Teams.Persistence;
+
+using System.Reflection;
+using Common.Events;
+using Common.Persistence;
+using Domain.Common.Models;
+using Domain.Teams.Models;
+using Microsoft.EntityFrameworkCore;
+
+internal class TeamsDbContext : MessagesDbContext
 {
-    using System.Reflection;
-    using Common.Events;
-    using Common.Persistence;
-    using Domain.Common.Models;
-    using Domain.Teams.Models;
-    using Microsoft.EntityFrameworkCore;
-
-    internal class TeamsDbContext : MessagesDbContext
+    public TeamsDbContext(
+        DbContextOptions<TeamsDbContext> options,
+        IEventPublisher eventPublisher)
+        : base(options, eventPublisher)
     {
-        public TeamsDbContext(
-            DbContextOptions<TeamsDbContext> options,
-            IEventPublisher eventPublisher)
-            : base(options, eventPublisher)
-        {
-        }
-
-        public DbSet<Team> Teams { get; set; } = default!;
-
-        public DbSet<Player> Players { get; set; } = default!;
-
-        public DbSet<Coach> Coaches { get; set; } = default!;
-
-        public DbSet<Image> Images { get; set; } = default!;
-
-        protected override Assembly ConfigurationsAssembly => Assembly.GetExecutingAssembly();
     }
+
+    public DbSet<Team> Teams { get; set; } = default!;
+
+    public DbSet<Player> Players { get; set; } = default!;
+
+    public DbSet<Coach> Coaches { get; set; } = default!;
+
+    public DbSet<Image> Images { get; set; } = default!;
+
+    protected override Assembly ConfigurationsAssembly => Assembly.GetExecutingAssembly();
 }

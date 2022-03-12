@@ -1,74 +1,73 @@
-﻿namespace BettingSystem.Domain.Teams.Models
+﻿namespace BettingSystem.Domain.Teams.Models;
+
+using System;
+using Common.Models;
+using Exceptions;
+using FakeItEasy;
+using FluentAssertions;
+using Xunit;
+
+public class TeamSpecs
 {
-    using System;
-    using Common.Models;
-    using Exceptions;
-    using FakeItEasy;
-    using FluentAssertions;
-    using Xunit;
-
-    public class TeamSpecs
+    [Fact]
+    public void ValidTeamShouldNotThrowException()
     {
-        [Fact]
-        public void ValidTeamShouldNotThrowException()
-        {
-            Action act = () => A.Dummy<Team>();
+        Action act = () => A.Dummy<Team>();
 
-            act.Should().NotThrow<InvalidTeamException>();
-        }
+        act.Should().NotThrow<InvalidTeamException>();
+    }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData("cs")]
-        [InlineData(null)]
-        public void InvalidTeamShouldThrowException(string name)
-        {
-            Action act = () => new Team(
-                name, 
-                A.Dummy<Image>(),
-                A.Dummy<Coach>());
+    [Theory]
+    [InlineData("")]
+    [InlineData("cs")]
+    [InlineData(null)]
+    public void InvalidTeamShouldThrowException(string name)
+    {
+        Action act = () => new Team(
+            name, 
+            A.Dummy<Image>(),
+            A.Dummy<Coach>());
 
-            act.Should().Throw<InvalidTeamException>();
-        }
+        act.Should().Throw<InvalidTeamException>();
+    }
 
-        [Theory]
-        [InlineData("Test 1")]
-        [InlineData("Test 2")]
-        [InlineData("Test 3")]
-        public void UpdateNameShouldSetNewNameIfNameIsValid(string newName)
-        {
-            var team = A.Dummy<Team>();
+    [Theory]
+    [InlineData("Test 1")]
+    [InlineData("Test 2")]
+    [InlineData("Test 3")]
+    public void UpdateNameShouldSetNewNameIfNameIsValid(string newName)
+    {
+        var team = A.Dummy<Team>();
 
-            team.UpdateName(newName);
+        team.UpdateName(newName);
 
-            team.Name.Should().Be(newName);
-        }
+        team.Name.Should().Be(newName);
+    }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData("cs")]
-        [InlineData(null)]
-        public void UpdateNameShouldThrowExceptionIfNameIsInvalid(string newName)
-        {
-            var team = A.Dummy<Team>();
+    [Theory]
+    [InlineData("")]
+    [InlineData("cs")]
+    [InlineData(null)]
+    public void UpdateNameShouldThrowExceptionIfNameIsInvalid(string newName)
+    {
+        var team = A.Dummy<Team>();
 
-            Action act = () => team.UpdateName(newName);
+        Action act = () => team.UpdateName(newName);
 
-            act.Should().Throw<InvalidTeamException>();
-        }
+        act.Should().Throw<InvalidTeamException>();
+    }
 
-        [Theory]
-        [InlineData("Test 1")]
-        [InlineData("Test 2")]
-        [InlineData("Test 3")]
-        public void AddPlayerShouldWork(string playerName)
-        {
-            var team = A.Dummy<Team>();
+    [Theory]
+    [InlineData("Test 1")]
+    [InlineData("Test 2")]
+    [InlineData("Test 3")]
+    public void AddPlayerShouldWork(string playerName)
+    {
+        var team = A.Dummy<Team>();
 
-            team.AddPlayer(playerName, Position.Forward);
+        team.AddPlayer(playerName, Position.Forward);
 
-            team.Players.Count.Should().Be(1);
-            team.Players.Should().ContainSingle(p => p.Name == playerName);
-        }
+        team.Players.Count.Should().Be(1);
+        team.Players.Should().ContainSingle(p => p.Name == playerName);
     }
 }

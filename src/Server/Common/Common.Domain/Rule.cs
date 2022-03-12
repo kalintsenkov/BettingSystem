@@ -1,7 +1,6 @@
-﻿namespace BettingSystem.Domain.Common
+﻿namespace BettingSystem.Domain.Common;
+
+public abstract class Rule<T>
 {
-    public abstract class Rule<T>
-    {
-        public abstract bool IsSatisfiedBy(T value);
-    }
+    public abstract bool IsSatisfiedBy(T value);
 }

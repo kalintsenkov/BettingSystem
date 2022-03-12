@@ -1,10 +1,9 @@
-﻿namespace BettingSystem.Application.Betting.Gamblers.Commands.Common
-{
-    using Application.Common;
+﻿namespace BettingSystem.Application.Betting.Gamblers.Commands.Common;
 
-    public abstract class GamblerCommand<TCommand> : EntityCommand<int>
-        where TCommand : EntityCommand<int>
-    {
-        public string Name { get; set; } = default!;
-    }
+using Application.Common;
+
+public abstract class GamblerCommand<TCommand> : EntityCommand<int>
+    where TCommand : EntityCommand<int>
+{
+    public string Name { get; set; } = default!;
 }

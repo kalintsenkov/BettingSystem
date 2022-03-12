@@ -1,9 +1,8 @@
-﻿namespace BettingSystem.Application.Common.Settings
-{
-    public class ApplicationSettings
-    {
-        public ApplicationSettings() => this.Secret = default!;
+﻿namespace BettingSystem.Application.Common.Settings;
 
-        public string Secret { get; private set; }
-    }
+public class ApplicationSettings
+{
+    public ApplicationSettings() => this.Secret = default!;
+
+    public string Secret { get; private set; }
 }

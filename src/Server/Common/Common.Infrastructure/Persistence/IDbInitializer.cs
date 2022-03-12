@@ -1,7 +1,6 @@
-﻿namespace BettingSystem.Infrastructure.Common.Persistence
+﻿namespace BettingSystem.Infrastructure.Common.Persistence;
+
+public interface IDbInitializer
 {
-    public interface IDbInitializer
-    {
-        void Initialize();
-    }
+    void Initialize();
 }

@@ -1,26 +1,25 @@
-﻿namespace BettingSystem.Application.Betting.Matches.Consumers
+﻿namespace BettingSystem.Application.Betting.Matches.Consumers;
+
+using System.Threading.Tasks;
+using Domain.Betting.Repositories;
+using Domain.Common.Events.Matches;
+using MassTransit;
+
+public class MatchStartDateUpdatedEventConsumer : IConsumer<MatchStartDateUpdatedEvent>
 {
-    using System.Threading.Tasks;
-    using Domain.Betting.Repositories;
-    using Domain.Common.Events.Matches;
-    using MassTransit;
+    private readonly IMatchDomainRepository matchRepository;
 
-    public class MatchStartDateUpdatedEventConsumer : IConsumer<MatchStartDateUpdatedEvent>
+    public MatchStartDateUpdatedEventConsumer(IMatchDomainRepository matchRepository)
+        => this.matchRepository = matchRepository;
+
+    public async Task Consume(ConsumeContext<MatchStartDateUpdatedEvent> context)
     {
-        private readonly IMatchDomainRepository matchRepository;
+        var eventMessage = context.Message;
 
-        public MatchStartDateUpdatedEventConsumer(IMatchDomainRepository matchRepository)
-            => this.matchRepository = matchRepository;
+        var match = await this.matchRepository.Find(eventMessage.Id);
 
-        public async Task Consume(ConsumeContext<MatchStartDateUpdatedEvent> context)
-        {
-            var eventMessage = context.Message;
+        match!.UpdateStartDate(eventMessage.StartDate);
 
-            var match = await this.matchRepository.Find(eventMessage.Id);
-
-            match!.UpdateStartDate(eventMessage.StartDate);
-
-            await this.matchRepository.Save(match);
-        }
+        await this.matchRepository.Save(match);
     }
 }

@@ -1,12 +1,11 @@
-﻿namespace BettingSystem.Application.Common.Exceptions
-{
-    using System;
+﻿namespace BettingSystem.Application.Common.Exceptions;
 
-    public class NotFoundException : Exception
+using System;
+
+public class NotFoundException : Exception
+{
+    public NotFoundException(string name, object key)
+        : base($"Entity '{name}' ({key}) was not found.")
     {
-        public NotFoundException(string name, object key)
-            : base($"Entity '{name}' ({key}) was not found.")
-        {
-        }
     }
 }

@@ -1,31 +1,30 @@
-﻿namespace BettingSystem.Application.Common.Exceptions
+﻿namespace BettingSystem.Application.Common.Exceptions;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using FluentValidation.Results;
+
+public class ModelValidationException : Exception
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using FluentValidation.Results;
+    public ModelValidationException()
+        : base("One or more validation errors have occurred.")
+        => this.Errors = new Dictionary<string, string[]>();
 
-    public class ModelValidationException : Exception
+    public ModelValidationException(IEnumerable<ValidationFailure> errors)
+        : this()
     {
-        public ModelValidationException()
-            : base("One or more validation errors have occurred.")
-            => this.Errors = new Dictionary<string, string[]>();
+        var failureGroups = errors
+            .GroupBy(e => e.PropertyName, e => e.ErrorMessage);
 
-        public ModelValidationException(IEnumerable<ValidationFailure> errors)
-            : this()
+        foreach (var failureGroup in failureGroups)
         {
-            var failureGroups = errors
-                .GroupBy(e => e.PropertyName, e => e.ErrorMessage);
+            var propertyName = failureGroup.Key;
+            var propertyFailures = failureGroup.ToArray();
 
-            foreach (var failureGroup in failureGroups)
-            {
-                var propertyName = failureGroup.Key;
-                var propertyFailures = failureGroup.ToArray();
-
-                this.Errors.Add(propertyName, propertyFailures);
-            }
+            this.Errors.Add(propertyName, propertyFailures);
         }
-
-        public IDictionary<string, string[]> Errors { get; }
     }
+
+    public IDictionary<string, string[]> Errors { get; }
 }

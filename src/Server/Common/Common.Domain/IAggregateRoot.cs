@@ -1,6 +1,5 @@
-﻿namespace BettingSystem.Domain.Common
+﻿namespace BettingSystem.Domain.Common;
+
+public interface IAggregateRoot
 {
-    public interface IAggregateRoot
-    {
-    }
 }

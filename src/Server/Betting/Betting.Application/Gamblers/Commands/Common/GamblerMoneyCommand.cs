@@ -1,10 +1,9 @@
-﻿namespace BettingSystem.Application.Betting.Gamblers.Commands.Common
-{
-    using Application.Common;
+﻿namespace BettingSystem.Application.Betting.Gamblers.Commands.Common;
 
-    public abstract class GamblerMoneyCommand<TCommand> : EntityCommand<int>
-        where TCommand : EntityCommand<int>
-    {
-        public decimal Amount { get; set; }
-    }
+using Application.Common;
+
+public abstract class GamblerMoneyCommand<TCommand> : EntityCommand<int>
+    where TCommand : EntityCommand<int>
+{
+    public decimal Amount { get; set; }
 }

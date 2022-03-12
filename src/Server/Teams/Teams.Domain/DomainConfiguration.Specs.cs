@@ -1,44 +1,43 @@
-﻿namespace BettingSystem.Domain.Teams
+﻿namespace BettingSystem.Domain.Teams;
+
+using System.Linq;
+using Common;
+using Factories;
+using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Xunit;
+
+public class DomainConfigurationSpecs
 {
-    using System.Linq;
-    using Common;
-    using Factories;
-    using FluentAssertions;
-    using Microsoft.Extensions.DependencyInjection;
-    using Xunit;
-
-    public class DomainConfigurationSpecs
+    [Fact]
+    public void AddDomainShouldRegisterFactories()
     {
-        [Fact]
-        public void AddDomainShouldRegisterFactories()
-        {
-            var serviceCollection = new ServiceCollection();
+        var serviceCollection = new ServiceCollection();
 
-            var services = serviceCollection
-                .AddDomain()
-                .BuildServiceProvider();
+        var services = serviceCollection
+            .AddDomain()
+            .BuildServiceProvider();
 
-            services
-                .GetService<ITeamFactory>()
+        services
+            .GetService<ITeamFactory>()
+            .Should()
+            .NotBeNull();
+    }
+
+    [Fact]
+    public void AddDomainShouldRegisterInitialData()
+    {
+        var serviceCollection = new ServiceCollection();
+
+        var services = serviceCollection
+            .AddDomain()
+            .BuildServiceProvider();
+
+        services
+            .GetServices<IInitialData>()
+            .ToList()
+            .ForEach(initialData => initialData
                 .Should()
-                .NotBeNull();
-        }
-
-        [Fact]
-        public void AddDomainShouldRegisterInitialData()
-        {
-            var serviceCollection = new ServiceCollection();
-
-            var services = serviceCollection
-                .AddDomain()
-                .BuildServiceProvider();
-
-            services
-                .GetServices<IInitialData>()
-                .ToList()
-                .ForEach(initialData => initialData
-                    .Should()
-                    .NotBeNull());
-        }
+                .NotBeNull());
     }
 }

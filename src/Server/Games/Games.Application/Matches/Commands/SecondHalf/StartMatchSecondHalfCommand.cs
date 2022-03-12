@@ -1,40 +1,39 @@
-﻿namespace BettingSystem.Application.Games.Matches.Commands.SecondHalf
+﻿namespace BettingSystem.Application.Games.Matches.Commands.SecondHalf;
+
+using System.Threading;
+using System.Threading.Tasks;
+using Application.Common;
+using Application.Common.Exceptions;
+using Domain.Games.Repositories;
+using MediatR;
+
+public class StartMatchSecondHalfCommand : EntityCommand<int>, IRequest<Result>
 {
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Application.Common;
-    using Application.Common.Exceptions;
-    using Domain.Games.Repositories;
-    using MediatR;
-
-    public class StartMatchSecondHalfCommand : EntityCommand<int>, IRequest<Result>
+    public class StartMatchSecondHalfCommandHandler : IRequestHandler<StartMatchSecondHalfCommand, Result>
     {
-        public class StartMatchSecondHalfCommandHandler : IRequestHandler<StartMatchSecondHalfCommand, Result>
+        private readonly IMatchDomainRepository matchRepository;
+
+        public StartMatchSecondHalfCommandHandler(IMatchDomainRepository matchRepository)
+            => this.matchRepository = matchRepository;
+
+        public async Task<Result> Handle(
+            StartMatchSecondHalfCommand request,
+            CancellationToken cancellationToken)
         {
-            private readonly IMatchDomainRepository matchRepository;
+            var match = await this.matchRepository.Find(
+                request.Id,
+                cancellationToken);
 
-            public StartMatchSecondHalfCommandHandler(IMatchDomainRepository matchRepository)
-                => this.matchRepository = matchRepository;
-
-            public async Task<Result> Handle(
-                StartMatchSecondHalfCommand request,
-                CancellationToken cancellationToken)
+            if (match == null)
             {
-                var match = await this.matchRepository.Find(
-                    request.Id,
-                    cancellationToken);
-
-                if (match == null)
-                {
-                    throw new NotFoundException(nameof(match), request.Id);
-                }
-
-                match.StartSecondHalf();
-
-                await this.matchRepository.Save(match, cancellationToken);
-
-                return Result.Success;
+                throw new NotFoundException(nameof(match), request.Id);
             }
+
+            match.StartSecondHalf();
+
+            await this.matchRepository.Save(match, cancellationToken);
+
+            return Result.Success;
         }
     }
 }

@@ -1,26 +1,25 @@
-﻿namespace BettingSystem.Application.Betting.Gamblers.Queries.Details
+﻿namespace BettingSystem.Application.Betting.Gamblers.Queries.Details;
+
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
+
+public class GamblerDetailsQuery : IRequest<GamblerDetailsResponseModel?>
 {
-    using System.Threading;
-    using System.Threading.Tasks;
-    using MediatR;
+    public int Id { get; set; }
 
-    public class GamblerDetailsQuery : IRequest<GamblerDetailsResponseModel?>
+    public class GamblerDetailsQueryHandler : IRequestHandler<GamblerDetailsQuery, GamblerDetailsResponseModel?>
     {
-        public int Id { get; set; }
+        private readonly IGamblerQueryRepository gamblerRepository;
 
-        public class GamblerDetailsQueryHandler : IRequestHandler<GamblerDetailsQuery, GamblerDetailsResponseModel?>
-        {
-            private readonly IGamblerQueryRepository gamblerRepository;
+        public GamblerDetailsQueryHandler(IGamblerQueryRepository gamblerRepository)
+            => this.gamblerRepository = gamblerRepository;
 
-            public GamblerDetailsQueryHandler(IGamblerQueryRepository gamblerRepository)
-                => this.gamblerRepository = gamblerRepository;
-
-            public async Task<GamblerDetailsResponseModel?> Handle(
-                GamblerDetailsQuery request,
-                CancellationToken cancellationToken)
-                => await this.gamblerRepository.GetDetails(
-                    request.Id,
-                    cancellationToken);
-        }
+        public async Task<GamblerDetailsResponseModel?> Handle(
+            GamblerDetailsQuery request,
+            CancellationToken cancellationToken)
+            => await this.gamblerRepository.GetDetails(
+                request.Id,
+                cancellationToken);
     }
 }

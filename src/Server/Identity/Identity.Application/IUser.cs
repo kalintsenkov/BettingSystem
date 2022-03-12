@@ -1,6 +1,5 @@
-﻿namespace BettingSystem.Application.Identity
+﻿namespace BettingSystem.Application.Identity;
+
+public interface IUser
 {
-    public interface IUser
-    {
-    }
 }

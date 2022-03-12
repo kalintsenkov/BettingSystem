@@ -1,13 +1,12 @@
-﻿namespace BettingSystem.Domain.Betting.Exceptions
+﻿namespace BettingSystem.Domain.Betting.Exceptions;
+
+using Common;
+
+public class InvalidBetException : BaseDomainException
 {
-    using Common;
-
-    public class InvalidBetException : BaseDomainException
+    public InvalidBetException()
     {
-        public InvalidBetException()
-        {
-        }
-
-        public InvalidBetException(string error) => this.Error = error;
     }
+
+    public InvalidBetException(string error) => this.Error = error;
 }

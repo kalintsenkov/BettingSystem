@@ -1,13 +1,12 @@
-﻿namespace BettingSystem.Domain.Betting.Factories.Matches
+﻿namespace BettingSystem.Domain.Betting.Factories.Matches;
+
+using System;
+using Common;
+using Models.Matches;
+
+public interface IMatchFactory : IFactory<Match>
 {
-    using System;
-    using Common;
-    using Models.Matches;
+    IMatchFactory WithStartDate(DateTime startDate);
 
-    public interface IMatchFactory : IFactory<Match>
-    {
-        IMatchFactory WithStartDate(DateTime startDate);
-
-        Match Build(DateTime startDate);
-    }
+    Match Build(DateTime startDate);
 }

@@ -1,9 +1,8 @@
-﻿namespace BettingSystem.Application.Betting.Matches
-{
-    using Common.Contracts;
-    using Domain.Betting.Models.Matches;
+﻿namespace BettingSystem.Application.Betting.Matches;
 
-    public interface IMatchQueryRepository : IQueryRepository<Match>
-    {
-    }
+using Common.Contracts;
+using Domain.Betting.Models.Matches;
+
+public interface IMatchQueryRepository : IQueryRepository<Match>
+{
 }

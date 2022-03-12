@@ -1,29 +1,28 @@
-﻿namespace BettingSystem.Application.Betting.Matches.Consumers
+﻿namespace BettingSystem.Application.Betting.Matches.Consumers;
+
+using System.Threading.Tasks;
+using Domain.Betting.Factories.Matches;
+using Domain.Betting.Repositories;
+using Domain.Common.Events.Matches;
+using MassTransit;
+
+public class MatchCreatedEventConsumer : IConsumer<MatchCreatedEvent>
 {
-    using System.Threading.Tasks;
-    using Domain.Betting.Factories.Matches;
-    using Domain.Betting.Repositories;
-    using Domain.Common.Events.Matches;
-    using MassTransit;
+    private readonly IMatchFactory matchFactory;
+    private readonly IMatchDomainRepository matchRepository;
 
-    public class MatchCreatedEventConsumer : IConsumer<MatchCreatedEvent>
+    public MatchCreatedEventConsumer(
+        IMatchFactory matchFactory,
+        IMatchDomainRepository matchRepository)
     {
-        private readonly IMatchFactory matchFactory;
-        private readonly IMatchDomainRepository matchRepository;
+        this.matchFactory = matchFactory;
+        this.matchRepository = matchRepository;
+    }
 
-        public MatchCreatedEventConsumer(
-            IMatchFactory matchFactory,
-            IMatchDomainRepository matchRepository)
-        {
-            this.matchFactory = matchFactory;
-            this.matchRepository = matchRepository;
-        }
+    public async Task Consume(ConsumeContext<MatchCreatedEvent> context)
+    {
+        var match = this.matchFactory.Build(context.Message.StartDate);
 
-        public async Task Consume(ConsumeContext<MatchCreatedEvent> context)
-        {
-            var match = this.matchFactory.Build(context.Message.StartDate);
-
-            await this.matchRepository.Save(match);
-        }
+        await this.matchRepository.Save(match);
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace BettingSystem.Application.Common.Contracts
+﻿namespace BettingSystem.Application.Common.Contracts;
+
+public interface ICurrentUser
 {
-    public interface ICurrentUser
-    {
-        string UserId { get; }
-    }
+    string UserId { get; }
 }

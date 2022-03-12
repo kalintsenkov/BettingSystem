@@ -1,18 +1,17 @@
-﻿namespace BettingSystem.Domain.Betting.Repositories
+﻿namespace BettingSystem.Domain.Betting.Repositories;
+
+using System.Threading;
+using System.Threading.Tasks;
+using Common;
+using Models.Bets;
+
+public interface IBetDomainRepository : IDomainRepository<Bet>
 {
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Common;
-    using Models.Bets;
+    Task<bool> Delete(
+        int id,
+        CancellationToken cancellationToken = default);
 
-    public interface IBetDomainRepository : IDomainRepository<Bet>
-    {
-        Task<bool> Delete(
-            int id,
-            CancellationToken cancellationToken = default);
-
-        Task<Bet?> Find(
-            int id,
-            CancellationToken cancellationToken = default);
-    }
+    Task<Bet?> Find(
+        int id,
+        CancellationToken cancellationToken = default);
 }

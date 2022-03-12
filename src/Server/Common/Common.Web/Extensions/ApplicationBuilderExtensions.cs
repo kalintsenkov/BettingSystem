@@ -1,56 +1,55 @@
-﻿namespace BettingSystem.Web.Common.Extensions
+﻿namespace BettingSystem.Web.Common.Extensions;
+
+using Infrastructure.Common.Persistence;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Middleware;
+
+public static class ApplicationBuilderExtensions
 {
-    using Infrastructure.Common.Persistence;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
-    using Middleware;
+    public static IApplicationBuilder UseWebService(
+        this IApplicationBuilder app,
+        IWebHostEnvironment env)
+        => app
+            .UseExceptionHandling(env)
+            .UseValidationExceptionHandler()
+            .UseHttpsRedirection()
+            .UseRouting()
+            .UseCors(options => options
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod())
+            .UseAuthentication()
+            .UseAuthorization()
+            .UseEndpoints(endpoints => endpoints
+                .MapHealthChecks()
+                .MapControllers());
 
-    public static class ApplicationBuilderExtensions
+    public static IApplicationBuilder UseExceptionHandling(
+        this IApplicationBuilder app,
+        IWebHostEnvironment env)
     {
-        public static IApplicationBuilder UseWebService(
-            this IApplicationBuilder app,
-            IWebHostEnvironment env)
-            => app
-                .UseExceptionHandling(env)
-                .UseValidationExceptionHandler()
-                .UseHttpsRedirection()
-                .UseRouting()
-                .UseCors(options => options
-                    .AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod())
-                .UseAuthentication()
-                .UseAuthorization()
-                .UseEndpoints(endpoints => endpoints
-                    .MapHealthChecks()
-                    .MapControllers());
-
-        public static IApplicationBuilder UseExceptionHandling(
-            this IApplicationBuilder app,
-            IWebHostEnvironment env)
+        if (env.IsDevelopment())
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            return app;
+            app.UseDeveloperExceptionPage();
         }
 
-        public static IApplicationBuilder Initialize(this IApplicationBuilder app)
+        return app;
+    }
+
+    public static IApplicationBuilder Initialize(this IApplicationBuilder app)
+    {
+        using var serviceScope = app.ApplicationServices.CreateScope();
+
+        var initializers = serviceScope.ServiceProvider.GetServices<IDbInitializer>();
+
+        foreach (var initializer in initializers)
         {
-            using var serviceScope = app.ApplicationServices.CreateScope();
-
-            var initializers = serviceScope.ServiceProvider.GetServices<IDbInitializer>();
-
-            foreach (var initializer in initializers)
-            {
-                initializer.Initialize();
-            }
-
-            return app;
+            initializer.Initialize();
         }
+
+        return app;
     }
 }

@@ -1,24 +1,23 @@
-﻿namespace BettingSystem.Application.Competitions.Leagues.Commands.Common
+﻿namespace BettingSystem.Application.Competitions.Leagues.Commands.Common;
+
+using Application.Common;
+using FluentValidation;
+
+using static Domain.Common.Models.ModelConstants.Common;
+
+public class LeagueCommandValidator<TCommand> : AbstractValidator<LeagueCommand<TCommand>>
+    where TCommand : EntityCommand<int>
 {
-    using Application.Common;
-    using FluentValidation;
-
-    using static Domain.Common.Models.ModelConstants.Common;
-
-    public class LeagueCommandValidator<TCommand> : AbstractValidator<LeagueCommand<TCommand>>
-        where TCommand : EntityCommand<int>
+    public LeagueCommandValidator()
     {
-        public LeagueCommandValidator()
-        {
-            this.RuleFor(m => m.Name)
-                .MinimumLength(MinNameLength)
-                .MaximumLength(MaxNameLength)
-                .NotEmpty();
+        this.RuleFor(m => m.Name)
+            .MinimumLength(MinNameLength)
+            .MaximumLength(MaxNameLength)
+            .NotEmpty();
 
-            this.RuleFor(m => m.Country)
-                .MinimumLength(MinNameLength)
-                .MaximumLength(MaxNameLength)
-                .NotEmpty();
-        }
+        this.RuleFor(m => m.Country)
+            .MinimumLength(MinNameLength)
+            .MaximumLength(MaxNameLength)
+            .NotEmpty();
     }
 }

@@ -1,12 +1,11 @@
-﻿namespace BettingSystem.Application.Teams.Queries.All
+﻿namespace BettingSystem.Application.Teams.Queries.All;
+
+using Common.Mapping;
+using Domain.Teams.Models;
+
+public class GetAllTeamsResponseModel : IMapFrom<Team>
 {
-    using Common.Mapping;
-    using Domain.Teams.Models;
+    public int Id { get; private set; }
 
-    public class GetAllTeamsResponseModel : IMapFrom<Team>
-    {
-        public int Id { get; private set; }
-
-        public string Name { get; private set; } = default!;
-    }
+    public string Name { get; private set; } = default!;
 }

@@ -1,33 +1,32 @@
-﻿namespace BettingSystem.Domain.Competitions.Factories.Teams
+﻿namespace BettingSystem.Domain.Competitions.Factories.Teams;
+
+using Exceptions;
+using Models.Teams;
+
+internal class TeamFactory : ITeamFactory
 {
-    using Exceptions;
-    using Models.Teams;
+    private string teamName = default!;
 
-    internal class TeamFactory : ITeamFactory
+    private bool isNameSet = false;
+
+    public ITeamFactory WithName(string name)
     {
-        private string teamName = default!;
+        this.teamName = name;
+        this.isNameSet = true;
 
-        private bool isNameSet = false;
-
-        public ITeamFactory WithName(string name)
-        {
-            this.teamName = name;
-            this.isNameSet = true;
-
-            return this;
-        }
-
-        public Team Build()
-        {
-            if (!this.isNameSet)
-            {
-                throw new InvalidTeamException("Name must have a value");
-            }
-
-            return new Team(this.teamName, points: 0);
-        }
-
-        public Team Build(string name)
-            => this.WithName(name).Build();
+        return this;
     }
+
+    public Team Build()
+    {
+        if (!this.isNameSet)
+        {
+            throw new InvalidTeamException("Name must have a value");
+        }
+
+        return new Team(this.teamName, points: 0);
+    }
+
+    public Team Build(string name)
+        => this.WithName(name).Build();
 }

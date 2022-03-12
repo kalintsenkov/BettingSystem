@@ -1,9 +1,8 @@
-﻿namespace BettingSystem.Application.Teams.Commands.Create
-{
-    public class CreateTeamResponseModel
-    {
-        internal CreateTeamResponseModel(int id) => this.Id = id;
+﻿namespace BettingSystem.Application.Teams.Commands.Create;
 
-        public int Id { get; }
-    }
+public class CreateTeamResponseModel
+{
+    internal CreateTeamResponseModel(int id) => this.Id = id;
+
+    public int Id { get; }
 }

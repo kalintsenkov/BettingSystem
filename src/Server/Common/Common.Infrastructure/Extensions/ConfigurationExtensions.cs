@@ -1,27 +1,26 @@
-﻿namespace BettingSystem.Infrastructure.Common.Extensions
+﻿namespace BettingSystem.Infrastructure.Common.Extensions;
+
+using Application.Common.Settings;
+using Microsoft.Extensions.Configuration;
+
+public static class ConfigurationExtensions
 {
-    using Application.Common.Settings;
-    using Microsoft.Extensions.Configuration;
+    public static string GetDefaultConnectionString(
+        this IConfiguration configuration)
+        => configuration.GetConnectionString("DefaultConnection");
 
-    public static class ConfigurationExtensions
+    public static string GetCronJobsConnectionString(
+        this IConfiguration configuration)
+        => configuration.GetConnectionString("CronJobsConnection");
+
+    public static MessageQueueSettings GetMessageQueueSettings(
+        this IConfiguration configuration)
     {
-        public static string GetDefaultConnectionString(
-            this IConfiguration configuration)
-            => configuration.GetConnectionString("DefaultConnection");
+        var settings = configuration.GetSection(nameof(MessageQueueSettings));
 
-        public static string GetCronJobsConnectionString(
-            this IConfiguration configuration)
-            => configuration.GetConnectionString("CronJobsConnection");
-
-        public static MessageQueueSettings GetMessageQueueSettings(
-            this IConfiguration configuration)
-        {
-            var settings = configuration.GetSection(nameof(MessageQueueSettings));
-
-            return new MessageQueueSettings(
-                settings.GetValue<string>(nameof(MessageQueueSettings.Host)),
-                settings.GetValue<string>(nameof(MessageQueueSettings.UserName)),
-                settings.GetValue<string>(nameof(MessageQueueSettings.Password)));
-        }
+        return new MessageQueueSettings(
+            settings.GetValue<string>(nameof(MessageQueueSettings.Host)),
+            settings.GetValue<string>(nameof(MessageQueueSettings.UserName)),
+            settings.GetValue<string>(nameof(MessageQueueSettings.Password)));
     }
 }

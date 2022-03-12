@@ -1,10 +1,9 @@
-﻿namespace BettingSystem.Application.Common.Contracts
-{
-    using System.Threading.Tasks;
-    using Images;
+﻿namespace BettingSystem.Application.Common.Contracts;
 
-    public interface IImageService
-    {
-        Task<ImageResponseModel> Process(ImageRequestModel image);
-    }
+using System.Threading.Tasks;
+using Images;
+
+public interface IImageService
+{
+    Task<ImageResponseModel> Process(ImageRequestModel image);
 }

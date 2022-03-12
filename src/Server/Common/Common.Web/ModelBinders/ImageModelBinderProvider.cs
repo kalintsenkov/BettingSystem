@@ -1,13 +1,12 @@
-﻿namespace BettingSystem.Web.Common.ModelBinders
-{
-    using Application.Common.Images;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿namespace BettingSystem.Web.Common.ModelBinders;
 
-    public class ImageModelBinderProvider : IModelBinderProvider
-    {
-        public IModelBinder? GetBinder(ModelBinderProviderContext context)
-            => context.Metadata.ModelType == typeof(ImageRequestModel)
-                ? new ImageModelBinder()
-                : default;
-    }
+using Application.Common.Images;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+
+public class ImageModelBinderProvider : IModelBinderProvider
+{
+    public IModelBinder? GetBinder(ModelBinderProviderContext context)
+        => context.Metadata.ModelType == typeof(ImageRequestModel)
+            ? new ImageModelBinder()
+            : default;
 }

@@ -1,13 +1,12 @@
-﻿namespace BettingSystem.Domain.Common
-{
-    using System.Threading;
-    using System.Threading.Tasks;
+﻿namespace BettingSystem.Domain.Common;
 
-    public interface IDomainRepository<in TEntity>
-        where TEntity : IAggregateRoot
-    {
-        Task Save(
-            TEntity entity,
-            CancellationToken cancellationToken = default);
-    }
+using System.Threading;
+using System.Threading.Tasks;
+
+public interface IDomainRepository<in TEntity>
+    where TEntity : IAggregateRoot
+{
+    Task Save(
+        TEntity entity,
+        CancellationToken cancellationToken = default);
 }

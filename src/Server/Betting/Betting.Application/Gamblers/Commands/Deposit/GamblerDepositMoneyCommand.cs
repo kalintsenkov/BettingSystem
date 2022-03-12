@@ -1,47 +1,46 @@
-﻿namespace BettingSystem.Application.Betting.Gamblers.Commands.Deposit
+﻿namespace BettingSystem.Application.Betting.Gamblers.Commands.Deposit;
+
+using System.Threading;
+using System.Threading.Tasks;
+using Application.Common;
+using Application.Common.Contracts;
+using Common;
+using Domain.Betting.Repositories;
+using MediatR;
+
+public class GamblerDepositMoneyCommand : GamblerMoneyCommand<GamblerDepositMoneyCommand>, IRequest<Result>
 {
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Application.Common;
-    using Application.Common.Contracts;
-    using Common;
-    using Domain.Betting.Repositories;
-    using MediatR;
-
-    public class GamblerDepositMoneyCommand : GamblerMoneyCommand<GamblerDepositMoneyCommand>, IRequest<Result>
+    public class GamblerDepositMoneyCommandHandler : IRequestHandler<GamblerDepositMoneyCommand, Result>
     {
-        public class GamblerDepositMoneyCommandHandler : IRequestHandler<GamblerDepositMoneyCommand, Result>
+        private readonly ICurrentUser currentUser;
+        private readonly IGamblerDomainRepository gamblerRepository;
+
+        public GamblerDepositMoneyCommandHandler(
+            ICurrentUser currentUser, 
+            IGamblerDomainRepository gamblerRepository)
         {
-            private readonly ICurrentUser currentUser;
-            private readonly IGamblerDomainRepository gamblerRepository;
+            this.currentUser = currentUser;
+            this.gamblerRepository = gamblerRepository;
+        }
 
-            public GamblerDepositMoneyCommandHandler(
-                ICurrentUser currentUser, 
-                IGamblerDomainRepository gamblerRepository)
+        public async Task<Result> Handle(
+            GamblerDepositMoneyCommand request, 
+            CancellationToken cancellationToken)
+        {
+            var gambler = await this.gamblerRepository.FindByUser(
+                this.currentUser.UserId,
+                cancellationToken);
+
+            if (request.Id != gambler.Id)
             {
-                this.currentUser = currentUser;
-                this.gamblerRepository = gamblerRepository;
+                return "You cannot edit this profile.";
             }
 
-            public async Task<Result> Handle(
-                GamblerDepositMoneyCommand request, 
-                CancellationToken cancellationToken)
-            {
-                var gambler = await this.gamblerRepository.FindByUser(
-                    this.currentUser.UserId,
-                    cancellationToken);
+            gambler.Deposit(request.Amount);
 
-                if (request.Id != gambler.Id)
-                {
-                    return "You cannot edit this profile.";
-                }
+            await this.gamblerRepository.Save(gambler, cancellationToken);
 
-                gambler.Deposit(request.Amount);
-
-                await this.gamblerRepository.Save(gambler, cancellationToken);
-
-                return Result.Success;
-            }
+            return Result.Success;
         }
     }
 }

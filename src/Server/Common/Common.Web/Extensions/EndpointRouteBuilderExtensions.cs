@@ -1,20 +1,19 @@
-﻿namespace BettingSystem.Web.Common.Extensions
+﻿namespace BettingSystem.Web.Common.Extensions;
+
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Routing;
+
+public static class EndpointRouteBuilderExtensions
 {
-    using HealthChecks.UI.Client;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-    using Microsoft.AspNetCore.Routing;
-
-    public static class EndpointRouteBuilderExtensions
+    public static IEndpointRouteBuilder MapHealthChecks(this IEndpointRouteBuilder endpoints)
     {
-        public static IEndpointRouteBuilder MapHealthChecks(this IEndpointRouteBuilder endpoints)
+        endpoints.MapHealthChecks("/health", new HealthCheckOptions
         {
-            endpoints.MapHealthChecks("/health", new HealthCheckOptions
-            {
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
 
-            return endpoints;
-        }
+        return endpoints;
     }
 }

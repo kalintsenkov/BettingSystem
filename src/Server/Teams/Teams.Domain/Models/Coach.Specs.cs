@@ -1,30 +1,29 @@
-﻿namespace BettingSystem.Domain.Teams.Models
+﻿namespace BettingSystem.Domain.Teams.Models;
+
+using System;
+using Exceptions;
+using FakeItEasy;
+using FluentAssertions;
+using Xunit;
+
+public class CoachSpecs
 {
-    using System;
-    using Exceptions;
-    using FakeItEasy;
-    using FluentAssertions;
-    using Xunit;
-
-    public class CoachSpecs
+    [Fact]
+    public void ValidStadiumShouldNotThrowException()
     {
-        [Fact]
-        public void ValidStadiumShouldNotThrowException()
-        {
-            Action act = () => A.Dummy<Coach>();
+        Action act = () => A.Dummy<Coach>();
 
-            act.Should().NotThrow<InvalidTeamException>();
-        }
+        act.Should().NotThrow<InvalidTeamException>();
+    }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData(" ")]
-        [InlineData(null)]
-        public void InvalidNameShouldThrowException(string name)
-        {
-            Action act = () => new Coach(name);
+    [Theory]
+    [InlineData("")]
+    [InlineData(" ")]
+    [InlineData(null)]
+    public void InvalidNameShouldThrowException(string name)
+    {
+        Action act = () => new Coach(name);
 
-            act.Should().Throw<InvalidTeamException>();
-        }
+        act.Should().Throw<InvalidTeamException>();
     }
 }

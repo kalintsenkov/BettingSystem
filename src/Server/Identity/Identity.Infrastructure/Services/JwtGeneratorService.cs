@@ -1,62 +1,61 @@
-﻿namespace BettingSystem.Infrastructure.Identity.Services
+﻿namespace BettingSystem.Infrastructure.Identity.Services;
+
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+using Application.Common.Settings;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+
+using static Domain.Common.Models.ModelConstants.Common;
+
+internal class JwtGeneratorService : IJwtGenerator
 {
-    using System;
-    using System.IdentityModel.Tokens.Jwt;
-    using System.Security.Claims;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Application.Common.Settings;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.Options;
-    using Microsoft.IdentityModel.Tokens;
+    private readonly UserManager<User> userManager;
+    private readonly ApplicationSettings applicationSettings;
 
-    using static Domain.Common.Models.ModelConstants.Common;
-
-    internal class JwtGeneratorService : IJwtGenerator
+    public JwtGeneratorService(
+        UserManager<User> userManager,
+        IOptions<ApplicationSettings> applicationSettings)
     {
-        private readonly UserManager<User> userManager;
-        private readonly ApplicationSettings applicationSettings;
+        this.userManager = userManager;
+        this.applicationSettings = applicationSettings.Value;
+    }
 
-        public JwtGeneratorService(
-            UserManager<User> userManager,
-            IOptions<ApplicationSettings> applicationSettings)
+    public async Task<string> GenerateToken(User user)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes(this.applicationSettings.Secret);
+
+        var tokenDescriptor = new SecurityTokenDescriptor
         {
-            this.userManager = userManager;
-            this.applicationSettings = applicationSettings.Value;
+            Subject = new ClaimsIdentity(new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.Email)
+            }),
+            Expires = DateTime.UtcNow.AddDays(7),
+            SigningCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha256Signature)
+        };
+
+        var isAdministrator = await this.userManager
+            .IsInRoleAsync(user, AdministratorRoleName);
+
+        if (isAdministrator)
+        {
+            tokenDescriptor.Subject.AddClaim(new Claim(
+                ClaimTypes.Role,
+                AdministratorRoleName));
         }
 
-        public async Task<string> GenerateToken(User user)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(this.applicationSettings.Secret);
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        var encryptedToken = tokenHandler.WriteToken(token);
 
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    new Claim(ClaimTypes.Name, user.Email)
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var isAdministrator = await this.userManager
-                .IsInRoleAsync(user, AdministratorRoleName);
-
-            if (isAdministrator)
-            {
-                tokenDescriptor.Subject.AddClaim(new Claim(
-                    ClaimTypes.Role,
-                    AdministratorRoleName));
-            }
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var encryptedToken = tokenHandler.WriteToken(token);
-
-            return encryptedToken;
-        }
+        return encryptedToken;
     }
 }

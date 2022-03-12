@@ -1,29 +1,28 @@
-﻿namespace BettingSystem.Application.Betting.Matches.Consumers
+﻿namespace BettingSystem.Application.Betting.Matches.Consumers;
+
+using System.Threading.Tasks;
+using Domain.Betting.Models.Matches;
+using Domain.Betting.Repositories;
+using Domain.Common.Events.Matches;
+using Domain.Common.Models;
+using MassTransit;
+
+public class MatchStatusUpdatedEventConsumer : IConsumer<MatchStatusUpdatedEvent>
 {
-    using System.Threading.Tasks;
-    using Domain.Betting.Models.Matches;
-    using Domain.Betting.Repositories;
-    using Domain.Common.Events.Matches;
-    using Domain.Common.Models;
-    using MassTransit;
+    private readonly IMatchDomainRepository matchRepository;
 
-    public class MatchStatusUpdatedEventConsumer : IConsumer<MatchStatusUpdatedEvent>
+    public MatchStatusUpdatedEventConsumer(IMatchDomainRepository matchRepository)
+        => this.matchRepository = matchRepository;
+
+    public async Task Consume(ConsumeContext<MatchStatusUpdatedEvent> context)
     {
-        private readonly IMatchDomainRepository matchRepository;
+        var eventMessage = context.Message;
 
-        public MatchStatusUpdatedEventConsumer(IMatchDomainRepository matchRepository)
-            => this.matchRepository = matchRepository;
+        var match = await this.matchRepository.Find(eventMessage.Id);
 
-        public async Task Consume(ConsumeContext<MatchStatusUpdatedEvent> context)
-        {
-            var eventMessage = context.Message;
+        match!.UpdateStatus(Enumeration.FromValue<Status>(
+            eventMessage.Status));
 
-            var match = await this.matchRepository.Find(eventMessage.Id);
-
-            match!.UpdateStatus(Enumeration.FromValue<Status>(
-                eventMessage.Status));
-
-            await this.matchRepository.Save(match);
-        }
+        await this.matchRepository.Save(match);
     }
 }

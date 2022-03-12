@@ -1,11 +1,10 @@
-﻿namespace BettingSystem.Application.Common.Images
+﻿namespace BettingSystem.Application.Common.Images;
+
+using System.IO;
+
+public class ImageRequestModel
 {
-    using System.IO;
+    public ImageRequestModel(Stream content) => this.Content = content;
 
-    public class ImageRequestModel
-    {
-        public ImageRequestModel(Stream content) => this.Content = content;
-
-        public Stream Content { get; }
-    }
+    public Stream Content { get; }
 }

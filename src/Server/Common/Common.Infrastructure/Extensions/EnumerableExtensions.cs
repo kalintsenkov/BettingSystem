@@ -1,18 +1,17 @@
-﻿namespace BettingSystem.Infrastructure.Common.Extensions
-{
-    using System;
-    using System.Collections.Generic;
+﻿namespace BettingSystem.Infrastructure.Common.Extensions;
 
-    public static class EnumerableExtensions
+using System;
+using System.Collections.Generic;
+
+public static class EnumerableExtensions
+{
+    public static void ForEach<T>(
+        this IEnumerable<T> enumerable,
+        Action<T> action)
     {
-        public static void ForEach<T>(
-            this IEnumerable<T> enumerable,
-            Action<T> action)
+        foreach (var item in enumerable)
         {
-            foreach (var item in enumerable)
-            {
-                action(item);
-            }
+            action(item);
         }
     }
 }

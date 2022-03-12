@@ -1,13 +1,12 @@
-﻿namespace BettingSystem.Application.Betting.Bets.Queries.Mine
-{
-    using System.Collections.Generic;
-    using Common;
+﻿namespace BettingSystem.Application.Betting.Bets.Queries.Mine;
 
-    public class MineBetsResponseModel : BetListingsResponseModel<MineBetResponseModel>
+using System.Collections.Generic;
+using Common;
+
+public class MineBetsResponseModel : BetListingsResponseModel<MineBetResponseModel>
+{
+    internal MineBetsResponseModel(IEnumerable<MineBetResponseModel> bets)
+        : base(bets)
     {
-        internal MineBetsResponseModel(IEnumerable<MineBetResponseModel> bets)
-            : base(bets)
-        {
-        }
     }
 }

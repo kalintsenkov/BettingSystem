@@ -1,43 +1,42 @@
-﻿namespace BettingSystem.Application.Competitions.Teams.Consumers
+﻿namespace BettingSystem.Application.Competitions.Teams.Consumers;
+
+using System.Threading.Tasks;
+using Domain.Common.Events.Matches;
+using Domain.Competitions.Repositories;
+using MassTransit;
+
+public class MatchFinishedEventConsumer : IConsumer<MatchFinishedEvent>
 {
-    using System.Threading.Tasks;
-    using Domain.Common.Events.Matches;
-    using Domain.Competitions.Repositories;
-    using MassTransit;
+    private readonly ITeamDomainRepository teamRepository;
 
-    public class MatchFinishedEventConsumer : IConsumer<MatchFinishedEvent>
+    public MatchFinishedEventConsumer(ITeamDomainRepository teamRepository)
+        => this.teamRepository = teamRepository;
+
+    public async Task Consume(ConsumeContext<MatchFinishedEvent> context)
     {
-        private readonly ITeamDomainRepository teamRepository;
+        var message = context.Message;
 
-        public MatchFinishedEventConsumer(ITeamDomainRepository teamRepository)
-            => this.teamRepository = teamRepository;
+        var homeScore = message.HomeScore;
+        var awayScore = message.AwayScore;
 
-        public async Task Consume(ConsumeContext<MatchFinishedEvent> context)
+        var homeTeam = await this.teamRepository.Find(message.HomeTeamId);
+        var awayTeam = await this.teamRepository.Find(message.AwayTeamId);
+
+        if (homeScore > awayScore)
         {
-            var message = context.Message;
-
-            var homeScore = message.HomeScore;
-            var awayScore = message.AwayScore;
-
-            var homeTeam = await this.teamRepository.Find(message.HomeTeamId);
-            var awayTeam = await this.teamRepository.Find(message.AwayTeamId);
-
-            if (homeScore > awayScore)
-            {
-                homeTeam!.GivePointsForWin();
-            }
-            else if (homeScore < awayScore)
-            {
-                awayTeam!.GivePointsForWin();
-            }
-            else if (homeScore == awayScore)
-            {
-                homeTeam!.GivePointForDraw();
-                awayTeam!.GivePointForDraw();
-            }
-
-            await this.teamRepository.Save(homeTeam!);
-            await this.teamRepository.Save(awayTeam!);
+            homeTeam!.GivePointsForWin();
         }
+        else if (homeScore < awayScore)
+        {
+            awayTeam!.GivePointsForWin();
+        }
+        else if (homeScore == awayScore)
+        {
+            homeTeam!.GivePointForDraw();
+            awayTeam!.GivePointForDraw();
+        }
+
+        await this.teamRepository.Save(homeTeam!);
+        await this.teamRepository.Save(awayTeam!);
     }
 }

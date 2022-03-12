@@ -1,27 +1,26 @@
-﻿namespace BettingSystem.Application.Games.Teams.Queries.OriginalLogo
+﻿namespace BettingSystem.Application.Games.Teams.Queries.OriginalLogo;
+
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
+
+public class TeamOriginalLogoQuery : IRequest<Stream>
 {
-    using System.IO;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using MediatR;
+    public int Id { get; set; }
 
-    public class TeamOriginalLogoQuery : IRequest<Stream>
+    public class TeamOriginalLogoQueryHandler : IRequestHandler<TeamOriginalLogoQuery, Stream>
     {
-        public int Id { get; set; }
+        private readonly ITeamQueryRepository teamRepository;
 
-        public class TeamOriginalLogoQueryHandler : IRequestHandler<TeamOriginalLogoQuery, Stream>
-        {
-            private readonly ITeamQueryRepository teamRepository;
+        public TeamOriginalLogoQueryHandler(ITeamQueryRepository teamRepository)
+            => this.teamRepository = teamRepository;
 
-            public TeamOriginalLogoQueryHandler(ITeamQueryRepository teamRepository)
-                => this.teamRepository = teamRepository;
-
-            public async Task<Stream> Handle(
-                TeamOriginalLogoQuery request,
-                CancellationToken cancellationToken)
-                => await this.teamRepository.GetOriginalLogo(
-                    request.Id,
-                    cancellationToken);
-        }
+        public async Task<Stream> Handle(
+            TeamOriginalLogoQuery request,
+            CancellationToken cancellationToken)
+            => await this.teamRepository.GetOriginalLogo(
+                request.Id,
+                cancellationToken);
     }
 }

@@ -1,47 +1,46 @@
-﻿namespace BettingSystem.Application.Betting.Gamblers.Commands.Edit
+﻿namespace BettingSystem.Application.Betting.Gamblers.Commands.Edit;
+
+using System.Threading;
+using System.Threading.Tasks;
+using Application.Common;
+using Application.Common.Contracts;
+using Common;
+using Domain.Betting.Repositories;
+using MediatR;
+
+public class EditGamblerCommand : GamblerCommand<EditGamblerCommand>, IRequest<Result>
 {
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Application.Common;
-    using Application.Common.Contracts;
-    using Common;
-    using Domain.Betting.Repositories;
-    using MediatR;
-
-    public class EditGamblerCommand : GamblerCommand<EditGamblerCommand>, IRequest<Result>
+    public class EditGamblerCommandHandler : IRequestHandler<EditGamblerCommand, Result>
     {
-        public class EditGamblerCommandHandler : IRequestHandler<EditGamblerCommand, Result>
+        private readonly ICurrentUser currentUser;
+        private readonly IGamblerDomainRepository gamblerRepository;
+
+        public EditGamblerCommandHandler(
+            ICurrentUser currentUser,
+            IGamblerDomainRepository gamblerRepository)
         {
-            private readonly ICurrentUser currentUser;
-            private readonly IGamblerDomainRepository gamblerRepository;
+            this.currentUser = currentUser;
+            this.gamblerRepository = gamblerRepository;
+        }
 
-            public EditGamblerCommandHandler(
-                ICurrentUser currentUser,
-                IGamblerDomainRepository gamblerRepository)
+        public async Task<Result> Handle(
+            EditGamblerCommand request,
+            CancellationToken cancellationToken)
+        {
+            var gambler = await this.gamblerRepository.FindByUser(
+                this.currentUser.UserId,
+                cancellationToken);
+
+            if (request.Id != gambler.Id)
             {
-                this.currentUser = currentUser;
-                this.gamblerRepository = gamblerRepository;
+                return "You cannot edit this profile.";
             }
 
-            public async Task<Result> Handle(
-                EditGamblerCommand request,
-                CancellationToken cancellationToken)
-            {
-                var gambler = await this.gamblerRepository.FindByUser(
-                    this.currentUser.UserId,
-                    cancellationToken);
+            gambler.UpdateName(request.Name);
 
-                if (request.Id != gambler.Id)
-                {
-                    return "You cannot edit this profile.";
-                }
+            await this.gamblerRepository.Save(gambler, cancellationToken);
 
-                gambler.UpdateName(request.Name);
-
-                await this.gamblerRepository.Save(gambler, cancellationToken);
-
-                return Result.Success;
-            }
+            return Result.Success;
         }
     }
 }

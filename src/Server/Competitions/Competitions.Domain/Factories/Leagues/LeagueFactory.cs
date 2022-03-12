@@ -1,47 +1,46 @@
-﻿namespace BettingSystem.Domain.Competitions.Factories.Leagues
+﻿namespace BettingSystem.Domain.Competitions.Factories.Leagues;
+
+using Exceptions;
+using Models.Leagues;
+
+internal class LeagueFactory : ILeagueFactory
 {
-    using Exceptions;
-    using Models.Leagues;
+    private string leagueName = default!;
+    private Country leagueCountry = default!;
 
-    internal class LeagueFactory : ILeagueFactory
+    private bool isNameSet = false;
+    private bool isCountrySet = false;
+
+    public ILeagueFactory WithName(string name)
     {
-        private string leagueName = default!;
-        private Country leagueCountry = default!;
+        this.leagueName = name;
+        this.isNameSet = true;
 
-        private bool isNameSet = false;
-        private bool isCountrySet = false;
+        return this;
+    }
 
-        public ILeagueFactory WithName(string name)
+    public ILeagueFactory WithCountry(string name)
+    {
+        var country = new Country(name);
+
+        return this.WithCountry(country);
+    }
+
+    public ILeagueFactory WithCountry(Country country)
+    {
+        this.leagueCountry = country;
+        this.isCountrySet = true;
+
+        return this;
+    }
+
+    public League Build()
+    {
+        if (!this.isNameSet || !this.isCountrySet)
         {
-            this.leagueName = name;
-            this.isNameSet = true;
-
-            return this;
+            throw new InvalidLeagueException("Name and country must have a value.");
         }
 
-        public ILeagueFactory WithCountry(string name)
-        {
-            var country = new Country(name);
-
-            return this.WithCountry(country);
-        }
-
-        public ILeagueFactory WithCountry(Country country)
-        {
-            this.leagueCountry = country;
-            this.isCountrySet = true;
-
-            return this;
-        }
-
-        public League Build()
-        {
-            if (!this.isNameSet || !this.isCountrySet)
-            {
-                throw new InvalidLeagueException("Name and country must have a value.");
-            }
-
-            return new League(this.leagueName, this.leagueCountry);
-        }
+        return new League(this.leagueName, this.leagueCountry);
     }
 }

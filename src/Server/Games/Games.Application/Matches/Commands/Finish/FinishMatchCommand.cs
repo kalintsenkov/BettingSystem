@@ -1,40 +1,39 @@
-﻿namespace BettingSystem.Application.Games.Matches.Commands.Finish
+﻿namespace BettingSystem.Application.Games.Matches.Commands.Finish;
+
+using System.Threading;
+using System.Threading.Tasks;
+using Application.Common;
+using Application.Common.Exceptions;
+using Domain.Games.Repositories;
+using MediatR;
+
+public class FinishMatchCommand : EntityCommand<int>, IRequest<Result>
 {
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Application.Common;
-    using Application.Common.Exceptions;
-    using Domain.Games.Repositories;
-    using MediatR;
-
-    public class FinishMatchCommand : EntityCommand<int>, IRequest<Result>
+    public class FinishMatchCommandHandler : IRequestHandler<FinishMatchCommand, Result>
     {
-        public class FinishMatchCommandHandler : IRequestHandler<FinishMatchCommand, Result>
+        private readonly IMatchDomainRepository matchRepository;
+
+        public FinishMatchCommandHandler(IMatchDomainRepository matchRepository)
+            => this.matchRepository = matchRepository;
+
+        public async Task<Result> Handle(
+            FinishMatchCommand request,
+            CancellationToken cancellationToken)
         {
-            private readonly IMatchDomainRepository matchRepository;
+            var match = await this.matchRepository.Find(
+                request.Id,
+                cancellationToken);
 
-            public FinishMatchCommandHandler(IMatchDomainRepository matchRepository)
-                => this.matchRepository = matchRepository;
-
-            public async Task<Result> Handle(
-                FinishMatchCommand request,
-                CancellationToken cancellationToken)
+            if (match == null)
             {
-                var match = await this.matchRepository.Find(
-                    request.Id,
-                    cancellationToken);
-
-                if (match == null)
-                {
-                    throw new NotFoundException(nameof(match), request.Id);
-                }
-
-                match.Finish();
-
-                await this.matchRepository.Save(match, cancellationToken);
-
-                return Result.Success;
+                throw new NotFoundException(nameof(match), request.Id);
             }
+
+            match.Finish();
+
+            await this.matchRepository.Save(match, cancellationToken);
+
+            return Result.Success;
         }
     }
 }

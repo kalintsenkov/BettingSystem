@@ -1,43 +1,42 @@
-﻿namespace BettingSystem.Domain.Betting.Factories.Gamblers
+﻿namespace BettingSystem.Domain.Betting.Factories.Gamblers;
+
+using Exceptions;
+using Models.Gamblers;
+
+internal class GamblerFactory : IGamblerFactory
 {
-    using Exceptions;
-    using Models.Gamblers;
+    private string gamblerName = default!;
+    private string gamblerUserId = default!;
 
-    internal class GamblerFactory : IGamblerFactory
+    private bool isNameSet = false;
+    private bool isUserIdSet = false;
+
+    public IGamblerFactory WithName(string name)
     {
-        private string gamblerName = default!;
-        private string gamblerUserId = default!;
+        this.gamblerName = name;
+        this.isNameSet = true;
 
-        private bool isNameSet = false;
-        private bool isUserIdSet = false;
+        return this;
+    }
 
-        public IGamblerFactory WithName(string name)
+    public IGamblerFactory FromUser(string userId)
+    {
+        this.gamblerUserId = userId;
+        this.isUserIdSet = true;
+
+        return this;
+    }
+
+    public Gambler Build()
+    {
+        if (!this.isNameSet || !this.isUserIdSet)
         {
-            this.gamblerName = name;
-            this.isNameSet = true;
-
-            return this;
+            throw new InvalidGamblerException("Name and User Id must have a value");
         }
 
-        public IGamblerFactory FromUser(string userId)
-        {
-            this.gamblerUserId = userId;
-            this.isUserIdSet = true;
-
-            return this;
-        }
-
-        public Gambler Build()
-        {
-            if (!this.isNameSet || !this.isUserIdSet)
-            {
-                throw new InvalidGamblerException("Name and User Id must have a value");
-            }
-
-            return new Gambler(
-                this.gamblerName,
-                this.gamblerUserId,
-                balance: decimal.Zero);
-        }
+        return new Gambler(
+            this.gamblerName,
+            this.gamblerUserId,
+            balance: decimal.Zero);
     }
 }

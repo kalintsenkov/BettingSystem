@@ -1,30 +1,29 @@
-﻿namespace BettingSystem.Domain.Competitions.Models.Leagues
+﻿namespace BettingSystem.Domain.Competitions.Models.Leagues;
+
+using System;
+using Exceptions;
+using FakeItEasy;
+using FluentAssertions;
+using Xunit;
+
+public class CountrySpecs
 {
-    using System;
-    using Exceptions;
-    using FakeItEasy;
-    using FluentAssertions;
-    using Xunit;
-
-    public class CountrySpecs
+    [Fact]
+    public void ValidCountryShouldNotThrowException()
     {
-        [Fact]
-        public void ValidCountryShouldNotThrowException()
-        {
-            Action act = () => A.Dummy<Country>();
+        Action act = () => A.Dummy<Country>();
 
-            act.Should().NotThrow<InvalidLeagueException>();
-        }
+        act.Should().NotThrow<InvalidLeagueException>();
+    }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData("  ")]
-        [InlineData(null)]
-        public void InvalidMatchDateShouldThrowException(string name)
-        {
-            Action act = () => new Country(name);
+    [Theory]
+    [InlineData("")]
+    [InlineData("  ")]
+    [InlineData(null)]
+    public void InvalidMatchDateShouldThrowException(string name)
+    {
+        Action act = () => new Country(name);
 
-            act.Should().Throw<InvalidLeagueException>();
-        }
+        act.Should().Throw<InvalidLeagueException>();
     }
 }

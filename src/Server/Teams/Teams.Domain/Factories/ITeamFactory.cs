@@ -1,18 +1,17 @@
-﻿namespace BettingSystem.Domain.Teams.Factories
+﻿namespace BettingSystem.Domain.Teams.Factories;
+
+using Common;
+using Models;
+
+public interface ITeamFactory : IFactory<Team>
 {
-    using Common;
-    using Models;
+    ITeamFactory WithName(string name);
 
-    public interface ITeamFactory : IFactory<Team>
-    {
-        ITeamFactory WithName(string name);
+    ITeamFactory WithLogo(
+        byte[] logoOriginalContent,
+        byte[] logoThumbnailContent);
 
-        ITeamFactory WithLogo(
-            byte[] logoOriginalContent,
-            byte[] logoThumbnailContent);
+    ITeamFactory WithCoach(string name);
 
-        ITeamFactory WithCoach(string name);
-
-        ITeamFactory WithCoach(Coach coach);
-    }
+    ITeamFactory WithCoach(Coach coach);
 }

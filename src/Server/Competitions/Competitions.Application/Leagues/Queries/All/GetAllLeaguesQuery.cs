@@ -1,25 +1,24 @@
-﻿namespace BettingSystem.Application.Competitions.Leagues.Queries.All
+﻿namespace BettingSystem.Application.Competitions.Leagues.Queries.All;
+
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
+
+public class GetAllLeaguesQuery : IRequest<IEnumerable<GetAllLeaguesResponseModel>>
 {
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using MediatR;
-
-    public class GetAllLeaguesQuery : IRequest<IEnumerable<GetAllLeaguesResponseModel>>
+    public class GetAllLeaguesQueryHandler : IRequestHandler<
+        GetAllLeaguesQuery,
+        IEnumerable<GetAllLeaguesResponseModel>>
     {
-        public class GetAllLeaguesQueryHandler : IRequestHandler<
-            GetAllLeaguesQuery,
-            IEnumerable<GetAllLeaguesResponseModel>>
-        {
-            private readonly ILeagueQueryRepository leagueRepository;
+        private readonly ILeagueQueryRepository leagueRepository;
 
-            public GetAllLeaguesQueryHandler(ILeagueQueryRepository leagueRepository)
-                => this.leagueRepository = leagueRepository;
+        public GetAllLeaguesQueryHandler(ILeagueQueryRepository leagueRepository)
+            => this.leagueRepository = leagueRepository;
 
-            public async Task<IEnumerable<GetAllLeaguesResponseModel>> Handle(
-                GetAllLeaguesQuery request,
-                CancellationToken cancellationToken)
-                => await this.leagueRepository.GetLeaguesListing(cancellationToken);
-        }
+        public async Task<IEnumerable<GetAllLeaguesResponseModel>> Handle(
+            GetAllLeaguesQuery request,
+            CancellationToken cancellationToken)
+            => await this.leagueRepository.GetLeaguesListing(cancellationToken);
     }
 }

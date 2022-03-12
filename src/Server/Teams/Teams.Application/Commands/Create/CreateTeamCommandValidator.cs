@@ -1,11 +1,10 @@
-﻿namespace BettingSystem.Application.Teams.Commands.Create
-{
-    using Common;
-    using FluentValidation;
+﻿namespace BettingSystem.Application.Teams.Commands.Create;
 
-    public class CreateTeamCommandValidator : AbstractValidator<CreateTeamCommand>
-    {
-        public CreateTeamCommandValidator()
-            => this.Include(new TeamCommandValidator<CreateTeamCommand>());
-    }
+using Common;
+using FluentValidation;
+
+public class CreateTeamCommandValidator : AbstractValidator<CreateTeamCommand>
+{
+    public CreateTeamCommandValidator()
+        => this.Include(new TeamCommandValidator<CreateTeamCommand>());
 }

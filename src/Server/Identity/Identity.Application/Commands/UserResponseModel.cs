@@ -1,9 +1,8 @@
-﻿namespace BettingSystem.Application.Identity.Commands
-{
-    public class UserResponseModel
-    {
-        public UserResponseModel(string token) => this.Token = token;
+﻿namespace BettingSystem.Application.Identity.Commands;
 
-        public string Token { get; }
-    }
+public class UserResponseModel
+{
+    public UserResponseModel(string token) => this.Token = token;
+
+    public string Token { get; }
 }

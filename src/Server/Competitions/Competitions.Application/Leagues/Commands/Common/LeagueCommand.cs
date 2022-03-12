@@ -1,12 +1,11 @@
-﻿namespace BettingSystem.Application.Competitions.Leagues.Commands.Common
+﻿namespace BettingSystem.Application.Competitions.Leagues.Commands.Common;
+
+using Application.Common;
+
+public abstract class LeagueCommand<TCommand> : EntityCommand<int>
+    where TCommand : EntityCommand<int>
 {
-    using Application.Common;
+    public string Name { get; set; } = default!;
 
-    public abstract class LeagueCommand<TCommand> : EntityCommand<int>
-        where TCommand : EntityCommand<int>
-    {
-        public string Name { get; set; } = default!;
-
-        public string Country { get; set; } = default!;
-    }
+    public string Country { get; set; } = default!;
 }

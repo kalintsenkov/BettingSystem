@@ -1,48 +1,47 @@
-﻿namespace BettingSystem.Infrastructure.Common.Services
+﻿namespace BettingSystem.Infrastructure.Common.Services;
+
+using System.IO;
+using System.Threading.Tasks;
+using Application.Common.Contracts;
+using Application.Common.Images;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+
+internal class ImageService : IImageService
 {
-    using System.IO;
-    using System.Threading.Tasks;
-    using Application.Common.Contracts;
-    using Application.Common.Images;
-    using SixLabors.ImageSharp;
-    using SixLabors.ImageSharp.Processing;
+    private const int ThumbnailWidth = 100;
 
-    internal class ImageService : IImageService
+    public async Task<ImageResponseModel> Process(ImageRequestModel image)
     {
-        private const int ThumbnailWidth = 100;
+        using var imageResult = await Image.LoadAsync(image.Content);
 
-        public async Task<ImageResponseModel> Process(ImageRequestModel image)
+        var original = await this.SaveImage(imageResult, imageResult.Width);
+        var thumbnail = await this.SaveImage(imageResult, ThumbnailWidth);
+
+        return new ImageResponseModel(original, thumbnail);
+    }
+
+    private async Task<byte[]> SaveImage(Image image, int resizeWidth)
+    {
+        var width = image.Width;
+        var height = image.Height;
+
+        if (width > resizeWidth)
         {
-            using var imageResult = await Image.LoadAsync(image.Content);
-
-            var original = await this.SaveImage(imageResult, imageResult.Width);
-            var thumbnail = await this.SaveImage(imageResult, ThumbnailWidth);
-
-            return new ImageResponseModel(original, thumbnail);
+            height = (int)((double)resizeWidth / width * height);
+            width = resizeWidth;
         }
 
-        private async Task<byte[]> SaveImage(Image image, int resizeWidth)
-        {
-            var width = image.Width;
-            var height = image.Height;
+        image
+            .Mutate(i => i
+                .Resize(new Size(width, height)));
 
-            if (width > resizeWidth)
-            {
-                height = (int)((double)resizeWidth / width * height);
-                width = resizeWidth;
-            }
+        image.Metadata.ExifProfile = null;
 
-            image
-                .Mutate(i => i
-                    .Resize(new Size(width, height)));
+        await using var memoryStream = new MemoryStream();
 
-            image.Metadata.ExifProfile = null;
+        await image.SaveAsJpegAsync(memoryStream);
 
-            await using var memoryStream = new MemoryStream();
-
-            await image.SaveAsJpegAsync(memoryStream);
-
-            return memoryStream.ToArray();
-        }
+        return memoryStream.ToArray();
     }
 }

@@ -1,30 +1,29 @@
-﻿namespace BettingSystem.Application.Games.Teams.Consumers
+﻿namespace BettingSystem.Application.Games.Teams.Consumers;
+
+using System.Threading.Tasks;
+using Domain.Common.Events.Teams;
+using Domain.Games.Repositories;
+using MassTransit;
+
+public class TeamLogoUpdatedEventConsumer : IConsumer<TeamLogoUpdatedEvent>
 {
-    using System.Threading.Tasks;
-    using Domain.Common.Events.Teams;
-    using Domain.Games.Repositories;
-    using MassTransit;
+    private readonly ITeamDomainRepository teamRepository;
 
-    public class TeamLogoUpdatedEventConsumer : IConsumer<TeamLogoUpdatedEvent>
+    public TeamLogoUpdatedEventConsumer(ITeamDomainRepository teamRepository)
+        => this.teamRepository = teamRepository;
+
+    public async Task Consume(ConsumeContext<TeamLogoUpdatedEvent> context)
     {
-        private readonly ITeamDomainRepository teamRepository;
+        var eventMessage = context.Message;
 
-        public TeamLogoUpdatedEventConsumer(ITeamDomainRepository teamRepository)
-            => this.teamRepository = teamRepository;
+        var team = await this.teamRepository.Find(eventMessage.Id);
 
-        public async Task Consume(ConsumeContext<TeamLogoUpdatedEvent> context)
-        {
-            var eventMessage = context.Message;
+        team!
+            .UpdateName(eventMessage.Name)
+            .UpdateLogo(
+                eventMessage.LogoOriginalContent,
+                eventMessage.LogoThumbnailContent);
 
-            var team = await this.teamRepository.Find(eventMessage.Id);
-
-            team!
-                .UpdateName(eventMessage.Name)
-                .UpdateLogo(
-                    eventMessage.LogoOriginalContent,
-                    eventMessage.LogoThumbnailContent);
-
-            await this.teamRepository.Save(team);
-        }
+        await this.teamRepository.Save(team);
     }
 }

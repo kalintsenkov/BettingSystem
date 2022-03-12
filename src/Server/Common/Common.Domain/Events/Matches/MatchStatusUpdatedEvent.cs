@@ -1,15 +1,14 @@
-﻿namespace BettingSystem.Domain.Common.Events.Matches
+﻿namespace BettingSystem.Domain.Common.Events.Matches;
+
+public class MatchStatusUpdatedEvent : IDomainEvent
 {
-    public class MatchStatusUpdatedEvent : IDomainEvent
+    public MatchStatusUpdatedEvent(int id, int status)
     {
-        public MatchStatusUpdatedEvent(int id, int status)
-        {
-            this.Id = id;
-            this.Status = status;
-        }
-
-        public int Id { get; }
-
-        public int Status { get; }
+        this.Id = id;
+        this.Status = status;
     }
+
+    public int Id { get; }
+
+    public int Status { get; }
 }

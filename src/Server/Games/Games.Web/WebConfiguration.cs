@@ -1,14 +1,13 @@
-﻿namespace BettingSystem.Web.Games
-{
-    using Application.Games;
-    using Common;
-    using Microsoft.Extensions.DependencyInjection;
+﻿namespace BettingSystem.Web.Games;
 
-    public static class WebConfiguration
-    {
-        public static IServiceCollection AddWebComponents(
-            this IServiceCollection services)
-            => services.AddCommonWebComponents(
-                typeof(ApplicationConfiguration));
-    }
+using Application.Games;
+using Common;
+using Microsoft.Extensions.DependencyInjection;
+
+public static class WebConfiguration
+{
+    public static IServiceCollection AddWebComponents(
+        this IServiceCollection services)
+        => services.AddCommonWebComponents(
+            typeof(ApplicationConfiguration));
 }

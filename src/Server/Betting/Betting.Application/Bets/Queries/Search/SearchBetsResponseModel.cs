@@ -1,13 +1,12 @@
-﻿namespace BettingSystem.Application.Betting.Bets.Queries.Search
-{
-    using System.Collections.Generic;
-    using Common;
+﻿namespace BettingSystem.Application.Betting.Bets.Queries.Search;
 
-    public class SearchBetsResponseModel : BetListingsResponseModel<BetResponseModel>
+using System.Collections.Generic;
+using Common;
+
+public class SearchBetsResponseModel : BetListingsResponseModel<BetResponseModel>
+{
+    internal SearchBetsResponseModel(IEnumerable<BetResponseModel> bets)
+        : base(bets)
     {
-        internal SearchBetsResponseModel(IEnumerable<BetResponseModel> bets)
-            : base(bets)
-        {
-        }
     }
 }

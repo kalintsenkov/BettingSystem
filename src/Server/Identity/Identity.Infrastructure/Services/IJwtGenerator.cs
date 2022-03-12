@@ -1,9 +1,8 @@
-﻿namespace BettingSystem.Infrastructure.Identity.Services
-{
-    using System.Threading.Tasks;
+﻿namespace BettingSystem.Infrastructure.Identity.Services;
 
-    public interface IJwtGenerator
-    {
-        Task<string> GenerateToken(User user);
-    }
+using System.Threading.Tasks;
+
+public interface IJwtGenerator
+{
+    Task<string> GenerateToken(User user);
 }

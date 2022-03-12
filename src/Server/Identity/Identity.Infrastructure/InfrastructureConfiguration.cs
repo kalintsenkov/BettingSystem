@@ -1,47 +1,46 @@
-﻿namespace BettingSystem.Infrastructure.Identity
+﻿namespace BettingSystem.Infrastructure.Identity;
+
+using System.Reflection;
+using Application.Identity;
+using Common;
+using Common.Persistence;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Persistence;
+using Services;
+
+using static Domain.Common.Models.ModelConstants.Identity;
+
+public static class InfrastructureConfiguration
 {
-    using System.Reflection;
-    using Application.Identity;
-    using Common;
-    using Common.Persistence;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Persistence;
-    using Services;
+    public static IServiceCollection AddInfrastructure(
+        this IServiceCollection services,
+        IConfiguration configuration)
+        => services
+            .AddIdentity()
+            .AddCommonInfrastructure<IdentityDbContext>(
+                configuration,
+                Assembly.GetExecutingAssembly(),
+                messagingHealthChecks: false)
+            .AddTransient<IDbInitializer, IdentityDbInitializer>();
 
-    using static Domain.Common.Models.ModelConstants.Identity;
-
-    public static class InfrastructureConfiguration
+    private static IServiceCollection AddIdentity(
+        this IServiceCollection services)
     {
-        public static IServiceCollection AddInfrastructure(
-            this IServiceCollection services,
-            IConfiguration configuration)
-            => services
-                .AddIdentity()
-                .AddCommonInfrastructure<IdentityDbContext>(
-                    configuration,
-                    Assembly.GetExecutingAssembly(),
-                    messagingHealthChecks: false)
-                .AddTransient<IDbInitializer, IdentityDbInitializer>();
+        services
+            .AddTransient<IIdentity, IdentityService>()
+            .AddTransient<IJwtGenerator, JwtGeneratorService>()
+            .AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = MinPasswordLength;
+            })
+            .AddEntityFrameworkStores<IdentityDbContext>();
 
-        private static IServiceCollection AddIdentity(
-            this IServiceCollection services)
-        {
-            services
-                .AddTransient<IIdentity, IdentityService>()
-                .AddTransient<IJwtGenerator, JwtGeneratorService>()
-                .AddIdentity<User, IdentityRole>(options =>
-                {
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.Password.RequiredLength = MinPasswordLength;
-                })
-                .AddEntityFrameworkStores<IdentityDbContext>();
-
-            return services;
-        }
+        return services;
     }
 }

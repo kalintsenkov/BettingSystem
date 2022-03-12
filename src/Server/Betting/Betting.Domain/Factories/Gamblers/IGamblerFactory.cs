@@ -1,12 +1,11 @@
-﻿namespace BettingSystem.Domain.Betting.Factories.Gamblers
+﻿namespace BettingSystem.Domain.Betting.Factories.Gamblers;
+
+using Common;
+using Models.Gamblers;
+
+public interface IGamblerFactory : IFactory<Gambler>
 {
-    using Common;
-    using Models.Gamblers;
+    IGamblerFactory WithName(string name);
 
-    public interface IGamblerFactory : IFactory<Gambler>
-    {
-        IGamblerFactory WithName(string name);
-
-        IGamblerFactory FromUser(string userId);
-    }
+    IGamblerFactory FromUser(string userId);
 }

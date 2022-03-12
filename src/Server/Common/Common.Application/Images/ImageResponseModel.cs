@@ -1,17 +1,16 @@
-﻿namespace BettingSystem.Application.Common.Images
+﻿namespace BettingSystem.Application.Common.Images;
+
+public class ImageResponseModel
 {
-    public class ImageResponseModel
+    public ImageResponseModel(
+        byte[] originalContent,
+        byte[] thumbnailContent)
     {
-        public ImageResponseModel(
-            byte[] originalContent,
-            byte[] thumbnailContent)
-        {
-            this.OriginalContent = originalContent;
-            this.ThumbnailContent = thumbnailContent;
-        }
-
-        public byte[] OriginalContent { get; }
-
-        public byte[] ThumbnailContent { get; }
+        this.OriginalContent = originalContent;
+        this.ThumbnailContent = thumbnailContent;
     }
+
+    public byte[] OriginalContent { get; }
+
+    public byte[] ThumbnailContent { get; }
 }
